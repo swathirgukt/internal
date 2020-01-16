@@ -1,4 +1,4 @@
-package com.indianeagle.internal;
+package com.indianeagle.internal.config;
 
 import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="en-us" http-equiv="Content-Language">
+    <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
+    <title>Cheque Details</title>
+</head>
+
+<body>
+<table border="0" cellpadding="0" cellspacing="0" width="650">
+    <tr>
+        <td style="font: bold 13px Arial;color: #000000">
+            Dear Accountant following are the Cheque Details
+        </td>
+    </tr>
+</table>
+<br/>
+<table border="0" cellpadding="0" cellspacing="0" width="650">
+    <tr align="center" bgcolor="#FF9933" height="30"
+        style="border: 1px solid #FFFFFF;font: bold 13px Arial;color: #FFFFFF">
+        <td style="border: 1px solid #FFFFFF">
+            Cheque No.
+        </td>
+        <td style="border: 1px solid #FFFFFF">
+            Amount
+        </td>
+        <td style="border: 1px solid #FFFFFF" width="200">
+            Date
+        </td>
+        <td style="border: 1px solid #FFFFFF" width="183">
+            Name of Pay
+        </td>
+        <td style="border: 1px solid #FFFFFF" width="112">
+            Bank
+        </td>
+    </tr>
+
+    <div th:each="chequeDetail : ${chequeDetailsList}">
+        <tr align="center" height="25">
+            <td style="border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC; border-top-width: 1px; border-bottom: 1px solid #CCCCCC">
+                [[${chequeDetail.chequeNo}]]
+            </td>
+            <td style="border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC; border-top-width: 1px; border-bottom: 1px solid #CCCCCC">
+                [[${chequeDetail.amount}]]
+            </td>
+            <td style="border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC; border-top-width: 1px; border-bottom: 1px solid #CCCCCC"
+                width="80">
+                [[${chequeDetail.chequeDate}]]
+            </td>
+            <td style="border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC; border-top-width: 1px; border-bottom: 1px solid #CCCCCC"
+                width="183">
+                [[${chequeDetail.nameOfPay}]]
+            </td>
+            <td style="border-left: 1px solid #CCCCCC; border-right: 1px solid #CCCCCC; border-top-width: 1px; border-bottom: 1px solid #CCCCCC"
+                width="112">
+                [[${chequeDetail.bank}]]
+            </td>
+        </tr>
+    </div>
+</table>
+
+</body>
+
+</html>

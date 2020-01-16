@@ -1,0 +1,514 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+</head>
+
+<body style="font-family:Calibri; margin:0px auto; ">
+<div th:with="lastSalary = ${arrayList.get(arrayList.size()-1)},
+              totalSalaryHistory = ${Form16Utils.prepareTotalSalary(arrayList, financialYear)},
+              remainingMonths = ${Form16Utils.calculateUnSalariedMonths(financialYear, lastSalary.salaryDate)},
+              range = ${#numbers.sequence(0, remainingMonths)},
+              totalActualHRA = ${Form16Utils.calculateActualHRA(arrayList, financialYear)},
+              basic40per = ${Form16Utils.calculateBasic40per(arrayList, financialYear)},
+              hraWith10perBasic = ${Form16Utils.calculateHraWithBasic10per(arrayList, financialYear, employeeFinancialYear)},
+              calculatedHRA = ${Form16Utils.calculateHRA(totalActualHRA, hraWith10perBasic, basic40per)}">
+
+    <table border="1" cellpadding="0" cellspacing="0"
+           style="font-family:Calibri; margin:0px auto; border:1px solid #ccc;"
+           width="100%">
+        <tr>
+            <td align="left" colspan="2" valign="middle">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="99%">
+                    <tr>
+                        <td width="22%">
+                            &nbsp;
+                        </td>
+                        <td width="78%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" height="130" valign="middle" width="22%">
+                            <img align="middle" alt="Indian Eagle.com" border="0" height="39"
+                                 hspace="25" src="$!{string}/Images/IE_Logo.png" style="padding-left:50px" width="100"/>
+                        </td>
+                        <td align="center" height="130" style="padding-left:10px" valign="middle" width="78%">
+                            <p style="font-family:Calibri;font-size:18px;font-weight:bold;color:#000;text-decoration:none;text-align:center;	text-transform:uppercase; height:30px; ">
+                                [[${companyName}]]
+                            </p>
+                            <p class="Title_Heading" style="font-size:11px;">Plot. No.87, 2nd Floor, A.P Productivity
+                                House,
+                                Road No.2,
+                                Banjara Hills, Hyderabad - 500 034</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="22%">
+                            &nbsp;
+                        </td>
+                        <td width="78%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <div style="font-size:15px; text-align:center">
+        <strong>INCOME TAX COMPUTATION - FY [[${employeeFinancialYear.financialYear.fromYear}]] -
+            [[${employeeFinancialYear.financialYear.toYear}]]</strong>
+    </div>
+    <br/><br/>
+    <table cellpadding="5" cellspacing="5" style="font-size:13px;" width="98%">
+        <tr>
+            <td valign="top">
+                <div style="font-size:15px;"><strong>Employee Details :</strong></div>
+                <br/>
+                <table cellpadding="5" cellspacing="5" width="98%">
+                    <tr>
+                        <td width="40%">Employee Id</td>
+                        <td width="58%">: [[${employee.empId}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Employee Name</td>
+                        <td width="58%">: [[${employee.fullName}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Date of Birth</td>
+                        <td width="58%">: [[${DateFormatter.format(employee.dob,"dd/MM/YYYY")}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Designation</td>
+                        <td width="58%">: [[${employee.designation}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%">PAN NO</td>
+                        <td width="58%">: [[${employee.panNo}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Address</td>
+                        <td width="58%">: [[${employee.perAddress}]]</td>
+                    </tr>
+                </table>
+            </td>
+            <td valign="top">
+                <div style="font-size:15px;"><strong>Company Details :</strong></div>
+                <br/>
+                <table cellpadding="5" cellspacing="5" width="98%">
+                    <tr>
+                        <td width="40%">Company PAN</td>
+                        <td width="58%">: AACCI7780E</td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Company TAN</td>
+                        <td width="58%">: HYDI03272D</td>
+                    </tr>
+                </table>
+            </td>
+    </table>
+    <br/><br/><br/><br/>
+    <div style="font-size:15px; text-align:center;"><strong>Total Salary for the financial year
+        [[${employeeFinancialYear.financialYear.fromYear}]] -
+        [[${employeeFinancialYear.financialYear.toYear}]] </strong>
+    </div>
+    <br/>
+
+    <table border="1" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="text-align:center;"><strong>MONTH</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;"><strong>[[${DateFormatter.getMonth(salaryHistory.salaryDate)}]]</strong>
+                </td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;"><strong>[[${Form16Utils.nextMonth(lastSalary.salaryDate, i)}]]</strong>
+                </td>
+            </div>
+            <td style="text-align:center;"><strong>TOTAL</strong></td>
+        </tr>
+        <td style="text-align:center;"><strong>BASIC</strong></td>
+        <div th:each="salaryHistory : ${arrayList}">
+            <td style="text-align:center;">[[${salaryHistory.basic}]]</td>
+        </div>
+        <div th:each="i : ${range}">
+            <td style="text-align:center;">[[${lastSalary.actlBasic}]]</td>
+        </div>
+        <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalBasic}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>HRA</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.hra}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.actlHra}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalHRA}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>CON</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.conveyence}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.actlConveyence}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalConveyence}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>MED</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.medicalAllowance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.actlMedicalAllowance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalMedicalAllowance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>SPL</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.specialAllowance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.actlSpecialAllowance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalSpecialAllowance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>GRA</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.telephoneAllowance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.telephoneAllowance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalTelephoneAllowance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>BONUS</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.bonus}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.bonus}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalBonus}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>PER</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.performanceLinkedPay}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.performanceLinkedPay}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalPerformanceLinkedPay}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>N.A</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.internetAllowance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.internetAllowance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalInternetAllowance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>T.A</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.uniformAllowance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.uniformAllowance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalUniformAllowance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>GROSS SALARY</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.grossSalary}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.actlGross}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalGrossSalary}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>PF</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.pfEmp}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.pfEmp}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalPfEmp}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>ESI</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.esi}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.esi}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalEsi}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>PT</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.PTax}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.PTax}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalPtax}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>MED.INS</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.medicalInsurance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.medicalInsurance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalMedicalInsurance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>SAL.ADV</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.salaryInAdvance}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.salaryInAdvance}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalSalaryInAdvance}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>TDS</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.incomeTax}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.incomeTax}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalTdsDeducted}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>TOT.D</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;">[[${salaryHistory.totalDeductions}]]</td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;">[[${lastSalary.totalDeductions}]]</td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalDeductions}]]</strong></td>
+        </tr>
+        <tr>
+            <td style="text-align:center;"><strong>NET SALARY</strong></td>
+            <div th:each="salaryHistory : ${arrayList}">
+                <td style="text-align:center;"><strong>[[${salaryHistory.netSalary}]]</strong></td>
+            </div>
+            <div th:each="i : ${range}">
+                <td style="text-align:center;"><strong>[[${lastSalary.netSalary}]]</strong></td>
+            </div>
+            <td style="text-align:center;"><strong>[[${totalSalaryHistory.totalNetSalary}]]</strong></td>
+        </tr>
+    </table>
+    <table cellpadding="1" cellspacing="1" width="100%">
+        <tr>
+            <td valign="top">
+                <div style="font-size:15px;"><strong>Income :</strong></div>
+                <br/>
+                <table border="1" cellpadding="1" cellspacing="1" style="float:left;" width="98%">
+                    <tr>
+                        <td width="20%"><strong>Gross Salary</strong></td>
+                        <td style="text-align:center;" width="20%"><strong>[[${employeeIncomeTax.grossSalary}]]</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Incentives</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.incentives}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">PLB</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.plb}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Reimbursement</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.reimbursement}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Bonus</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.bonus}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Others</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.others}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Previous Company Income</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.previousCompanyIncome}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><strong>Income Earned By Employee</strong></td>
+                        <td style="text-align:center;" width="20%">
+                            <strong>[[${employeeIncomeTax.incomeEarnedByEmployee}]]</strong></td>
+                    </tr>
+                </table>
+            </td>
+            <td valign="top">
+                <div style="font-size:15px;"><strong>HRA Calculation :</strong></div>
+                <br/>
+                <table border="1" cellpadding="1" cellspacing="1" width="98%">
+                    <tr>
+                        <td width="20%">Actual HRA per annum</td>
+                        <td style="text-align:center;" width="20%">[[${totalActualHRA}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">40% of Salary (basic)</td>
+                        <td style="text-align:center;" width="20%">[[${basic40per}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Employee given - 10% of Basic</td>
+                        <td style="text-align:center;" width="20%">[[${hraWith10perBasic}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><strong>HRA Exempted</strong></td>
+                        <td style="text-align:center;" width="20%"><strong>[[${calculatedHRA}]]</strong></td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table cellpadding="1" cellspacing="1" width="98%">
+        <tr>
+            <td valign="top">
+                <div style="font-size:15px;"><strong>Section Tax :</strong></div>
+                <br/>
+                <table border="1" cellpadding="1" cellspacing="1" width="98%">
+                    <div th:each="taxSection : ${employeeFinancialYear.employeeTaxSections}">
+                        <tr>
+                            <td width="20%"><strong>[[${taxSection.sectionName}]] : (Max Limit
+                                [[${taxSection.sectionLimit}]]) </strong></td>
+                            <td style="text-align:center;" width="20%"><strong>[[${Form16Utils.prepareSectionSaveAmount(taxSection,
+                                calculatedHRA).sectionLimit}]]</strong></td>
+                        </tr>
+                        <div th:each="sectionDeclaration : ${taxSection.employeeTaxSectionDeclarations}">
+
+                            <tr>
+                                <td width="20%">[[${sectionDeclaration.subSectionName}]]</td>
+                                <td style="text-align:center;"
+                                    th:text="$!{sectionDeclaration.subSectionName} == 'HRA'?${calculatedHRA}:${sectionDeclaration.saveAmount}"
+                                    width="20%"></td>
+                            </tr>
+                        </div>
+                    </div>
+                </table>
+            </td>
+            <td valign="top">
+                <div style="font-size:15px;"><strong>Detailed Tax Information :</strong></div>
+                <br/>
+                <table border="1" cellpadding="1" cellspacing="1" width="98%">
+                    <tr>
+                        <td width="20%"><strong>Gross Salary</strong></td>
+                        <td style="text-align:center;" width="20%"><strong>[[${employeeIncomeTax.grossSalary}]]</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Less: Exemption</td>
+                        <td style="text-align:center;" width="20%">
+                            [[${Form16Utils.totalExemptionAmount(employeeFinancialYear, calculatedHRA)}]]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><strong>Taxable Income</strong></td>
+                        <td style="text-align:center;" width="20%">
+                            <strong>[[${employeeIncomeTax.taxableIncome}]]</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Tax on Income</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.taxOnIncome}]]</td>
+                    </tr>
+                    <div th:each="rebate : ${financialYear.rebates}">
+                        <div th:if="${Form16Utils.isRebateEligible(rebate, employeeIncomeTax.taxableIncome)}">
+                            <tr>
+                                <td width="20%">[[${rebate.rebateName}]]</td>
+                                <td style="text-align:center;" width="20%">[[${rebate.rebateAmount}]]</td>
+                            </tr>
+                        </div>
+                    </div>
+                    <tr>
+                        <td width="20%">EDU cess(3%)</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.eduCess}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><strong>Total Tax on Income</strong></td>
+                        <td style="text-align:center;" width="20%">
+                            <strong>[[${employeeIncomeTax.totalTaxOnIncome}]]</strong></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">LESS: TDS Deducted</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.tdsDeducted}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Tax To be Deducted</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.taxTobeDeducted}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Per Month Tax</td>
+                        <td style="text-align:center;" width="20%">[[${employeeIncomeTax.perMonthTax}]]</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br/><br/>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I K.Ramesh son of Apparao working in the Manager (O&M) do
+        hereby
+        certify that a sum of Rs. [[${employeeIncomeTax.tdsDeducted}]] only has been deducted and deposited to the
+        credit of
+        the Central Government.
+        I further certify that the information given above is true, complete and correct and is based on the book of
+        accounts, documents, TDS statements,TDS deposited and other available records.
+    </p>
+    <br/><br/><br/>
+
+    <table cellpadding="1" cellspacing="1" width="98%">
+        <tr>
+            <td align="left" width="49%">
+                <table cellpadding="1" cellspacing="1" width="98%">
+                    <tr>
+                        <td width="10%">Date</td>
+                        <td width="88%">: [[${DateFormatter.currentDate("dd/MM/yyyy")}]]</td>
+                    </tr>
+                    <tr>
+                        <td width="10%">Place</td>
+                        <td width="88%">: Hyderabad</td>
+                    </tr>
+                </table>
+            </td>
+            <td align="right" width="49%">
+                <table align="right" cellpadding="1" cellspacing="1" valign="bottom" width="40%">
+                    <tr>
+                        <td style="font-size:20px;" width="35%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;" width="35%">Signature of the Employer</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

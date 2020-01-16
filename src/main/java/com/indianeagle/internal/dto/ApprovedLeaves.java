@@ -20,6 +20,7 @@ import java.util.Date;
 @Entity
 @Table(name = "APPROVED_LEAVES")
 public class ApprovedLeaves {
+    @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

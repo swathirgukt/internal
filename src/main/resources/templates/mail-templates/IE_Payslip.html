@@ -1,0 +1,597 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+</head>
+
+<body style="font-family:Calibri;font:Calibri; margin:0px auto; ">
+<table border="1" cellpadding="0" cellspacing="0"
+       style="font-family:Calibri;font:Calibri; margin:0px auto; border:1px solid #ccc;"
+       width="100%">
+    <tr>
+        <td align="left" colspan="2" valign="middle">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="99%">
+                <tr>
+                    <td width="22%">
+                        &nbsp;
+                    </td>
+                    <td width="78%">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" height="130" valign="middle" width="22%">
+                        <img align="middle" alt="Indian Eagle.com" border="0" height="39"
+                             hspace="25" src="$!{string$/Images/IE_Logo.png" style="padding-left:50" width="100"/>
+                    </td>
+                    <td align="center" height="130" style="padding-left:10" valign="middle" width="78%">
+                        <p style="font-family:Calibri;font:Calibri;font-size:18px;font-weight:bold;color:#000;text-decoration:none;text-align:center;	text-transform:uppercase; height:30px; ">
+                            [[${companyName}]]
+                        </p>
+                        <p class="Title_Heading" style="font-size:11px;">Plot. No.87, 2nd Floor, A.P Productivity House,
+                            Road No.2,
+                            Banjara Hills, Hyderabad - 500 034</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="22%">
+                        &nbsp;
+                    </td>
+                    <td width="78%">
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#C0BFBF" colspan="2" valign="middle">
+            <p style="background: #C0BFBF; border-top:1px solid #333; border-bottom:1px solid #333; height:12px;font-family:Calibri; font-weight:bold; font-size:11px; color:#333333;text-align:center; vertical-align:center; margin-bottom:3px; ">
+                PAYSLIP FOR THE MONTH OF
+                [[${DateFormatter.format(salaryHistory.salaryEndDate,StringConstants.MMMM_YYYY).toUpperCase()}]]
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="2" valign="middle">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="99%">
+                <tr>
+                    <td align="left" height="23"
+                        style="font-family:Calibri; font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;padding-left:3;"
+                        valign="middle"
+                        width="115">
+                        EMP NO
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                        valign="middle"
+                        width="377">
+                        [[${employee.empId}]]
+                    </td>
+                    <td rowspan="3" width="364"></td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;"
+                        valign="middle"
+                        width="183">
+                        UAN
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                        valign="middle">
+                        [[${employee.uanNumber}]]
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;padding-left:3;"
+                        valign="middle"
+                        width="115">
+                        NAME
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                        valign="middle"
+                        width="377">
+                        [[${employee.fullName}]]
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;"
+                        valign="middle"
+                        width="183">
+                        PAN. NO.
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                        valign="middle"
+                        width="229">
+                        [[${employee.panNo}]]
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;padding-left:3;"
+                        valign="middle"
+                        width="115">
+                        DESIGNATION
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                        valign="middle"
+                        width="377">
+                        [[${employee.designation}]]
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;"
+                        valign="middle"
+                        width="183">
+                        AADHAR NO.
+                    </td>
+                    <td align="left" height="23"
+                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                        valign="middle">
+                        [[${employee.aadharNo}]]
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="2" valign="top">
+            <table bgcolor="#333" border="1" cellpadding="2" cellspacing="1" width="100%">
+                <tr>
+                    <td bgcolor="#C0BFBF" height="12" width="39%">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="100%">
+                            <tr>
+                                <td style="font-family:Calibri; font-size:9px; font-weight:bold; " width="60%"><strong>EARNINGS</strong>
+                                </td>
+                                <td style="font-size:9px;" width="7%">Rs.</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td bgcolor="#C0BFBF" height="12" width="28%">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="100%">
+                            <tr>
+                                <td style="font-family:Calibri; font-size:9px; font-weight:bold; " width="60%"><strong>DEDUCTIONS</strong>
+                                </td>
+                                <td style="font-size:9px;" width="7%">Rs.</td>
+                            </tr>
+                        </table>
+
+                    </td>
+                    <td bgcolor="#C0BFBF" height="12" width="33%"></td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#FFFFFF" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="98%">
+
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;"
+                                    width="64%">
+                                    Basic
+                                </td>
+                                <td align="right" height="20"
+                                    style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;"
+                                    width="36%">
+                                    [[${salaryHistory.basic}]]
+                                </td>
+                            </tr>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.hra}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        House Rent Allowance
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.hra}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.conveyence}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Conveyance Allowance
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.conveyence}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.medicalAllowance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Medical Allowance
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.medicalAllowance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.telephoneAllowance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Gratuity
+                                    </td>
+                                    <td align="right"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;"
+                                        width="36%">
+                                        [[${salaryHistory.telephoneAllowance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.internetAllowance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Night Shift Allowance
+                                    </td>
+                                    <td align="right"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.internetAllowance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.uniformAllowance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Travel Allowance
+                                    </td>
+                                    <td align="right"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.uniformAllowance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.specialAllowance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Special Allowance
+                                    </td>
+                                    <td align="right"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.specialAllowance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.performanceLinkedPay}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Performance Linked Pay
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.performanceLinkedPay}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.bonus}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Bonus
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.bonus}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.otherAllowance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Other Allowance
+                                    </td>
+                                    <td align="right"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.otherAllowance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.performanceIncentives}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Performance Incentive
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.performanceIncentives}]]
+                                    </td>
+                                </tr>
+                            </div>
+                        </table>
+                    </td>
+                    <td align="left" bgcolor="#FFFFFF" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="98%">
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.pfEmp}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        PF
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.pfEmp}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.esi}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        ESI
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.esi}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.PTax}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;"
+                                        width="56%">
+                                        Professional Tax
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;"
+                                        width="36%">
+                                        [[${salaryHistory.PTax}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.medicalInsurance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Medical Insurance
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.medicalInsurance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.salaryInAdvance}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Salary Advance
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.salaryInAdvance}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.loanAmount}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Loan Amount
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.loanAmount}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.incomeTax}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Income Tax
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.incomeTax}]]
+                                    </td>
+                                </tr>
+                            </div>
+                            <div th:if="${BigDecimal.ZERO} != ${salaryHistory.miscDeductions}">
+                                <tr>
+                                    <td height="20"
+                                        style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                        Misc. Deductions
+                                    </td>
+                                    <td align="right" height="20"
+                                        style=" font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                        [[${salaryHistory.miscDeductions}]]
+                                    </td>
+                                </tr>
+                            </div>
+                        </table>
+                    </td>
+                    <td align="left" bgcolor="#FFFFFF" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="100%">
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    DEPARTMENT
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${employee.department.department}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;"
+                                    width="46%">
+                                    DATE OF JOINING
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;"
+                                    width="54%">
+                                    [[${DateFormatter.format(employee.joinDate, StringConstants.DD_MMMM_YYYY)}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    DATE OF BIRTH
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${DateFormatter.format(employee.dob,StringConstants.DD_MMMM_YYYY)}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    STANDARD DAYS
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${salaryHistory.totalDays}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    DAYS PAID
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    <div th:with="daysWorked = ${salaryHistory.basic / (salaryHistory.actlBasic / salaryHistory.totalDays)}">
+                                        [[${daysWorked.intValue()}]]
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    LOP's
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${salaryHistory.lopDays}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    ARREARS
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${salaryHistory.arrearsDays}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td bgcolor="#333" colspan="2" height="1"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px; color: #333;text-decoration:none;text-align:left;text-transform: capitalize;"></td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    PAYMENT
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    BANK TRANSFER
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    BANK
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${employee.bankName}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;">
+                                    A/c. No
+                                </td>
+                                <td height="20"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                    [[${employee.bankAc}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" height="10"
+                                    style="font-family:Calibri;font:Calibri;font-size:9px;color: #333;text-decoration:none;text-align:left;text-transform: capitalize;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#FFFFFF" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="98%">
+                            <tr>
+                                <td style="font-family:Calibri; font-size:11px; font-weight:bold; " width="63%"><strong>Total
+                                    Earnings</strong></td>
+                                <td align="right" width="37%"><span
+                                        style=" font-family:Calibri;font:Calibri;font-size:11px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;">
+                                <strong>[[${salaryHistory.totalEarnings}]]</strong>
+                            </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="left" bgcolor="#FFFFFF" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="98%">
+                            <tr>
+                                <td style="font-family:Calibri; font-size:11px; font-weight:bold; " width="63% ">
+                                    <strong>Total Deductions</strong></td>
+                                <td align="right"
+                                    style=" font-family:Calibri;font:Calibri;font-size:11px;color: #666;text-decoration:none;text-align: right; text-transform: capitalize;"
+                                    width="37%">
+                                    <strong>[[${salaryHistory.totalDeductions}]]</strong></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="left" bgcolor="#FFFFFF" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:5px;" width="100%">
+                            <tr>
+                                <td style="font-family:Calibri; font-size:11px; font-weight:bold;" width="50%"><strong>Net
+                                    Payment</strong></td>
+                                <td width="50%"><span
+                                        style="font-family:Calibri;font:Calibri;font-size:11px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
+                                <strong>[[${salaryHistory.netSalary}]]</strong>
+                            </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="2" height="40" style="padding-left:5px;" valign="middle"><span
+                style="font-family:Calibri; font-size:9px; font-weight:bold; ">Note:</span><br/>
+            <p style="font-family:Calibri;font:Calibri;font-size:9px;color:#666; padding-left:2px;text-decoration:none;text-align:left;text-transform: capitalize;padding-left:5">
+                [[${DateUtils.findPaySlipFooterDate()}]] Please Send Your Queries to [[${hrMailId}]]<br/>
+                This document contains confidential information. If you are not the intended recipient,you are not
+                authorized to use or disclose it in any form.If you have received this in error,please destroy it along
+                with
+                any copies and notify the sender immediately
+            </p>
+        </td>
+    </tr>
+</table>
+<p align="left" colspan="2" height="40" style="padding-left:0px;" valign="middle"<br/>
+<p style="font-family:Calibri;font:Calibri;font-size:9px;color:#666; padding-left:2px;text-decoration:none;text-align:left;text-transform:">
+    This payslip is computer generated no signature is required.
+</p>
+</p>
+
+</body>
+</html>

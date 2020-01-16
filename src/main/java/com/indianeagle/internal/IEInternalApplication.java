@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class InternalApplication {
+public class IEInternalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InternalApplication.class, args);
+		SpringApplication.run(IEInternalApplication.class, args);
 	}
 
 }

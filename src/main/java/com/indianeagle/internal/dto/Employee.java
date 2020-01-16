@@ -1,6 +1,7 @@
 package com.indianeagle.internal.dto;
 
 import org.apache.commons.lang.StringUtils;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name = "EMPLOYEE")
 public class Employee {
-    @javax.persistence.Id
+    @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;

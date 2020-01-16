@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <TITLE>Indian Eagle internal</TITLE>
+    <META CONTENT="text/html; charset=iso-8859-1" HTTP-EQUIV="Content-Type">
+</head>
+<body>
+<table bgcolor="#7D3B03" height="500" width="100%">
+    <tr>
+        <td>
+            <table height="81" width="100%">
+                <tr>
+                    <td bgcolor="#FFFFFF">
+                        <img src="" style="border: medium none;"/>
+                    </td>
+                </tr>
+            </table>
+
+            <table height="326" width="100%">
+                <tr>
+                    <td>
+
+    <span style="color: #FFFFFF;font-weight: bold"
+          th:text="${empId == null} ?'Your Account has been created. Please find the login credentials below.':'Your Account details have been saved.'">
+    </span>
+                    </td>
+                </tr>
+                <tr bgcolor="#FFFFFF">
+                    <td>
+                        <table align="center" bgcolor="#FFFFFF" cellpadding="3" cellspacing="1"
+                               height="117" style="border: 1px solid black;" width="441">
+                            <tr>
+                                <td align="center"
+                                    style="font-size:15px;font-family:arial;color: #F79910;font-weight: bold;">
+                                    <b>User Name:</b>
+                                </td>
+                                <td align="left" style="font-size:15px;font-family:arial;">
+                                      <span style="color: #666666;font-weight: bold"
+                                            th:text="${empId == null} ? ${user.userName}: ${empId}">
+                                      </span>
+                                </td>
+                            </tr>
+                            <div th:if="${empId==null}">
+                                <tr>
+                                    <td align="center"
+                                        style="font-size:15px;font-family:arial;color: #F79910;font-weight: bold;">
+                                        Password:
+                                    </td>
+                                    <td align="left"
+                                        style="font-size:15px;font-family:arial;color: #666666;font-weight: bold;">
+                                        [[${password}]]
+                                    </td>
+                                </tr>
+                            </div>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div align="center" style="color: #FFFFFF;">
+                <p>[[${currentYear}]] &copy; Indian Eagle Pvt. Ltd.</p>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
