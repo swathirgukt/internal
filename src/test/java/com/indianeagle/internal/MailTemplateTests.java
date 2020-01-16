@@ -1,10 +1,11 @@
 package com.indianeagle.internal;
 
+import com.indianeagle.internal.constants.StringConstants;
 import com.indianeagle.internal.dto.ChequeDetails;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
 import com.indianeagle.internal.dto.User;
-import com.indianeagle.internal.utils.MailContentBuilder;
+import com.indianeagle.internal.util.MailContentBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,9 +34,18 @@ class MailTemplateTests {
         messageModel.put("user", user);
         messageModel.put("newPassword", "yana123");
         messageModel.put("currentYear", Calendar.getInstance().get(Calendar.YEAR));
-        String html = MailContentBuilder.build(templateEngine, "passwordReset", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail-templates/passwordReset", messageModel);
         System.out.println(html);
     }
+/*
+    @Test
+    void tempTemplateTest() {
+        Map<String, Object> messageModel = new HashMap<String, Object>();
+        messageModel.put("StringConstants", StringConstants.class);
+        String html = MailContentBuilder.build(templateEngine, "/mail-templates/temp", messageModel);
+        System.out.println(html);
+    }
+*/
 
     @Test
     void paySlipPDFTest() throws IOException {
@@ -55,7 +65,7 @@ class MailTemplateTests {
         model.put("employee", employee);
         model.put("salaryHistory", currentSalary);
 
-        String html = MailContentBuilder.build(templateEngine, "IE_Payslip", model);
+        String html = MailContentBuilder.build(templateEngine, "/mail-templates/IE_Payslip", model);
         System.out.println(html);
     }
 
@@ -71,7 +81,7 @@ class MailTemplateTests {
         messageModel.put("empId", "IEPL0500");
         messageModel.put("currentYear", Calendar.getInstance().get(Calendar.YEAR));
 
-        String html = MailContentBuilder.build(templateEngine, "accountInfo", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail-templates/accountInfo", messageModel);
         System.out.println(html);
     }
 
@@ -94,7 +104,7 @@ class MailTemplateTests {
 
         Map<String, Object> messageModel = new HashMap<String, Object>();
         messageModel.put("chequeDetailsList", list);
-        String html = MailContentBuilder.build(templateEngine, "chequeDetails", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail-templates/chequeDetails", messageModel);
         System.out.println(html);
     }
 

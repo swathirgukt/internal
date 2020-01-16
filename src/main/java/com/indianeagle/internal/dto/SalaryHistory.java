@@ -1,6 +1,6 @@
 package com.indianeagle.internal.dto;
 
-import com.indianeagle.internal.utils.SimpleUtils;
+import com.indianeagle.internal.util.SimpleUtils;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

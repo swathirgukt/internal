@@ -1,4 +1,4 @@
-package com.indianeagle.internal.utils;
+package com.indianeagle.internal.util;
 
 import com.indianeagle.internal.dto.Employee;
 import org.apache.commons.lang.RandomStringUtils;

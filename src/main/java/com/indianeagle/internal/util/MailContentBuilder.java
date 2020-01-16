@@ -1,4 +1,4 @@
-package com.indianeagle.internal.utils;
+package com.indianeagle.internal.util;
 
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;

@@ -1,4 +1,4 @@
-package com.indianeagle.internal.utils;
+package com.indianeagle.internal.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
