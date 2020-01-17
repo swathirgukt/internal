@@ -1,5 +1,7 @@
 package com.indianeagle.internal.form;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
 /**
@@ -8,6 +10,8 @@ import java.math.BigDecimal;
  * User: kalesha
  * Date: 8/17/2017
  */
+
+@Component
 public class TotalSalaryHistoryForm {
 
     private BigDecimal totalBasic = BigDecimal.ZERO;

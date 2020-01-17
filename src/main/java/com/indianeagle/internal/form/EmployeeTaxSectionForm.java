@@ -1,6 +1,7 @@
 package com.indianeagle.internal.form;
 
 import com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
  * User: kalesha
  * Date: 8/13/2017
  */
+
+@Component
 public class EmployeeTaxSectionForm {
 
     private Long id;

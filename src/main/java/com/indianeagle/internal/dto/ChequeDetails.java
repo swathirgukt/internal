@@ -1,9 +1,6 @@
 package com.indianeagle.internal.dto;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,6 +8,8 @@ import java.util.Date;
  * @author irfan
  * dto for Cheque Details
  */
+@Entity
+@Table(name = "CHEQUE_DETAILS")
 public class ChequeDetails extends BaseDto {
 
     @Column(name = "CHEQUE_DATE")

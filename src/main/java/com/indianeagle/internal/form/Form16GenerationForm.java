@@ -1,16 +1,19 @@
 package com.indianeagle.internal.form;
 
 import com.indianeagle.internal.dto.Rebate;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Form of Form16 Generation
- *
+ * <p>
  * User: kalesha
  * Date: 8/15/2017
  */
+
+@Component
 public class Form16GenerationForm {
 
     private Long id;
