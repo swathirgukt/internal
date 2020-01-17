@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#calendar1').click(function (event) {
+
+                $('#start_date').datepicker('show');
+            });
+        });
+    </script>
+    <style type="text/css">
+        .Heading {
+            font-size: 20px;
+            color: #ff751a;
+            border-bottom: 1px solid black;
+        }
+
+        .Sbutton {
+            border-radius: 5px;
+            box-shadow: 0 1px 2px blue;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 13px;
+            height: 25px;
+            line-height: 25px;
+            margin: 0 2px;
+            outline: medium none;
+            text-align: center;
+            text-decoration: none;
+            text-shadow: 0 1px 0 #ffcc99;
+            vertical-align: baseline;
+            width: 90px;
+        }
+
+        .input-group {
+            margin-left: 0px;
+        }
+    </style>
+
+</head>
+<body style="background-color: #ffffcc;">
+<!-- <form action="/"> -->
+
+<div>
+    <form action="/">
+        <div style="font-size: 20px;color: #ff751a;border-bottom: 1px solid black;">IT Report</div>
+        <br>
+        <div style="width: 100%;height: 100px; ">
+
+            <div class="col-md-1">
+                <span>Search Date *:</span>
+
+
+            </div>
+
+
+            <span class="col-md-2">
+								<div class="input-group">
+									<input class="form-control start_date" data-inputmask="'alias':'mm/dd/yyyy'"
+                                           data-mask="" id="start_date" name="start_date" type="text" value="">
+									<div class="input-group-addon" id="calendar1">
+										<i class="fa fa-calendar"></i>
+									</div>
+								</div>
+							</span>
+
+
+            <span style="margin-left: 50px;"><a class="Sbutton" href="#"> Search </a></span>
+        </div>
+</div>
+</div>
+</div>
+</form>
+</div>
+
+
+<div style="font-size: 20px;color: #ff751a;border-bottom: 1px solid black;">
+    <div><p>Search Results
+        <p></div>
+
+
+</div>
+</body>
+
+
+</html>

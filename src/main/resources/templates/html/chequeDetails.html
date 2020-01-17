@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chequess</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#calendar1').click(function (event) {
+                $('.start_date').datepicker('show');
+            });
+
+
+            $('#calendar2').click(function (event) {
+                $('.end_date').datepicker('show');
+            });
+        });
+    </script>
+    <style type="text/css">
+        .Heading {
+            font-size: 20px;
+            color: #ff751a;
+            border-bottom: 1px solid #CCCCCC;
+        }
+
+        .form-page {
+            width: 900px;
+            height: 500px;
+            border: solid;
+            border-color: transparent;
+            box-shadow: 10px 10px 8px #ffb366;
+            margin-left: 200px;
+            margin-top: 30px;
+            background-color: #ffe6cc;
+        }
+
+        .btuun {
+            width: 80px;
+            height: 40px;
+
+
+            border-radius: 20%;
+            background-color: #ffd9b3;
+            font-size: 15px;
+
+
+        }
+
+        .btuun:hover {
+            background-color: #ff9933;
+            box-shadow: 0 8px 6px 0 #ff9933;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                console.log('Calendar function-----');
+                $("#datepicker").datepicker();
+            });
+        })
+
+    </script>
+    <head>
+<body>
+
+<div class="form-page">
+    <form action="/">
+        <div class="Heading">Cheque Details</div>
+        <br>
+        <div>
+							<span>
+								<span style="margin-left: 5px;">Cheque Date :</span>
+								<span style="margin-left: 10px;">
+									<input name="" type="">
+								</span>
+								<span style="margin-left: 60px;">Amount :</span>
+								<span style="margin-left: 10px;">
+									<input name="" type="">
+								</span>
+							</span>
+        </div>
+        <div style="margin-top: 10px;">
+							<span>
+								<span style="margin-left: 5px;">Cheque No* :</span>
+								<span style="margin-left: 10px;">
+									<input name="" type="">
+								</span>
+								<span style="margin-left: 70px;">Status :</span>
+								<span style="margin-left: 10px;">
+									<span> <select name="id" style="width: 250px;height: 23px;">
+										<option>--Select--</option>
+										<option value="issued">issued</option>
+										<option value="cancel">cancel</option>
+									</select>
+                                        <!-- <input type="" name=""> -->
+								</span>
+							</span>
+        </div>
+        <div style="margin-top: 10px;">
+							<span>
+								<span style="margin-left: 5px;">Bank* :</span>
+								<span style="margin-left: 50px;">
+									<input name="" type="">
+								</span>
+								<span style="margin-left: 60px;">Name of pay* :</span>
+								<span style="margin-left: 10px;">
+									<input name="" type="">
+								</span>
+							</span>
+        </div>
+
+        <div style="margin-top: 10px;">
+							<span>
+								<span style="margin-left: 5px;">Comments:</span>
+								<span style="margin-left: 10px;">
+									<input name="" style="width: 250px;height: 50px;" type="">
+								</span>
+							</span>
+        </div>
+        <div style="margin-left: 95px;margin-top: 10px;">
+            <button class="btuun" onclick="alert('form Save!')" type="button">Save</button>
+        </div>
+        <div class="Heading"> Search Cheque Details</div>
+        <br>
+
+
+        <div class="col-md-3">
+            <span>From </span>
+            <span style="color: red">*:</span>
+            <div class="input-group">
+                <input class="form-control start_date" data-inputmask="'alias':'mm/dd/yyyy'" data-mask=""
+                       id="start_date" name="start_date" type="text" value="">
+                <div class="input-group-addon" id="calendar1">
+                    <i class="fa fa-calendar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <span>To </span>
+            <span style="color: red">*:</span>
+            <div class="input-group">
+                <input class="form-control end_date" data-inputmask="'alias':'mm/dd/yyyy'" data-mask="" id="end_date"
+                       name="end_date" type="text" value="">
+                <div class="input-group-addon" id="calendar2">
+                    <i class="fa fa-calendar"></i>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px">
+            <span style="margin-left: 60px;">Amount :</span>
+            <span style="margin-left: 10px;">
+								<input name="" type="">
+
+								<span style="margin-left: 10px;">
+									<button class="btuun" onclick="alert('form Search!')" type="button">Search</button>
+								</span>
+							</span>
+
+
+        </div>
+
+</div>
+
+</form>
+</div>
+
+
+</body>
+</html>
