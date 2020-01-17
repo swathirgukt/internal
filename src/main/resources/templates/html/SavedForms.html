@@ -1,0 +1,125 @@
+<html>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<head>
+    <style type="text/css">
+
+
+		.form_page {
+			box-shadow: 10px 10px 8px #cccccc;
+			width: 900px;
+			height: 500px;
+			border: solid;
+			border-color: #fff2e6;
+			margin-left: 300px;
+			margin-top: 30px;
+			background-color: #fff2e6;
+
+		}
+
+		.top_border_line {
+			font-size: 20px;
+			color: #ff751a;
+			border-bottom: 2px solid #ffb366;
+			margin-top: 15px;
+			font-family: Arial;
+		}
+
+
+		.button:link,
+		.button:visited {
+			background-color: #fff2e6;
+			color: black;
+			border: 2px solid #ff9933;
+			padding: 6px 15px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 5px;
+		}
+
+		.button:hover,
+		.button:active {
+			background-color: #fff2e6;
+
+			padding: 6px 15px;
+			box-shadow: 2px 3px 1px 2px #ffbf80;
+		}
+
+
+		.sel_op {
+			width: 250px;
+			font-size: 15px;
+			text-align: center;
+			color: red;
+			background-color: #fff2e6;
+		}
+
+    </style>
+    <script>
+		function getFormtData() {
+			var ele1 = document.getElementById("empdata").elements[0].value;
+			var ele2 = document.getElementById("empdata").elements[1].value;
+			if (ele1 == "" && ele2 == "") {
+				alert("value is required"); 
+				document.getElementById("employeeid").focus();
+				document.getElementById("errorMsg").innerHTML = "Id is required..!";
+			} else {
+				
+				document.getElementById("errorMsg").innerHTML = "";
+
+document.getElementById("fullname").setAttribute("value","DurgaMahadev parida");
+				document.getElementById("desgination").setAttribute("value","Software Devloper");
+				document.getElementById("pancardno").setAttribute("value","13543313");
+				document.getElementById("address").setAttribute("value","Odisha");
+
+			}
+		}
+
+    </script>
+</head>
+
+<body>
+
+<div class="form_page">
+    <div style="margin-left:20px;">
+        <div class="top_border_line">Income Text Sections</div>
+
+        <div style="margin-top:20px;">
+            <span id="errorMsg" style="color: red;font-size: 15px;"></span>
+            <form action="#" id="empdata" method="POST">
+                <span>Employee ID </span>
+                <input id="employeeid" name="employeeid" style="margin-left: 20px;" type="text" value="">
+
+                <span>(or) Employee Name </span>
+                <input id="employeename" name="employeename" style="margin-left: 20px;" type="text" value="">
+                <span style="margin-left:50px;"><a class="button" href="#"
+                                                   onclick="getFormtData()"><b>Search</b></a></span>
+
+
+                <div class="top_border_line">Employee Details</div>
+
+
+                <div style="margin-top: 20px;">
+							<span>
+								<input id="fullname" name="fullname" placeholder="fullname" readonly
+                                       style="margin-left: 20px;"
+                                       type="text" value="">
+								<input id="desgination" name="desgination" placeholder="desgination" readonly
+                                       style="margin-left: 20px;" type="text" value="">
+								<input id="pancardno" name="pancardno" placeholder="PAN CARD NO"
+                                       style="margin-left: 20px;" type="text"
+                                       value="">
+								<input id="address" name="address" placeholder="ADDRESS" readonly
+                                       style="margin-left: 20px;"
+                                       type="text" value="">
+							</span>
+                </div>
+                <div class="top_border_line">Form 16</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
