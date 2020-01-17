@@ -1,6 +1,5 @@
 package com.indianeagle.internal;
 
-import com.indianeagle.internal.constants.StringConstants;
 import com.indianeagle.internal.dto.ChequeDetails;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
@@ -19,9 +18,6 @@ import java.util.*;
 class MailTemplateTests {
 
     @Autowired
-    MailContentBuilder mailContentBuilder;
-
-    @Autowired
     TemplateEngine templateEngine;
 
     @Test
@@ -34,7 +30,7 @@ class MailTemplateTests {
         messageModel.put("user", user);
         messageModel.put("newPassword", "yana123");
         messageModel.put("currentYear", Calendar.getInstance().get(Calendar.YEAR));
-        String html = MailContentBuilder.build(templateEngine, "/mail-templates/passwordReset", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail/passwordReset", messageModel);
         System.out.println(html);
     }
 /*
@@ -42,7 +38,7 @@ class MailTemplateTests {
     void tempTemplateTest() {
         Map<String, Object> messageModel = new HashMap<String, Object>();
         messageModel.put("StringConstants", StringConstants.class);
-        String html = MailContentBuilder.build(templateEngine, "/mail-templates/temp", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail/temp", messageModel);
         System.out.println(html);
     }
 */
@@ -65,9 +61,67 @@ class MailTemplateTests {
         model.put("employee", employee);
         model.put("salaryHistory", currentSalary);
 
-        String html = MailContentBuilder.build(templateEngine, "/mail-templates/IE_Payslip", model);
+        String html = MailContentBuilder.build(templateEngine, "/mail/IE_Payslip", model);
         System.out.println(html);
     }
+
+/*
+    @Test
+    void form16PDFTest() throws IOException {
+
+        SalaryHistory currentSalary = new SalaryHistory();
+        currentSalary.setSalaryEndDate(new Date(2019));
+        currentSalary.setBasic(new BigDecimal(40000));
+
+        Employee employee = new Employee();
+        employee.setEmpId("IEPL0500");
+        employee.setFullName("Taymur");
+        employee.setUanNumber("1020304050");
+        employee.setPanNo("213456");
+        employee.setDesignation("Developer");
+        employee.setDob(new Date());
+        employee.setPerAddress("Nanded");
+
+        FinancialYear financialYear=new FinancialYear();
+        financialYear.setFromYear("2019");
+        financialYear.setToYear("2020");
+        Set<Rebate> rebates = new HashSet<>();
+        Rebate rebate = new Rebate();
+        rebate.setRebateAmount(new BigDecimal(12345));
+        rebate.setActive(true);
+        rebate.setRebateName("Reb1");
+        rebates.add(rebate);
+        financialYear.setRebates(rebates);
+
+        EmployeeIncomeTax employeeIncomeTax= new EmployeeIncomeTax();
+        employeeIncomeTax.setEduCess(new BigDecimal(1200));
+        employeeIncomeTax.setEmpId("IEPL0500");
+        employeeIncomeTax.setBonus(new BigDecimal(10000));
+        employeeIncomeTax.setFinancialYear(financialYear);
+        employeeIncomeTax.setTotalTaxOnIncome(new BigDecimal(25000));
+        employeeIncomeTax.setTdsDeducted(new BigDecimal(2300));
+        employeeIncomeTax.setTaxTobeDeducted(new BigDecimal(10000));
+        employeeIncomeTax.setPerMonthTax(new BigDecimal(1050));
+        employeeIncomeTax.setTaxableIncome(new BigDecimal(50000));
+
+        EmployeeFinancialYear employeeFinancialYear = new EmployeeFinancialYear();
+        employeeFinancialYear.setFinancialYear(financialYear);
+
+        List<SalaryHistory> salaryHistoryList = new ArrayList<>();
+        salaryHistoryList.add(currentSalary);
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("employee", employee);
+        model.put("arrayList", salaryHistoryList);
+        model.put("financialYear", financialYear);
+        model.put("employeeIncomeTax", employeeIncomeTax);
+        model.put("employeeFinancialYear", employeeFinancialYear);
+
+
+        String html = MailContentBuilder.build(templateEngine, "/mail/form16Pdf", model);
+        System.out.println(html);
+    }
+*/
 
     @Test
     void accountInfoTemplateTest() {
@@ -81,7 +135,7 @@ class MailTemplateTests {
         messageModel.put("empId", "IEPL0500");
         messageModel.put("currentYear", Calendar.getInstance().get(Calendar.YEAR));
 
-        String html = MailContentBuilder.build(templateEngine, "/mail-templates/accountInfo", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail/accountInfo", messageModel);
         System.out.println(html);
     }
 
@@ -104,7 +158,7 @@ class MailTemplateTests {
 
         Map<String, Object> messageModel = new HashMap<String, Object>();
         messageModel.put("chequeDetailsList", list);
-        String html = MailContentBuilder.build(templateEngine, "/mail-templates/chequeDetails", messageModel);
+        String html = MailContentBuilder.build(templateEngine, "/mail/chequeDetails", messageModel);
         System.out.println(html);
     }
 

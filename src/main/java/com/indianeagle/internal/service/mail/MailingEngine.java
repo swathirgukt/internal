@@ -35,7 +35,6 @@ import java.util.Map;
 @Component
 public class MailingEngine {
 
-	@Autowired
 	private static final Logger log = Logger.getLogger(MailingEngine.class);
 	private static final String BCC_MAIL_ID = "accounts-india@indianeagle.com";
 	private static final String FROM_MAIL_ID = "accounts-india@indianeagle.com";
@@ -45,9 +44,9 @@ public class MailingEngine {
 	private static final String OLD_MESSAGE = "<P>This is duplicate copy given as per Employee request.";
 	private static final String PWD_NOTE = "<P><b>Note:</b> Use your Employee Code as password to open pay slip.";
 	private static final String SUBJECT = "PAYSLIP - ";
-	private static final String PASSWORD_RESET_TEMPLATE = "/mail-templates/passwordReset";
-	private static final String ACCOUNT_INFO_TEMPLATE = "/mail-templates/accountInfo";
-	private static final String CHEQUE_DETAILS_TEMPLATE = "/mail-templates/chequeDetails";
+	private static final String PASSWORD_RESET_TEMPLATE = "/mail/passwordReset";
+	private static final String ACCOUNT_INFO_TEMPLATE = "/mail/accountInfo";
+	private static final String CHEQUE_DETAILS_TEMPLATE = "/mail/chequeDetails";
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
