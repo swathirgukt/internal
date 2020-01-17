@@ -4,11 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "LEAVES_DETAILS")
-public class LeaveDetails {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class LeaveDetails  extends BaseDto {
+
     @Column(name = "EMP_ID")
     private String empId;
     @Column(name = "TOTAL_LEAVES")
@@ -19,21 +16,6 @@ public class LeaveDetails {
     private Long personalLeaves;
     @Column(name = "COMPENSATORY_LEAVES")
     private Long compensatoryLeaves;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 
     /**
      * @return the totalLeaves

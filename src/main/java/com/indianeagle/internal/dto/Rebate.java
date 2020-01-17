@@ -11,12 +11,8 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "REBATES")
-public class Rebate {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class Rebate  extends BaseDto{
 
-    private Long id;
     @Column(name = "REBATE_NAME")
     private String rebateName;
     @Column(name = "REBATE_APPLY_SALARY")
@@ -25,14 +21,6 @@ public class Rebate {
     private BigDecimal rebateAmount;
     @Column(name = "ACTIVE", nullable = false)
     private boolean active = true;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getRebateName() {
         return rebateName;

@@ -11,11 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "INCENTIVES")
-public class Incentives {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Incentives extends BaseDto {
+
     @Column(name = "AMOUNT")
     private BigDecimal incentiveAmount;
     @Column(name = "DATE")
@@ -24,20 +21,6 @@ public class Incentives {
     @JoinColumn(name = "EMP_REF", nullable = false)
     private Employee employee;
     private String empName;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the incentiveAmount

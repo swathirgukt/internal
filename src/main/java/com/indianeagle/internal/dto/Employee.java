@@ -8,11 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "EMPLOYEE")
-public class Employee {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+public class Employee extends BaseDto{
     @Column(name = "EMP_ID")
     private String empId;
     @Column(name = "FIRST_NAME")
@@ -39,8 +35,6 @@ public class Employee {
     private String panNo;
     @Column(name = "PF_NO")
     private String pfNo;
-    //@Column(name = "ID")
-    private BigInteger uan;
     @Column(name = "ESI_NO")
     private String esiNo;
     @Column(name = "AADHAR_NUMBER")
@@ -86,7 +80,6 @@ public class Employee {
     private SalaryHistory currentSalary;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
-    //@property ref??
     private Leaves leaves;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -95,20 +88,6 @@ public class Employee {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "employee")
     private Nominee nominee;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return Id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        Id = id;
-    }
 
     /**
      * @return the empId

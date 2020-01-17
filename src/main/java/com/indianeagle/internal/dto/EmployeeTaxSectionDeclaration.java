@@ -12,25 +12,13 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "EMPLOYEE_TAX_SECTION_DECLARATIONS")
 public class EmployeeTaxSectionDeclaration {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
     @Column(name = "SUB_SECTION_NAME")
     private String subSectionName;
     @Column(name = "SAVE_AMOUNT")
     private BigDecimal saveAmount;
     @Column(name = "ACTIVE")
     private boolean active = true;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getSubSectionName() {
         return subSectionName;

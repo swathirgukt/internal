@@ -11,11 +11,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "INCOME_TAX_FINANCIAL_YEAR")
-public class FinancialYear {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class FinancialYear extends BaseDto{
+
     @Column(name = "FROM_MONTH")
     private String fromMonth;
     @Column(name = "FROM_YEAR")
@@ -36,14 +33,6 @@ public class FinancialYear {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "FINANCIAL_YEAR_ID", nullable = false)
     private Set<TaxSection> taxSections;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFromMonth() {
         return fromMonth;

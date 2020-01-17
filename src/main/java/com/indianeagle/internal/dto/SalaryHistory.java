@@ -8,11 +8,8 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SalaryHistory {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class SalaryHistory  extends BaseDto{
+
     @Column(name = "EMP_ID")
     private String empId;
     @Column(name = "SALARY_DATE")
@@ -103,22 +100,6 @@ public class SalaryHistory {
     private BigDecimal bonus = BigDecimal.ZERO;
     @Column(name = "SALARY_END_DATE")
     private Date salaryEndDate;
-
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     /**
      * @return the empId
      */

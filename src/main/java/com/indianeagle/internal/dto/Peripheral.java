@@ -10,12 +10,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "PERIPHERAL")
-public class Peripheral {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class Peripheral  extends BaseDto{
 
-    private Long id;
     @Column(name = "PERIPHERAL")
     private String peripheralName;
     @Column(name = "TYPE")
@@ -34,14 +30,6 @@ public class Peripheral {
     private String users;
     @Column(name = "STATUS")
     private String status;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getType() {
         return type;

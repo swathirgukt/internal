@@ -6,16 +6,13 @@ import java.math.BigDecimal;
 /**
  * EmployeeIncomeTax DTO
  * <p>
- * User: kalesha
- * Date: 8/17/2017
+ * User: Praveen
+ * Date: 16/01/2020
  */
 @Entity
 @Table(name = "EMPLOYEE_INCOME_TAX")
-public class EmployeeIncomeTax {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class EmployeeIncomeTax extends BaseDto{
+
     @Column(name = "EMP_ID")
     private String empId;
     @ManyToOne
@@ -53,14 +50,6 @@ public class EmployeeIncomeTax {
     private BigDecimal taxTobeDeducted;
     @Column(name = "PER_MONTH_TAX")
     private BigDecimal perMonthTax;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmpId() {
         return empId;

@@ -11,11 +11,8 @@ import java.util.Date;
  * @author irfan
  * dto for Cheque Details
  */
-public class ChequeDetails {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class ChequeDetails extends BaseDto {
+
     @Column(name = "CHEQUE_DATE")
     private Date chequeDate;
     @Column(name = "AMOUNT")
@@ -29,24 +26,9 @@ public class ChequeDetails {
     private String bank;
     @Column(name = "NAME_OF_PAY")
     private String nameOfPay;
-    @Column(name = "ID")
-    private String comments;
 
     @Column(name = "COMMENTS")
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String comments;
 
     /**
      * @return the chequeDate

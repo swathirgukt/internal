@@ -13,11 +13,8 @@ import java.util.Date;
  *
  * @author appala.sambangi
  */
-public class MonthlySalaryReport {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class MonthlySalaryReport extends BaseDto {
+
     @Column(name = "EMP_ID")
     private String employeeId;
     @Column(name = "FULL_NAME")
@@ -102,20 +99,6 @@ public class MonthlySalaryReport {
      */
     public void setMedicalInsurance(BigDecimal medicalInsurance) {
         this.medicalInsurance = medicalInsurance;
-    }
-
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
     }
 
     /**

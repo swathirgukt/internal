@@ -11,11 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "EMPLOYEE_SETTLEMENT")
-public class EmployeeSettlement {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class EmployeeSettlement extends BaseDto{
+
     @Column(name = "SETTLEMENT_DATE")
     private Date settlementDate;
     @Column(name = "BASIC")
@@ -64,21 +61,6 @@ public class EmployeeSettlement {
 
     @JoinColumn(name = "EMP_ID", unique = true)
     private Employee employee;
-
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the settlementDate

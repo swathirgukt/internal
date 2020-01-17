@@ -12,11 +12,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "TAX_SECTIONS")
-public class TaxSection implements Comparable<TaxSection> {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class TaxSection  extends BaseDto implements Comparable<TaxSection> {
+
     @Column(name = "SECTION_NAME")
     private String sectionName;
     @Column(name = "SECTION_LIMIT")
@@ -26,15 +23,6 @@ public class TaxSection implements Comparable<TaxSection> {
     private Set<TaxSectionDeclaration> taxSectionDeclarations;
     @Column(name = "ACTIVE")
     private boolean active = true;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getSectionName() {
         return sectionName;

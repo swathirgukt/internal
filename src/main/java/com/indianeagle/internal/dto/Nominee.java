@@ -12,11 +12,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "EMPLOYEE_NOMINEE")
-public class Nominee {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Nominee  extends BaseDto{
+
     @Column(name = "FIRST_NAME")
     private String firstName;
     @Column(name = "MIDDLE_NAME")
@@ -32,15 +29,6 @@ public class Nominee {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "EMP_ID", unique = true)
     private Employee employee;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;

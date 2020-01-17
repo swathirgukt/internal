@@ -19,32 +19,27 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "LEAVES")
-public class Leaves implements Serializable {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Leaves  extends BaseDto {
+
     @ManyToOne
     @JoinColumn(name = "EMPLOYEE_ID", unique = true, nullable = false)
     private Employee employee;
+
     @Column(name = "CASUAL_LEAVES")
-    private Double casualLeaves = new Double(0);
+    private Double casualLeaves = 0d;
+
     @Column(name = "SICK_LEAVES")
-    private Double sinkLeaves = new Double(0);
+    private Double sinkLeaves = 0d;
+
     @Column(name = "COMPENSATORY_LEAVES")
-    private Double compensatoryLeaves = new Double(0);
+    private Double compensatoryLeaves = 0d;
+
     @Column(name = "PREVIOUS_YEAR_LEAVES")
-    private Double previousYearLeaves = new Double(0);
+    private Double previousYearLeaves = 0d;
+
     @Column(name = "CURRENT_LEAVE_YEAR")
     private Date currentLeaveYear;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Employee getEmployee() {
         return employee;

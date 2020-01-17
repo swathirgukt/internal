@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -12,13 +13,13 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "ROLES")
-public class Role {
+public class Role implements Serializable{
     @Id
     @Column(name = "ROLES")
     private String roleName;
     @Column(name = "ACCESS_SCREENS")
     private String accessScreens = "ALL";
-    @Column(name = "ID")
+
     private Set<User> users;
 
 

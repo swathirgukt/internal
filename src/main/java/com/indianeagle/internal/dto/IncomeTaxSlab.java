@@ -11,11 +11,8 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "INCOME_TAX_SLABS")
-public class IncomeTaxSlab implements Comparable<IncomeTaxSlab> {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class IncomeTaxSlab  extends BaseDto implements Comparable<IncomeTaxSlab> {
+
     @Column(name = "MINIMUM_INCOME")
     private BigDecimal minIncome;
     @Column(name = "MAXIMUM_INCOME")
@@ -24,14 +21,6 @@ public class IncomeTaxSlab implements Comparable<IncomeTaxSlab> {
     private BigDecimal taxRate;
     @Column(name = "ACTIVE")
     private boolean active = true;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public BigDecimal getMinIncome() {
         return minIncome;

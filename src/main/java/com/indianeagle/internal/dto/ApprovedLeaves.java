@@ -19,11 +19,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "APPROVED_LEAVES")
-public class ApprovedLeaves {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class ApprovedLeaves extends BaseDto {
     @Column(name = "EMP_ID")
     private String empId;
     @Column(name = "APPROVED_DATE")
@@ -48,20 +44,6 @@ public class ApprovedLeaves {
     private String leaveType;
     @Column(name = "NOTE")
     private String note;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the empId

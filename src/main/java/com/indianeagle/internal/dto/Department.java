@@ -5,10 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DEPARTMENT")
 public class Department {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
     @Column(name = "DEPT_NO")
     private String deptNo;
     @Column(name = "DEPARTMENT")
@@ -19,20 +16,6 @@ public class Department {
     private String location;
     @Column(name = "PHONE_NO")
     private Long phoneNo;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the deptNo

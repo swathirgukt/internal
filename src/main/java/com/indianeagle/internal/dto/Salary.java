@@ -5,11 +5,8 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "SALARY")
-public class Salary {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Salary  extends BaseDto{
+
     @Column(name = "BASIC")
     private BigDecimal basic = BigDecimal.ZERO;
     @Column(name = "HRA")
@@ -60,20 +57,6 @@ public class Salary {
      */
     public BigDecimal getGrossSal() {
         return basic.add(hra).add(conveyence).add(medicalAllowance).add(specialAllowance).add(otherAllowance).add(telephoneAllowance).add(internetAllowance).add(uniformAllowance).setScale(2, BigDecimal.ROUND_HALF_UP);
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**

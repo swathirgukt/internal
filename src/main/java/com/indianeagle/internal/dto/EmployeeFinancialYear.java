@@ -11,13 +11,9 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "EMPLOYEE_FINANCIAL_YEAR")
-public class EmployeeFinancialYear {
-    @javax.persistence.Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
-    @Column(name = "EMP_ID")
+public class EmployeeFinancialYear extends BaseDto {
 
+    @Column(name = "EMP_ID")
     private String empId;
     @ManyToOne
     @JoinColumn(name = "FINANCIAL_YEAR_ID", nullable = false)
@@ -27,14 +23,6 @@ public class EmployeeFinancialYear {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_FINANCIAL_YEAR_ID", nullable = false)
     private Set<EmployeeTaxSection> employeeTaxSections;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
 
     public String getEmpId() {
         return empId;

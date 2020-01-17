@@ -10,11 +10,8 @@ import javax.persistence.*;
  */
 //@Entity
 @Table(name = "GENERATED_FORM_16")
-public class GeneratedForm16 {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class GeneratedForm16 extends BaseDto{
+
     @Column(name = "EMP_ID")
     private String empId;
 
@@ -23,14 +20,6 @@ public class GeneratedForm16 {
     private FinancialYear financialYear;
     @Column(name = "PDF_DATA")
     private byte[] pdfData;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmpId() {
         return empId;
