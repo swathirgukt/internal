@@ -1,4 +1,4 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.EmployeeSettlement;
@@ -9,12 +9,12 @@ import com.indianeagle.internal.form.SalaryRule;
 import java.util.List;
 
 /*
-import com.yana.internal.dto.Employee;
-import com.yana.internal.dto.EmployeeSettlement;
-import com.yana.internal.dto.SalaryHistory;
-import com.yana.internal.form.EmployeeSettlementForm;
-import com.yana.internal.form.GenerateAllSalariesForm;
-import com.yana.internal.form.SalaryRule;
+import com.indianeagle.internal.dto.Employee;
+import com.indianeagle.internal.dto.EmployeeSettlement;
+import com.indianeagle.internal.dto.SalaryHistory;
+import com.indianeagle.internal.form.EmployeeSettlementForm;
+import com.indianeagle.internal.form.GenerateAllSalariesForm;
+import com.indianeagle.internal.form.SalaryRule;
 */
 
 /**

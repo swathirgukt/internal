@@ -1,6 +1,6 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import com.yana.internal.dto.Peripheral;
+import com.indianeagle.internal.dto.Peripheral;
 import java.util.List;
 
 public interface PeripheralService {

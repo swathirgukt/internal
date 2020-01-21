@@ -1,6 +1,6 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import com.yana.internal.dto.Role;
+import com.indianeagle.internal.dto.Role;
 import java.util.List;
 
 /**

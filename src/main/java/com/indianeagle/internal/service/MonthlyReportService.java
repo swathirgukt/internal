@@ -1,8 +1,8 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import com.yana.internal.dto.MonthlySalaryReport;
-import com.yana.internal.form.BankSalariesForm;
-import com.yana.internal.form.ITForm;
+import com.indianeagle.internal.dto.MonthlySalaryReport;
+import com.indianeagle.internal.form.BankSalariesForm;
+import com.indianeagle.internal.form.ITForm;
 import java.util.Date;
 import java.util.List;
 

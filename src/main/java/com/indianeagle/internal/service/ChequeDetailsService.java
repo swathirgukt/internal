@@ -1,7 +1,7 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import com.yana.internal.dto.ChequeDetails;
-import com.yana.internal.form.ChequeDetailsForm;
+import com.indianeagle.internal.dto.ChequeDetails;
+import com.indianeagle.internal.form.ChequeDetailsForm;
 import java.util.List;
 
 /**

@@ -1,8 +1,8 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
 import com.indianeagle.internal.dto.Department;
-import com.yana.internal.dto.Employee;
-import com.yana.internal.form.EmployeeForm;
+import com.indianeagle.internal.dto.Employee;
+import com.indianeagle.internal.form.EmployeeForm;
 import java.util.List;
 
 public interface EmployeeService {

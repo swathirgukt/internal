@@ -1,6 +1,6 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import org.springframework.security.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * Global Session Object for Application

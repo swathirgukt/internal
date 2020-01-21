@@ -1,8 +1,8 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import com.yana.internal.dto.LeaveDetails;
-import com.yana.internal.dto.Leaves;
-import com.yana.internal.form.LeaveApproveForm;
+import com.indianeagle.internal.dto.LeaveDetails;
+import com.indianeagle.internal.dto.Leaves;
+import com.indianeagle.internal.form.LeaveApproveForm;
 import java.util.List;
 
 public interface LeaveDetailsService {

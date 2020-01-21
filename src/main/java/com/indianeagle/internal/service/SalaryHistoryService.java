@@ -1,6 +1,6 @@
-package com.indianeagle.internal.facade;
+package com.indianeagle.internal.service;
 
-import com.yana.internal.dto.SalaryHistory;
+import com.indianeagle.internal.dto.SalaryHistory;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
