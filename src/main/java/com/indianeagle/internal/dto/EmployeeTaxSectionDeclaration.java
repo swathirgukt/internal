@@ -1,6 +1,8 @@
 package com.indianeagle.internal.dto;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +13,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "EMPLOYEE_TAX_SECTION_DECLARATIONS")
-public class EmployeeTaxSectionDeclaration {
+public class EmployeeTaxSectionDeclaration extends BaseDto {
 
     @Column(name = "SUB_SECTION_NAME")
     private String subSectionName;

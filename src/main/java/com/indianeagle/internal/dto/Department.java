@@ -1,10 +1,12 @@
 package com.indianeagle.internal.dto;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "DEPARTMENT")
-public class Department {
+public class Department extends BaseDto {
 
     @Column(name = "DEPT_NO")
     private String deptNo;

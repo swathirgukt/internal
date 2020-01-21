@@ -1,9 +1,6 @@
 package com.indianeagle.internal.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -20,6 +17,7 @@ public class Role implements Serializable{
     @Column(name = "ACCESS_SCREENS")
     private String accessScreens = "ALL";
 
+    @OneToMany
     private Set<User> users;
 
 
