@@ -2,15 +2,18 @@ package com.indianeagle.internal.form;
 
 import com.indianeagle.internal.dto.IncomeTaxSlab;
 import com.indianeagle.internal.dto.Rebate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Form for FinancialYear
- *
+ * <p>
  * User: kalesha
  * Date: 7/31/2017
  */
+
+@Component
 public class FinancialYearForm {
 
     private Long id;

@@ -1,15 +1,18 @@
 package com.indianeagle.internal.form;
 
 import com.indianeagle.internal.dto.FinancialYear;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Form class of EmployeeFinancialYear
- *
+ * <p>
  * User: kalesha
  * Date: 8/13/2017
  */
+
+@Component
 public class EmployeeFinancialYearForm {
 
     private Long Id;
