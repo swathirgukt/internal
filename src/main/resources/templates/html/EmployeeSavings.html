@@ -49,6 +49,7 @@
     </style>
 </head>
 <body>
+<header th:insert="html/fragment/header :: header"></header>
 <div id="employeeSavingBody">
     <form action="/ieinternal/saveEmployee.action" id="employeeSavingForm" method="post"
           name="employeeSavings" onsubmit="return true;">
@@ -218,6 +219,6 @@
     </form>
 
 </div>
-
+<footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 </html>

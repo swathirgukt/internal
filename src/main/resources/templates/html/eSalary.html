@@ -71,7 +71,8 @@
 
     </script>
 </head>
-<body style="background-color: #FFFAF5">
+<body>
+<header th:insert="html/fragment/header :: header"></header>
 <form action="/">
 
     <div>
@@ -182,6 +183,6 @@
                         </button>
                     </div>
         </form>
-
+        <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 </html>
