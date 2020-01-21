@@ -120,8 +120,12 @@ ul.nav a:hover {
     display: block;
 }
 
-
-.background {
+.welcome-1
+ {
+    margin: 0px auto;
+    width: 990px;
+}
+.welcome-2 {
     width: 990px;
     border-radius: 5px;
     min-height: 455px;
@@ -134,39 +138,43 @@ ul.nav a:hover {
     align: center;
 }
 
-.welcome {
+.welcome-3 {
     width: 100%;
     padding-top: 150px;
     color: #f79910
 }
 
-.back {
-    margin: 0px auto;
-    width: 990px;
-}
+.Generate_button{
+    padding:5px;
+     border: 2px solid #ff9900;
+     border-radius: 8px;
 
-.footer {
+ }
+ .Generate_button:hover {
+   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+ }
+
+.footer{
+     position: absolute;
+     bottom: 0;
+     width: 85%;
+     height: 30px;
+     color:#004d00;
+     font-size: 12px;
+  }
+
+#footer{
+    margin-bottom:100px;
     position: absolute;
     bottom: 0;
     width: 85%;
     height: 30px;
     color: #004d00;
     font-size: 12px;
-}
-
-#footer {
-    margin-bottom: 100px;
-    position: absolute;
-    bottom: 0;
-    width: 85%;
-    height: 30px;
-    color: #004d00;
-    font-size: 12px;
-    margin-left: 110px;
-}
-
-.footerinner {
-    margin-top: -100px;
+    margin-left:110px;
+    }
+.footerInner {
+    margin-top:-100px;
     margin: 0px auto;
     width: 990px;
-}
+ }
