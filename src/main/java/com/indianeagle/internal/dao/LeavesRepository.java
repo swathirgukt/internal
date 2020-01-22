@@ -11,6 +11,7 @@ package com.indianeagle.internal.dao;
 import com.indianeagle.internal.dto.Leaves;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,7 +25,8 @@ import java.util.List;
 @Repository
 public interface LeavesRepository extends JpaRepository<Leaves, Long> {
 
-
+    @Query("select l from Leaves l where l.employee.empId = :empId")
+    public List<Leaves> findLeavesByEmployeeId(@Param("empId") String empId);
     /**
      * This method to find all employee Leaves
      *
