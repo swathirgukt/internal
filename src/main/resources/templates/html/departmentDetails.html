@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Department</title>
 
@@ -37,61 +37,112 @@
 
         }
     </style>
+
+    <script type="text/javascript">
+        function submitSave() {
+            document.departmentForm.action = "./department/save";
+            document.departmentForm.submit();
+        }
+
+        function reset() {
+            document.department.reset();
+        }
+
+        function submitSearch() {
+            document.departmentForm.action = "./department/search";
+            document.departmentForm.submit();
+        }
+    </script>
+
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
-    <form action="/">
+    <form action="department/save" method="post" name="departmentForm" th:action="@{department/save}"
+          th:object="${department}">
         <div class="Heading">Department Details</div>
         <br>
 
-        <div style="margin-top: 5px;">
-				<span>
-					<span style="margin-left: 25px;">Depart No*</span><span
-                        style="margin-left:35px;margin-right: 20px;">:</span>
-					<span style="margin-left: 40px;">
-						<input name="" type="">
-					</span>
-				</span>
-            <span>
-					<span style="margin-left: 25px;">Depart Name*</span><span
-                    style="margin-left:30px;margin-right: 22px;">:</span>
-					<span style="margin-left: 40px;">
-						<input name="" type="">
-					</span>
-				</span>
-        </div>
+        <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:if="${success}!=null"
+              th:text="${success}"></span>
 
-        <div style="margin-top: 5px;">
-				<span>
-					<span style="margin-left: 25px;">Manager No *</span><span
-                        style="margin-left:18px;margin-right: 20px;">:</span>
-					<span style="margin-left: 39px;">
-						<input name="" type="">
-					</span>
-					<span style="margin-left: 25px;">Depart Location*</span><span
-                        style="margin-left:20px;margin-right: 20px;">:</span>
-					<span style="margin-left: 35px;">
-						<input name="" type="">
-					</span>
-				</span>
-        </div>
-        <div style="margin-top: 5px;">
-				<span>
-					<span style="margin-left: 25px;">Phone No *</span><span
-                        style="margin-left:35px;margin-right: 20px;">:</span>
-					<span style="margin-left: 40px;">
-						<input name="" type="">
-					</span>
-				</span>
-        </div>
-        <p style="margin-left: 25px;">Note:you can search Department Details by Department Name.</p>
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td align="center" style="line-height:28px;">
+                    <table cellpadding="0" cellspacing="0" width="95%">
+                        <tr>
+                            <td>Department No <span style="color: #ff0000">*</span></td>
+                            <td width="15px">:</td>
+                            <td style="padding: 5px"><input maxlength="20" th:field="*{deptNo}" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><span style="color:#ff0000;" th:errors="*{deptNo}"
+                                      th:if="${#fields.hasErrors('deptNo')}">DeptNo Erro</span></td>
+                        </tr>
+                        <tr>
+                            <td>Manager No <span style="color: #ff0000">*</span></td>
+                            <td width="15px">:</td>
+                            <td style="padding: 5px"><input maxlength="20" th:field="*{mngrNo}" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><span style="color:#ff0000;" th:errors="*{mngrNo}"
+                                      th:if="${#fields.hasErrors('mngrNo')}">MngrNo Error</span></td>
+                        </tr>
+                        <tr>
+                            <td>Phone No <span style="color: #ff0000">*</span></td>
+                            <td width="15px">:</td>
+                            <td style="padding: 5px"><input maxlength="11" th:field="*{phoneNo}" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><span style="color:#ff0000;" th:errors="*{phoneNo}"
+                                      th:if="${#fields.hasErrors('phoneNo')}">PhoneNo Error</span></td>
+                        </tr>
+                    </table>
+                </td>
+                <td align="center" style="line-height:30px;" valign="top">
+                    <table cellpadding="0" cellspacing="0" width="95%">
+                        <tr>
+                            <td>Department Name <span style="color: #ff0000">*</span></td>
+                            <td width="15px">:</td>
+                            <td style="padding: 5px"><input maxlength="25" th:field="*{department}" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><span style="color:#ff0000;" th:errors="*{department}"
+                                      th:if="${#fields.hasErrors('department')}">DeptName Error</span></td>
+                        </tr>
+                        <tr>
+                            <td>Department Location <span style="color: #ff0000">*</span></font>
+                            </td>
+                            <td width="15px">:</td>
+                            <td style="padding: 5px"><input maxlength="150" th:field="*{location}" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><span style="color:#ff0000;" th:errors="*{location}"
+                                      th:if="${#fields.hasErrors('location')}">Location Error</span></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <p style="margin-left: 10px;">Note:you can search Department Details by Department Name.</p>
         <div style="margin-left: 150px;">
 				<span>
-					<button class="InfoButton" onclick="alert('Submit')" type="button">Submit</button>
+					<button class="InfoButton" onclick="submitSave()" type="button">Submit</button>
 				</span>
             <span>
-					<button class="InfoButton" onclick="alert('Search')" type="button">Search</button>
+					<button class="InfoButton" onclick="submitSearch()" type="button">Search</button>
 				</span>
             <span>
 					<button class="InfoButton" onclick="alert('Reset')" type="button">Reset</button>
@@ -101,7 +152,31 @@
         <div class="Heading">Department Details</div>
         <br>
 
-
+        <div th:if="${departmentList} != null AND ${departmentList.size()}>0">
+            <table cellpadding="1" cellspacing="1" style="text-align: center;border: 1px solid black">
+                <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                    <th>Department No</th>
+                    <th>Department Name</th>
+                    <th>Manager No</th>
+                    <th>Location</th>
+                    <th>Phone No</th>
+                    <th>Edit</th>
+                </tr>
+                <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                    th:each="department :${departmentList}">
+                    <td th:text="${department.deptNo}"></td>
+                    <td th:text="${department.department}"></td>
+                    <td th:text="${department.mngrNo}"></td>
+                    <td th:text="${department.location}"></td>
+                    <td th:text="${department.phoneNo}"></td>
+                    <td><a th:href="@{~/department/edit/{id}(id=${department.id})}">Edit</a></td>
+                </tr>
+            </table>
+        </div>
+        <div style="font: 15pt 'Arial Black';color: #ff0000;"
+             th:if="${departmentList}!=null  AND ${departmentList.size()}==0">
+            Nothing found to display
+        </div>
     </form>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
