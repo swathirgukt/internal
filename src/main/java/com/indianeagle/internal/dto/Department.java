@@ -3,20 +3,31 @@ package com.indianeagle.internal.dto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "DEPARTMENT")
 public class Department extends BaseDto {
 
     @Column(name = "DEPT_NO")
+    @NotBlank(message = "Please provide department number")
     private String deptNo;
+
     @Column(name = "DEPARTMENT")
+    @NotBlank(message = "Please provide department name")
     private String department;
+
     @Column(name = "MNGR_NO")
+    @NotNull(message = "Please provide manager number")
     private Long mngrNo;
+
     @Column(name = "LOCATION")
+    @NotBlank(message = "Please provide department location")
     private String location;
+
     @Column(name = "PHONE_NO")
+    @NotNull(message = "Please provide phone number")
     private Long phoneNo;
 
     /**
