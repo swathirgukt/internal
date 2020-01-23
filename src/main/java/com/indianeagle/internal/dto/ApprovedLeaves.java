@@ -22,11 +22,14 @@ import java.util.Date;
 public class ApprovedLeaves extends BaseDto {
     @Column(name = "EMP_ID")
     private String empId;
+    @Temporal(TemporalType.DATE)
     @Column(name = "APPROVED_DATE")
     private Date approvedDate;
+    @Temporal(TemporalType.DATE)
     @Column(name = "FROM_DATE")
     private Date fromDate;
     @Column(name = "TO_DATE")
+    @Temporal(TemporalType.DATE)
     private Date toDate;
     @Column(name = "TOTAL_NO_DAYS")
     private double totalNumberOfAbsentDays;

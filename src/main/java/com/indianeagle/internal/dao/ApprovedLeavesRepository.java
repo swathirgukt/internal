@@ -17,13 +17,6 @@ import java.util.List;
 public interface ApprovedLeavesRepository extends JpaRepository<ApprovedLeaves, Long> {
 
 
-    /**
-     * Method to save or update approvedLeaves
-     *
-     * @param approvedLeaves to persist
-     */
-    // void saveOrUpdateApprovedLeaves(ApprovedLeaves approvedLeaves);
-
 
     /**
      * This method to get employee approvedLeaves from database
