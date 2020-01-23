@@ -17,7 +17,9 @@ public class Role implements Serializable{
     @Column(name = "ACCESS_SCREENS")
     private String accessScreens = "ALL";
 
-    @OneToMany
+    @ManyToMany(targetEntity = com.indianeagle.internal.dto.User.class)
+    @JoinTable(name = "USER_ROLES",
+            joinColumns = @JoinColumn(name = "ROLES", referencedColumnName = "ROLES"), inverseJoinColumns = @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME"))
     private Set<User> users;
 
 

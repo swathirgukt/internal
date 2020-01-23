@@ -124,5 +124,29 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
 
     }
 
+    /**
+     * This method to find the list of employees based on date of birth
+     *
+     * @return list of employees
+     */
+    public List<Employee> findByDob() {
+        Query query = entityManager.createNativeQuery("select e from FROM Employee e WHERE DAY(e.dob) = DATE_ADD(CURRENT_DATE, INTERVAL 1 day)");
+        return query.getResultList();
+
+    }
+
+    /**
+     * This method to find the employees based on date of joining
+     *
+     * @return
+     */
+
+    public List<Employee> findByJoinDate() {
+        Query query = entityManager.createNativeQuery("select e FROM Employee e WHERE DAY(e.joinDate) = DAY(CURRENT_DATE) AND MONTH(e.joinDate) = MONTH(CURRENT_DATE)+1");
+        return query.getResultList();
+    }
+
+
+
 
 }

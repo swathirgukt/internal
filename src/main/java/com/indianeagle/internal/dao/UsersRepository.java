@@ -38,7 +38,7 @@ public interface UsersRepository extends JpaRepository<User, String> {
      * @return List
      */
     //List<User> loadActiveUsers(User user);WHY DO WE NEED TO SEND USER OBJECT FOR THIS?
-
+    List<User> findByStatus(boolean status);
     /**
      * To get a user based on userName
      *

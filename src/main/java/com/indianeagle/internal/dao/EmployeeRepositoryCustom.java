@@ -38,4 +38,23 @@ public interface EmployeeRepositoryCustom {
     @SuppressWarnings("unchecked")
     public List<Employee> searchBasedOnEmpStatus(EmployeeForm employeeForm);
 
+    /**
+     * This method to find the list of employees based on date of birth
+     *
+     * @return list of employees
+     */
+
+    List<Employee> findByDob();
+
+    /**
+     * This method to find the employees based on date of joining
+     *
+     * @return
+     */
+
+    List<Employee> findByJoinDate();
+
+
+
+
 }
