@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add/Edit Leave</title>
+    <style type="text/css">
+		.Heading{
+			font-size: 20px;
+			    color: #ff751a;
+		        border-bottom: 1px solid #CCCCCC;
+			    padding-bottom: 15px;
+                padding-top: 15px;
+                padding-left:15px;
+                margin: 0px 10px 0px 10px;
+		}
+		.form-page{
+			width: 990px;
+                min-height: 455px;
+                border-radius: 9px;
+                box-shadow: 10px 10px 8px  #cc8500;
+                border: 2px solid orange;
+                background-color:#FFFAF5;
+                left: calc(25% - 280px/2);
+			    position: absolute;
+			    color: black;
+		}
+		.inputfield{
+			width: 40px;
+			height:25px;
+
+		}
+		.submitButton{
+			 padding:5px;
+                 border: 2px solid #ff9900;
+                 border-radius: 8px;
+                 cursor:pointer;
+                 width:100px;
+
+		}
+		.submitButton:hover{
+			background-color: white;
+				box-shadow: 0 8px 6px 0 #ff9933;
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<div class="form-page">
+    <form action="/">
+        <div class="Heading">Add/Edit Leave</div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <span style="padding-left:10px">Employee ID  <span
+                            style="color:red;font-size:15px"> *</span> <b>:</b></span>
+                    <span> <select name="id" style="width: 200px;height: 23px;">
+
+							<option value="YSPL1008">YSPL1008</option>
+							<option value="YSPL1007">YSPL1007</option>
+
+
+						</select>
+						<span style="margin-left: 15px;">PL<b>:</b></span>
+						<span style="margin-left: 10px;">
+							<input class="inputfield" type="" name="">
+						</span>
+						<span style="margin-left: 15px;">SL<b>:</b></span>
+						<span style="margin-left: 10px;">
+							<input class="inputfield" type="" name="">
+						</span>
+						<span style="margin-left: 15px;">COM.L<b>:</b></span>
+					<span style="margin-left: 10px;">
+						<input class="inputfield" type="" name="">
+					</span>
+					<span style="margin-left: 15px;">Previous Leaves<b>:</b></span>
+					<span style="margin-left: 10px;">
+						<input class="inputfield" type="" name="">
+					</span>
+					<span>
+					<button type="button" class="submitButton" onclick="alert('Submit')">Submit</button>
+			    	</span>
+
+					</span>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+<footer th:insert="html/fragment/footer :: footer"></footer>
+</body>
+</html>
