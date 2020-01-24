@@ -34,7 +34,7 @@ public interface UsersRepository extends JpaRepository<User, String> {
 
     /**
      * To load Active Users only
-     * @param user
+     * @param status
      * @return List
      */
     //List<User> loadActiveUsers(User user);WHY DO WE NEED TO SEND USER OBJECT FOR THIS?
