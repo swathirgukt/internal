@@ -1,68 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <title>Salary History</title>
     <style type="text/css">
-        .Heading {
-            font-size: 20px;
-            color: #ff751a;
-            border-bottom: 1px solid #CCCCCC;
-        }
+			.input-group{
+				margin-left: 0px;
+			}
 
-        .Sbutton {
-            border-radius: 5px;
-            box-shadow: 0 1px 2px blue;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 13px;
-            height: 25px;
-            line-height: 25px;
-            margin: 0 2px;
-            outline: medium none;
-            text-align: center;
-            text-decoration: none;
-            text-shadow: 0 1px 0 #ffcc99;
-            vertical-align: baseline;
-            width: 90px;
-            /*style="margin-left: 50px; font-size: 15px;"
-        */
-        }
     </style>
+
 </head>
-<body style="background-color: #ffffcc">
+<body>
 <header th:insert="html/fragment/header :: header"></header>
-<form action="/">
+<div class="form-page">
+    <form action="/">
+        <div class="Heading" style="padding-left:5px">Salary History</div>
+        <br>
+        <div style="`padding-left:5px">
+            <div style="float:left;margin-top:10px;margin-left:10px">DATE</div>
+            <div style="margin-top:10px;color:red;float:left;">*</div>
+            <div style="margin-left:25px;;float:left;font-size:25px">:</div>
+            <div style="margin-left:20px; width:300px;float:left;">
 
-    <div>
-        <form action="/">
-            <div class="Heading">Salary History</div>
-            <br>
-            <div style="width: 100%;height: 100px;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <span>Employee ID  *:</span>
-                            <span> <select name="id" style="width: 250px;height: 23px; margin-left: 150px;">
-											<option>--Select--</option>
-											<option value="IEPL076">IEPL076</option>
-											<option value="IEPL077">IEPL077</option>
-										</select>
-									</span>
-                            <span style="margin-left: 50px;"><a class="Sbutton" href="#"> Search </a></span>
-                        </div>
-                    </div>
-                </div>
+                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
+                       name="datepicker"/>
+                <script>
+								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
             </div>
-        </form>
-    </div>
+            <button type="button" class="submitButton" onclick="alert('Search')"><b>Search</b></button>
+        </div>
+    </form>
 
+    <p class="Heading" style="float:left;padding-left:5px">Salary History Details</p>
 
-    <div class="Heading">
-        <div><p>Salary History Details
-            <p></div>
+</div>
 
-
-    </div>
-    <footer th:insert="html/fragment/footer :: footer"></footer>
+<footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 
 

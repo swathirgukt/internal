@@ -2,92 +2,41 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Approve Leave</title>
-    <style type="text/css">
-			.Heading{
-				font-size: 20px;
-			    color: #ff751a;
-		        border-bottom: 1px solid #CCCCCC;
-			    padding-bottom: 15px;
-                padding-top: 15px;
-                padding-left:15px;
-                margin: 0px 10px 0px 10px;
-			}
-			.form-page{
-				width: 990px;
-                min-height: 455px;
-                border-radius: 9px;
-                box-shadow: 10px 10px 8px  #cc8500;
-                border: 2px solid orange;
-                background-color:#FFFAF5;
-                left: calc(25% - 280px/2);
-			    position: absolute;
-			    color: black;
-			}
-			.Type_leaves {
-				width: 49px;
-				height: 18px;
-				float: left;
-				text-align: center;
-				font-size: 15px;
-				color: #666666;
-				margin-right: 14px;
-
-			}
-			.submitButton{
-				 padding:5px;
-                 border: 2px solid #ff9900;
-                 border-radius: 8px;
-                 cursor:pointer;
-                 width:100px;
-                float:right;
-			}
-			.submitButton:hover{
-				background-color: white;
-				box-shadow: 0 8px 6px 0 #ff9933;
-
-			}
-
-
-
-
-    </style>
-
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
     <form action="/">
-        <div class="Heading">Approve Leave</div>
-        <br>
+
         <div class="container">
-            <div class="row">
+            <div class="Heading">Approve Leave</div>
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-6">
                     <div>
                         <div>
                             <span>Employee ID <span style="color:red;font-size:15px"> *</span> <b>:</b></span>
-                            <span> <select name="id" style="width: 250px;height: 23px;">
+                            <select name="id" style="width: 250px;height: 23px;">
 
-										<option value="YSPL1324">YSPL1324</option>
-										<option value="YSPL1321">YSPL1321</option>
-									</select>
-								</span>
+                                <option value="YSPL1324">YSPL1324</option>
+                                <option value="YSPL1321">YSPL1321</option>
+                            </select>
+
                         </div>
-                        <div><span>Leave Type&nbsp<span style="color:red;font-size:15px"> *</span> <b>:</b></span>
-                            <span> <select name="id"
-                                           style="width: 250px;height: 23px; margin-top: 10px; margin-left: 5px;">
+                        <div>Leave Type&nbsp<span style="color:red;font-size:15px"> *</span> <b>:</b>
+                            <select name="id"
+                                    style="width: 250px;height: 23px; margin-top: 10px; margin-left: 5px;">
 
-									<option value="Casual Leave">Casual Leave</option>
-									<option value="Sick Leave">Sick Leave</option>
-									<option value="Compensatory Leave">Compensatory Leave</option>
-									<option value="Maternity Leave">Maternity Leave</option>
-									<option value="LOP inc Holidays">LOP inc Holidays</option>
-									<option value="LOP 1/2 Day">LOP 1/2 Day</option>
-									<option value="Half Day Leave">Half Day Leave</option>
-									<option value="Comp. Leave Half Day">Comp. Leave Half Day</option>
-									<option value="Marriage Leave inc Holidays">Marriage Leave inc Holidays</option>
-									<option value="Marriage Leave">Marriage Leave</option>
-								</select>
-							</span>
+                                <option value="Casual Leave">Casual Leave</option>
+                                <option value="Sick Leave">Sick Leave</option>
+                                <option value="Compensatory Leave">Compensatory Leave</option>
+                                <option value="Maternity Leave">Maternity Leave</option>
+                                <option value="LOP inc Holidays">LOP inc Holidays</option>
+                                <option value="LOP 1/2 Day">LOP 1/2 Day</option>
+                                <option value="Half Day Leave">Half Day Leave</option>
+                                <option value="Comp. Leave Half Day">Comp. Leave Half Day</option>
+                                <option value="Marriage Leave inc Holidays">Marriage Leave inc Holidays</option>
+                                <option value="Marriage Leave">Marriage Leave</option>
+                            </select>
                         </div>
                     </div>
                     <div style="margin-top:20px;">
@@ -100,13 +49,10 @@
 								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
 
 
-
-
                             </script>
                         </div>
 
                     </div>
-
 
                     <div style="margin-top:20px;">
                         <span>To </span>
@@ -118,9 +64,6 @@
                                    name="datepicker"/>
                             <script>
 								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
-
-
-
 
 
                             </script>
@@ -227,11 +170,9 @@
                         <span style="float: left;">Note <b style="margin-left:50px">:</b></span>&nbsp;
                         <textarea rows="3" cols="33"></textarea>
 
-                        <div>
-							<span>
-                                <button type="button" class="submitButton"
-                                        onclick="alert('Submit')"><b>Submit</b></button>
-							</span>
+                        <div style="margin-left:97px">
+                            <button type="button" class="submitButton"
+                                    onclick="alert('Submit')"><b>Submit</b></button>
                         </div>
 
                     </div>

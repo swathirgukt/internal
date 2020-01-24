@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Indianeagle</title>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="welcome" align="center">
-            <p> PT Form</p>
-            <div>
-                <div style="float:left;margin-top:10px;margin-left:10px">DATE</div>
-                <div style="margin-top:10px;color:red;float:left;">*</div>
-                <div style="margin-left:25px;float:left;font-size:25px">:</div>
-                <div style="margin-left:20px; width:300px;float:left;">
+<div class="form-page">
+    <p class="Heading" style="padding-left:5px"> PT Form</p>
+    <div style="padding-left:5px">
+        <div style="float:left;margin-top:10px;margin-left:10px">DATE</div>
+        <div style="margin-top:10px;color:red;float:left;">*</div>
+        <div style="margin-left:25px;;float:left;font-size:25px">:</div>
+        <div style="margin-left:20px; width:300px;float:left;">
 
-                    <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
-                           name="datepicker"/>
-                    <script>
+            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
+                   name="datepicker"/>
+            <script>
 								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-                    </script>
-                </div>
-                <span><button type="button" class="Generate_button"
-                              onclick="salClickBut()"><b>Generate PT</b></button></span>
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </script>
         </div>
-
-
+        <button type="button" class="submitButton"
+                onclick="salClickBut()"><b>Generate PT</b></button>
+    </div>
+</div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 </html>

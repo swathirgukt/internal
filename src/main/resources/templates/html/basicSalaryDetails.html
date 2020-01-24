@@ -1,90 +1,59 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <style type="text/css">
+    <title>Basic Salary Details</title>
 
-	 
-			 
-	.form_page{
-		box-shadow: 10px 10px 8px  #cccccc;
-		width:900px;
-		height:500px;
-		border:solid;
-		border-color:#fff2e6;
-		margin-left:300px;
-		margin-top:30px;
-		background-color:#fff2e6;
-		
-		}
-		.top_border_line{
-			font-size: 20px;
-			color: #ff751a;
-			border-bottom: 2px solid #ffb366;
-			margin-top:10px;
-			font-family:Arial;
-		}
-		
-		
-		.button:link, .button:visited {
-			  background-color: #fff2e6;
-			  color: black;
-			  border: 2px solid #ff9933;
-			  padding: 6px 15px;
-			  text-align: center;
-			  text-decoration: none;
-			  display: inline-block;
-			  border-radius:5px;
-}
-
-			.button:hover, .button:active {
-					  background-color:#fff2e6;
-					  
-						padding: 6px 15px;
-					box-shadow: 2px 3px 1px 2px #ffbf80;
-					  }
-					  
-					  
-					  .sel_op{
-					  width:250px;
-					  font-size:15px;
-						text-align:center;
-						color:red;
-						background-color:#fff2e6;
-					  }
-
-
-    </style>
-    <script>
-		function getSelectData(){
-		alert(document.getElementById("sel_op").value);
-		}
-
-
-    </script>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="form_page">
-    <div style="margin-left:20px;">
-        <div class="top_border_line">Basic Salary Details</div>
+<div class="form-page">
+    <form action="/">
+        <div class="container">
+            <div class="Heading" style="padding-left:5px">Basic Salary Details</div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Employee Status</td>
+                                <td><b>:</b></td>
+                                <td>
+                                    <select id="sel_op" class="inputBoxStyle">
+                                        <option label="All" value="all">All</option>
+                                        <option label="Resigned" value="resigned">Resigned</option>
+                                        <option label="Relieved" value="relieved">Relieved</option>
+                                        <option label="Working" value="working">Working</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
-        <div style="margin-top:20px;">
-            <span>Employee Status </span><span style="margin-left:20px;"> :</span>
+                    <div style="float:right;margin-right:200px;">
+                        <button type="button" class="submitButton" onclick="alert('Search')"><b>Search</b>
+                        </button>
+                    </div>
 
-            <select class="sel_op" id="sel_op">
-                <option label="All" value="all">All</option>
-                <option label="Resigned" value="resigned">Resigned</option>
-                <option label="Relieved" value="relieved">Relieved</option>
-                <option label="Working" value="working">Working</option>
-            </select>
+                </div>
+            </div>
+            <div class="Heading" style="float:left">Search Results</div>
+            <div class="row">
+                <div class="col-md-10">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td></td>
+                        </tr>
 
-            <span style="margin-left:150px;"><a class="button" href="#"
-                                                onclick="getSelectData()"><b>Search</b></a></span>
+                    </table>
+                </div>
+            </div>
         </div>
+    </form>
 
 
-        <div class="top_border_line">Search Details</div>
-    </div>
 </div>
+
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 </html>
+

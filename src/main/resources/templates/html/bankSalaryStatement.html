@@ -1,0 +1,71 @@
+<html>
+<title>Bank Salary Statement</title>
+<head>
+    <style type="text/css">
+		.sel_op {
+			width: 250px;
+			font-size: 15px;
+			text-align: center;
+			color: red;
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<div class="form-page">
+    <div style="margin-left:20px;">
+        <div class="Heading">Bank Salary Statement</div>
+
+        <div style="margin-top:30px;">
+            <form action="#" method="post">
+                <!-- Date picker -->
+                <div style="float:left;margin-top:10px;">DATE</div>
+                <div style="margin-top:10px;color:red;float:left;">*</div>
+                <div style="margin-left:20px;margin-top:10px;float:left;">:</div>
+                <div style="margin-left:60px; width:300px;float:left;">
+
+                    <input style=" float:left;" id="date" width="200px" name="date"/>
+                    <script>
+								$('#date').datepicker({ uiLibrary: 'bootstrap' });
+
+
+
+
+
+
+
+
+
+
+
+
+                    </script>
+                </div>
+                <span style="margin-left:50px;"><button type="button" class="submitButton"
+                                                        onclick="salClickBut()"><b>Generate Bank Salaries</b></button></span>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<footer th:insert="html/fragment/footer :: footer"></footer>
+</body>
+
+</html>

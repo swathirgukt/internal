@@ -2,123 +2,53 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Employee Leave Reports</title>
-
-    <style type="text/css">
-		.Heading{
-			font-size: 20px;
-			    color: #ff751a;
-		        border-bottom: 1px solid #CCCCCC;
-			    padding-bottom: 15px;
-                padding-top: 15px;
-                padding-left:15px;
-                margin: 0px 10px 0px 10px;
-		}
-		.form-page{
-			    width: 990px;
-                min-height: 455px;
-                border-radius: 9px;
-                box-shadow: 10px 10px 8px  #cc8500;
-                border: 2px solid orange;
-                background-color:#FFFAF5;
-                left: calc(25% - 280px/2);
-			    position: absolute;
-			    color: black;
-		}
-		.searchButton{
-			     padding:5px;
-                 border: 2px solid #ff9900;
-                 border-radius: 8px;
-                 cursor:pointer;
-                 width:100px;
-                 float:right;
-                 margin-top:-33px;
-                 margin-right:10px;
-
-		}
-		.searchButton:hover{
-			background-color: white;
-				box-shadow: 0 8px 6px 0 #ff9933;
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-    </style>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
     <form action="/">
-        <div class="Heading">Leave Report</div>
-        <br>
-
         <div class="container" style="float:left">
-            <div class="row">
+            <div class="Heading">Leave Report</div>
+            <div class="row" style="margin-top:10px;">
                 <div class="col-md-3">
-                    <span>Employee ID  <span style="color: red">*</span><b>:</b></span>
-                    <span> <select name="id" style="width: 250px;height: 23px;">
+                    Employee ID <span style="color: red">*</span><b>:</b>
+                    <select name="id" style="width: 250px;height: 23px;">
 							<option value="YSPL1008">YSPL1008</option>
 							<option value="YSPL1007">YSPL1007</option>
 							<option value="YSPL1339">YSPL1339</option>
 							<option value="IEPL0216">IEPL0216</option>
-						   </select>
-					</span>
+                    </select>
                 </div>
                 <div class="col-md-3">
-                    <span>From </span>
+                    From
                     <span style="color: red">*</span><b>:</b></span>
-                    <div style="margin-right:250px; width:200px;">
+                    <div>
                         <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
                                name="datepicker"/>
                         <script>
 								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-
-
-
                         </script>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <span>To </span>
+                    To
                     <span style="color: red">*</span><b>:</b></span>
-                    <div style="margin-right:250px; width:200px;">
-
+                    <div>
                         <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1" width="200px"
                                name="datepicker"/>
                         <script>
 								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
 
-
-
-
-
-
-
-
-
-
-
                         </script>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div style="margin-top:20px;">
+                        <button type="button" class="submitButton" onclick="alert('Search')">Search</button>
                     </div>
                 </div>
             </div>
 
-        </div>
-
-        <div>
-			<span>
-					<button type="button" class="searchButton" onclick="alert('Search')">Search</button>
-				</span>
         </div>
 
     </form>
