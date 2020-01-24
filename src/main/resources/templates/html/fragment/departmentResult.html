@@ -1,6 +1,7 @@
 <div th:fragment="departmentResult" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${departmentList} != null AND ${departmentList.size()}>0">
-        <table cellpadding="1" cellspacing="1" style="text-align: center;border: 1px solid black">
+        <table cellpadding="1" cellspacing="1" class="table table-bordered"
+               style="text-align: center;border: 1px solid black">
             <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
                 <th>Department No</th>
                 <th>Department Name</th>

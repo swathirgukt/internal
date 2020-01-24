@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Department</title>
-
-    <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript">
-    </script>
-
+    <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript"></script>
 </head>
 
 <body>
@@ -23,6 +19,8 @@
                           th:object="${department}">
                         <div class="Heading">Department Details</div>
                         <div class="row">
+                            <span style="color: #008000;margin-left: 40%;font: 12pt arial;padding-top: 30px"
+                                  th:if="${success}!=null" th:text="${success}"></span>
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                 <div>
                                     <table width="100%">
@@ -104,15 +102,17 @@
                                 </div>
                                 <div style="margin-top:50px;">
                                     <div style="float: left;">
-                                        <button class="submitButton" onclick="submitSave()" type="button"><b>Submit</b>
+                                        <button class="submitButton" onclick="saveDepartment()" type="button">
+                                            <b>Submit</b>
                                         </button>
                                     </div>
                                     <div style="float: left;margin-left: 40px;">
-                                        <button class="submitButton" onclick="reset()" type="button"><b>Reset</b>
+                                        <button class="submitButton" onclick="document.departmentForm.reset()"
+                                                type="button"><b>Reset</b>
                                         </button>
                                     </div>
                                     <div style="float: left;margin-left: 40px;">
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
+                                        <button class="submitButton" onclick="searchDepartment()" type="button">
                                             <b>Search</b>
                                         </button>
                                     </div>
@@ -136,8 +136,7 @@
 
         </div>
         <!--
-        <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:if="${success}!=null"
-          th:text="${success}"></span>
+
         -->
     </div>
 </div>

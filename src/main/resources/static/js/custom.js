@@ -6,7 +6,7 @@ function makeAJAXCall(requestUrl,formId) {
     });
 }
 
-function submitSearch() {
+function searchDepartment() {
     var response = makeAJAXCall("/department/search", 'departmentForm');
     response.done(function (responseData) {
         if (responseData) {
@@ -15,10 +15,21 @@ function submitSearch() {
     });
 }
 
-function submitSave() {
+function searchPeripheral() {
+    var response = makeAJAXCall("/peripheral/search", 'peripheralForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#peripheralResult").html(responseData);
+        }
+    });
+}
+
+function saveDepartment() {
     document.departmentForm.action = "/department/save";
     document.departmentForm.submit();
 }
-function reset() {
-    document.department.reset();
+
+function savePeripheral() {
+    document.peripheralForm.action = "/peripheral/save";
+    document.peripheralForm.submit();
 }
