@@ -14,6 +14,12 @@ import java.util.List;
 
 import static com.indianeagle.internal.constants.StringConstants.DEPARTMENTS_LIST;
 
+/**
+ * Controller to handle department requests
+ * Author: Taymur Shaikh
+ * Since: 24/01/2020
+ */
+
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {

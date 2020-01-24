@@ -7,125 +7,141 @@
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
-    <form action="/peripheral/sav" id="peripheralForm" method="post" name="peripheralForm"
-          th:action="@{/peripheral/save}" th:object="${peripheral}">
-        <div class="container">
+    <div class="container">
+        <form action="/peripheral/sav" id="peripheralForm" method="post" name="peripheralForm"
+              th:action="@{/peripheral/save}" th:object="${peripheral}">
             <div class="Heading">Workshop Details</div>
-            <br>
             <div class="row">
-                <div class="col-lg-5">
-                    <div class="inputDiv">
-							<span>
-								<span>Peripheral Name<span style="color:red">*</span></span>
-                                <span style="margin-left:55px;margin-right: 10px;"><b>:</b></span>
-								<span>
-									<input class="inputBoxStyle" th:field="*{peripheralName}" type="text">
-								</span>
-							</span>
-                    </div>
+                <span style="color: #008000;margin-left: 40%;font: 12pt arial;padding-top: 30px"
+                      th:if="${success}!=null" th:text="${success}"></span>
 
-                    <div class="inputDiv">
-                        <span>Type<span style="color:red">*</span></span><span
-                            style="margin-left:133px;margin-right: 10px;"><b>:</b></span>
-                        <span>
-								<input class="inputBoxStyle" th:field="*{type}" type="text">
-							</span>
-                    </div>
-
-
-                    <div class="inputDiv">
-                        <span>Model<span style=" color:red">*</span></span><span
-                            style="margin-left:126px;margin-right: 10px;"><b>:</b></span>
-                        <span>
-								<input class="inputBoxStyle" th:field="*{model}" type="text">
-							</span>
-                    </div>
-
-                    <div class="inputDiv">
-
-                        <table style="width:100%;">
+                <div class="col-md-6 col-sm-12 col-xs-10">
+                    <div>
+                        <table width="100%">
                             <tr>
-                                <td>
-                                    Year of Purchase<span style="color:red">*</span><span
-                                        style="margin-left:57px;margin-right: -41px;"><b>:</b></span>
-                                </td>
-
-                                <td>
-                                    <span style="margin-right:182px; width:100px;">
-                                        <input id="datepicker1" name="datepicker" style=" border: 1px solid #ff9900;"
-                                               th:field="*{yearOfPurchase}"
-                                               type="date" width="200px"/>
-                                        <script>
-								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
-				         </script>
-                                    </span>
+                                <td>Peripheral Name <span style="color: #ff0000">*</span></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="50"
+                                                                th:field="*{peripheralName}" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{peripheralName}"
+                                          th:if="${#fields.hasErrors('peripheralName')}">peripheralName Error</span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Type <span style="color: #ff0000">*</span></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="25" th:field="*{type}"
+                                                                type="text"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{type}"
+                                          th:if="${#fields.hasErrors('type')}">type Error</span></td>
+                            </tr>
+                            <tr>
+                                <td>Model <span style="color: #ff0000">*</span></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="25" th:field="*{model}"
+                                                                type="text"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{model}"
+                                          th:if="${#fields.hasErrors('model')}">model Error</span></td>
+                            </tr>
+                            <tr>
+                                <td>Year of Purchase<span style="color: #ff0000">*</span></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input id="datepicker1" name="datepicker"
+                                                                style=" border: 1px solid #ff9900;"
+                                                                th:field="*{yearOfPurchase}" type="text" width="200px"/>
+                                    <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{yearOfPurchase}"
+                                          th:if="${#fields.hasErrors('yearOfPurchase')}">yearOfPurchase Error</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Employee Id</td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="50" th:field="*{users}"
+                                                                type="text"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{users}"
+                                          th:if="${#fields.hasErrors('users')}">users Error</span></td>
+                            </tr>
                         </table>
-
-                    </div>
-                    <div class="inputDiv">
-                        <span>Employee Id</span><span style="margin-left:91px;margin-right: 10px;"><b>:</b></span>
-                        <span>
-								<input class="inputBoxStyle" th:field="*{users}" type="text">
-							</span>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div style="float:right">
-                        <div class="inputDiv">
-								<span>
-									<span>Brand<span style="color:red">*</span></span><span
-                                        style="margin-left:100px;margin-right:10px;"><b>:</b></span>
-									<span>
-										<input class="inputBoxStyle" th:field="*{brand}" type="text">
-									</span>
-								</span>
-                        </div>
-
-                        <div class="inputDiv">
-								<span>Serial Number <span style="color:red">*</span><span
-                                        style="margin-left:44px;margin-right: 10px;"><b>:</b></span>
-									<span>
-										<input class="inputBoxStyle" th:field="*{serialNumber}" type="text">
-									</span>
-								</span>
-                        </div>
-
-
-                        <div class="inputDiv">
-
-
-                            <table style="width:100%;">
-                                <tr>
-                                    <td>
-                                        Warranty Date <span style="color:red">*</span><span
-                                            style="margin-left:45px;margin-right: 15px;"><b>:</b></span>
-                                    </td>
-
-                                    <td>
-                                        <span style="margin-right:250px; width:200px;">
-                                            <input id="datepicker" name="datepicker"
-                                                   style=" float:left; border: 1px solid #ff9900;"
-                                                   th:field="*{warrantyDate}" type="date" width="200px"/>
-                                            <script>
-								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-				         </script>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="inputDiv">
-								<span>Status <span style="color:red">*</span><span
-                                        style="margin-left:94px;margin-right: 10px;"><b>:</b></span>
-									<span>
-										<input class="inputBoxStyle" th:field="*{status}" type="text">
-									</span>
-								</span>
-                        </div>
-
-
+                <div class="col-md-6 col-sm-12 col-xs-10">
+                    <div>
+                        <table width="100%">
+                            <tr>
+                                <td>Brand <span style="color: #ff0000">*</span></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="25" th:field="*{brand}"
+                                                                type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{brand}"
+                                          th:if="${#fields.hasErrors('brand')}">brand Error</span></td>
+                            </tr>
+                            <tr>
+                                <td>Serial Number <span style="color: #ff0000">*</span></font></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="50"
+                                                                th:field="*{serialNumber}" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{serialNumber}"
+                                          th:if="${#fields.hasErrors('serialNumber')}">serialNumber Error</span></td>
+                            </tr>
+                            <tr>
+                                <td>Warranty Date <span style="color: #ff0000">*</span></font></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input id="datepicker" name="datepicker"
+                                                                style=" float:left; border: 1px solid #ff9900;"
+                                                                th:field="*{warrantyDate}" type="text" width="200px"/>
+                                    <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{warrantyDate}"
+                                          th:if="${#fields.hasErrors('warrantyDate')}">warrantyDate Error</span></td>
+                            </tr>
+                            <tr>
+                                <td>Status <span style="color: #ff0000">*</span></font></td>
+                                <td width="15px">:</td>
+                                <td style="padding: 5px"><input class="inputBoxStyle" maxlength="50"
+                                                                th:field="*{status}" type="text"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span style="color:#ff0000;" th:errors="*{status}"
+                                          th:if="${#fields.hasErrors('status')}">status Error</span></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -133,8 +149,8 @@
                 <div class="col-lg-5 col-sm-5 col-lg-offset-5">
                     <div style="float: right">
 							<span>
-                                <button type="button" class="submitButton"
-                                        onclick="savePeripheral()"><b>Submit</b></button>
+                                <button class="submitButton" type="submit"
+                                ><b>Submit</b></button>
 							</span>
                         <span>
                             <button class="submitButton" onclick="searchPeripheral()"
@@ -154,7 +170,7 @@
                 </div>
 
             </div>
-        </div>
+    </div>
 
     </form>
 </div>
