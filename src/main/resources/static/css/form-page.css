@@ -50,10 +50,11 @@
             height: 30px;
             width: 140px;
 
-        }
+       }
 
-        .tableScrollbar{
+.tableScrollbar{
              display:block;
               max-height:300px;
+              overflow-x:auto;
               overflow-y:auto;
         }
