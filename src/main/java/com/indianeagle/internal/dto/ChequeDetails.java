@@ -129,4 +129,16 @@ public class ChequeDetails extends BaseDto {
         this.comments = comments;
     }
 
+    @Override
+    public String toString() {
+        return "ChequeDetails{" +
+                "chequeDate=" + chequeDate +
+                ", amount=" + amount +
+                ", chequeNo=" + chequeNo +
+                ", status='" + status + '\'' +
+                ", bank='" + bank + '\'' +
+                ", nameOfPay='" + nameOfPay + '\'' +
+                ", comments='" + comments + '\'' +
+                '}';
+    }
 }

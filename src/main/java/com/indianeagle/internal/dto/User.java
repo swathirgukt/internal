@@ -24,8 +24,9 @@ public class User implements Serializable {
     private String email;
     @Column(name = "ENABLED")
     private boolean status;
-    @ManyToMany()
-    @JoinTable(name = "USER_ROLES", joinColumns = @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME"), inverseJoinColumns = @JoinColumn(name = "ROLES", referencedColumnName = "ROLES"))
+    @ManyToMany(targetEntity = com.indianeagle.internal.dto.Role.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLES",
+            joinColumns = @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME"), inverseJoinColumns = @JoinColumn(name = "ROLES", referencedColumnName = "ROLES"))
     private Set<Role> roles;
 
 
