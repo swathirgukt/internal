@@ -12,8 +12,7 @@
             box-shadow: 10px 10px 8px  #cc8500;
             border: 2px solid orange;
             background-color:#FFFAF5;
-			position: absolute;
-			left: calc(25% - 280px/2);
+
 			 }
 
 .inputBoxStyle {
@@ -57,4 +56,10 @@
               max-height:300px;
               overflow-x:auto;
               overflow-y:auto;
+        }
+
+        .max-auto-custom{
+           margin-left:auto;
+           margin-right:auto;
+
         }
