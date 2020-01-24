@@ -215,4 +215,22 @@ public class ApprovedLeaves extends BaseDto {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public String toString() {
+        return "ApprovedLeaves{" +
+                "empId='" + empId + '\'' +
+                ", approvedDate=" + approvedDate +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", totalNumberOfAbsentDays=" + totalNumberOfAbsentDays +
+                ", casualLeave=" + casualLeave +
+                ", sickLeave=" + sickLeave +
+                ", compensatoryLeave=" + compensatoryLeave +
+                ", lop=" + lop +
+                ", leaveBalance=" + leaveBalance +
+                ", leaveType='" + leaveType + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
