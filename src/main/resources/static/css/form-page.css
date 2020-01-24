@@ -56,10 +56,14 @@
               max-height:300px;
               overflow-x:auto;
               overflow-y:auto;
+<<<<<<< HEAD
         }
 
         .max-auto-custom{
            margin-left:auto;
            margin-right:auto;
 
+=======
+              overflow-x:auto;
+>>>>>>> 931c71cfb4a51b4e733e509ba1e05214fc6276c6
         }
