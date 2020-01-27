@@ -6,48 +6,39 @@
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="form-page">
-    <form action="/">
-        <div class="container">
-            <div class="Heading">Add/Edit Leave</div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div style="padding-top:10px;">
-                    <span style="padding-left:10px">Employee ID  <span
-                            style="color:red;font-size:15px"> *</span> <b>:</b></span>
-                        <span> <select name="id" style="width: 200px;height: 23px;">
-
-							<option value="YSPL1008">YSPL1008</option>
-							<option value="YSPL1007">YSPL1007</option>
-						</select>
-						<span style="margin-left: 15px;">PL<b>:</b></span>
-						<span style="margin-left: 10px;">
-							<input class="inputfield" type="" name="">
-						</span>
-						<span style="margin-left: 15px;">SL<b>:</b></span>
-						<span style="margin-left: 10px;">
-							<input class="inputfield" type="" name="">
-						</span>
-						<span style="margin-left: 15px;">COM.L<b>:</b></span>
-					<span style="margin-left: 10px;">
-						<input class="inputfield" type="" name="">
-					</span>
-					<span style="margin-left: 15px;">Previous Leaves<b>:</b></span>
-					<span style="margin-left: 10px;">
-						<input class="inputfield" type="" name="">
-					</span>
-					<span>
-					<button type="button" class="submitButton" onclick="alert('Submit')">Submit</button>
-			    	</span>
-
-					</span>
-                    </div>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <form action="/">
+                        <div class="Heading">Add/Edit Leave</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Employee ID <span style="color:red">*</span> <b>:</b>
+                                <select name="id" style="width: 200px;height: 23px;border-radius:5px">
+                                    <option value="YSPL1008">YSPL1008</option>
+                                    <option value="YSPL1007">YSPL1007</option>
+                                </select>
+                                PL<b>:</b>
+                                <input class="inputfield" type="" name="">
+                                SL<b>:</b>
+                                <input class="inputfield" type="" name="">
+                                COM.L<b>:</b>
+                                <input class="inputfield" type="" name="">
+                                Previous Leaves<b>:</b>
+                                <input class="inputfield" type="" name="">
+                                <button type="button" class="submitButton" onclick="alert('Submit')"><b>Submit</b>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
-
-    </form>
+    </div>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
