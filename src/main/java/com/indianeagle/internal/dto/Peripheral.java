@@ -22,8 +22,10 @@ public class Peripheral  extends BaseDto{
     private String model;
     @Column(name = "SERIAL_NUMBER")
     private String serialNumber;
+    @Temporal(TemporalType.DATE)
     @Column(name = "PURCHASE_DATE")
     private Date yearOfPurchase;
+    @Temporal(TemporalType.DATE)
     @Column(name = "WARRANTY_DATE")
     private Date warrantyDate;
     @Column(name = "USERS")

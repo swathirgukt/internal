@@ -99,4 +99,15 @@ public class Department extends BaseDto {
     public void setPhoneNo(Long phoneNo) {
         this.phoneNo = phoneNo;
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "deptNo='" + deptNo + '\'' +
+                ", department='" + department + '\'' +
+                ", mngrNo=" + mngrNo +
+                ", location='" + location + '\'' +
+                ", phoneNo=" + phoneNo +
+                '}';
+    }
 }

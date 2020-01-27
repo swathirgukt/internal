@@ -1,8 +1,6 @@
 package com.indianeagle.internal.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "CHEQUE_DETAILS")
 public class ChequeDetails extends BaseDto {
-
+    @Temporal(TemporalType.DATE)
     @Column(name = "CHEQUE_DATE")
     private Date chequeDate;
     @Column(name = "AMOUNT")

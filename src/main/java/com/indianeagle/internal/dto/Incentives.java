@@ -15,6 +15,7 @@ public class Incentives extends BaseDto {
 
     @Column(name = "AMOUNT")
     private BigDecimal incentiveAmount;
+    @Temporal(TemporalType.DATE)
     @Column(name = "DATE")
     private Date incentiveDate;
     @ManyToOne(fetch = FetchType.EAGER)

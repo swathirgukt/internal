@@ -2,9 +2,7 @@ package com.indianeagle.internal.dto;
 
 import com.indianeagle.internal.util.SimpleUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -25,8 +23,10 @@ public class MonthlySalaryReport extends BaseDto {
     private String designation;
     @Column(name = "DEPARTMENT")
     private String department;
+    @Temporal(TemporalType.DATE)
     @Column(name = "JOIN_DATE")
     private Date doj;
+    @Temporal(TemporalType.DATE)
     @Column(name = "SALARY_DATE")
     private Date salaryDate;
     @Column(name = "BASIC")

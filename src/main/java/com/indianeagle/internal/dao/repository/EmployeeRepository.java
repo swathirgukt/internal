@@ -66,4 +66,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, Emplo
     @Query("select employee from Employee employee where employee.firstName like %:name% or employee.middleName like %:name% or employee.lastName like %:name%")
     List<Employee> findEmployeeByName(@Param("name") String name);
 
+
 }

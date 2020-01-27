@@ -37,7 +37,7 @@ public class PeripheralRepositoryImpl implements PeripheralRepositoryCustom {
             query.append(" where p.yearOfPurchase <= '" + SimpleUtils.utilDateToSqlDate(peripheral.getYearOfPurchase()) + "'");
         else if (!SimpleUtils.isEmpty(peripheral.getUsers()))
             query.append(" where p.users LIKE '" + peripheral.getUsers() + "'");
-        nativeQuery = entityManager.createNativeQuery(query.toString());
+        nativeQuery = entityManager.createQuery(query.toString());
         return nativeQuery.getResultList();
 
     }

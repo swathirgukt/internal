@@ -61,4 +61,14 @@ public class EmployeeTaxSection extends BaseDto implements Comparable<EmployeeTa
     public int compareTo(EmployeeTaxSection employeeTaxSection) {
         return this.sectionName.compareTo(employeeTaxSection.getSectionName());
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeTaxSection{" +
+                "sectionName='" + sectionName + '\'' +
+                ", sectionLimit=" + sectionLimit +
+                ", active=" + active +
+                ", employeeTaxSectionDeclarations=" + employeeTaxSectionDeclarations +
+                '}';
+    }
 }
