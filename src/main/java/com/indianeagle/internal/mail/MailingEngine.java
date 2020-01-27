@@ -1,4 +1,4 @@
-package com.indianeagle.internal.service.mail;
+package com.indianeagle.internal.mail;
 
 
 import com.indianeagle.internal.constants.StringConstants;
