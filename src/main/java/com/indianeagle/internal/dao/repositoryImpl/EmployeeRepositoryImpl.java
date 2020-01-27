@@ -62,7 +62,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
             queryString.append(" where RELIEVE_DATE is not null ");
         }
         queryString.append(" order by EMP_ID ");
-        query = entityManager.createQuery(queryString.toString(), Employee.class);
+        query = entityManager.createNativeQuery(queryString.toString(), Employee.class);
         return query.getResultList();
 
     }
@@ -90,7 +90,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
             }
         }
         queryEmpStatus.append(" ORDER BY EMP_ID");
-        query = entityManager.createNativeQuery(queryEmpStatus.toString());
+        query = entityManager.createQuery(queryEmpStatus.toString());
         return query.getResultList();
     }
 
@@ -100,28 +100,28 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
      */
     private String generateQueryForSearchEmployee(EmployeeForm employeeForm) {
 
-        StringBuilder queryString = new StringBuilder("from Employee e where ");
+        StringBuilder queryString = new StringBuilder("select e from Employee e where ");
 
         if (!SimpleUtils.isEmpty(employeeForm.getEmpId())) {
-            return "from Employee e left join fetch e.department  where e.empId = '".concat(employeeForm.getEmpId()).concat("'");
+            return "select e from Employee e right join fetch Department d  where EMP_ID = '".concat(employeeForm.getEmpId()).concat("'");
         }
         if (EmployeeStatusEnum.WORKING.name().equalsIgnoreCase(employeeForm.getStatus())) {
-            queryString.append(" e.relieveDate is null");
+            queryString.append(" RELIEVE_DATE is null");
         } else {
-            queryString.append("e.relieveDate is not null");
+            queryString.append("RELIEVE_DATE is not null");
         }
         if (!SimpleUtils.isEmpty(employeeForm.getFirstName()) && !SimpleUtils.isEmpty(employeeForm.getLastName())) {
-            queryString.append(" AND ( e.firstName LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
-            queryString.append(" OR e.lastName LIKE '").append(employeeForm.getLastName().trim()).append("%'").append(")");
+            queryString.append(" AND ( FIRST_NAME LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
+            queryString.append(" OR LAST_NAME LIKE '").append(employeeForm.getLastName().trim()).append("%'").append(")");
         } else if (!SimpleUtils.isEmpty(employeeForm.getFirstName())) {
-            queryString.append(" AND  e.firstName LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
+            queryString.append(" AND  FIRST_NAME LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
         } else if (!SimpleUtils.isEmpty(employeeForm.getLastName())) {
-            queryString.append(" AND e.lastName LIKE '").append(employeeForm.getLastName().trim()).append("%'");
+            queryString.append(" AND LAST_NAME LIKE '").append(employeeForm.getLastName().trim()).append("%'");
         }
         if (!SimpleUtils.isEmpty(employeeForm.getDepartment())) {
-            queryString.append(" AND e.department.deptNo = '").append(employeeForm.getDepartment()).append("'");
+            queryString.append(" AND department.deptNo = '").append(employeeForm.getDepartment()).append("'");
         }
-        queryString.append(" ORDER BY e.empId");
+        queryString.append(" ORDER BY EMP_ID");
         return queryString.toString();
 
     }

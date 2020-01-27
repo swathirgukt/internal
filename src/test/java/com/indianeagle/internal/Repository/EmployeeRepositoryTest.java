@@ -40,11 +40,7 @@ public class EmployeeRepositoryTest {
     public void getBasicSalarybyEmpStatus() {
 
         List<Employee> employees = employeeRepository.getBasicSalaryDetails(EmployeeStatusEnum.RELIEVED.name());
-        for (Employee E : employees
-        ) {
-            System.out.println(E.getFullName());
-        }
-        ;
+
     }
 
     @Test
@@ -65,7 +61,7 @@ public class EmployeeRepositoryTest {
         List<Employee> employees=employeeRepository.searchEmployees(employeeForm);
         System.out.println(employees.size());*/
         // System.out.println(e);
-        employeeForm.setDepartment("IT");
+        employeeForm.setDepartment("D002");
         List<Employee> employees = employeeRepository.searchEmployees(employeeForm);
         System.out.println(employees.size());
         for (Employee e1 : employees
