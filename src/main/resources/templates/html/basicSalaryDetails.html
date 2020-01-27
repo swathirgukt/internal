@@ -1,67 +1,90 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Basic Salary Details</title>
+    <style type="text/css">
+
+	 
+			 
+	.form_page{
+		box-shadow: 10px 10px 8px  #cccccc;
+		width:900px;
+		height:500px;
+		border:solid;
+		border-color:#fff2e6;
+		margin-left:300px;
+		margin-top:30px;
+		background-color:#fff2e6;
+		
+		}
+		.top_border_line{
+			font-size: 20px;
+			color: #ff751a;
+			border-bottom: 2px solid #ffb366;
+			margin-top:10px;
+			font-family:Arial;
+		}
+		
+		
+		.button:link, .button:visited {
+			  background-color: #fff2e6;
+			  color: black;
+			  border: 2px solid #ff9933;
+			  padding: 6px 15px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  border-radius:5px;
+}
+
+			.button:hover, .button:active {
+					  background-color:#fff2e6;
+					  
+						padding: 6px 15px;
+					box-shadow: 2px 3px 1px 2px #ffbf80;
+					  }
+					  
+					  
+					  .sel_op{
+					  width:250px;
+					  font-size:15px;
+						text-align:center;
+						color:red;
+						background-color:#fff2e6;
+					  }
+
+
+    </style>
+    <script>
+		function getSelectData(){
+		alert(document.getElementById("sel_op").value);
+		}
+
+
+    </script>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
+<div class="form_page">
+    <div style="margin-left:20px;">
+        <div class="top_border_line">Basic Salary Details</div>
+
+        <div style="margin-top:20px;">
+            <span>Employee Status </span><span style="margin-left:20px;"> :</span>
+
+            <select class="sel_op" id="sel_op">
+                <option label="All" value="all">All</option>
+                <option label="Resigned" value="resigned">Resigned</option>
+                <option label="Relieved" value="relieved">Relieved</option>
+                <option label="Working" value="working">Working</option>
+            </select>
+
+            <span style="margin-left:150px;"><a class="button" href="#"
+                                                onclick="getSelectData()"><b>Search</b></a></span>
         </div>
-        <div class="col-sm-8 text-left">
-            <div class="jumbotron">
-                <div class="container-fluid">
-                    <form action="/">
-                        <div class="Heading">Basic Salary Details</div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td>Employee&nbsp;Status</td>
-                                            <td><b>:</b></td>
-                                            <td>
-                                                <select id="sel_op" class="inputBoxStyle">
-                                                    <option label="All" value="all">All</option>
-                                                    <option label="Resigned" value="resigned">Resigned</option>
-                                                    <option label="Relieved" value="relieved">Relieved</option>
-                                                    <option label="Working" value="working">Working</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
-                                <div style="float: right">
-                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Search</b>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
-                                <div class="Heading">Search Results</div>
-                            </div>
 
-                        </div>
 
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
+        <div class="top_border_line">Search Details</div>
     </div>
-
-
 </div>
-
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
-
-
 </html>
-

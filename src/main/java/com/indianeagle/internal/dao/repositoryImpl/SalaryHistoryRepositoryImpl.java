@@ -31,8 +31,8 @@ public class SalaryHistoryRepositoryImpl implements SalaryHistoryRepositoryCusto
         List<Integer> inputList = new ArrayList<Integer>(CalculationRules.PT_RANGE.keySet());
         List<Long> resultList = new ArrayList<Long>();
 
-        String minQuery = "SELECT count(sh.empId) FROM SalaryHistory as sh WHERE month(sh.salaryDate) = month(?) AND year(sh.salaryDate) = year(?) AND (sh.grossSalary > " + CalculationRules.PT_PAID_ON.intValue() + ") AND sh.grossSalary  BETWEEN ? AND ? ";
-        String maxQuery = "SELECT count(sh.empId) FROM SalaryHistory as sh WHERE month(sh.salaryDate) = month(?) AND year(sh.salaryDate) = year(?) AND sh.grossSalary  >= ? ";
+        String minQuery = "SELECT count(EMP_ID) FROM SALARY_HISTORY as sh WHERE month(SALARY_DATE) = month(?) AND year(SALARY_DATE) = year(?) AND (GROSS_SALARY > " + CalculationRules.PT_PAID_ON.intValue() + ") AND GROSS_SALARY  BETWEEN ? AND ? ";
+        String maxQuery = "SELECT count(EMP_ID) FROM SALARY_HISTORY as sh WHERE month(SALARY_DATE) = month(?) AND year(SALARY_DATE) = year(?) AND GROSS_SALARY  >= ? ";
 
         for (int i = 0; i < inputList.size(); i++) {
             if (i != inputList.size() - 1) {
@@ -75,13 +75,13 @@ public class SalaryHistoryRepositoryImpl implements SalaryHistoryRepositoryCusto
         Query basicLtListQuery = null;
         Query basicGtlistQuery = null;
 
-        basicLtListQuery = entityManager.createNativeQuery("SELECT COUNT(sh.empId) AS COUNT,SUM(sh.basic) AS AMOUNT FROM SalaryHistory sh WHERE sh.basic <= ? AND MONTH(sh.salaryDate) = MONTH(?) AND YEAR(sh.salaryDate) = YEAR (?)");
+        basicLtListQuery = entityManager.createNativeQuery("SELECT COUNT(EMP_ID) AS COUNT,SUM(BASIC) AS AMOUNT FROM SALARY_HISTORY sh WHERE BASIC <= ? AND MONTH(SALARY_DATE) = MONTH(?) AND YEAR(SALARY_DATE) = YEAR (?)");
         basicLtListQuery.setParameter(1, range);
         basicLtListQuery.setParameter(2, date);
         basicLtListQuery.setParameter(3, date);
         List<Object> basicLtList = basicLtListQuery.getResultList();
 
-        basicGtlistQuery = entityManager.createNativeQuery("SELECT COUNT(sh.empId) AS COUNT,SUM(sh.basic) AS AMOUNT FROM SalaryHistory sh WHERE sh.basic > ? AND MONTH(sh.salaryDate) = MONTH(?) AND YEAR(sh.salaryDate) = YEAR (?)");
+        basicGtlistQuery = entityManager.createNativeQuery("SELECT COUNT(EMP_ID) AS COUNT,SUM(BASIC) AS AMOUNT FROM SALARY_HISTORY sh WHERE BASIC> ? AND MONTH(SALARY_DATE) = MONTH(?) AND YEAR(SALARY_DATE) = YEAR (?)");
         basicGtlistQuery.setParameter(1, range);
         basicGtlistQuery.setParameter(2, date);
         basicGtlistQuery.setParameter(3, date);

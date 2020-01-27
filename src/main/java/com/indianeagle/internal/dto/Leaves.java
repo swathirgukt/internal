@@ -9,7 +9,6 @@
 package com.indianeagle.internal.dto;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -37,6 +36,7 @@ public class Leaves  extends BaseDto {
     @Column(name = "PREVIOUS_YEAR_LEAVES")
     private Double previousYearLeaves = 0d;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "CURRENT_LEAVE_YEAR")
     private Date currentLeaveYear;
 

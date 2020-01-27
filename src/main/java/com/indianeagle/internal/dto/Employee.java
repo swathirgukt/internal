@@ -22,10 +22,13 @@ public class Employee extends BaseDto{
     private String middleName;
     @Column(name = "MOBILE_NO")
     private Long mobileNo;
+    @Temporal(TemporalType.DATE)
     @Column(name = "JOIN_DATE")
     private Date joinDate;
+    @Temporal(TemporalType.DATE)
     @Column(name = "RELIEVE_DATE")
     private Date relieveDate;
+    @Temporal(TemporalType.DATE)
     @Column(name = "RESIGN_DATE")
     private Date resignDate;
     @Column(name = "REASON_FOR_RESIGN")
@@ -52,6 +55,7 @@ public class Employee extends BaseDto{
     private String level;
     @Column(name = "BANK_NAME")
     private String bankName;
+    @Temporal(TemporalType.DATE)
     @Column(name = "DOB")
     private Date dob;
     @Column(name = "EMP_STATUS")
@@ -525,5 +529,46 @@ public class Employee extends BaseDto{
 
     public void setAadharNo(String aadharNo) {
         this.aadharNo = aadharNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId='" + empId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", tempAddress='" + tempAddress + '\'' +
+                ", perAddress='" + perAddress + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", mobileNo=" + mobileNo +
+                ", joinDate=" + joinDate +
+                ", relieveDate=" + relieveDate +
+                ", resignDate=" + resignDate +
+                ", reasonsForResign='" + reasonsForResign + '\'' +
+                ", panNo='" + panNo + '\'' +
+                ", pfNo='" + pfNo + '\'' +
+                ", esiNo='" + esiNo + '\'' +
+                ", aadharNo='" + aadharNo + '\'' +
+                ", bankAc='" + bankAc + '\'' +
+                ", designation='" + designation + '\'' +
+                ", personalEmail='" + personalEmail + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", empInfo='" + empInfo + '\'' +
+                ", level='" + level + '\'' +
+                ", bankName='" + bankName + '\'' +
+                ", dob=" + dob +
+                ", empStatus='" + empStatus + '\'' +
+                ", maritalStatus='" + maritalStatus + '\'' +
+                ", officialEmail='" + officialEmail + '\'' +
+                ", emergencyContact='" + emergencyContact + '\'' +
+                ", passportNo='" + passportNo + '\'' +
+                ", uanNumber='" + uanNumber + '\'' +
+                ", salary=" + salary +
+                ", department=" + department +
+                ", currentSalary=" + currentSalary +
+                ", leaves=" + leaves +
+                ", employeeSettlement=" + employeeSettlement +
+                ", nominee=" + nominee +
+                '}';
     }
 }
