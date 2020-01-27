@@ -1,71 +1,65 @@
+<!DOCTYPE html>
 <html>
-<title>Bank Salary Statement</title>
 <head>
-    <style type="text/css">
-		.sel_op {
-			width: 250px;
-			font-size: 15px;
-			text-align: center;
-			color: red;
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </style>
-
+    <title>Bank Salary Statement</title>
 </head>
-
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="form-page">
-    <div style="margin-left:20px;">
-        <div class="Heading">Bank Salary Statement</div>
-
-        <div style="margin-top:30px;">
-            <form action="#" method="post">
-                <!-- Date picker -->
-                <div style="float:left;margin-top:10px;">DATE</div>
-                <div style="margin-top:10px;color:red;float:left;">*</div>
-                <div style="margin-left:20px;margin-top:10px;float:left;">:</div>
-                <div style="margin-left:60px; width:300px;float:left;">
-
-                    <input style=" float:left;" id="date" width="200px" name="date"/>
-                    <script>
-								$('#date').datepicker({ uiLibrary: 'bootstrap' });
-
-
-
-
-
-
-
-
-
-
-
-
-                    </script>
-                </div>
-                <span style="margin-left:50px;"><button type="button" class="submitButton"
-                                                        onclick="salClickBut()"><b>Generate Bank Salaries</b></button></span>
-
-
-            </form>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
         </div>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container-fluid">
+                    <form action="/">
+                        <div class="Heading">Bank Salary Statement</div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td> DATE</td>
+                                            <td width="20px"><span style="color:red"> *</span></td>
+                                            <td width="20px"><b>:</b></td>
+                                            <td>
+                                                <input style=" float:left; border: 1px solid #ff9900;"
+                                                       id="datepicker" width="200px" name="datepicker"/>
+                                                <script>
+                                                        $('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
 
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
+                                <div style="float: right">
+                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Generate
+                                        Bank Salaries</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
+
+
 </div>
+
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 
+
 </html>
+
+
