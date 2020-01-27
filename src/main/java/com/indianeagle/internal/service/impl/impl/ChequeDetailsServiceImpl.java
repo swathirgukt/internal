@@ -5,6 +5,7 @@ import com.indianeagle.internal.dto.ChequeDetails;
 import com.indianeagle.internal.form.ChequeDetailsForm;
 import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.ChequeDetailsService;
+import com.indianeagle.internal.util.SimpleUtils;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	@Override
 	public List<ChequeDetails> searchChequeDetails(ChequeDetailsForm chequeDetailsForm)
 	{
-		return chequeDetailsList = chequeDetailsRepository.searchChequeDetails(chequeDetailsForm);
+		return chequeDetailsList = chequeDetailsRepository.findByChequeDateBetweenAndAmountOrderByChequeDate(chequeDetailsForm.getFromDate(),chequeDetailsForm.getToDate(),chequeDetailsForm.getAmount());
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	 * Get tomorrowDate Cheque Details and call mailChequeDetails
 	 */
 	public void sendChequeDetailsMail(){
-		List<ChequeDetails> chequeDetails = chequeDetailsRepository.postChequeDetails();
+		List<ChequeDetails> chequeDetails = chequeDetailsRepository.findByChequeDate(SimpleUtils.tomorrowDate());
 		if(chequeDetails.size() > 0){
 			mailingEngine.mailChequeDetails(chequeDetails);
 		}

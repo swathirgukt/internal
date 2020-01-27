@@ -18,7 +18,8 @@ import java.util.List;
  * @Date 22/01/2020
  */
 @Repository
-public interface ChequeDetailsRepository extends JpaRepository<ChequeDetails, Long> {
+public interface
+ChequeDetailsRepository extends JpaRepository<ChequeDetails, Long> {
 
     /**
      * to get tomorrow's ChequeDetails object

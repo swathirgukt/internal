@@ -35,7 +35,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@SuppressWarnings("unchecked")
 	public List<Department> findDepartments(Department department){
-		return	departmentRepository.findDepartments(department);
+		return	departmentRepository.findByDepartmentStartingWith(department.getDepartment());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -76,7 +76,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	public List<EmployeeFinancialYear> findEmployeeFinancialYearWithEmpIdAndFinancialYear(String empId, String fromMonth, String fromYear, String toMonth, String toYear) {
-		return employeeFinancialYearRepository.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, fromMonth, fromYear, toMonth, toYear);
+		return employeeFinancialYearRepository.findEmployeeFinancialYearWithEmpIdAndMonthAndYear(empId, fromMonth, fromYear, toMonth, toYear);
 	}
 
 	public InputStream saveForm16PDF(String empId, FinancialYear financialYear, List<SalaryHistory> salaryHistories, EmployeeIncomeTax employeeIncomeTax, EmployeeFinancialYear employeeFinancialYear, String contextPath) {
