@@ -5,6 +5,7 @@ import com.indianeagle.internal.dao.*;
 import com.indianeagle.internal.dao.repository.*;
 import com.indianeagle.internal.dto.*;
 import com.indianeagle.internal.enums.TemplateNames;
+import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.DepartmentService;
 import com.indianeagle.internal.util.Form16PdfUtils;
 import org.springframework.core.io.ByteArrayResource;
@@ -25,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private SalaryHistoryRepository salaryHistoryRepository;
 	private EmployeeIncomeTaxRepository employeeIncomeTaxRepository;
 	private TemplateEngine velocityEngine;
-	private com.indianeagle.internal.service.mail.MailingEngine mailingEngine;
+	private MailingEngine mailingEngine;
 	private GeneratedForm16Repository generatedForm16Repository;
 
 	public void saveOrUpdate(Department department){
@@ -81,7 +82,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public InputStream saveForm16PDF(String empId, FinancialYear financialYear, List<SalaryHistory> salaryHistories, EmployeeIncomeTax employeeIncomeTax, EmployeeFinancialYear employeeFinancialYear, String contextPath) {
 		Employee employee = employeeRepository.findByEmpId(empId);
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		Form16PdfUtils.generateForm16Pdf(velocityEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.form16Pdf.name() + StringConstants.VM_FILE_EXTENTION, contextPath, employee, salaryHistories, employeeIncomeTax, employeeFinancialYear, financialYear);
+		Form16PdfUtils.generateForm16Pdf(velocityEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.form16Pdf.name() + ".html", contextPath, employee, salaryHistories, employeeIncomeTax, employeeFinancialYear, financialYear);
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(arrayOutputStream.toByteArray());
 		return byteArrayInputStream;
 	}
@@ -109,7 +110,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public void sendMailEmployeeIncomeTax(String empId, FinancialYear financialYear, List<SalaryHistory> salaryHistories, EmployeeIncomeTax employeeIncomeTax, EmployeeFinancialYear employeeFinancialYear, String contextPath) {
 		Employee employee = employeeRepository.findByEmpId(empId);
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		Form16PdfUtils.generateForm16Pdf(velocityEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.form16Pdf.name() + StringConstants.VM_FILE_EXTENTION, contextPath, employee, salaryHistories, employeeIncomeTax, employeeFinancialYear, financialYear);
+		Form16PdfUtils.generateForm16Pdf(velocityEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.form16Pdf.name() + ".html", contextPath, employee, salaryHistories, employeeIncomeTax, employeeFinancialYear, financialYear);
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(arrayOutputStream.toByteArray());
 		mailingEngine.sendEmployeeIncomeTax(employee, financialYear, (InputStreamSource)new ByteArrayResource(arrayOutputStream.toByteArray()));
 	}
@@ -161,11 +162,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 		this.velocityEngine = velocityEngine;
 	}
 
-	public com.indianeagle.internal.service.mail.MailingEngine getMailingEngine() {
+	public MailingEngine getMailingEngine() {
 		return mailingEngine;
 	}
 
-	public void setMailingEngine(com.indianeagle.internal.service.mail.MailingEngine mailingEngine) {
+	public void setMailingEngine(MailingEngine mailingEngine) {
 		this.mailingEngine = mailingEngine;
 	}
 

@@ -3,9 +3,8 @@ package com.indianeagle.internal.service.impl.impl;
 import com.indianeagle.internal.dao.repository.ChequeDetailsRepository;
 import com.indianeagle.internal.dto.ChequeDetails;
 import com.indianeagle.internal.form.ChequeDetailsForm;
+import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.ChequeDetailsService;
-import com.indianeagle.internal.service.mail.MailingEngine;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +13,6 @@ import java.util.Optional;
  * service implementation for Cheque Details
  */
 public class ChequeDetailsServiceImpl implements ChequeDetailsService {
-	@Autowired
 	private ChequeDetailsRepository chequeDetailsRepository;
 	private List<ChequeDetails> chequeDetailsList;
 	private MailingEngine mailingEngine;
@@ -22,14 +20,16 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	/**
 	 * To save or update cheque details into database
 	 */
+
 	public void saveOrUpdateCheque(ChequeDetails chequeDetails) {
         chequeDetailsRepository.save(chequeDetails);
 		
 	}
 
 	@Override
-	public List<ChequeDetails> searchChequeDetails(ChequeDetailsForm chequeDetailsForm) {
-		return null;
+	public List<ChequeDetails> searchChequeDetails(ChequeDetailsForm chequeDetailsForm)
+	{
+		return chequeDetailsList = chequeDetailsRepository.searchChequeDetails(chequeDetailsForm);
 	}
 
 	/**
@@ -78,6 +78,7 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	 * @return the mailingEngine
 	 */
 	public MailingEngine getMailingEngine() {
+
 		return mailingEngine;
 	}
 

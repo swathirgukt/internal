@@ -5,6 +5,7 @@ import com.indianeagle.internal.dao.repository.SalaryHistoryRepository;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
 import com.indianeagle.internal.enums.TemplateNames;
+import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.util.PaySlipPdfUtils;
 import com.itextpdf.text.FontFactory;
@@ -30,10 +31,10 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 	
 	private MessageSource messageSource;
 	private SalaryHistoryRepository salaryHistoryRepository;
-	private com.indianeagle.internal.service.mail.MailingEngine mailingEngine;
+	private MailingEngine mailingEngine;
     private SalaryHistory salaryHistory;
     private List<Employee> employees;
-    private TemplateEngine velocityEngine;
+    private TemplateEngine templateEngine;
 	private FontFactoryImp factoryImp;
 
 	public List<SalaryHistory> searchSalaryHistory(String empId, Date periodDate) {
@@ -82,7 +83,7 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
 		//PDFUtil.generatePdf(employees.get(0), salaryHistory, arrayOutputStream,contextPath,messageSource);
         /*YP-4: added vm file for paySlip*/
-        PaySlipPdfUtils.generatePaySlipPdf(velocityEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + StringConstants.VM_FILE_EXTENTION, contextPath, employees.get(0), salaryHistory);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() +".html", contextPath, employees.get(0), salaryHistory);
 		mailingEngine.sendMail(employees.get(0), salaryHistory ,new ByteArrayResource(arrayOutputStream.toByteArray()),true);
 		return salaryHistory;
 	}
@@ -93,7 +94,7 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
         /*PDFUtil.generatePdf(employees.get(0), salaryHistory, arrayOutputStream,contextPath,messageSource);*/
         /*YP-4: added vm file for paySlip*/
-        PaySlipPdfUtils.generatePaySlipPdf(velocityEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + StringConstants.VM_FILE_EXTENTION, contextPath, employees.get(0), salaryHistory);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".html", contextPath, employees.get(0), salaryHistory);
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(arrayOutputStream.toByteArray());
 		return byteArrayInputStream;
 	}
@@ -116,7 +117,7 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 	/**
 	 * @param mailingEngine the mailingEngine to set
 	 */
-	public void setMailingEngine(com.indianeagle.internal.service.mail.MailingEngine mailingEngine) {
+	public void setMailingEngine(MailingEngine mailingEngine) {
 		this.mailingEngine = mailingEngine;
 	}
 
@@ -125,9 +126,9 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 	}
 
     /**
-	 * @param velocityEngine the velocityEngine to set
+	 * @param templateEngine the velocityEngine to set
 	 */
-	public void setVelocityEngine(TemplateEngine velocityEngine) {
-		this.velocityEngine = velocityEngine;
+	public void setVelocityEngine(TemplateEngine templateEngine) {
+		this.templateEngine = templateEngine;
 	}
 }

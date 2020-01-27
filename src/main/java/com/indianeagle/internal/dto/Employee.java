@@ -3,7 +3,6 @@ package com.indianeagle.internal.dto;
 import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.Date;
 
 @Entity

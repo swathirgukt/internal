@@ -6,8 +6,6 @@ package com.indianeagle.internal.service.impl.impl;
 import com.indianeagle.internal.dao.repository.EmployeeRepository;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.service.BasicSalaryDetailsService;
-import com.indianeagle.internal.dto.Employee;
-//import com.indianeagle.internal.facade.BasicSalaryDetailsService;
 import java.util.List;
 
 /**
@@ -15,7 +13,6 @@ import java.util.List;
  * Service for BasicSalaryDetails of employees
  */
 public class BasicSalaryDetailsServiceImpl implements BasicSalaryDetailsService {
-	
 	private EmployeeRepository employeeRepository;
 	
 	/* (non-Javadoc)
@@ -31,9 +28,10 @@ public class BasicSalaryDetailsServiceImpl implements BasicSalaryDetailsService 
 		return employeeRepository;
 	}
 	/**
-	 * @param employeeDAO the employeeDAO to set
+	 * @param employeeRepository the employeeDAO to set
 	 */
-	public void setEmployeeDAO(EmployeeRepository employeeDAO) {
-		this.employeeRepository = employeeDAO;
+	public void setEmployeeDAO(EmployeeRepository employeeRepository)
+	{
+		this.employeeRepository = employeeRepository;
 	}
 }

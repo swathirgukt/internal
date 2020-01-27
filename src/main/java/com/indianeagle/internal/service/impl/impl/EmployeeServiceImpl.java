@@ -7,6 +7,7 @@ import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.Leaves;
 import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.form.EmployeeForm;
+import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.springframework.beans.BeanUtils;
@@ -17,15 +18,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private UsersRepository usersRepository;
     private List<Employee> bufferedEmployees;
-    private com.indianeagle.internal.service.mail.MailingEngine mailingEngine;
+    private MailingEngine mailingEngine;
 
     public List<Employee> searchEmployees(EmployeeForm employeeForm) {
-        this.bufferedEmployees = this.employeeRepository.searchEmployees(employeeForm);
+        this.bufferedEmployees=this.employeeRepository.searchEmployees(employeeForm);
         return this.bufferedEmployees;
     }
 
     public List<Department> getDepartmentList() {
-        return this.employeeRepository.getDepartmentList();
+return  employeeRepository.getDepartmentList();
     }
 
 
@@ -87,6 +88,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public List<Employee> searchBasedOnEmpStatus(EmployeeForm employeeForm) {
+
         return this.employeeRepository.searchBasedOnEmpStatus(employeeForm);
     }
 
@@ -123,11 +125,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.usersRepository = usersDAO;
     }
 
-    public com.indianeagle.internal.service.mail.MailingEngine getMailingEngine() {
+    public MailingEngine getMailingEngine() {
         return this.mailingEngine;
     }
 
-    public void setMailingEngine(com.indianeagle.internal.service.mail.MailingEngine mailingEngine) {
+    public void setMailingEngine(MailingEngine mailingEngine) {
         this.mailingEngine = mailingEngine;
     }
 }

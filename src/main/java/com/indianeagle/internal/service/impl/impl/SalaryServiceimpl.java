@@ -38,13 +38,13 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     private SalaryHistoryRepository salaryHistoryRepository;
     private Employee employee;
     private SalaryHistory currentSalary;
-    private com.indianeagle.internal.service.mail.MailingEngine mailingEngine;
+    private com.indianeagle.internal.mail.MailingEngine mailingEngine;
     private List<Employee> currSalaryEmpList;
     private List<SalaryHistory> currentSalaryList;
     private EmployeeSettlementRepository employeeSettlementRepository;
     private EmployeeSettlement employeeSettlement;
     private SalaryHistoryService salaryHistoryService;
-    private TemplateEngine velocityEngine;
+    private TemplateEngine templateEngine;
 
     public List<Employee> loadAllEmployees() {
         return this.salaryRepository.loadAllEmployees();
@@ -193,7 +193,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
                 log.debug("Thank you for your time! Continue......");
             }
             ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-            PaySlipPdfUtils.generatePaySlipPdf((TemplateEngine) this.velocityEngine, (OutputStream) arrayOutputStream, (String) (TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".vm"), (Object[]) new Object[]{contextPath, emp, emp.getCurrentSalary()});
+            PaySlipPdfUtils.generatePaySlipPdf((TemplateEngine) this.templateEngine, (OutputStream) arrayOutputStream, (String) (TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".vm"), (Object[]) new Object[]{contextPath, emp, emp.getCurrentSalary()});
             this.mailingEngine.sendMail(emp, emp.getCurrentSalary(), (InputStreamSource) new ByteArrayResource(arrayOutputStream.toByteArray()), false);
             counter += 1;
         }
@@ -239,7 +239,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     public void confirmAndSendMail(String contextPath) throws Exception {
         this.salaryHistoryRepository.save(this.currentSalary);
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        PaySlipPdfUtils.generatePaySlipPdf((TemplateEngine) this.velocityEngine, (OutputStream)arrayOutputStream, (String)(TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".vm"), (Object[])new Object[]{contextPath, this.employee, this.currentSalary});
+        PaySlipPdfUtils.generatePaySlipPdf((TemplateEngine) this.templateEngine, (OutputStream)arrayOutputStream, (String)(TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".vm"), (Object[])new Object[]{contextPath, this.employee, this.currentSalary});
         this.mailingEngine.sendMail(this.employee, this.currentSalary, (InputStreamSource)new ByteArrayResource(arrayOutputStream.toByteArray()), false);
     }
 
@@ -406,7 +406,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         this.salaryRepository = salaryDAO;
     }
 
-    public void setMailingEngine(com.indianeagle.internal.service.mail.MailingEngine mailingEngine) {
+    public void setMailingEngine(com.indianeagle.internal.mail.MailingEngine mailingEngine) {
         this.mailingEngine = mailingEngine;
     }
 
@@ -431,6 +431,6 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     }
 
     public void setVelocityEngine(TemplateEngine velocityEngine) {
-        this.velocityEngine = velocityEngine;
+        this.templateEngine = velocityEngine;
     }
 }
