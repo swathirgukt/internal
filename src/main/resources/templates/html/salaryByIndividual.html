@@ -3,17 +3,6 @@
 
 <head>
     <title>Salary By Individual</title>
-    <style type="text/css">
-        .input-style {
-			width: 200px;
-			height: 20px;
-
-		}
-
-
-
-    </style>
-
 </head>
 
 <body>
@@ -28,17 +17,17 @@
                     <form action="/">
                         <div class="Heading">Generate salary for Employee</div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                 <table class="table-condensed">
                                     <tr>
                                         <td>
-                                            Employee ID<span style="color: red">*</span>
+                                            Employee&nbsp;ID<span style="color: red">*</span>
                                         </td>
                                         <td>
                                             <b>:</b>
                                         </td>
                                         <td>
-                                            <select class="input-style" name="id">
+                                            <select class="selectOption" name="id">
                                                 <option>--Select--</option>
                                                 <option value="IEPL076">IEPL076</option>
                                                 <option value="IEPL077">IEPL077</option>
@@ -47,14 +36,14 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <div>
                                     <table>
                                         <tr>
                                             <td>
                                                 From <span style="color: red">*</span>
                                             </td>
-                                            <td width="20px">
+                                            <td>
                                                 <b>:</b>
                                             </td>
                                             <td>
@@ -62,13 +51,20 @@
                                             </td>
                                             <script>$('#from').datepicker({ uiLibrary: 'bootstrap' });</script>
 
-                                            <td>
-                                                To <span style="color: red">*</span>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td width="20px">To<span style="color: red">*</span>
                                             </td>
                                             <td width="20px">
                                                 <b>:</b>
                                             </td>
-                                            <td>
+                                            <td width="20px">
                                                 <input id="to" width="150px" name="to">
                                             </td>
                                             <script>$('#to').datepicker({ uiLibrary: 'bootstrap' });</script>
@@ -77,37 +73,38 @@
                                 </div>
                             </div>
 
+
                         </div>
                         <div class="Heading">Attendance Details</div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed ">
                                     <tr>
-                                        <td>LOP Days</td>
+                                        <td>LOP&nbsp;Days</td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="Lop Days" name="Lop Days"
-                                                   style="width: 200px;height: 23px;" type="text">
+                                                   style="width: 250px;height: 23px;" type="text">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>PER Incentives</td>
+                                        <td>PER&nbsp;Incentives</td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="ARR Days" name="ARR Days"
-                                                   style="width: 200px;height: 23px;" type="text">
+                                                   style="width: 250px;height: 23px;" type="text">
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed ">
                                     <tr>
-                                        <td>ARR Days</td>
+                                        <td>ARR&nbsp;Days</td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="PER Incentives" name="PER Incentives"
-                                                   style="width: 200px;height: 23px;"
+                                                   style="width: 250px;height: 23px;"
                                                    type="text"></td>
                                         <td></td>
                                     </tr>
@@ -115,36 +112,36 @@
                             </div>
                         </div>
 
-                        <div class="Heading">Deductions Details</div>
+                        <div class="Heading">Deductions&nbsp;Details</div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed ">
                                     <tr>
-                                        <td>Salary In Advance</td>
+                                        <td>Salary&nbsp;In&nbsp;Advance</td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="Salary In Advance" name="Salary In Advance"
-                                                   type="text">
+                                                   type="text" style="width: 240px;height: 23px;">
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
                                 <div>
                                     <table class="table-condensed ">
                                         <tr>
-                                            <td> Misc Deductions</td>
+                                            <td> Misc&nbsp;Deductions</td>
                                             <td><b>:</b></td>
                                             <td>
                                                 <input class="input-style" id="Misc Deductions" name="Misc Deductions"
-                                                       type="text">
+                                                       type="text" style="width: 240px;height: 23px;">
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div style="float: right">
-                                    <button class="submitButton" onclick="javascript:form.submit" type="button">Generate
-                                        Salary
+                                    <button class="submitButton" onclick="javascript:form.submit" type="button"><b>Generate
+                                        Salary</b>
                                     </button>
                                 </div>
                             </div>
