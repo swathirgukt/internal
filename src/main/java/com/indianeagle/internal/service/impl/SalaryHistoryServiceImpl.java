@@ -1,6 +1,5 @@
-package com.indianeagle.internal.service.impl.impl;
+package com.indianeagle.internal.service.impl;
 
-import com.indianeagle.internal.constants.StringConstants;
 import com.indianeagle.internal.dao.repository.SalaryHistoryRepository;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;

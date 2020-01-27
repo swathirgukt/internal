@@ -1,4 +1,4 @@
-package com.indianeagle.internal.service.impl.impl;
+package com.indianeagle.internal.service.impl;
 
 import com.indianeagle.internal.dao.repository.PeripheralRepository;
 import com.indianeagle.internal.dto.Peripheral;
