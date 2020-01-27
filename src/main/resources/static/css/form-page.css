@@ -56,14 +56,23 @@
               max-height:300px;
               overflow-x:auto;
               overflow-y:auto;
-<<<<<<< HEAD
         }
 
-        .max-auto-custom{
-           margin-left:auto;
-           margin-right:auto;
-
-=======
-              overflow-x:auto;
->>>>>>> 931c71cfb4a51b4e733e509ba1e05214fc6276c6
+.max-auto-custom{
+          margin-left:auto;
+          margin-right:auto;
+          overflow-x:auto;
+          overflow-y:auto;
         }
+        .selectOption {
+                        width: 150px;
+                        height: 25px;
+                        font-size: 15px;
+                        text-align: center;
+                        color: red;
+                        border-radius: 5px;
+                    }
+
+                    .table_text_style{
+                    font-size:14px;
+                    }
