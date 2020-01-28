@@ -78,338 +78,204 @@
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<<<<<<< HEAD
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-lg-2 sidenav">
-=======
-
-<div class="RoundedCornerboxform16Pages">
-    <form>
-        <div class="Heading">
-            <label>Income Tax Sections</label>
->>>>>>> 006bd9217a6dcf131aade280f4d95ef58300f0a3
         </div>
         <div class="col-lg-8 text-left">
             <div class="jumbotron">
                 <div class="container">
-                <form>
-                    <div class="Heading"><label>Income Tax Sections</label></div>
+                    <form>
+                        <div class="Heading"><label>Income Tax Sections</label></div>
 
-                    <div>
-                        <div class="col-md-12 col-sm-12 col-xs-10">
-                            <table width="100%" class="table_text_style table-sm">
-                                <tr>
-                                    <td>Financial&nbsp;Year</td>
-                                    <td><b>:</b></td>
-                                    <td>From</td>
-                                    <td>
-                                        <select>
-                                            <option value="jan">JAN</option>
-                                            <option value="feb">FEB</option>
-                                            <option value="mar">MAR</option>
-                                            <option value="apr">APR</option>
-                                            <option value="may">MAY</option>
-                                            <option value="jun">JUN</option>
-                                            <option value="jul">JUL</option>
-                                            <option value="aug">AUG</option>
-                                            <option value="sep">SEP</option>
-                                            <option value="oct">OCT</option>
-                                            <option value="nov">NOV</option>
-                                            <option value="dec">DEC</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select>
-                                            <option value="2007">2007</option>
-                                            <option value="2008">2008</option>
-                                            <option value="2008">2009</option>
-                                            <option value="2008">2010</option>
-                                            <option value="2008">2011</option>
-                                            <option value="2008">2012</option>
-                                            <option value="2008">2013</option>
-                                            <option value="2008">2014</option>
-                                            <option value="2008">2015</option>
-                                            <option value="2008">2016</option>
-                                            <option value="2008">2017</option>
-                                            <option value="2008">2018</option>
-                                            <option value="2008">2019</option>
-                                            <option value="2008" selected="selected">2020</option>
-                                            <option value="2008">2021</option>
-                                            <option value="2008">2022</option>
-                                            <option value="2008">2023</option>
-                                            <option value="2008">2024</option>
-                                            <option value="2008">2025</option>
-                                            <option value="2008">2026</option>
-                                            <option value="2008">2027</option>
-                                            <option value="2008">2028</option>
-                                            <option value="2008">2029</option>
-                                            <option value="2008">2030</option>
-                                        </select>
-                                    </td>
-                                    <td>To</td>
-                                    <td>
-                                        <select>
-                                            <option value="jan">JAN</option>
-                                            <option value="feb">FEB</option>
-                                            <option value="mar">MAR</option>
-                                            <option value="apr">APR</option>
-                                            <option value="may">MAY</option>
-                                            <option value="jun">JUN</option>
-                                            <option value="jul">JUL</option>
-                                            <option value="aug">AUG</option>
-                                            <option value="sep">SEP</option>
-                                            <option value="oct">OCT</option>
-                                            <option value="nov">NOV</option>
-                                            <option value="dec">DEC</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select>
-                                            <option value="2007">2007</option>
-                                            <option value="2008">2008</option>
-                                            <option value="2008">2009</option>
-                                            <option value="2008">2010</option>
-                                            <option value="2008">2011</option>
-                                            <option value="2008">2012</option>
-                                            <option value="2008">2013</option>
-                                            <option value="2008">2014</option>
-                                            <option value="2008">2015</option>
-                                            <option value="2008">2016</option>
-                                            <option value="2008">2017</option>
-                                            <option value="2008">2018</option>
-                                            <option value="2008">2019</option>
-                                            <option value="2008" selected="selected">2020</option>
-                                            <option value="2008">2021</option>
-                                            <option value="2008">2022</option>
-                                            <option value="2008">2023</option>
-                                            <option value="2008">2024</option>
-                                            <option value="2008">2025</option>
-                                            <option value="2008">2026</option>
-                                            <option value="2008">2027</option>
-                                            <option value="2008">2028</option>
-                                            <option value="2008">2029</option>
-                                            <option value="2008">2030</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Retrieve</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="Heading"><label>Income Tax Slabs</label>
-                            <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">ADD TAX
-                                SLAB
-                            </button>
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-10">
-                            <table width="100%" class="table_text_style table-sm">
-                                <tr>
-                                    <td>From</td>
-                                    <td><b>:</b></td>
-                                    <td> <input class="inputfield" name="" type="text"></td>
-                                    <td>To</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                    <td>Tax Rate</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>From</td>
-                                    <td><b>:</b></td>
-                                    <td> <input class="inputfield" name="" type="text"></td>
-                                    <td>To</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                    <td>Tax Rate</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>From</td>
-                                    <td><b>:</b></td>
-                                    <td> <input class="inputfield" name="" type="text"></td>
-                                    <td>To</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                    <td>Tax Rate</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>Above</td>
-                                    <td><b>:</b></td>
-                                    <td> <input class="inputfield" name="" type="text"></td>
-                                    <td>Tax Rate</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text"></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="Heading"><label>Rebates</label>
-                            <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">ADD TAX
-                                SLAB
-                            </button>
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-10">
-                            <table width="100%" class="table_text_style table-sm">
-                                <tr>
-                                    <td>Name</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text" value="U/s 87A"></td>
-                                    <td>Income&nbsp;Limit</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text" value="500000.00">
-                                    </td>
-                                    <td>Amount</td>
-                                    <td><b>:</b></td>
-                                    <td><input class="inputfield" name="" type="text" value="2000.00"></td>
-                                     <td><button type="button">Save</button></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="Heading"><label>Sections</label>
-                            <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">ADD NEW
-                                SECTION
-                            </button>
-                        </div>
                         <div>
                             <div class="col-md-12 col-sm-12 col-xs-10">
                                 <table width="100%" class="table_text_style table-sm">
                                     <tr>
-                                        <td>U/s 10</td>
-                                        <td><b><button type="button">Add</button></b></td>
+                                        <td>Financial&nbsp;Year</td>
+                                        <td><b>:</b></td>
+                                        <td>From</td>
+                                        <td>
+                                            <select>
+                                                <option value="jan">JAN</option>
+                                                <option value="feb">FEB</option>
+                                                <option value="mar">MAR</option>
+                                                <option value="apr">APR</option>
+                                                <option value="may">MAY</option>
+                                                <option value="jun">JUN</option>
+                                                <option value="jul">JUL</option>
+                                                <option value="aug">AUG</option>
+                                                <option value="sep">SEP</option>
+                                                <option value="oct">OCT</option>
+                                                <option value="nov">NOV</option>
+                                                <option value="dec">DEC</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select>
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2008">2009</option>
+                                                <option value="2008">2010</option>
+                                                <option value="2008">2011</option>
+                                                <option value="2008">2012</option>
+                                                <option value="2008">2013</option>
+                                                <option value="2008">2014</option>
+                                                <option value="2008">2015</option>
+                                                <option value="2008">2016</option>
+                                                <option value="2008">2017</option>
+                                                <option value="2008">2018</option>
+                                                <option value="2008">2019</option>
+                                                <option value="2008" selected="selected">2020</option>
+                                                <option value="2008">2021</option>
+                                                <option value="2008">2022</option>
+                                                <option value="2008">2023</option>
+                                                <option value="2008">2024</option>
+                                                <option value="2008">2025</option>
+                                                <option value="2008">2026</option>
+                                                <option value="2008">2027</option>
+                                                <option value="2008">2028</option>
+                                                <option value="2008">2029</option>
+                                                <option value="2008">2030</option>
+                                            </select>
+                                        </td>
+                                        <td>To</td>
+                                        <td>
+                                            <select>
+                                                <option value="jan">JAN</option>
+                                                <option value="feb">FEB</option>
+                                                <option value="mar">MAR</option>
+                                                <option value="apr">APR</option>
+                                                <option value="may">MAY</option>
+                                                <option value="jun">JUN</option>
+                                                <option value="jul">JUL</option>
+                                                <option value="aug">AUG</option>
+                                                <option value="sep">SEP</option>
+                                                <option value="oct">OCT</option>
+                                                <option value="nov">NOV</option>
+                                                <option value="dec">DEC</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select>
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2008">2009</option>
+                                                <option value="2008">2010</option>
+                                                <option value="2008">2011</option>
+                                                <option value="2008">2012</option>
+                                                <option value="2008">2013</option>
+                                                <option value="2008">2014</option>
+                                                <option value="2008">2015</option>
+                                                <option value="2008">2016</option>
+                                                <option value="2008">2017</option>
+                                                <option value="2008">2018</option>
+                                                <option value="2008">2019</option>
+                                                <option value="2008" selected="selected">2020</option>
+                                                <option value="2008">2021</option>
+                                                <option value="2008">2022</option>
+                                                <option value="2008">2023</option>
+                                                <option value="2008">2024</option>
+                                                <option value="2008">2025</option>
+                                                <option value="2008">2026</option>
+                                                <option value="2008">2027</option>
+                                                <option value="2008">2028</option>
+                                                <option value="2008">2029</option>
+                                                <option value="2008">2030</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Retrieve</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="Heading"><label>Income Tax Slabs</label>
+                                <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">ADD TAX
+                                    SLAB
+                                </button>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>From</td>
+                                        <td><b>:</b></td>
+                                        <td> <input class="inputfield" name="" type="text"></td>
+                                        <td>To</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
+                                        <td>Tax Rate</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
                                     </tr>
                                     <tr>
-                                        <td>Section&nbsp;Limit</td>
-                                        <td><input class="inputfieldsection" type="text" value="1000000.00"></td>
+                                        <td>From</td>
+                                        <td><b>:</b></td>
+                                        <td> <input class="inputfield" name="" type="text"></td>
+                                        <td>To</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
+                                        <td>Tax Rate</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>From</td>
+                                        <td><b>:</b></td>
+                                        <td> <input class="inputfield" name="" type="text"></td>
+                                        <td>To</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
+                                        <td>Tax Rate</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Above</td>
+                                        <td><b>:</b></td>
+                                        <td> <input class="inputfield" name="" type="text"></td>
+                                        <td>Tax Rate</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="Heading"><label>Rebates</label>
+                                <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">ADD TAX
+                                    SLAB
+                                </button>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>Name</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text" value="U/s 87A"></td>
+                                        <td>Income&nbsp;Limit</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text" value="500000.00">
+                                        </td>
+                                        <td>Amount</td>
+                                        <td><b>:</b></td>
+                                        <td><input class="inputfield" name="" type="text" value="2000.00"></td>
                                         <td><button type="button">Save</button></td>
                                         <td>
-                                            <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Edit
-                                            </button>
-                                        </td>
-                                        <td><button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Remove
-                                            SECTION
-                                        </button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="Home Loan Interest Amount"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
                                             <button class="submitButton" onclick="submitSearch()" type="button">
                                                 <b>Edit</b>
                                             </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="Travel Allowance"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="HRA"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="Medical Allowance"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="LTA"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="PT"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="inputfieldsection" name="" type="text" value="Food Coupons"></td>
-                                        <td><b><button type="button">Save</button></b></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button" value="Edit">
-                                                <b>Edit</b></button>
                                         </td>
                                         <td>
                                             <button class="submitButton" onclick="submitSearch()" type="button">
@@ -420,126 +286,252 @@
                                 </table>
                             </div>
                         </div>
-                    </div><hr>
-                    <div>
-                        <div class="col-md-12 col-sm-12 col-xs-10">
-                            <table width="100%" class="table_text_style table-sm">
-                                <tr>
-                                    <td>U/s 80C</td>
-                                    <td><button type="button">ADD</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Section&nbsp;Limit</td>
-                                    <td><input class="inputfieldsection" type="text" value="1000000.00"></td>
-                                    <td><button type="button">Save</button></td>
-                                    <td>
-                                        <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Edit
-                                        </button>
-                                    </td>
-                                    <td><button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Remove&nbsp;Section
-                                    </button></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="Fixed Deposites"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="Pradanmantri Sukanya Samvrudi"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="Tution Fee"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="Life Insurance Policies"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="PPF"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="Home Loan Principle Amount"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input class="inputfieldsection" name="" type="text" value="PF"></td>
-                                    <td><b><button type="button">Save</button></b></td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Edit</b>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="submitButton" onclick="submitSearch()" type="button">
-                                            <b>Remove</b>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
+
+                        <div>
+                            <div class="Heading"><label>Sections</label>
+                                <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">ADD NEW
+                                    SECTION
+                                </button>
+                            </div>
+                            <div>
+                                <div class="col-md-12 col-sm-12 col-xs-10">
+                                    <table width="100%" class="table_text_style table-sm">
+                                        <tr>
+                                            <td>U/s 10</td>
+                                            <td><b><button type="button">Add</button></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Section&nbsp;Limit</td>
+                                            <td><input class="inputfieldsection" type="text" value="1000000.00"></td>
+                                            <td><button type="button">Save</button></td>
+                                            <td>
+                                                <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Edit
+                                                </button>
+                                            </td>
+                                            <td><button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Remove
+                                                SECTION
+                                            </button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="Home Loan Interest Amount"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Edit</b>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="Travel Allowance"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Edit</b>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="HRA"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Edit</b>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="Medical Allowance"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Edit</b>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="LTA"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Edit</b>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="PT"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()">
+                                                    <b>Edit</b>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="inputfieldsection" name="" type="text" value="Food Coupons"></td>
+                                            <td><b><button type="button">Save</button></b></td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button" value="Edit">
+                                                    <b>Edit</b></button>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                                    <b>Remove</b>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><hr>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>U/s 80C</td>
+                                        <td><button type="button">ADD</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section&nbsp;Limit</td>
+                                        <td><input class="inputfieldsection" type="text" value="1000000.00"></td>
+                                        <td><button type="button">Save</button></td>
+                                        <td>
+                                            <button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Edit
+                                            </button>
+                                        </td>
+                                        <td><button style="float: right; padding-right: 10px; margin-right: 30px;" type="button">Remove&nbsp;Section
+                                        </button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="Fixed Deposites"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="Pradanmantri Sukanya Samvrudi"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="Tution Fee"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="Life Insurance Policies"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="PPF"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="Home Loan Principle Amount"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input class="inputfieldsection" name="" type="text" value="PF"></td>
+                                        <td><b><button type="button">Save</button></b></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                         <hr>
                         <div class="col-8">
                             <span class="Heading">U/s 80D</span>
@@ -583,7 +575,7 @@
                             <button style="width: 100px; height: 30px;" type="button">RESET</button>
                         </div>
 
-                    </div>
+                </div>
 
                 </form>
 
