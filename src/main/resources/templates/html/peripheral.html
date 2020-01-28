@@ -1,212 +1,114 @@
 <!DOCTYPE html>
-<html>
-
 <head>
     <title>Peripherals</title>
-    <style type="text/css">
-		.Heading {
-			font-size: 20px;
-			color: #ff751a;
-			border-bottom: 1px solid #CCCCCC;
-			width:970px;
-		}
-
-		.form-page {
-			width: 990px;
-			min-height: 455px;
-			border-radius: 9px;
-            box-shadow: 10px 10px 8px  #cc8500;
-            border: 2px solid orange;
-            background-color:#FFFAF5;
-			position: absolute;
-			left: calc(25% - 280px/2);
-
-		}
-		.submitButton {
-		         padding:5px;
-                 border: 2px solid #ff9900;
-                 border-radius: 8px;
-                 cursor:pointer;
-                 width:100px;
-                 margin-top:-33px;
-			     cursor: pointer;
-		}
-		.submitButton:hover {
-			background-color: white;
-		    box-shadow: 0 8px 6px 0 #ff9933;
-
-
-		}
-
-		.inputBoxStyle {
-			width: 250px;
-			height: 20px;
-		}
-
-		.inputDiv {
-			padding-bottom: 2px;
-			padding-top: 2px;
-		}
-
-		.inputDate {
-			width: 50%;
-			height: 40px;
-		}
-
-    </style>
-
+    <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript"></script>
 </head>
-
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="form-page">
-    <form action="/">
-        <div class="container">
-            <div class="Heading">Workshop Details</div>
-            <br>
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="inputDiv">
-							<span>
-								<span>Peripheral Name<span style="color:red">*</span></span>
-                                <span style="margin-left:55px;margin-right: 10px;"><b>:</b></span>
-								<span>
-									<input class="inputBoxStyle" type="" name="">
-								</span>
-							</span>
-                    </div>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <form action="/peripheral/sav" id="peripheralForm" method="post" name="peripheralForm"
+                          th:action="@{/peripheral/save}" th:object="${peripheral}">
+                        <div class="Heading">Workshop Details</div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
+                                <table width="100%">
+                                    <tr>
+                                        <td>Peripheral&nbsp;Name<span style="color: #ff0000">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{peripheralName}" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Type<span style="color: #ff0000">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{type}" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Model<span style=" color:red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td><input class="inputBoxStyle" th:field="*{model}" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year&nbsp;of&nbsp;Purchase<span style="color:red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td>
+                                            <input id="datepicker1" name="datepicker" style=" border: 1px solid #ff9900;"
+                                                   th:field="*{yearOfPurchase}"
+                                                   width="176px"/>
+                                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employee&nbsp;Id</td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{users}" type="text"></td>
 
-                    <div class="inputDiv">
-                        <span>Type<span style="color:red">*</span></span><span
-                            style="margin-left:133px;margin-right: 10px;"><b>:</b></span>
-                        <span>
-								<input class="inputBoxStyle" type="" name="">
-							</span>
-                    </div>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-10">
+                                <table width="100%">
+                                    <tr>
+                                        <td>Brand<span style="color:red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{brand}" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Serial&nbsp;Number<span style="color:red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td><input class="inputBoxStyle" th:field="*{serialNumber}" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Warranty&nbsp;Date<span style="color:red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td>
+                                            <input id="datepicker" name="datepicker"
+                                                   style=" float:left; border: 1px solid #ff9900;"
+                                                   th:field="*{warrantyDate}" width="176px"/>
+                                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status<span style="color:red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{status}" type="text"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="margin-top:50px;">
+                                <div style="float: left;">
+                                    <button type="button" class="submitButton"
+                                            onclick="savePeripheral()"><b>Submit</b></button>
+                                </div>
+                                <div style="float: left;margin-left: 40px;">
+                                    <button class="submitButton" onclick="searchPeripheral()"
+                                            type="button"><b>Search</b></button>
+                                </div>
+                                <div style="float: left;margin-left: 40px;">
 
-
-                    <div class="inputDiv">
-							<span>
-								<span>Model<span style=" color:red">*</span></span><span
-                                    style="margin-left:126px;margin-right: 10px;"><b>:</b></span>
-                        <span>
-								<input class="inputBoxStyle" type="" name="">
-							</span>
-
-
-                    </div>
-
-                    <div class="inputDiv">
-
-                        <table style="width:100%;">
-                            <tr>
-                                <td>
-                                    Year of Purchase<span style="color:red">*</span><span
-                                        style="margin-left:57px;margin-right: -41px;"><b>:</b></span>
-                                </td>
-
-                                <td>
-                                    <span style="margin-right:182px; width:100px;">
-                                        <input style=" border: 1px solid #ff9900;" id="datepicker1" width="200px"
-                                               name="datepicker"/>
-                                        <script>
-								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
-				         </script>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="inputDiv">
-                        <span>Employee Id</span><span style="margin-left:91px;margin-right: 10px;"><b>:</b></span>
-                        <span>
-								<input class="inputBoxStyle" type="" name="">
-							</span>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div style="float:right">
-                        <div class="inputDiv">
-								<span>
-									<span>Brand<span style="color:red">*</span></span><span
-                                        style="margin-left:100px;margin-right:10px;"><b>:</b></span>
-									<span>
-										<input class="inputBoxStyle" type="" name="">
-									</span>
-								</span>
+                                    <button class="submitButton" onclick="document.peripheralForm.reset()"
+                                            type="button"><b>Reset</b></button>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="inputDiv">
-								<span>Serial Number <span style="color:red">*</span><span
-                                        style="margin-left:44px;margin-right: 10px;"><b>:</b></span>
-									<span>
-										<input class="inputBoxStyle" type="" name="">
-									</span>
-								</span>
+                    </form>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="Heading">Search Result</div>
                         </div>
-
-
-                        <div class="inputDiv">
-
-
-                            <table style="width:100%;">
-                                <tr>
-                                    <td>
-                                        Warranty Date <span style="color:red">*</span><span
-                                            style="margin-left:45px;margin-right: 15px;"><b>:</b></span>
-                                    </td>
-
-                                    <td>
-                                        <span style="margin-right:250px; width:200px;">
-                                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                   width="200px" name="datepicker"/>
-                                            <script>
-								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-				         </script>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="inputDiv">
-								<span>Status <span style="color:red">*</span><span
-                                        style="margin-left:94px;margin-right: 10px;"><b>:</b></span>
-									<span>
-										<input class="inputBoxStyle" type="" name="">
-									</span>
-								</span>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-5 col-sm-5 col-lg-offset-5">
-                    <div style="float: right">
-							<span>
-                                <button type="button" class="submitButton"
-                                        onclick="alert('Submit')"><b>Submit</b></button>
-							</span>
-                        <span>
-                            <button type="button" class="submitButton" onclick="alert('Search')"><b>Search</b></button>
-							</span>
-                        <span>
-                            <button type="button" class="submitButton" onclick="alert('Reset')"><b>Reset</b></button>
-							</span>
+                        <div id="peripheralResult"></div>
                     </div>
 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <div class="Heading">Search Result</div>
                 </div>
             </div>
         </div>
+    </div>
 
-    </form>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
