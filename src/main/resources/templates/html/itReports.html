@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Monthly Incentives Search</title>
+    <style type="text/css">
+			.input-group{
+				margin-left: 0px;
+			}
+
+    </style>
+
+</head>
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<div class="form-page">
+    <form action="/">
+        <div class="Heading" style="padding-left:5px">IT Report</div>
+        <br>
+        <div style="`padding-left:5px">
+            <div style="float:left;margin-top:10px;margin-left:10px">DATE</div>
+            <div style="margin-top:10px;color:red;float:left;">*</div>
+            <div style="margin-left:25px;;float:left;font-size:25px">:</div>
+            <div style="margin-left:20px; width:300px;float:left;">
+
+                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
+                       name="datepicker"/>
+                <script>
+								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
+            </div>
+            <button type="button" class="submitButton" onclick="alert('Search')"><b>Search</b></button>
+        </div>
+    </form>
+
+    <p class="Heading" style="float:left">Search Results</p>
+
+</div>
+
+<footer th:insert="html/fragment/footer :: footer"></footer>
+</body>
+
+
+</html>
