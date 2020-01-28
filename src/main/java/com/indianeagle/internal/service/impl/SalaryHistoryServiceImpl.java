@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
@@ -24,6 +25,7 @@ import java.util.List;
 /**
  * @author SVK
  */
+@Service
 public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSourceAware {
 	
 	private static final Logger log = Logger.getLogger(SalaryHistoryServiceImpl.class);

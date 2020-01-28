@@ -25,12 +25,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
+import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.*;
-
+@Service
 public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     private static final Logger log = Logger.getLogger(SalaryServiceimpl.class);
     private MessageSource messageSource;

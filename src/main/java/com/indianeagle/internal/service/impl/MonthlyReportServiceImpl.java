@@ -8,6 +8,8 @@ import com.indianeagle.internal.form.BankSalariesForm;
 import com.indianeagle.internal.form.ITForm;
 import com.indianeagle.internal.service.MonthlyReportService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -16,6 +18,7 @@ import java.util.*;
  * @author appala.sambangi
  *
  */
+@Service
 public class MonthlyReportServiceImpl implements MonthlyReportService {
 	private MonthlySalaryReportRepository monthlySalaryReportRepository;
     private EmployeeSettlementRepository employeeSettlementRepository;

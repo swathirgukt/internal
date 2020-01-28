@@ -12,11 +12,13 @@ import com.indianeagle.internal.form.LeaveApproveForm;
 import com.indianeagle.internal.service.LeaveDetailsService;
 import com.indianeagle.internal.util.DateUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class LeaveDetailsServiceImpl implements LeaveDetailsService {
 
     private LeaveDetailsRepository leaveDetailsRepository;

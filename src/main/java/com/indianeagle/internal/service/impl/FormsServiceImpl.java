@@ -20,6 +20,8 @@ import com.indianeagle.internal.enums.Relation;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import org.springframework.stereotype.Service;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -34,6 +36,7 @@ import java.util.List;
  * Service class implementation for various forms
  * @author kiran.paluvadi
  */
+@Service
 public class FormsServiceImpl implements FormsService, MessageSourceAware {
 	
 	private MessageSource messageSource;

@@ -11,9 +11,11 @@ import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
     private UsersRepository usersRepository;

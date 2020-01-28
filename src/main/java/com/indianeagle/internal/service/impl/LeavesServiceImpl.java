@@ -11,12 +11,14 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.LeavesRepository;
 import com.indianeagle.internal.dto.Leaves;
 import com.indianeagle.internal.service.LeavesService;
+import org.springframework.stereotype.Service;
 
 /**
  * User: anish
  * Date: 5/29/12
  * Time: 4:07 PM
  */
+@Service
 public class LeavesServiceImpl implements LeavesService {
     private LeavesRepository leavesRepository;
 

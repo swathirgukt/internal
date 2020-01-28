@@ -6,6 +6,8 @@ import com.indianeagle.internal.form.ChequeDetailsForm;
 import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.ChequeDetailsService;
 import com.indianeagle.internal.util.SimpleUtils;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,7 @@ import java.util.Optional;
  * @author irfan
  * service implementation for Cheque Details
  */
+@Service
 public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	private ChequeDetailsRepository chequeDetailsRepository;
 	private List<ChequeDetails> chequeDetailsList;
