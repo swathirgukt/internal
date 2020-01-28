@@ -8,6 +8,7 @@ import com.indianeagle.internal.enums.TemplateNames;
 import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.DepartmentService;
 import com.indianeagle.internal.util.Form16PdfUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
 import org.thymeleaf.TemplateEngine;
@@ -18,15 +19,23 @@ import java.util.Date;
 import java.util.List;
 
 public class DepartmentServiceImpl implements DepartmentService {
-
+@Autowired
 	private DepartmentRepository departmentRepository;
+@Autowired
 	private FinancialYearRepository financialYearRepository;
+@Autowired
 	private EmployeeRepository employeeRepository;
+@Autowired
 	private EmployeeFinancialYearRepository employeeFinancialYearRepository;
+@Autowired
 	private SalaryHistoryRepository salaryHistoryRepository;
+@Autowired
 	private EmployeeIncomeTaxRepository employeeIncomeTaxRepository;
+@Autowired
 	private TemplateEngine velocityEngine;
+@Autowired
 	private MailingEngine mailingEngine;
+	@Autowired
 	private GeneratedForm16Repository generatedForm16Repository;
 
 	public void saveOrUpdate(Department department){

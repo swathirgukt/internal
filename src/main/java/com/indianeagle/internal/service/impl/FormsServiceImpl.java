@@ -18,6 +18,7 @@ import com.indianeagle.internal.util.MessageKeys;
 import com.indianeagle.internal.util.SimpleUtils;
 import com.indianeagle.internal.enums.Relation;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import java.io.ByteArrayInputStream;
@@ -35,11 +36,15 @@ import java.util.List;
  * @author kiran.paluvadi
  */
 public class FormsServiceImpl implements FormsService, MessageSourceAware {
-	
+	@Autowired
 	private MessageSource messageSource;
+	@Autowired
 	private SalaryHistoryRepository salaryHistoryRepository;
+	@Autowired
 	private FormsResultData formsResultData;
+	@Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
+	@Autowired
     private EmployeeRepository employeeRepository;
 
     private static final String CESSATION_CODE = "C";

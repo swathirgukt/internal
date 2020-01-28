@@ -6,16 +6,20 @@ import com.indianeagle.internal.form.ChequeDetailsForm;
 import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.ChequeDetailsService;
 import com.indianeagle.internal.util.SimpleUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * @author irfan
+ * @author Unskrishna
  * service implementation for Cheque Details
  */
 public class ChequeDetailsServiceImpl implements ChequeDetailsService {
+	@Autowired
 	private ChequeDetailsRepository chequeDetailsRepository;
+	@Autowired
 	private List<ChequeDetails> chequeDetailsList;
+	@Autowired
 	private MailingEngine mailingEngine;
 	
 	/**

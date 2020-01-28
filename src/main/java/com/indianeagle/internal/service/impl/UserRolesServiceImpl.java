@@ -3,6 +3,7 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.UserRolesRepository;
 import com.indianeagle.internal.dto.Role;
 import com.indianeagle.internal.service.UserRolesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * User Roles Service to load all roles from USER_ROLES table
  */
 public class UserRolesServiceImpl implements UserRolesService {
-
+@Autowired
 	private UserRolesRepository rolesRepository;
 	
 	/**

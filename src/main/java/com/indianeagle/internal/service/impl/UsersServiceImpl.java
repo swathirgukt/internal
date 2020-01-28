@@ -5,6 +5,7 @@ import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.service.UsersService;
 import com.indianeagle.internal.util.CryptoUtil;
 import com.indianeagle.internal.util.SimpleUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * User Service to perform all operations on USER table
  */
 public class UsersServiceImpl implements UsersService {
-
+  @Autowired
 	 private UsersRepository usersRepository;
 		
 	 /**

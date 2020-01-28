@@ -3,6 +3,7 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.PeripheralRepository;
 import com.indianeagle.internal.dto.Peripheral;
 import com.indianeagle.internal.service.PeripheralService;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
  * @author SVK
  */
 public class PeripheralServiceImpl implements PeripheralService {
-
+	@Autowired
 	private PeripheralRepository peripheralRepository;
 
 	public void saveOrUpdate(Peripheral peripheral){

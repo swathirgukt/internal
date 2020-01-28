@@ -10,6 +10,7 @@ import com.indianeagle.internal.util.PaySlipPdfUtils;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.FontFactoryImp;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.core.io.ByteArrayResource;
@@ -27,13 +28,19 @@ import java.util.List;
 public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSourceAware {
 	
 	private static final Logger log = Logger.getLogger(SalaryHistoryServiceImpl.class);
-	
+	@Autowired
 	private MessageSource messageSource;
+	@Autowired
 	private SalaryHistoryRepository salaryHistoryRepository;
+	@Autowired
 	private MailingEngine mailingEngine;
+	@Autowired
     private SalaryHistory salaryHistory;
+	@Autowired
     private List<Employee> employees;
+	@Autowired
     private TemplateEngine templateEngine;
+	@Autowired
 	private FontFactoryImp factoryImp;
 
 	public List<SalaryHistory> searchSalaryHistory(String empId, Date periodDate) {

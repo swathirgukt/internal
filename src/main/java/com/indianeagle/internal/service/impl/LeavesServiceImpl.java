@@ -11,6 +11,7 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.LeavesRepository;
 import com.indianeagle.internal.dto.Leaves;
 import com.indianeagle.internal.service.LeavesService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * User: anish
@@ -18,6 +19,7 @@ import com.indianeagle.internal.service.LeavesService;
  * Time: 4:07 PM
  */
 public class LeavesServiceImpl implements LeavesService {
+    @Autowired
     private LeavesRepository leavesRepository;
 
     @Override

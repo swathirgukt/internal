@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *  Global Session Object for Application
- * @author kiran.paluvadi
+ * @author Unskrishna
  */
 public class ApplicationSessionImpl implements ApplicationSession {
 
