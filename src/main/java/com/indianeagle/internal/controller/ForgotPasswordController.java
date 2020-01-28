@@ -2,8 +2,8 @@ package com.indianeagle.internal.controller;
 
 import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.form.UserForm;
+import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.UsersService;
-import com.indianeagle.internal.service.mail.MailingEngine;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,45 +1,102 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html>
+
 <head>
-    <title>All Employee Leave Reports</title>
-</head>
+
+    <head>
+
+        <style type="text/css">
+
+            .selectOption {
+                width: 150px;
+                height: 25px;
+                font-size: 15px;
+                text-align: center;
+                color: red;
+                border-radius: 5px;
+            }
+
+
+        </style>
+        <title>All Employees Leave Reports</title>
+    </head>
+
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="form-page">
-    <form action="/">
-        <div class="container">
-            <div class="Heading">Employee's Leave Report</div>
-            <div class="row" style="margin-top:10px;">
-                <div class="col-md-4">
-                    <span>From </span>
-                    <span style="color: red">*</span><b>:</b>
-                    <div>
-                        <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1" width="200px"
-                               name="datepicker"/>
-                        <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });</script>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <span>To </span>
-                    <span style="color: red">*</span><b>:</b>
-                    <div>
-                        <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
-                               name="datepicker"/>
-                        <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="margin-top:20px;">
-                        <button type="button" class="submitButton" onclick="alert('Search')">Search</button>
-                    </div>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-lg-2 sidenav">
+        </div>
+        <div class="col-lg-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <form action="/">
+                        <div class="Heading">Employee's Leave Report</div>
+                        <div class="row">
+                            <div class=" col-lg-4  col-md-12 col-sm-12 col-xs-12">
+                                <div style="float: left;">
+                                    <table>
+                                        <tr>
+                                            <td> From</td>
+                                            <td width="30px;">
+                                                <span style="color: red">*</span>
+                                            <td>
+                                            <td width="20px"><b>:</b></td>
+                                            <td>
+                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
+                                                       width="200px"
+                                                       name="datepicker"/>
+                                                <script>
+								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
+
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td width="20px"> To</td>
+                                            <td>
+                                                <span style="color: red">*</span>
+                                            <td>
+                                            <td width="20px"><b>:</b></td>
+                                            <td>
+                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
+                                                       width="200px"
+                                                       name="datepicker"/>
+                                                <script>
+								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
+
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                <div>
+                                    <button type="button" class="submitButton"
+                                            onclick="alert('Search')">Search
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
                 </div>
 
             </div>
         </div>
-
-
-    </form>
+    </div>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
+
 </html>
