@@ -19,9 +19,9 @@ public class PeripheralServiceImpl implements PeripheralService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Optional<Peripheral> findById(long id){
-
-		return  (peripheralRepository.findById(id));
+	public Peripheral findById(long id){
+		Optional<Peripheral> optional = peripheralRepository.findById(id);
+		return optional.isPresent()?optional.get():null;
 	}
 	
 	public List<Peripheral> searchPeripherals(Peripheral peripheral){
