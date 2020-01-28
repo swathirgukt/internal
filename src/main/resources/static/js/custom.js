@@ -32,3 +32,12 @@ function savePeripheral() {
     document.peripheralForm.action = "/peripheral/save";
     document.peripheralForm.submit();
 }
+
+function getLeaveBalance(){
+    var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
+    response.done(function(responseData){
+        if(responseData){
+            $("#leaveBalanceResult").html(responseData);
+        }
+    });
+}
