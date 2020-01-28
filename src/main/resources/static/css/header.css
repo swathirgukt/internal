@@ -99,7 +99,7 @@ ul.nav a:hover {
     display: none;
     background-color: #f9f9f9;
     margin-top: -44px;
-    margin-left: 150px;
+    margin-left: 148px;
 }
 
 .dropdown-menu-2 a {
@@ -134,19 +134,19 @@ footer {
  }
  .jumbotron {
         min-height: 400px;
-       margin-bottom: 0;
-       border-radius: 9px;
-       box-shadow: 10px 10px 8px  #cc8500;
-       border: 2px solid #D1D1D1;
-       background-color:#FFFAF5;
-       color: #664200;
-       border-color:orange;
-       padding-top:20px;
-       padding-left:10px;
-       padding-right:10px;
-       padding-bottom:20px;
+        margin-bottom: 0;
+        border-radius: 9px;
+        box-shadow: 10px 10px 8px  #cc8500;
+        border: 2px solid #D1D1D1;
+        background-color:#FFFAF5;
+        color: #664200;
+        border-color:orange;
+        padding-top:20px;
+        padding-left:10px;
+        padding-right:10px;
+        padding-bottom:20px;
 
      }
-     .row.content {
+.row.content {
      height:auto;
      }
