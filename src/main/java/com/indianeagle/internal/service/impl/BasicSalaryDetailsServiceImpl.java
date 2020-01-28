@@ -6,16 +6,15 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.EmployeeRepository;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.service.BasicSalaryDetailsService;
-import org.springframework.stereotype.Service;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
- * @author hari.pondreti
- * Service for BasicSalaryDetails of employees
+ * @author Unskrishna
+  * Service for BasicSalaryDetails of employees
  */
-@Service
 public class BasicSalaryDetailsServiceImpl implements BasicSalaryDetailsService {
+	@Autowired
 	private EmployeeRepository employeeRepository;
 	
 	/* (non-Javadoc)

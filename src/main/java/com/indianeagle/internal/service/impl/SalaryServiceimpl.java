@@ -12,6 +12,7 @@ import com.indianeagle.internal.form.EmpSalaryDecider;
 import com.indianeagle.internal.form.EmployeeSettlementForm;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
 import com.indianeagle.internal.form.SalaryRule;
+import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.service.SalaryService;
 import com.indianeagle.internal.util.CalculationRules;
@@ -21,6 +22,7 @@ import com.indianeagle.internal.util.SimpleUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.core.io.ByteArrayResource;
@@ -34,17 +36,29 @@ import java.util.*;
 @Service
 public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     private static final Logger log = Logger.getLogger(SalaryServiceimpl.class);
+    @Autowired
     private MessageSource messageSource;
+    @Autowired
     private SalaryRepository salaryRepository;
+    @Autowired
     private SalaryHistoryRepository salaryHistoryRepository;
+    @Autowired
     private Employee employee;
+    @Autowired
     private SalaryHistory currentSalary;
-    private com.indianeagle.internal.mail.MailingEngine mailingEngine;
+    @Autowired
+    private MailingEngine mailingEngine;
+    @Autowired
     private List<Employee> currSalaryEmpList;
+    @Autowired
     private List<SalaryHistory> currentSalaryList;
+    @Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
+    @Autowired
     private EmployeeSettlement employeeSettlement;
+    @Autowired
     private SalaryHistoryService salaryHistoryService;
+    @Autowired
     private TemplateEngine templateEngine;
 
     public List<Employee> loadAllEmployees() {

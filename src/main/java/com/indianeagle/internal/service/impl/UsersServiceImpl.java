@@ -3,19 +3,17 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.UsersRepository;
 import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.service.UsersService;
-import com.indianeagle.internal.util.SimpleUtils;
-import org.springframework.stereotype.Service;
 import com.indianeagle.internal.util.CryptoUtil;
-
+import com.indianeagle.internal.util.SimpleUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 /**
  * @author kiran.paluvadi
  * User Service to perform all operations on USER table
  */
-@Service
 public class UsersServiceImpl implements UsersService {
-
+  @Autowired
 	 private UsersRepository usersRepository;
 		
 	 /**

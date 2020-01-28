@@ -44,15 +44,15 @@ public class IncentiveServiceImpl implements IncentiveService {
 	/**
 	 * @return the incentiveDAO
 	 */
-	public IncentiveRepository getIncentiveDAO() {
+	public IncentiveRepository incentiveRepository() {
 		return incentiveRepository;
 	}
 
 	/**
-	 * @param incentiveDAO the incentiveDAO to set
+	 * @param incentiveRepository the incentiveRepository to set
 	 */
-	public void setIncentiveDAO(IncentiveRepository incentiveDAO) {
-		this.incentiveRepository = incentiveDAO;
+	public void setIncentiveDAO(IncentiveRepository incentiveRepository) {
+		this.incentiveRepository = incentiveRepository;
 	}
 
 }

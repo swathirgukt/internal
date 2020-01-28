@@ -6,8 +6,7 @@ import com.indianeagle.internal.form.LeaveApproveForm;
 import com.indianeagle.internal.service.ApprovedLeaveService;
 import com.indianeagle.internal.util.DateUtils;
 import com.indianeagle.internal.util.SimpleUtils;
-import org.springframework.stereotype.Service;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 
 /**
@@ -16,9 +15,12 @@ import java.util.*;
  * Date: 5/29/12
  * Time: 2:53 PM
  */
-@Service
-public class ApprovedLeaveServiceImpl implements ApprovedLeaveService {
 
+/**
+ *  @author Unskrishna
+ */
+public class ApprovedLeaveServiceImpl implements ApprovedLeaveService {
+@Autowired
     private ApprovedLeavesRepository approvedLeavesRepository;
 
     /**

@@ -12,18 +12,20 @@ import com.indianeagle.internal.form.LeaveApproveForm;
 import com.indianeagle.internal.service.LeaveDetailsService;
 import com.indianeagle.internal.util.DateUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-@Service
-public class LeaveDetailsServiceImpl implements LeaveDetailsService {
 
+public class LeaveDetailsServiceImpl implements LeaveDetailsService {
+@Autowired
     private LeaveDetailsRepository leaveDetailsRepository;
+@Autowired
     private EmployeeRepository employeeRepository;
+@Autowired
     private ApprovedLeavesRepository approvedLeavesRepository;
+@Autowired
     private LeavesRepository leavesRepository;
 
     public void saveOrUpdate(LeaveDetails leaveDetails) {

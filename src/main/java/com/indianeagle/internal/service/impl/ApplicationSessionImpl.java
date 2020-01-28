@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *  Global Session Object for Application
- * @author kiran.paluvadi
+ * @author Unskrishna
  */
 @Service
 public class ApplicationSessionImpl implements ApplicationSession {
