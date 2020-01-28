@@ -19,4 +19,10 @@ public class PeripheralRepositoryTest {
         peripheralRepository.searchPeripherals(peripheral);
 
     }
+    @Test
+    public void findById(){
+        Peripheral peripheral=peripheralRepository.findById(1000l).get();
+        System.out.println(peripheral);
+
+    }
 }

@@ -5,22 +5,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <link href="../../../static/css/header.css" rel="stylesheet" th:href="@{css/header.css}">
+    <link href="../../../static/css/button.css" rel="stylesheet" th:href="@{css/button.css}">
+    <link href="../../../static/css/form-page.css" rel="stylesheet" th:href="@{css/form-page.css}">
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-
-
+    <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript">
+    </script>
     <div class="menu-bar">
         <div>
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="#"><img src="../../../static/images/IE_Logo.png"
                                                           th:src="@{images/IE_Logo.png}"></a>
                 </div>
             </div>
-            <div>
+            <div class="collapse navbar-collapse" id="myNavbar1">
                 <span style="margin-left:450px">Welcome </span>
                 <span style="float:right">Last login: Jan 17, 2013</span>
                 <span style="margin-left:370px">You have <span>0</span> notification</span>
@@ -30,90 +39,100 @@
         <nav class="navbar navbar-custom">
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee Details
-                            <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="#">Update My Details</a>
-                                <a href="#">Create Employee</a>
-                                <a href="#">Search Employee</a>
-                                <a href="#" th:href="@{department}">Department</a>
-                                <a href="#">Employee Status</a>
-                            </div>
-                        </li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
-                            Department
-                            <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="#">Salary by Individual</a>
-                                <a href="#">E-Salary</a>
-                                <a href="#">F & F Settlement</a>
-                                <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Salary
-                                    Report <i class="fa fa-caret-right"></i></a>
-                                    <div class="dropdown-menu-2">
-                                        <a href="#">Salary History</a>
-                                        <a href="#">Monthly Salary Report</a>
-                                        <a href="#">Basic Salary Report</a>
-                                        <a href="#">Bank Salary Statement</a>
-                                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Portfolio</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a th:href="@{/}"><i class="fa fa-home"></i>Home</a></li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee Details
+                                <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a th:href="@{updateMyDetails}">Update My Details</a>
+                                    <a th:href="@{createEmployee}">Create Employee</a>
+                                    <a th:href="@{searchEmployee}">Search Employee</a>
+                                    <a th:href="@{/department}">Department</a>
+                                    <a th:href="@{employeeStatus}">Employee Status</a>
                                 </div>
-                                <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Forms
-                                    <i class="fa fa-caret-right"></i></a>
-                                    <div class="dropdown-menu-2">
-                                        <a href="#">PT</a>
-                                        <a href="#">ESI</a>
-                                        <a href="#">PF</a>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+                                Department
+                                <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a th:href="@{salaryByIndividual}">Salary by Individual</a>
+                                    <a th:href="@{eSalary}">E-Salary</a>
+                                    <a th:href="@{fSettlement}">F & F Settlement</a>
+                                    <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Salary
+                                        Report <i class="fa fa-caret-right"></i></a>
+                                        <div class="dropdown-menu-2">
+                                            <a th:href="@{salaryHistory}">Salary History</a>
+                                            <a th:href="@{monthlySalaryReport}">Monthly Salary Report</a>
+                                            <a th:href="@{basicSalaryDetails}">Basic Salary Report</a>
+                                            <a th:href="@{bankSalaryStatement}">Bank Salary Statement</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Incentives
-                                    <i class="fa fa-caret-right"></i></a>
-                                    <div class="dropdown-menu-2">
-                                        <a href="#">Add Incentives</a>
-                                        <a href="#">Reports</a>
+                                    <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Forms
+                                        <i class="fa fa-caret-right"></i></a>
+                                        <div class="dropdown-menu-2">
+                                            <a th:href="@{PT}">PT</a>
+                                            <a th:href="@{ESI}">ESI</a>
+                                            <a th:href="@{PF}">PF</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Form16
-                                    <i class="fa fa-caret-right"></i></a>
-                                    <div class="dropdown-menu-2">
-                                        <a href="#">IT Sections</a>
-                                        <a href="#">Employee Savings</a>
-                                        <a href="#">Form16 Generation</a>
-                                        <a href="#">Saved Forms</a>
+                                    <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Incentives
+                                        <i class="fa fa-caret-right"></i></a>
+                                        <div class="dropdown-menu-2">
+                                            <a th:href="@{addIncentive}">Add Incentives</a>
+                                            <a th:href="@{reports}">Reports</a>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Form16
+                                        <i class="fa fa-caret-right"></i></a>
+                                        <div class="dropdown-menu-2">
+                                            <a th:href="@{itSections}">IT Sections</a>
+                                            <a th:href="@{employeeSavings}">Employee Savings</a>
+                                            <a th:href="@{Form16Generation}">Form16 Generation</a>
+                                            <a th:href="@{savedForms}">Saved Forms</a>
+                                        </div>
+                                    </div>
 
-                                <div><a href="#">Cheques</a></div>
-                                <div><a href="#">IT Reports</a></div>
-                            </div>
-                        </li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">HR Department <i
-                                class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="#">Polices</a>
-                                <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Leaves
-                                    <i class="fa fa-caret-right"></i></a>
-                                    <div class="dropdown-menu-2">
-                                        <a href="#">Approve Leaves</a>
-                                        <a href="#">Employee Leave Reports</a>
-                                        <a href="#">All Employee Leave Reports</a>
-                                        <a href="#">Add/Edit Leaves</a>
-                                    </div>
+                                    <div><a href="#">Cheques</a></div>
+                                    <div><a th:href="@{itReports}">IT Reports</a></div>
                                 </div>
-                                <div><a href="#">Holiday List</a></div>
-                            </div>
-                        </li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Workshop <i
-                                class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a th:href="@{peripheral}">Peripherals</a>
-                                <a href="#">Inventory</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                    </ul>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">HR Department <i
+                                    class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a href="#">Polices</a>
+                                    <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Leaves
+                                        <i class="fa fa-caret-right"></i></a>
+                                        <div class="dropdown-menu-2">
+                                            <a th:href="@{approaveLeave}">Approve Leaves</a>
+                                            <a th:href="@{employeeLeaveReport}">Employee Leave Reports</a>
+                                            <a th:href="@{allEmployeeLeaveReport}">All Employee Leave Reports</a>
+                                            <a th:href="@{addEdit}">Add/Edit Leaves</a>
+                                        </div>
+                                    </div>
+                                    <div><a href="#">Holiday List</a></div>
+                                </div>
+                            </li>
+                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Workshop <i
+                                    class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a th:href="@{/peripheral}">Peripherals</a>
+                                    <a href="#">Inventory</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </nav>

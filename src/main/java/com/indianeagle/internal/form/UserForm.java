@@ -22,6 +22,8 @@ public class UserForm {
     private String roleName;
     private List<Department> departments;
     private long department;
+    private String userName;
+
 
     /**
      * @return the empId
@@ -147,5 +149,13 @@ public class UserForm {
      */
     public void setDepartment(long department) {
         this.department = department;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

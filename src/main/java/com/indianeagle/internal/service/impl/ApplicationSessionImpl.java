@@ -4,11 +4,13 @@ import com.indianeagle.internal.service.ApplicationSession;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 /**
  *  Global Session Object for Application
  * @author Unskrishna
  */
+@Service
 public class ApplicationSessionImpl implements ApplicationSession {
 
 	/**

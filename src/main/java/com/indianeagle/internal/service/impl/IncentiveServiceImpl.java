@@ -5,6 +5,8 @@ import com.indianeagle.internal.dto.Incentives;
 import com.indianeagle.internal.form.IncentiveForm;
 import com.indianeagle.internal.service.IncentiveService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
  * Service class for Incentives
  * @author kiran.paluvadi
  */
+@Service
 public class IncentiveServiceImpl implements IncentiveService {
 	@Autowired
 	private IncentiveRepository incentiveRepository;

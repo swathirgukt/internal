@@ -1,0 +1,10 @@
+.submitButton {
+		        padding: 1px  15px;
+                border: 0.5px solid #ff9900;
+                border-radius: 5px;
+                cursor: pointer;
+                }
+.submitButton:hover {
+			 background-color: white;
+             box-shadow: 0 3px 6px 0 #ff9933;
+             }

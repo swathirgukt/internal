@@ -21,6 +21,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import org.springframework.stereotype.Service;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -35,6 +37,7 @@ import java.util.List;
  * Service class implementation for various forms
  * @author kiran.paluvadi
  */
+@Service
 public class FormsServiceImpl implements FormsService, MessageSourceAware {
 	@Autowired
 	private MessageSource messageSource;

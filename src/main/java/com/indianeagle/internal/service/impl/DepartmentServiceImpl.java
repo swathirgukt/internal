@@ -1,7 +1,6 @@
 package com.indianeagle.internal.service.impl;
 
-import com.indianeagle.internal.constants.StringConstants;
-import com.indianeagle.internal.dao.*;
+
 import com.indianeagle.internal.dao.repository.*;
 import com.indianeagle.internal.dto.*;
 import com.indianeagle.internal.enums.TemplateNames;
@@ -11,13 +10,14 @@ import com.indianeagle.internal.util.Form16PdfUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
+import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class DepartmentServiceImpl implements DepartmentService {
 @Autowired
 	private DepartmentRepository departmentRepository;
