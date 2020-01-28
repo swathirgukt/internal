@@ -10,6 +10,7 @@
     <link href="../../../static/css/button.css" rel="stylesheet" th:href="@{css/button.css}">
     <link href="../../../static/css/form-page.css" rel="stylesheet" th:href="@{css/form-page.css}">
 
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
@@ -53,10 +54,10 @@
                             <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a th:href="@{updateMyDetails}">Update My Details</a>
-                                <a href="#">Create Employee</a>
-                                <a href="#">Search Employee</a>
+                                <a th:href="@{createEmployee}">Create Employee</a>
+                                <a th:href="@{searchEmployee}">Search Employee</a>
                                 <a href="#" th:href="@{/department}">Department</a>
-                                <a href="#">Employee Status</a>
+                                <a th:href="@{employeeStatus}">Employee Status</a>
                             </div>
                         </li>
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
@@ -64,8 +65,8 @@
                             <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a th:href="@{salaryByIndividual}">Salary by Individual</a>
-                                <a href="#">E-Salary</a>
-                                <a href="#">F & F Settlement</a>
+                                <a th:href="@{eSalary}">E-Salary</a>
+                                <a th:href="@{fSettlement}">F & F Settlement</a>
                                 <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Salary
                                     Report <i class="fa fa-caret-right"></i></a>
                                     <div class="dropdown-menu-2">
@@ -94,8 +95,8 @@
                                     <i class="fa fa-caret-right"></i></a>
                                     <div class="dropdown-menu-2">
                                         <a th:href="@{itSections}">IT Sections</a>
-                                        <a href="#">Employee Savings</a>
-                                        <a href="#">Form16 Generation</a>
+                                        <a th:href="@{employeeSavings}">Employee Savings</a>
+                                        <a th:href="@{Form16Generation}">Form16 Generation</a>
                                         <a th:href="@{savedForms}">Saved Forms</a>
                                     </div>
                                 </div>
