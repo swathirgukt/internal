@@ -89,4 +89,17 @@ public class FinancialYear extends BaseDto{
     public void setTaxSections(Set<TaxSection> taxSections) {
         this.taxSections = taxSections;
     }
+
+    @Override
+    public String toString() {
+        return "FinancialYear{" +
+                "fromMonth='" + fromMonth + '\'' +
+                ", fromYear='" + fromYear + '\'' +
+                ", toMonth='" + toMonth + '\'' +
+                ", toYear='" + toYear + '\'' +
+                ", incomeTaxSlabs=" + incomeTaxSlabs +
+                ", rebates=" + rebates +
+                ", taxSections=" + taxSections +
+                '}';
+    }
 }

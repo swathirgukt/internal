@@ -2,6 +2,9 @@ package com.indianeagle.internal.service;
 
 import com.indianeagle.internal.dto.*;
 import com.indianeagle.internal.dto.*;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;

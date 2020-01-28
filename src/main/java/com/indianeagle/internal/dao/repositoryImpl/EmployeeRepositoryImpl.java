@@ -35,8 +35,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
      */
     @Override
     public List<Employee> searchEmployees(EmployeeForm employeeForm) {
-        Query query = entityManager.createNativeQuery(generateQueryForSearchEmployee(employeeForm));
+        Query query = entityManager.createQuery(generateQueryForSearchEmployee(employeeForm), Employee.class);
         return query.getResultList();
+        // org.springframework.data.jpa.repository.Query query1=
     }
 
     /**
@@ -50,18 +51,18 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
     public List<Employee> getBasicSalaryDetails(String empStatus) {
         Query query = null;
         StringBuffer queryString = new StringBuffer();
-        String QUERY = "from Employee e ";
+        String QUERY = "select * from EMPLOYEE e ";
         queryString.append(QUERY);
 
         if (EmployeeStatusEnum.RESIGNED.name().equals(empStatus)) {
-            queryString.append(" where (e.resignDate is not null) AND (e.relieveDate is null) ");
+            queryString.append(" where (RESIGN_DATE is not null) AND (RELIEVE_DATE is null) ");
         } else if (EmployeeStatusEnum.WORKING.name().equals(empStatus)) {
-            queryString.append(" where e.relieveDate is null ");
+            queryString.append(" where RELIEVE_DATE is null ");
         } else if (EmployeeStatusEnum.RELIEVED.name().equals(empStatus)) {
-            queryString.append(" where e.relieveDate is not null ");
+            queryString.append(" where RELIEVE_DATE is not null ");
         }
-        queryString.append(" order by e.empId ");
-        query = entityManager.createNativeQuery(queryString.toString());
+        queryString.append(" order by EMP_ID ");
+        query = entityManager.createNativeQuery(queryString.toString(), Employee.class);
         return query.getResultList();
 
     }
@@ -75,21 +76,21 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
     @Override
     public List<Employee> searchBasedOnEmpStatus(EmployeeForm employeeForm) {
         Query query = null;
-        StringBuffer queryEmpStatus = new StringBuffer("from Employee e where ");
+        StringBuffer queryEmpStatus = new StringBuffer("SELECT * from EMPLOYEE e where ");
 
         if (!SimpleUtils.isEmpty(employeeForm.getType()) && "Joined".equals(employeeForm.getType().trim())) {
-            queryEmpStatus.append(" e.joinDate >= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getFromDate())).append("'");
+            queryEmpStatus.append(" JOIN_DATE >= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getFromDate())).append("'");
             if (!SimpleUtils.isEmpty(employeeForm.getToDate())) {
-                queryEmpStatus.append(" and e.joinDate <= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getToDate())).append("'");
+                queryEmpStatus.append(" and JOIN_DATE <= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getToDate())).append("'");
             }
         } else {
-            queryEmpStatus.append(" e.relieveDate >= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getFromDate())).append("'");
+            queryEmpStatus.append(" RELIEVE_DATE >= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getFromDate())).append("'");
             if (!SimpleUtils.isEmpty(employeeForm.getToDate())) {
-                queryEmpStatus.append(" and e.relieveDate <= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getToDate())).append("'");
+                queryEmpStatus.append(" and RELIEVE_DATE <= '").append(SimpleUtils.YYYY_MM_DD.format(employeeForm.getToDate())).append("'");
             }
         }
-        queryEmpStatus.append(" ORDER BY e.empId");
-        query = entityManager.createNativeQuery(queryEmpStatus.toString());
+        queryEmpStatus.append(" ORDER BY EMP_ID");
+        query = entityManager.createQuery(queryEmpStatus.toString());
         return query.getResultList();
     }
 
@@ -99,28 +100,28 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
      */
     private String generateQueryForSearchEmployee(EmployeeForm employeeForm) {
 
-        StringBuilder queryString = new StringBuilder("from Employee e where ");
+        StringBuilder queryString = new StringBuilder("select e from Employee e where ");
 
         if (!SimpleUtils.isEmpty(employeeForm.getEmpId())) {
-            return "from Employee e where e.empId = '".concat(employeeForm.getEmpId()).concat("'");
+            return "select e from Employee e right join fetch Department d  where EMP_ID = '".concat(employeeForm.getEmpId()).concat("'");
         }
         if (EmployeeStatusEnum.WORKING.name().equalsIgnoreCase(employeeForm.getStatus())) {
-            queryString.append(" e.relieveDate is null");
+            queryString.append(" RELIEVE_DATE is null");
         } else {
-            queryString.append("e.relieveDate is not null");
+            queryString.append("RELIEVE_DATE is not null");
         }
         if (!SimpleUtils.isEmpty(employeeForm.getFirstName()) && !SimpleUtils.isEmpty(employeeForm.getLastName())) {
-            queryString.append(" AND ( e.firstName LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
-            queryString.append(" OR e.lastName LIKE '").append(employeeForm.getLastName().trim()).append("%'").append(")");
+            queryString.append(" AND ( FIRST_NAME LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
+            queryString.append(" OR LAST_NAME LIKE '").append(employeeForm.getLastName().trim()).append("%'").append(")");
         } else if (!SimpleUtils.isEmpty(employeeForm.getFirstName())) {
-            queryString.append(" AND  e.firstName LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
+            queryString.append(" AND  FIRST_NAME LIKE '").append(employeeForm.getFirstName().trim()).append("%'");
         } else if (!SimpleUtils.isEmpty(employeeForm.getLastName())) {
-            queryString.append(" AND e.lastName LIKE '").append(employeeForm.getLastName().trim()).append("%'");
+            queryString.append(" AND LAST_NAME LIKE '").append(employeeForm.getLastName().trim()).append("%'");
         }
         if (!SimpleUtils.isEmpty(employeeForm.getDepartment())) {
-            queryString.append(" AND e.department.deptNo = '").append(employeeForm.getDepartment()).append("'");
+            queryString.append(" AND department.deptNo = '").append(employeeForm.getDepartment()).append("'");
         }
-        queryString.append(" ORDER BY e.empId");
+        queryString.append(" ORDER BY EMP_ID");
         return queryString.toString();
 
     }
@@ -131,7 +132,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
      * @return list of employees
      */
     public List<Employee> findByDob() {
-        Query query = entityManager.createNativeQuery("select e from FROM Employee e WHERE DAY(e.dob) = DATE_ADD(CURRENT_DATE, INTERVAL 1 day)");
+        Query query = entityManager.createQuery("select e FROM Employee e WHERE DAY(e.dob) = DAY(CURRENT_DATE)+1 ");
         return query.getResultList();
 
     }
@@ -143,7 +144,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
      */
 
     public List<Employee> findByJoinDate() {
-        Query query = entityManager.createNativeQuery("select e FROM Employee e WHERE DAY(e.joinDate) = DAY(CURRENT_DATE) AND MONTH(e.joinDate) = MONTH(CURRENT_DATE)+1");
+        Query query = entityManager.createNativeQuery("select * FROM EMPLOYEE  WHERE DAY(JOIN_DATE) = DAY(CURRENT_DATE) AND MONTH(JOIN_DATE) = MONTH(CURRENT_DATE)+1");
         return query.getResultList();
     }
 

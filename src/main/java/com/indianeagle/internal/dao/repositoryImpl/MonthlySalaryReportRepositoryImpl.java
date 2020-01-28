@@ -31,7 +31,7 @@ public class MonthlySalaryReportRepositoryImpl implements MonthlySalaryReportRep
      */
     @SuppressWarnings("unchecked")
     public List<MonthlySalaryReport> getITReport(Date range) {
-        Query query = entityManager.createNativeQuery("select ITReport from MonthlySalaryReport ITReport where ITReport.salaryDate >=? AND  ITReport.salaryDate <= ? GROUP BY MONTH(ITReport.salaryDate),ITReport.employeeId  ORDER BY ITReport.employeeId,ITReport.salaryDate");
+        Query query = entityManager.createQuery("select ITReport from MonthlySalaryReport ITReport where ITReport.salaryDate >=?1 AND  ITReport.salaryDate <= ?2 GROUP BY MONTH(ITReport.salaryDate),ITReport.employeeId  ORDER BY ITReport.employeeId,ITReport.salaryDate");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(range);
         calendar.add(Calendar.MONTH, 11);

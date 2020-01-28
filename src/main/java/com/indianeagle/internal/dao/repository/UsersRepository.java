@@ -14,27 +14,11 @@ import java.util.List;
 @Repository
 public interface UsersRepository extends JpaRepository<User, String> {
 
-    /**
-     * To save user
-     * @param user
-     */
-    //void save(User user);
 
-    /**
-     * To update user
-     * @param user
-     */
-    //void update(User user);
-
-    /**
-     * To get all users.
-     * @return list
-     */
-    //List<User> loadAll();
 
     /**
      * To load Active Users only
-     * @param user
+     * @param status
      * @return List
      */
     //List<User> loadActiveUsers(User user);WHY DO WE NEED TO SEND USER OBJECT FOR THIS?
@@ -47,11 +31,6 @@ public interface UsersRepository extends JpaRepository<User, String> {
      */
     User findByUserName(String userName);
 
-    /**
-     * To save or update user
-     * @param user
-     */
-    //  void saveOrUpdate(User user);
 
     /**
      * return all user names

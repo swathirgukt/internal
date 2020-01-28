@@ -11,8 +11,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "EMPLOYEE_SETTLEMENT")
-public class EmployeeSettlement extends BaseDto{
-
+public class EmployeeSettlement extends BaseDto {
+    @Temporal(TemporalType.DATE)
     @Column(name = "SETTLEMENT_DATE")
     private Date settlementDate;
     @Column(name = "BASIC")
@@ -58,7 +58,6 @@ public class EmployeeSettlement extends BaseDto{
     @Column(name = "OTHER_DEDUCTIONS")
     private BigDecimal otherDeductions = BigDecimal.ZERO;
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-
     @JoinColumn(name = "EMP_ID", unique = true)
     private Employee employee;
 
@@ -370,5 +369,34 @@ public class EmployeeSettlement extends BaseDto{
 
     public void setTotalDeductions(BigDecimal totalDeductions) {
         this.totalDeductions = totalDeductions;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeSettlement{" +
+                "settlementDate=" + settlementDate +
+                ", basic=" + basic +
+                ", hra=" + hra +
+                ", conveyence=" + conveyence +
+                ", pfEmp=" + pfEmp +
+                ", pfCom=" + pfCom +
+                ", esi=" + esi +
+                ", medicalAllowance=" + medicalAllowance +
+                ", specialAllowance=" + specialAllowance +
+                ", medicalInsurance=" + medicalInsurance +
+                ", otherAllowance=" + otherAllowance +
+                ", PTax=" + PTax +
+                ", incomeTax=" + incomeTax +
+                ", totalDays=" + totalDays +
+                ", previousArrears=" + previousArrears +
+                ", adminCharges=" + adminCharges +
+                ", totalEarnings=" + totalEarnings +
+                ", totalDeductions=" + totalDeductions +
+                ", grossSalary=" + grossSalary +
+                ", netSalary=" + netSalary +
+                ", otherEarnings=" + otherEarnings +
+                ", otherDeductions=" + otherDeductions +
+                ", employee=" + employee +
+                '}';
     }
 }

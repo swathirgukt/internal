@@ -47,4 +47,13 @@ public class EmployeeFinancialYear extends BaseDto {
     public void setEmployeeTaxSections(Set<EmployeeTaxSection> employeeTaxSections) {
         this.employeeTaxSections = employeeTaxSections;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeFinancialYear{" +
+                "empId='" + empId + '\'' +
+                ", financialYear=" + financialYear +
+                ", employeeTaxSections=" + employeeTaxSections +
+                '}';
+    }
 }

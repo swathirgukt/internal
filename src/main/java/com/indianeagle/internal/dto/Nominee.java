@@ -1,6 +1,7 @@
 package com.indianeagle.internal.dto;
 
 import org.apache.commons.lang.StringUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class Nominee  extends BaseDto{
     private String middleName;
     @Column(name = "LAST_NAME")
     private String lastName;
+    @Temporal(TemporalType.DATE)
     @Column(name = "DOB")
     private Date dateOfBirth;
     @Column(name = "RELATION")

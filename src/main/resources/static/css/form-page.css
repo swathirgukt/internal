@@ -49,6 +49,7 @@
             }
 
 .tableScrollbar{
+<<<<<<< HEAD
                    display:block;
                    max-height:300px;
                    overflow-x:auto;
@@ -75,3 +76,20 @@
                     .table-sm th,.table-sm td {
                                                 padding: 0.3rem;
                                                }
+=======
+             display:block;
+              max-height:300px;
+              overflow-x:auto;
+              overflow-y:auto;
+<<<<<<< HEAD
+        }
+
+        .max-auto-custom{
+           margin-left:auto;
+           margin-right:auto;
+
+=======
+              overflow-x:auto;
+>>>>>>> 931c71cfb4a51b4e733e509ba1e05214fc6276c6
+        }
+>>>>>>> 006bd9217a6dcf131aade280f4d95ef58300f0a3

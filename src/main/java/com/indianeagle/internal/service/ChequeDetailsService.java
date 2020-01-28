@@ -3,6 +3,7 @@ package com.indianeagle.internal.service;
 import com.indianeagle.internal.dto.ChequeDetails;
 import com.indianeagle.internal.form.ChequeDetailsForm;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author irfan
@@ -31,6 +32,6 @@ public interface ChequeDetailsService {
      * @param chequeDetails
      * @return
      */
-    ChequeDetails findBy(long chequeDetails);
+    Optional<ChequeDetails> findBy(long chequeDetails);
 
 }

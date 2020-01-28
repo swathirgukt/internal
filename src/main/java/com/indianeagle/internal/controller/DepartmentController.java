@@ -37,7 +37,7 @@ public class DepartmentController {
         return "html/departmentDetails";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @RequestMapping("/search")
     public String search(ModelMap modelMap, @ModelAttribute Department department) {
         List<Department> departments = departmentService.findDepartments(department);
         modelMap.addAttribute(DEPARTMENTS_LIST, departments);

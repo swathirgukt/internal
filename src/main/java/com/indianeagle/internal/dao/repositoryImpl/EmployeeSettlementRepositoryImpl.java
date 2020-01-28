@@ -38,8 +38,8 @@ public class EmployeeSettlementRepositoryImpl implements EmployeeSettlementRepos
         Query query = null;
         List<Integer> ptRangeList = new ArrayList<Integer>(CalculationRules.PT_RANGE.keySet());
         List<Long> noOfEmployeesByPTRange = new ArrayList<Long>();
-        String minDateRangeQuery = "SELECT count(employeeSettlement.id) FROM EmployeeSettlement as employeeSettlement WHERE month(employeeSettlement.settlementDate) = month(?) AND year(employeeSettlement.settlementDate) = year(?) AND (employeeSettlement.grossSalary > " + CalculationRules.PT_PAID_ON.intValue() + ") AND employeeSettlement.grossSalary  BETWEEN ? AND ? ";
-        String maxDateRangeQuery = "SELECT count(employeeSettlement.id) FROM EmployeeSettlement as employeeSettlement WHERE month(employeeSettlement.settlementDate) = month(?) AND year(employeeSettlement.settlementDate) = year(?) AND employeeSettlement.grossSalary  >= ? ";
+        String minDateRangeQuery = "SELECT count(ID) FROM EMPLOYEE_SETTLEMENT as employeeSettlement WHERE month(SETTLEMENT_DATE) = month(?) AND year(SETTLEMENT_DATE) = year(?) AND (GROSS_SALARY> " + CalculationRules.PT_PAID_ON.intValue() + ") AND GROSS_SALARY  BETWEEN ? AND ? ";
+        String maxDateRangeQuery = "SELECT count(ID) FROM EMPLOYEE_SETTLEMENT as employeeSettlement WHERE month(SETTLEMENT_DATE) = month(?) AND year(SETTLEMENT_DATE) = year(?) AND GROSS_SALARY  >= ? ";
         for (int index = 0; index < ptRangeList.size(); index++) {
             if (index != ptRangeList.size() - 1) {
 
@@ -70,7 +70,7 @@ public class EmployeeSettlementRepositoryImpl implements EmployeeSettlementRepos
      * @return EmployeeSettlement list
      */
     public List<EmployeeSettlement> findEmployeeSettlementByDate(Date date) {
-        Query query = entityManager.createNativeQuery("select employeeSettlement from EmployeeSettlement employeeSettlement left join fetch employeeSettlement.employee employee WHERE (month(employeeSettlement.settlementDate) = month(?) AND year(employeeSettlement.settlementDate) = year(?)) OR (month(employeeSettlement.settlementDate) = month(?) AND year(employeeSettlement.settlementDate) = year(?))");
+        Query query = entityManager.createQuery("select employeeSettlement from EmployeeSettlement employeeSettlement left join fetch employeeSettlement.employee employee WHERE (month(employeeSettlement.settlementDate) = month(?1) AND year(employeeSettlement.settlementDate) = year(?2)) OR (month(employeeSettlement.settlementDate) = month(?3) AND year(employeeSettlement.settlementDate) = year(?4))");
         Calendar previousMonthDate = Calendar.getInstance();
         previousMonthDate.setTime(date);
         previousMonthDate.set(Calendar.MONTH, previousMonthDate.get(Calendar.MONTH) - 1);

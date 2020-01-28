@@ -1,67 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Monthly Incentives Search</title>
+    <style type="text/css">
+        .Heading {
+            font-size: 20px;
+            color: #ff751a;
+            border-bottom: 1px solid #CCCCCC;
+        }
+
+        .Sbutton {
+            border-radius: 5px;
+            box-shadow: 0 1px 2px blue;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 13px;
+            height: 25px;
+            line-height: 25px;
+            margin: 0 2px;
+            outline: medium none;
+            text-align: center;
+            text-decoration: none;
+            text-shadow: 0 1px 0 #ffcc99;
+            vertical-align: baseline;
+            width: 90px;
+            /*style="margin-left: 50px; font-size: 15px;"
+        */
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #ffffcc">
 <header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-        </div>
-        <div class="col-sm-8 text-left">
-            <div class="jumbotron">
-                <div class="container-fluid">
-                    <form action="/">
-                        <div class="Heading">Salary History</div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td> DATE</td>
-                                            <td width="20px"><span style="color:red"> *</span></td>
-                                            <td width="20px"><b>:</b></td>
-                                            <td>
-                                                <input style=" float:left; border: 1px solid #ff9900;"
-                                                       id="datepicker" width="200px" name="datepicker"/>
-                                                <script>
-                                                        $('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
+<form action="/">
 
-
-                                                </script>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
-                                <div style="float: right">
-                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Search</b>
-                                    </button>
-                                </div>
-                            </div>
+    <div>
+        <form action="/">
+            <div class="Heading">Salary History</div>
+            <br>
+            <div style="width: 100%;height: 100px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span>Employee ID  *:</span>
+                            <span> <select name="id" style="width: 250px;height: 23px; margin-left: 150px;">
+											<option>--Select--</option>
+											<option value="IEPL076">IEPL076</option>
+											<option value="IEPL077">IEPL077</option>
+										</select>
+									</span>
+                            <span style="margin-left: 50px;"><a class="Sbutton" href="#"> Search </a></span>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
-                                <div class="Heading">Salary History Details</div>
-                            </div>
-
-                        </div>
-
-                    </form>
-
+                    </div>
                 </div>
-
             </div>
-
-        </div>
+        </form>
     </div>
 
 
-</div>
+    <div class="Heading">
+        <div><p>Salary History Details
+            <p></div>
 
-<footer th:insert="html/fragment/footer :: footer"></footer>
+
+    </div>
+    <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 
 
