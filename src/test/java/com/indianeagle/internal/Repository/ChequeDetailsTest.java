@@ -6,13 +6,12 @@ import com.indianeagle.internal.form.ChequeDetailsForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-@SpringBootTest
+   @SpringBootTest
 public class ChequeDetailsTest {
     @Autowired
     ChequeDetailsRepository chequeDetailsRepository;
