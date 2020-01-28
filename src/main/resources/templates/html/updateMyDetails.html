@@ -1,17 +1,8 @@
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!doctype html>
 <html lang="en">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <title>Employee details</title>
-    <style>
-   td,th {
-    padding: 2px;
-}
-
-
-    </style>
 </head>
 
 <body>
@@ -31,14 +22,15 @@
                                 <table width="100%" class="table_text_style table-sm">
                                     <tr>
                                         <td>First&nbsp;Name<span style="color:red">*</span></span><span
-                                                style="float:right; margin-right:10px;">:</span>
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="first_name" id="first_name"
                                                    value="">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Middle&nbsp;Name<span style="float:right; margin-right:10px;">:</span>
+                                        <td>Middle&nbsp;Name<span
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="middle_name" id="middle_name"
                                                    value="">
@@ -46,7 +38,7 @@
                                     </tr>
                                     <tr>
                                         <td>Permanent&nbsp;Address<span class="mandatory">*</span><span
-                                                style="float:right; margin-right:10px;">:</span>
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="permanent_address"
                                                    id="permanent_address" value="">
@@ -54,14 +46,15 @@
                                     </tr>
                                     <tr>
                                         <td>Mobile&nbsp;No<span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span>
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="mobile_no" id="mobile_no"
                                                    value="">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Material&nbsp;Status<span style="float:right; margin-right:10px;">:</span>
+                                        <td>Material&nbsp;Status<span
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input type="radio" name="material_status"
                                                    value="Single">Single
@@ -71,7 +64,7 @@
                                     </tr>
                                     <tr>
                                         <td>Personal&nbsp;Email <span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span>
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="personal_email"
                                                    id="personal_email"
@@ -80,7 +73,7 @@
                                     </tr>
                                     <tr>
                                         <td>Official&nbsp;Email<span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span>
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="official_email"
                                                    id="official_email"
@@ -98,13 +91,13 @@
                                 <table width="100%" class="table_text_style table-sm">
                                     <tr>
                                         <td>Last&nbsp;Name<span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span></td>
+                                                style="float:right; margin-right:10px;"><b>:</b></span></td>
                                         <td>
                                             <input class="input_style" type="text">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Temporary&nbsp;Address<span style="float:right; margin-right:10px;">:</span>
+                                        <td>Temporary&nbsp;Address<span style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td>
                                             <input class="input_style" type="text">
@@ -112,33 +105,31 @@
                                     </tr>
                                     <tr>
                                         <td>DOB<span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span></td>
+                                                style="float:right; margin-right:10px;"><b>:</b></span></td>
                                         <td>
-
-                                            <input id="dob" width="200px" name="dob"/>
-                                            <script>
-										$('#dob').datepicker({ uiLibrary: 'bootstrap' });
-
-
-
-                                            </script>
+                                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
+                                                   width="176px"
+                                                   name="datepicker"/>
+                                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>PAN&nbsp;Number<span style="float:right; margin-right:10px;">:</span></td>
+                                        <td>PAN&nbsp;Number<span style="float:right; margin-right:10px;"><b>:</b></span>
+                                        </td>
                                         <td>
                                             <input class="input_style" type="text">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Emergency&nbsp;Contact<span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span></td>
+                                                style="float:right; margin-right:10px;"><b>:</b></span></td>
                                         <td>
                                             <input class="input_style" type="text">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Passport&nbsp;Number<span style="float:right; margin-right:10px;">:</span>
+                                        <td>Passport&nbsp;Number<span
+                                                style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td>
                                             <input class="input_style" type="text">
@@ -146,7 +137,7 @@
                                     </tr>
                                     <tr>
                                         <td>Department<span style="color:red">*</span><span
-                                                style="float:right; margin-right:10px;">:</span></td>
+                                                style="float:right; margin-right:10px;"><b>:</b></span></td>
                                         <td>
                                             <select class="selectOption" name="">
                                                 <option value="">--select--</option>
@@ -160,11 +151,9 @@
                                             </select>
                                         </td>
                                     </tr>
-
-
                                 </table>
 
-                                <div style="float: right; margin-top:20px;margin-right:30px;">
+                                <div style="float: right; margin-top:20px;margin-right:10px;">
                                     <button class="submitButton" id="btn ">Submit</button>
                                     <button class="submitButton" id="">Reset</button>
                                 </div>
