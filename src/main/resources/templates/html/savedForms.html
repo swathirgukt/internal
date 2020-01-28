@@ -54,18 +54,17 @@
 			background-color: #fff2e6;
 		}
 
-
     </style>
     <script>
 		function getFormtData() {
 			var ele1 = document.getElementById("empdata").elements[0].value;
 			var ele2 = document.getElementById("empdata").elements[1].value;
 			if (ele1 == "" && ele2 == "") {
-				alert("value is required");
+				alert("value is required"); 
 				document.getElementById("employeeid").focus();
 				document.getElementById("errorMsg").innerHTML = "Id is required..!";
 			} else {
-
+				
 				document.getElementById("errorMsg").innerHTML = "";
 
 document.getElementById("fullname").setAttribute("value","DurgaMahadev parida");
@@ -76,14 +75,13 @@ document.getElementById("fullname").setAttribute("value","DurgaMahadev parida");
 			}
 		}
 
-
     </script>
 </head>
 
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form_page">
-    <div>
+    <div style="margin-left:20px;">
         <div class="top_border_line">Income Text Sections</div>
 
         <div style="margin-top:20px;">
