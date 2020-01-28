@@ -1,5 +1,8 @@
 package com.indianeagle.internal.dto;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,13 +18,14 @@ public class EmployeeFinancialYear extends BaseDto {
 
     @Column(name = "EMP_ID")
     private String empId;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "FINANCIAL_YEAR_ID", nullable = false)
     private FinancialYear financialYear;
 
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "EMPLOYEE_FINANCIAL_YEAR_ID", nullable = false)
+
     private Set<EmployeeTaxSection> employeeTaxSections;
 
     public String getEmpId() {

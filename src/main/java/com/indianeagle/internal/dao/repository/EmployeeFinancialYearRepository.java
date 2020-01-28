@@ -25,7 +25,7 @@ public interface EmployeeFinancialYearRepository extends JpaRepository<EmployeeF
      * @return list of EmployeeFinancialYear
      */
 
-    @Query("select efy from EmployeeFinancialYear efy left join fetch efy.financialYear left join fetch efy.employeeTaxSections ets left join fetch ets.employeeTaxSectionDeclarations etsd where efy.empId=:empId and ets.active=true and etsd.active=true")
+    @Query("select distinct efy from EmployeeFinancialYear efy left join fetch efy.financialYear left join fetch efy.employeeTaxSections ets left join fetch ets.employeeTaxSectionDeclarations etsd where efy.empId=:empId and ets.active=true and etsd.active=true")
     List<EmployeeFinancialYear> findEmployeeFinancialYearByEmpId(@Param("empId") String empId);
 
     /**
@@ -38,7 +38,7 @@ public interface EmployeeFinancialYearRepository extends JpaRepository<EmployeeF
      * @param toYear
      * @return
      */
-    @Query("select efy from EmployeeFinancialYear efy left join fetch efy.financialYear fy left join fetch efy.employeeTaxSections ets left join fetch ets.employeeTaxSectionDeclarations etsd where efy.empId=:empId and fy.fromMonth=:fromMonth and fy.fromYear=:fromYear and fy.toMonth=:toMonth and fy.toYear=:toYear and ets.active=true and etsd.active=true")
+    @Query("select distinct efy from EmployeeFinancialYear efy left join fetch efy.financialYear fy left join fetch efy.employeeTaxSections ets left join fetch ets.employeeTaxSectionDeclarations etsd where efy.empId=:empId and fy.fromMonth=:fromMonth and fy.fromYear=:fromYear and fy.toMonth=:toMonth and fy.toYear=:toYear and ets.active=true and etsd.active=true")
     List<EmployeeFinancialYear> findEmployeeFinancialYearWithEmpIdAndMonthAndYear(@Param("empId") String empId, @Param("fromMonth") String fromMonth, @Param("fromYear") String fromYear, @Param("toMonth") String toMonth, @Param("toYear") String toYear);
 }
 
