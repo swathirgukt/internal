@@ -1,0 +1,582 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Employee Status Search</title>
+    <script>
+		var bodyHeight = 0;
+		var nommine_details = 0, authentication_details = 0, salary_details = 0;
+
+		function nommine_detailspopup() {
+			$("#nommine_details_form").toggle("slow");
+			nommine_details += 1;
+			//	alert(" Document" +$( "#nommine_details_form" ).height());
+			if (nommine_details % 2 == 0) {
+
+				$('body').css('height', ((bodyHeight - 90)) + "px");
+				bodyHeight = $('body').height();
+			} else {
+
+				$('body').css('height', ((bodyHeight + 90)) + "px");
+				bodyHeight = $('body').height();
+			}
+			return false;
+		}
+		function authentication_detailspopup() {
+			$("#authentication_details_form").toggle("slow");
+			authentication_details += 1;
+
+			//	alert(" Document" +$("#authentication_details_form").height());
+			if (authentication_details % 2 == 0) {
+
+				$('body').css('height', ((bodyHeight - 23)) + "px");
+				bodyHeight = $('body').height();
+			} else {
+
+				$('body').css('height', ((bodyHeight + 23)) + "px");
+				bodyHeight = $('body').height();
+			}
+			return false;
+		}
+
+		function salary_detailspopup() {
+			$("#salary_details_form").toggle("slow");
+			//	alert(" Document" +$("#salary_details_form").height());
+			salary_details += 1;
+
+			//	alert(" Document" +$("#authentication_details_form").height());
+			if (salary_details % 2 == 0) {
+
+				$('body').css('height', ((bodyHeight - 314)) + "px");
+				bodyHeight = $('body').height();
+			} else {
+
+				$('body').css('height', ((bodyHeight + 314)) + "px");
+				bodyHeight = $('body').height();
+			}
+			return false;
+
+		}
+		$(document).ready(function () {
+			$("#nommine_details_form,#authentication_details_form, #pay_slip_format_form, #salary_details_form").hide();
+			bodyHeight = $('body').height();
+		});
+
+
+    </script>
+</head>
+
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<!-- <div class="form_body"> -->
+
+<!-- <div class="BodyWrapper"> -->
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-lg-2 sidenav">
+        </div>
+        <div class="col-lg-8 text-left">
+            <div class="jumbotron">
+
+                <div class="container">
+                    <form action="" method="post">
+                        <div class="Heading">Employee Details</div>
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>First Name<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Middle Name<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Permanent Address<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Employee Id<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Designation<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Level<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Official Email<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Personal Email<span style="color:red">*<span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mobile No<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emergency Contact<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Join Date<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+
+                                                <input id="joindate" width="170px" name="joindate"/>
+                                                <script>
+														$('#joindate').datepicker({ uiLibrary: 'bootstrap' });
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>Last Name<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="">--SELECT-</option>
+                                                    <option value="Admin">Admin</option>
+                                                    <option value="IT">IT</option>
+                                                    <option value="CC-IE">CC-IE</option>
+                                                    <option value="CC-TTS">CC-TTS</option>
+                                                    <option value="Operations">Operations</option>
+                                                    <option value="HR">HR</option>
+                                                    <option value="Accounts">Accounts</option>
+
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temporary Address<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>DOB<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input id="dob" width="170px" name="dob"/>
+                                                <script>
+														$('#dob').datepicker({ uiLibrary: 'bootstrap' });
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bank Name<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bank A/C No<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PF Number<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PAN Number<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>UAN<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ESI Number<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aadhar No<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Row -->
+                        <div class="Heading">Nommine Details <span
+                                class="glyphicon glyphicon-chevron-down btn-sm" id="nommine_details"
+                                onclick="nommine_detailspopup()"></span></div>
+                        <div class="row" id="nommine_details_form">
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>First Name<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Middle Name<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date of Birth<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input id="dateofbirth" width="170px" name="dateofbirth"/>
+                                                <script>
+														$('#dateofbirth').datepicker({ uiLibrary: 'bootstrap' });
+
+                                                </script>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>Last Name<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Relation<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="">--Select--</option>
+                                                    <option value="Father">Father</option>
+                                                    <option value="Mother">Mother</option>
+                                                    <option value="Husband">Husband</option>
+                                                    <option value="Wife">Wife</option>
+                                                </select>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="Heading">Authentication Details<span
+                                class="glyphicon glyphicon-chevron-down btn-sm" id="authentication_details"
+                                onclick="authentication_detailspopup()"></span></div>
+                        <div class="row" id="authentication_details_form">
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>Role<span style="color:red">*</span><span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="">--SELECT--</option>
+                                                    <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                                                    <option value="ROLE_EMPLOYEE">ROLE_EMPLOYEE</option>
+                                                    <option value="ROLE_HR">ROLE_HR</option>
+                                                    <option value="ROLE_SYS_ADMIN">ROLE_SYS_ADMIN</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>Password<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="password">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="Heading">Salary Details <span
+                                class="glyphicon glyphicon-chevron-down btn-sm" id="salary_details"
+                                onclick="salary_detailspopup()"></span></div>
+                        <div class="row" id="salary_details_form">
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div
+                                        style="font-size: 20px;color: #ff751a;	font-family: Arial;margin-left: 10px;margin-bottom: 10px;">
+                                    Earnings
+                                </div>
+                                <div class="form-align">
+
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>Basic<span style="float:right; margin-right:10px;"><b>:</b></span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>HRA<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="">--SELECT-</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Conveyance<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Medical Allowance<span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Special Allowance<span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gratuity<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bonus<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Performance Linked Pay<span
+                                                    style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>UAN<span style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shift Allowance<span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Transport Allowance<span
+                                                    style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Other Allowance<span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div
+                                        style="font-size: 20px;color: #ff751a;font-family: Arial;margin-left: 10px;margin-bottom: 10px;">
+                                    Deductions
+                                </div>
+                                <div class="form-align">
+
+                                    <table width="100%" class="table-sm table_text_style">
+                                        <tr>
+                                            <td>Medical Insurance<span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loan Amount<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PF Required<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Income Tax<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <input class="input_style" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ESI Eligible<span style="float:right; margin-right:10px;">:</span>
+                                            </td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="YES">YES</option>
+                                                    <option value="NO">NO</option>
+                                                    s
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="Heading">Pay Slip Format</div>
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div class="form-align">
+                                    <table width="100%" class="table_text_style table-sm">
+
+                                        <tr>
+                                            <td>Pay Slip Format<span
+                                                    style="float:right; margin-right:10px;">:</span></td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="IT">IT</option>
+                                                    <option value="NON-IT">NON-IT</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-xs-12 col-md-6">
+                                <div style="margin-left: 150px;">
+                                    <button class="submitButton" id="submitbtn">Submit</button>
+                                    <button class="submitButton">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Container -->
+
+                <!-- </div>Body div -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- </div> -->
+
+<footer th:insert="html/fragment/footer :: footer"></footer>
+</body>
+
+</html>

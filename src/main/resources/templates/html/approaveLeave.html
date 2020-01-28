@@ -1,207 +1,268 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+
 <head>
+
+    <style type="text/css">
+      .form-align {
+            margin-left: 10px;
+        }
+
+        .Type_leaves {
+            float: left;
+            margin-left: 3px;
+        }
+
+        .Type_leaves_select {
+            float: left;
+            margin-left: 100px;
+            position: relative;
+            bottom: 13px;
+
+        }
+
+
+    </style>
     <title>Approve Leave</title>
 </head>
+
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="form-page">
-    <form action="/">
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <form action="/">
+                        <div class="Heading">Approve Leave</div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-10" style="border-right: 2px dotted #bbba86; " >
+                                <div >
+                                    <table width="100%" class="table_text_style table-sm">
+                                        <tr>
+                                            <th>
+                                                Employee&nbsp;ID
+                                            </th>
 
-        <div class="container">
-            <div class="Heading">Approve Leave</div>
-            <div class="row" style="margin-top:10px;">
-                <div class="col-md-6">
-                    <div>
-                        <div>
-                            <span>Employee ID <span style="color:red;font-size:15px"> *</span> <b>:</b></span>
-                            <select name="id" style="width: 250px;height: 23px;">
+                                            <td>
+                                                <span><b>:</b></span>
+                                            </td>
+                                            <td>
+                                                <select name="id" class="selectOption">
+                                                    <option value="YSPL1324">YSPL1324</option>
+                                                    <option value="YSPL1321">YSPL1321</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Leave &nbsp;Type
+                                            </th>
 
-                                <option value="YSPL1324">YSPL1324</option>
-                                <option value="YSPL1321">YSPL1321</option>
-                            </select>
+                                            <td>
+                                                <span><b>:</b></span>
+                                            </td>
+                                            <td>
+                                                <select class="selectOption">
+                                                    <option value="Casual Leave">Casual Leave</option>
+                                                    <option value="Sick Leave">Sick Leave</option>
+                                                    <option value="Compensatory Leave">Compensatory Leave</option>
+                                                    <option value="Maternity Leave">Maternity Leave</option>
+                                                    <option value="LOP inc Holidays">LOP inc Holidays</option>
+                                                    <option value="LOP 1/2 Day">LOP 1/2 Day</option>
+                                                    <option value="Half Day Leave">Half Day Leave</option>
+                                                    <option value="Comp. Leave Half Day">Comp. Leave Half Day
+                                                    </option>
+                                                    <option value="Marriage Leave inc Holidays">Marriage Leave inc
+                                                        Holidays
+                                                    </option>
+                                                    <option value="Marriage Leave">Marriage Leave</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th> Absent&nbsp;From </th>
 
-                        </div>
-                        <div>Leave Type&nbsp<span style="color:red;font-size:15px"> *</span> <b>:</b>
-                            <select name="id"
-                                    style="width: 250px;height: 23px; margin-top: 10px; margin-left: 5px;">
+                                            <td>
+                                                <span><b>:</b></span>
+                                            </td>
+                                            <td> <input style="  border: 1px solid #ff9900;"
+                                                        id="datepicker" width="180px" name="datepicker" />
+                                                <script>
+                                                        $('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
 
-                                <option value="Casual Leave">Casual Leave</option>
-                                <option value="Sick Leave">Sick Leave</option>
-                                <option value="Compensatory Leave">Compensatory Leave</option>
-                                <option value="Maternity Leave">Maternity Leave</option>
-                                <option value="LOP inc Holidays">LOP inc Holidays</option>
-                                <option value="LOP 1/2 Day">LOP 1/2 Day</option>
-                                <option value="Half Day Leave">Half Day Leave</option>
-                                <option value="Comp. Leave Half Day">Comp. Leave Half Day</option>
-                                <option value="Marriage Leave inc Holidays">Marriage Leave inc Holidays</option>
-                                <option value="Marriage Leave">Marriage Leave</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div style="margin-top:20px;">
-                        <span> Absent From </span>
-                        <span style="color:red;font-size:15px"> *</span> <b>:</b>
-                        <div style="margin-right:250px; width:200px;float:right;">
-                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
-                                   name="datepicker"/>
-                            <script>
-								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
+                                                    </script>
+                                            </td>
 
+                                        </tr>
+                                        <tr>
+                                            <th> To </th>
 
-                            </script>
-                        </div>
+                                            <td>
+                                                <span><b>:</b></span>
+                                            </td>
+                                            <td> <input style="border: 1px solid #ff9900;"
+                                                        id="datepicker1" width="180px" name="datepicker" />
+                                                <script>
+                                                        $('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
 
-                    </div>
+                                                    </script>
+                                            </td>
 
-                    <div style="margin-top:20px;">
-                        <span>To </span>
-                        <span style=" margin-left: 65px"><span
-                                style="color:red;font-size:15px"> *</span> <b>:</b></span>
-                        <div style="margin-right:250px; width:200px;float:right;">
+                                        </tr>
+                                        <tr>
+                                            <th> Leave&nbsp;Days </th>
 
-                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1" width="200px"
-                                   name="datepicker"/>
-                            <script>
-								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
+                                            <td>
+                                                <span><b>:</b></span>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="leavedays" id="leavedays">
+                                            </td>
+                                        </tr>
+                                    </table>
 
 
-                            </script>
-                        </div>
-                    </div>
+                                    <div>
+                                        <span class="Type_leaves">Type<b style="margin-left:50px;">:</b></span>
+                                        <div>
+                                            <ul>
+                                                <li style="margin-left:40px;">CL</li>
+                                                <li style="margin-left:10px;">SL</li>
+                                                <li style="margin-left:8px;">C.Off</li>
+                                                <li style="margin-left:8px;">LOP</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="Type_leaves_select">
+                                            <select>
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
 
-                    <div style="margin-top:20px;">
-						<span>
-							<span>Leave Days &nbsp;&nbsp<b>:</b></span>
-							<span style="margin-left: 10px;">
-								<input type="" name="">
-							</span>
-						</span>
-                    </div>
+                                            <select>
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+
+                                            <select>
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+
+                                            <select>
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
 
-                    <div style="margin-top: 10px;">
+                                    <div class="Type_leaves">
+                                        <label>Note <span><b>:</b></span></label>
+                                        <textarea class="form-control rounded-10"rows="3" cols="33"></textarea>
 
-                        <span class="Type_leaves" style="margin-top: 15px;">Type<b
-                                style="margin-left:50px;">:</b></span>
-                        <div style="margin-left:100px;">
-                            <div class="Type_leaves" style="font-size:12px">CL</div>
-                            <div class="Type_leaves" style="font-size:12px">SL</div>
-                            <div class="Type_leaves" style="font-size:12px">C.Off</div>
-                            <div class="Type_leaves" style="font-size:12px">LOP</div>
-                        </div>
-                        <div style="position: absolute;top: 92%;left: 15%;margin-left:30px;">
-                            <div class="Type_leaves">
-                                <select>
-                                    <option value="0">00</option>
-                                    <option value="0.5">0.5</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
+                                        <div>
+                                            <button type="button" class="submitButton"
+                                                    onclick="alert('Submit')"><b>Submit</b></button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="Type_leaves">
-                                <select>
-                                    <option value="0">00</option>
-                                    <option value="0.5">0.5</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-                            <div class="Type_leaves">
-                                <select>
-                                    <option value="0">00</option>
-                                    <option value="0.5">0.5</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-                            <div class="Type_leaves">
-                                <select>
-                                    <option value="0">00</option>
-                                    <option value="0.5">0.5</option>
-                                    <option value="1">01</option>
-                                    <option value="2">02</option>
-                                    <option value="3">03</option>
-                                    <option value="4">04</option>
-                                    <option value="5">05</option>
-                                    <option value="6">06</option>
-                                    <option value="7">07</option>
-                                    <option value="8">08</option>
-                                    <option value="9">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
+                            <div class="col-md-6 col-sm-12 col-xs-10" >
+                                <div >
+                                    <div>
+                                        <span class="Type_leaves">Leave balance<b>:</b></span>
+                                        <div>
+                                            <ul>
+                                                <li style="margin-left:40px;">CL</li>
+                                                <li style="margin-left:10px;;">SL</li>
+                                                <li style="margin-left:8px;">C.Off</li>
+                                                <li style="margin-left:8px;">LOP</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="Type_leaves_select">
+                                        <ul class="list-inline">
+                                            <li style="font-size:12px;">
+                                                <input style="width:40px;" type="text" readonly="readonly">
+                                            </li>
+                                            <li style="font-size:12px; ">
+                                                <input style="width:40px;" type="text" readonly="readonly">
+                                            </li>
+                                            <li style="font-size:12px;  ">
+                                                <input style="width:40px;" type="text" readonly="readonly">
+                                            </li>
+                                            <li style="font-size:12px;  ">
+                                                <input style="width:40px;" type="text" readonly="readonly">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-
-                    <div style="position: absolute;top: 111%">
-                        <span style="float: left;">Note <b style="margin-left:50px">:</b></span>&nbsp;
-                        <textarea rows="3" cols="33"></textarea>
-
-                        <div style="margin-left:97px">
-                            <button type="button" class="submitButton"
-                                    onclick="alert('Submit')"><b>Submit</b></button>
-                        </div>
-
-                    </div>
-
+                        <!--Row-->
+                    </form>
                 </div>
-                <div class="col-md-6">
-                    <div style="margin-top: 5px; margin-left: 10px;">
-                        <div class="Type_leaves" style="margin-top: 5px;">Leave Balance<b>:</b></div>
-                        <div class="Type_leaves" style="font-size:12px">CL</div>
-                        <div class="Type_leaves" style="font-size:12px">SL</div>
-                        <div class="Type_leaves" style="font-size:12px">C.Off</div>
-                        <!-- <div class="Type_leaves" style="width: 900px;height: 30px;"> -->
-                        <div style="position: absolute;top: 85%;left: 15%;">
-                            <div class="Type_leaves">
-                                <input type="text" readonly style="width:50px;height:25px">
-                            </div>
-                            <div class="Type_leaves">
-                                <input type="text" readonly style="width:50px;height:25px">
-                            </div>
-                            <div class="Type_leaves">
-                                <input type="text" readonly style="width:50px;height:25px">
-                            </div>
-                        </div>
-                    </div>
+                <!--Container-->
+            </div>
+        </div>
+    </div>
 
-                </div>
-            </div><!--Row-->
-        </div><!--Container-->
-    </form>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
