@@ -1,223 +1,324 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <style>
-		#employeeSavingBody{
-			border:2px solid  #d7d7c1;
-			background-color:#fff2e6;
-			padding: 20px;
-            height: 600px;
-            width:60%;
-
-		}
-		
-		
-		#employeeSavingBody{
-			color: #E80000; 
-			font-family:Sans-Serif. Arial, Helvetica,  Gill Sans;
-			font-size: 20px;
-		}
-		button{
-			background-color:#f7941e; 
-			border: 1px solid #f7941e;
-			color: white;
-			margin-top: 10px;
-			margin-left: 8px;
-		}
-		.sectionStyle{
-			list-style-type:none;
-			color: black;
-			font-size: 17px;
-			padding-bottom: 10px;
-		}
-		body{
-			font-family: DroidSansRegular;
-			align: center;
-		}
-		.employeeSavingForm{
-			align: center;
-		}
-		.input{
-			margin-left: 5px;
-		}
-	
-			
-			
-		
-
-    </style>
+    <title>Employee Savings</title>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div id="employeeSavingBody">
-    <form action="/ieinternal/saveEmployee.action" id="employeeSavingForm" method="post"
-          name="employeeSavings" onsubmit="return true;">
-        <div class="Heading">Employee Savings</div>
-        <hr>
-        <ul class="sectionStyle">
-            <li style="padding-bottom: 10px;">
-                <label>Employee Name</label>
-                <input type="text">
-
-                <span class="button btnOrange">
-					
-						<button onClick="searchEmployeeByName()" type="button">search employee by name</button>
-				   </span>
-            </li>
-            <li>
-                <label> Employee Id</label>
-                <input placeholder="employee Id" style="margin-right: 20px;margin-left: 25px" type="text">
-                <label><span style="margin-right: 5px;">Finanacial Year</span></label>
-                <select name="employeeFinanacialYearForm.finanacialYear.fromMonth" style="margin-right: 5px;">
-                    <option value="JAN">JAN</option>
-                    <option value="FEB">FEB</option>
-                    <option value="MAR">MAR</option>
-                    <option selected="selected" value="APR">APR</option>
-                    <option value="MAY">MAY</option>
-                    <option value="JUN">JUN</option>
-                    <option value="JUL">JUL</option>
-                    <option value="AUG">AUG</option>
-                    <option value="SEP">SEP</option>
-                    <option value="OCT">OCT</option>
-                    <option value="NOV">NOV</option>
-                    <option value="DEC">DEC</option>
-
-                </select>
-                <select name="employeeFinanacialYearForm.FinanacialYear.fromYear">
-                    <option value="2007">2007</option>
-                    <option value="2008">2008</option>
-                    <option value="2009">2009</option>
-                    <option value="2010">2010</option>
-                    <option value="2011">2011</option>
-                    <option value="2012">2012</option>
-                    <option value="2013">2013</option>
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
-                <label> <span style="margin-right: 5px; margin-left: 5px;">To</span></label>
-
-
-                <select name="employeeFinanacialYearForm.finanacialYear.toMonth" style="margin-right: 5px;">
-                    <option value="JAN">JAN</option>
-                    <option value="FEB">FEB</option>
-                    <option selected="selected" value="MAR">MAR</option>
-                    <option value="APR">APR</option>
-                    <option value="MAY">MAY</option>
-                    <option value="JUN">JUN</option>
-                    <option value="JUL">JUL</option>
-                    <option value="AUG">AUG</option>
-                    <option value="SEP">SEP</option>
-                    <option value="OCT">OCT</option>
-                    <option value="NOV">NOV</option>
-                    <option value="DEC">DEC</option>
-
-                </select>
-                <select name="employeeFinanacialYearForm.FinanacialYear.toYear">
-                    <option value="2007">2007</option>
-                    <option value="2008">2008</option>
-                    <option value="2009">2009</option>
-                    <option value="2010">2010</option>
-                    <option value="2011">2011</option>
-                    <option value="2012">2012</option>
-                    <option value="2013">2013</option>
-                    <option value="2014">2014</option>
-                    <option value="2015">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
-                <span class="button btnOrange">
-					<button onclick="retrieveFinancialYearDataToEmployee()" type="button">Retrieve</button>
-				</span>
-            </li>
-
-        </ul>
-
-        <div class="Heading">Employee Details</div>
-
-        <hr>
-
-        <div class="sectionStyle">
-            <input placeholder="Full Name" type="text">
-            <input placeholder="Designation" type="text">
-            <input placeholder="PAN CARD NO" type="text">
-            <input placeholder="ADDRESS" type="text">
-            <button type="button">Edit</button>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
         </div>
-        <div class="Heading">Sections</div>
-        <hr>
-        <div class="sectionStyle">
-            <label>U/S 10</label>
-            <input style="background-color: rgb(211,211,211);" type="text" value="1000000.00">
-            <button type="button">Add</button>
-        </div>
-        <div class="sectionStyle">
-            <select>
-                <option value="MEDICAL ALLOWANCE">MEDICAL ALLOWANCE</option>
-                <option value="HRA">HRA</option>
-                <option value="HOME LOAN">HOME LOAN</option>
-                <option value="TRAVEL ALLOWANCE">TRAVEL ALLOWANCE</option>
-                <option value="FOOD COUPONS">FOOD COUPONS</option>
-                <option value="LTA">LTA</option>
-                <option value="PT">PT</option>
-            </select>
-            <input style="background-color: rgb(255,255,255);" type="text" value="0">
-            <button type="button">SAVE</button>
-            <button style="background-color: grey ;border: 1px solid grey;" type="button">EDIT</button>
-            <button style="background-color: grey; border: 1PX solid grey;" type="button">REMOVE</button>
-        </div>
-        <div class="sectionStyle">
-            <label><span style="color: black; padding-bottom: 10px;">U/S 80C</span></label>
-            <input style="background-color: rgb(211,211,211);" type="text" value="150000.00">
-            <button type="button">Add</button>
-        </div>
-        <div class="sectionStyle">
-            <select>
-                <option value="PFF">PFF</option>
-                <option value="HOME LOAN PRINCIPLE AMOUNT">HOME LOAN PRINCIPLE AMOUNT</option>
-                <option value="TUTION FEE">TUTION FEE</option>
-                <option value="LIFE INSURANCE POLICES">LIFE INSURANCE POLICES</option>
-                <option value="FIXED DEPOSIT">FIXED DEPOSIT</option>
-                <option value="PF">PF</option>
-                <option value="PRADANAMANTRI SUKANYA SAMVRUDI">PRADANAMANTRI SUKANYA SAMVRUDI</option>
-            </select>
-            <input style="background-color: rgb(211,211,211);" type="text">
-            <button type="button">SAVE</button>
-            <button style="background-color: grey ;border: 1px solid grey;" type="button">EDIT</button>
-            <button style="background-color: grey; border: 1PX solid grey;" type="button">REMOVE</button>
-        </div>
-        <div class="sectionStyle">
-            <label><span style="color: black;">U/S 80D</span></label>
-            <input style="background-color: rgb(211,211,211);" type="text" value="150000.00">
-            <button type="button">Add</button>
-        </div>
-        <div>
-            <select>
-                <option value="MEDICAL INSURANCE-SELF WITH FAMILY AND PARENTS">MEDICAL INSURANCE-SELF WITH FAMILY AND
-                    PARENTS
-                </option>
-                <option value="MEDICAL INSURANCE-SELF WITH FAMILY ">MEDICAL INSURANCE-SELF WITH FAMILY</option>
-                <option value="MEDICAL INSURANCE-SELF">MEDICAL INSURANCE-SELF</option>
-            </select>
-            <input style="background-color: rgb(211,211,211);" type="text">
-            <button type="button">SAVE</button>
-            <button style="background-color: grey ;border: 1px solid grey;" type="button">EDIT</button>
-            <button style="background-color: grey; border: 1PX solid grey;" type="button">REMOVE</button>
-        </div>
-        <div style="margin-left: 600PX; margin-top:10PX; ">
-            <button style="height: 30px; width: 80px;" type="button">Cancel</button>
-            <button style="height: 30px; width: 80px;" type="button">Submit</button>
-        </div>
-    </form>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <form action="">
+                        <div class="Heading">Employee Savings</div>
+                        <div class="col-md-12 col-sm-12 col-xs-10">
+                            <table width="100%" class="table_text_style table-sm">
+                                <tr>
+                                    <td>Employee Name</td>
+                                    <td><b>:</b></td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <button class="submitButton" onclick="submitSearch()" type="button">
+                                            <b>Search Employee By Name</b>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
 
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>Employee&nbsp;Id</td>
+                                        <td><b>:</b></td>
+                                        <td><input type="text"></td>
+                                        <td>Financial&nbsp;Year</td>
+                                        <td>From</td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <select name="">
+                                                <option value="JAN">JAN</option>
+                                                <option value="FEB">FEB</option>
+                                                <option value="MAR">MAR</option>
+                                                <option selected="selected" value="APR">APR</option>
+                                                <option value="MAY">MAY</option>
+                                                <option value="JUN">JUN</option>
+                                                <option value="JUL">JUL</option>
+                                                <option value="AUG">AUG</option>
+                                                <option value="SEP">SEP</option>
+                                                <option value="OCT">OCT</option>
+                                                <option value="NOV">NOV</option>
+                                                <option value="DEC">DEC</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="">
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2009">2009</option>
+                                                <option value="2010">2010</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019" selected="selected">2019</option>
+                                                <option value="2020">2020</option>
+                                            </select>
+                                        </td>
+                                        <td>To</td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <select name="">
+                                                <option value="JAN">JAN</option>
+                                                <option value="FEB">FEB</option>
+                                                <option selected="selected" value="MAR">MAR</option>
+                                                <option value="APR">APR</option>
+                                                <option value="MAY">MAY</option>
+                                                <option value="JUN">JUN</option>
+                                                <option value="JUL">JUL</option>
+                                                <option value="AUG">AUG</option>
+                                                <option value="SEP">SEP</option>
+                                                <option value="OCT">OCT</option>
+                                                <option value="NOV">NOV</option>
+                                                <option value="DEC">DEC</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="">
+                                                <option value="2007">2007</option>
+                                                <option value="2008">2008</option>
+                                                <option value="2009">2009</option>
+                                                <option value="2010">2010</option>
+                                                <option value="2011">2011</option>
+                                                <option value="2012">2012</option>
+                                                <option value="2013">2013</option>
+                                                <option value="2014">2014</option>
+                                                <option value="2015">2015</option>
+                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Retrieve</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="Heading">Employee Details</div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td><input placeholder="Full Name" type="text"></td>
+                                        <td><input placeholder="Designation" type="text"></td>
+                                        <td><input placeholder="PAN CARD NO" type="text"></td>
+                                        <td><input placeholder="ADDRESS" type="text"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="Heading">Sections</div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td><label>U/S 10</label></td>
+                                        <td><input style="background-color: rgb(211,211,211);" type="text"
+                                                   value="1000000.00"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Add</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>
+                                            <select>
+                                                <option value="MEDICAL ALLOWANCE">Medical&nbsp;Allowance</option>
+                                                <option value="HRA">HRA</option>
+                                                <option value="HOME LOAN">Home&nbsp;Loan</option>
+                                                <option value="TRAVEL ALLOWANCE" selected="selected">Travel&nbsp;Allowance
+                                                </option>
+                                                <option value="FOOD COUPONS">Food&nbsp;Coupons</option>
+                                                <option value="LTA">LTA</option>
+                                                <option value="PT">PT</option>
+                                            </select>
+                                        </td>
+                                        <td><input style="background-color: rgb(255,255,255);" type="text"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Save</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td><label>U/S 80C</label></td>
+                                        <td><input style="background-color: rgb(211,211,211);" type="text"
+                                                   value="150000.00"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Add</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>
+                                            <select>
+                                                <option value="Pradanmantri Sukanya Samvrudi">Pradanmantri&nbsp;Sukanya&nbsp;Samvrudi
+                                                </option>
+                                                <option value="LIFE INSURANCE POLICES">Life&nbsp;Insurance&nbsp;Policies
+                                                </option>
+                                                <option value="PFF">PPF</option>
+                                                <option value="HOME LOAN PRINCIPLE AMOUNT">Home&nbsp;Loan&nbsp;Principle&nbsp;Amount</option>
+                                                <option value="FIXED DEPOSIT">Fixed&nbsp;Deposite</option>
+                                                <option value="PF">PF</option>
+                                                <option value="TUTION FEE">Tution&nbsp;Fee</option>
+                                            </select>
+                                        </td>
+                                        <td><input style="background-color: rgb(211,211,211);" type="text"
+                                                   value="150000.00"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Save</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td><label>U/S 80D</label></td>
+                                        <td><input style="background-color: rgb(211,211,211);" type="text"
+                                                   value="25000.00">
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Add</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>
+                                            <select>
+                                                <option value="Medical Insurance-self with family">Medical&nbsp;Insurance-Self&nbsp;With&nbsp;Family
+                                                </option>
+                                                <option value="Medical Insurance-Self">Medical Insurance-Self</option>
+                                                <option value="Medical Insurance-Self with Family&Parents">Medical
+                                                    Insurance-Self with Family&Parents
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td><input style="background-color: rgb(211,211,211);" type="text"
+                                                   value="150000.00"></td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Save</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Edit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Remove</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm" style="float:right">
+                                    <tr>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Submit</b>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                                <b>Cancel</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
