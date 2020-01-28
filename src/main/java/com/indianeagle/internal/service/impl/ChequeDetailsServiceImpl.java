@@ -65,8 +65,9 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	/**
 	 * find cheque details by id
 	 */
-	public Optional<ChequeDetails> findBy(long chequeDetails) {
-		return chequeDetailsRepository.findById(chequeDetails);
+	public ChequeDetails findBy(long chequeDetails) {
+				Optional<ChequeDetails> chequeDetailsOptional=chequeDetailsRepository.findById(chequeDetails);
+		return  chequeDetailsOptional.isPresent()?chequeDetailsOptional.get():null;
 	}
 
 	/**
