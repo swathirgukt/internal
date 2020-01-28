@@ -8,7 +8,7 @@ public interface PeripheralService {
 
     void saveOrUpdate(Peripheral peripheral);
 
-    Optional<Peripheral> findById(long id);
+    Peripheral findById(long id);
 
     List<Peripheral> searchPeripherals(Peripheral peripheral);
 }

@@ -5,6 +5,7 @@ import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.service.UsersService;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.springframework.stereotype.Service;
+import com.indianeagle.internal.util.CryptoUtil;
 
 import java.util.List;
 
