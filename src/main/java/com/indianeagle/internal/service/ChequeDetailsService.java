@@ -21,7 +21,7 @@ public interface ChequeDetailsService {
     /**
      * To search for ChequeDetails
      *
-     * @param chequeDetailsForm
+     * @param chequeDetails
      * @return
      */
     List<ChequeDetails> searchChequeDetails(ChequeDetailsForm chequeDetailsForm);
@@ -32,6 +32,6 @@ public interface ChequeDetailsService {
      * @param chequeDetails
      * @return
      */
-    ChequeDetails findBy(long chequeDetails);
+    Optional<ChequeDetails> findBy(long chequeDetails);
 
 }

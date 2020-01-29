@@ -16,93 +16,124 @@
                     <form action="/peripheral/sav" id="peripheralForm" method="post" name="peripheralForm"
                           th:action="@{/peripheral/save}" th:object="${peripheral}">
                         <div class="Heading">Workshop Details</div>
+                        <div class="row ">
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="inputDiv">
+                                    <table  width="100%" class="table-condensed">
+                                        <tr>
+                                            <td>
+
+                                                <span>Peripheral Name<span style="color:red">*</span></span>
+                                                <span style="float: right;margin-right:10px">:</span>
+                                            </td>
+                                            <td ><input th:field="*{peripheralName}" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Type<span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span>
+                                            </td>
+
+                                            <td><input th:field="*{type}" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td> <span>Model<span style=" color:red">*</span></span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
+
+                                            <td ><input th:field="*{model}" type="text"></td>
+                                        </tr>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Year of Purchase<span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span>
+                                            </td>
+
+                                            <td>
+                                                <input width="170px" name="yearOfPurchase"
+                                                       id="yearOfPurchase" th:field="*{yearOfPurchase}">
+                                                <script>
+														$('#yearOfPurchase').datepicker({ uiLibrary: 'bootstrap' });
+													</script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>Employee Id</span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
+
+                                            <td><input th:field="*{users}" type="text"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div>
+                                    <table  width="100%" class="table-condensed">
+                                        <tr>
+                                            <td> <span>Brand<span style="color:red">*</span></span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
+
+                                            <td><input th:field="*{brand}" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Serial Number <span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
+
+                                            <td><input th:field="*{serialNumber}" type="text"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Warranty Date <span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span>
+                                            </td>
+
+                                            <td>
+                                                <input  width="170px"
+                                                        name="warrantyDate" id="warrantyDate"   th:field="*{warrantyDate}">
+                                                <script>
+															$('#warrantyDate').datepicker({ uiLibrary: 'bootstrap' });
+														</script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status <span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px"s>:</span></td>
+
+                                            <td><input th:field="*{status}" type="text"></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <table width="100%">
-                                    <tr>
-                                        <td>Peripheral&nbsp;Name<span style="color: #ff0000">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{peripheralName}" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Type<span style="color: #ff0000">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{type}" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Model<span style=" color:red">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td><input class="inputBoxStyle" th:field="*{model}" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Year&nbsp;of&nbsp;Purchase<span style="color:red">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td>
-                                            <input id="datepicker1" name="datepicker" style=" border: 1px solid #ff9900;"
-                                                   th:field="*{yearOfPurchase}"
-                                                   width="176px"/>
-                                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Employee&nbsp;Id</td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{users}" type="text"></td>
+                            <div class="col-lg-12 col-sm-12">
+                                <div style="float:right">
+										<span>
+											 <button type="button" class="submitButton"
+                                                     onclick="savePeripheral()"><b>Submit</b></button>
+										</span>
+                                    <span>
+											 <button class="submitButton" onclick="searchPeripheral()"
+                                                     type="button"><b>Search</b></button>
+										</span>
+                                    <span>
+											 <button class="submitButton" onclick="document.peripheralForm.reset()"
+                                                     type="button"><b>Reset</b></button>
+										</span>
+                                </div>
 
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <table width="100%">
-                                    <tr>
-                                        <td>Brand<span style="color:red">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{brand}" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Serial&nbsp;Number<span style="color:red">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td><input class="inputBoxStyle" th:field="*{serialNumber}" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Warranty&nbsp;Date<span style="color:red">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td>
-                                            <input id="datepicker" name="datepicker"
-                                                   style=" float:left; border: 1px solid #ff9900;"
-                                                   th:field="*{warrantyDate}" width="176px"/>
-                                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Status<span style="color:red">*</span></td>
-                                        <td width="15px"><b>:</b></td>
-                                        <td style="padding: 5px"><input class="inputBoxStyle" th:field="*{status}" type="text"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div style="margin-top:50px;">
-                                <div style="float: left;">
-                                    <button type="button" class="submitButton"
-                                            onclick="savePeripheral()"><b>Submit</b></button>
-                                </div>
-                                <div style="float: left;margin-left: 40px;">
-                                    <button class="submitButton" onclick="searchPeripheral()"
-                                            type="button"><b>Search</b></button>
-                                </div>
-                                <div style="float: left;margin-left: 40px;">
-
-                                    <button class="submitButton" onclick="document.peripheralForm.reset()"
-                                            type="button"><b>Reset</b></button>
-                                </div>
                             </div>
                         </div>
                     </form>
+                    <div class="Heading">Search Result</div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="Heading">Search Result</div>
+                            <div id="peripheralResult" class="tableScrollbar"></div>
                         </div>
-                        <div id="peripheralResult"></div>
+
                     </div>
 
                 </div>
