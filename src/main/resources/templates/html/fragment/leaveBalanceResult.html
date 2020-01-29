@@ -1,0 +1,19 @@
+<div th:fragment="leaveBalance" xmlns:th="http://www.thymeleaf.org">
+    <span class="Type_leaves">Leave balance<span style="margin-left: 75px; margin-right: 10px ">:</span></span>
+    <div class="Type_leaves">
+        <table width="100%" text-align="center" th:object="${leaveApproveForm}">
+            <tr>
+                <td>CL</td>
+                <td>SL</td>
+                <td>C.Off</td>
+            </tr>
+            <tr>
+                <td><input type="text" style="width:40px;" readonly="readonly" th:field="*{remainingCL}"/>
+                </td>
+                <td><input type="text" style="width:40px;" readonly="readonly" th:field="*{remainingSL}"/>
+                </td>
+                <td><input type="text" style="width:40px;" readonly="readonly" th:field="*{remainingCompOff}"/>
+            </tr>
+        </table>
+    </div>
+</div>
