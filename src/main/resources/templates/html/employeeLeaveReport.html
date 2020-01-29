@@ -11,9 +11,6 @@
                 color: red;
                 border-radius: 5px;
             }
-
-
-
         </style>
         <title>Employee Leave Reports</title>
     </head>
@@ -40,7 +37,7 @@
                                         <td><b>:</b></td>
                                         <td>
                                             <select class="selectOption" id="empId" name="empId">
-                                                <option th:each="empId : ${employeeIds}">[[${empId}]]</option>
+                                                <option th:each="empId : ${employeeIds}" th:value="${empId}">[[${empId}]]</option>
                                             </select>
                                         </td>
                                     </tr>

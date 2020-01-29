@@ -23,7 +23,7 @@ import java.util.List;
 @Controller
 public class LeaveReportController {
     @Autowired
-    LeaveDetailsService leaveDetailsService;
+    private LeaveDetailsService leaveDetailsService;
     @Autowired
     private ApprovedLeaveService approvedLeaveService;
 
@@ -41,7 +41,7 @@ public class LeaveReportController {
     }
 
     @PostMapping("/employeeLeaveReport")
-    public String leaveReport(ModelMap modelMap, @RequestParam String empId, @RequestParam Date fromDate, @RequestParam Date toDate){
+    public String leaveReport(ModelMap modelMap, @RequestParam() String empId, @RequestParam Date fromDate, @RequestParam Date toDate){
         System.out.println("#leaveReport  "+empId+fromDate+toDate);
         if (StringUtils.isBlank(empId) || fromDate == null || toDate == null) {
             return "html/fragment/LeaveReportResult";

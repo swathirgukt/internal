@@ -1,7 +1,10 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
+@Component
 @Entity
 @Table(name = "LEAVES_DETAILS")
 public class LeaveDetails  extends BaseDto {

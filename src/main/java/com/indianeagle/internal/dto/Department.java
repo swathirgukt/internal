@@ -1,11 +1,14 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Component
 @Entity
 @Table(name = "DEPARTMENT")
 public class Department extends BaseDto {

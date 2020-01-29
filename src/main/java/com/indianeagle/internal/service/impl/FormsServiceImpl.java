@@ -43,7 +43,7 @@ public class FormsServiceImpl implements FormsService, MessageSourceAware {
 	private MessageSource messageSource;
 	@Autowired
 	private SalaryHistoryRepository salaryHistoryRepository;
-	@Autowired
+
 	private FormsResultData formsResultData;
 	@Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;

@@ -1,6 +1,7 @@
 package com.indianeagle.internal.dto;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +12,8 @@ import java.util.Date;
  * Date: 1/23/13
  * Time: 10:46 AM
  */
+
+@Component
 @Entity
 @Table(name = "EMPLOYEE_NOMINEE")
 public class Nominee  extends BaseDto{

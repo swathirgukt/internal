@@ -34,64 +34,42 @@
                         <div class="Heading">Employee's Leave Report</div>
                         <div class="row">
                             <div class=" col-lg-4  col-md-12 col-sm-12 col-xs-12">
-                                <div style="float: left;">
-                                    <table>
-                                        <tr>
-                                            <td> From</td>
-                                            <td width="30px;">
-                                                <span style="color: red">*</span>
-                                            <td>
-                                            <td width="20px"><b>:</b></td>
-                                            <td>
-                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="200px"
-                                                       name="datepicker"/>
-                                                <script>
-								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-
-                                                </script>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                <table>
+                                    <tr>
+                                        <td> From</td>
+                                        <td width="30px;">
+                                            <span style="color: red">*</span>
+                                        <td>
+                                        <td width="20px"><b>:</b></td>
+                                        <td>
+                                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px" name="fromDate"/>
+                                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td width="20px"> To</td>
-                                            <td>
-                                                <span style="color: red">*</span>
-                                            <td>
-                                            <td width="20px"><b>:</b></td>
-                                            <td>
-                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
-                                                       width="200px"
-                                                       name="datepicker"/>
-                                                <script>
-								$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
-
-
-                                                </script>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                <table>
+                                    <tr>
+                                        <td width="20px"> To</td>
+                                        <td>
+                                            <span style="color: red">*</span>
+                                        <td>
+                                        <td width="20px"><b>:</b></td>
+                                        <td>
+                                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1" width="200px" name="toDate"/>
+                                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
+                                            </script>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <div>
-                                    <button type="button" class="submitButton"
-                                            onclick="alert('Search')">Search
-                                    </button>
-                                </div>
+                                <button type="button" class="submitButton" onclick="alert('Search')">Search</button>
                             </div>
-
                         </div>
-
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
