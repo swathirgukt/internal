@@ -2,7 +2,10 @@ function makeAJAXCall(requestUrl,formId) {
     return jQuery.ajax({
         url: requestUrl,
         data: jQuery('#'+formId).serialize(),
-        type: "POST"
+        type: "POST",
+        error: function(msg,err,exc){
+            console.log("#error: "+err);
+        }
     });
 }
 
@@ -24,6 +27,15 @@ function searchPeripheral() {
     });
 }
 
+function searchEmployeeLeaveReport() {
+    var response = makeAJAXCall("/employeeLeaveReport", 'employeeLeaveReportForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#employeeLeaveReportResult").html(responseData);
+        }
+    });
+}
+
 function saveDepartment() {
     document.departmentForm.action = "/department/save";
     document.departmentForm.submit();
@@ -38,6 +50,7 @@ function getLeaveBalance(){
     response.done(function(responseData){
         if(responseData){
             $("#leaveBalanceResult").html(responseData);
+            console.log(responseData);
         }
     });
 }
