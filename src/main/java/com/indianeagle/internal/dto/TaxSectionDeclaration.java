@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 /**
@@ -8,6 +10,8 @@ import javax.persistence.*;
  * User: kalesha
  * Date: 7/31/2017
  */
+
+@Component
 @Entity
 @Table(name = "TAX_SECTION_DECLARATIONS")
 public class TaxSectionDeclaration extends BaseDto{

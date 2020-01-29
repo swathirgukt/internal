@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -8,6 +10,8 @@ import java.util.Set;
  * @author kiran.paluvadi
  * POJO which represents Roles of a user
  */
+
+@Component
 @Entity
 @Table(name = "ROLES")
 public class Role implements Serializable{

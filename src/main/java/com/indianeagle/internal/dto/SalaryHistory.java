@@ -1,6 +1,7 @@
 package com.indianeagle.internal.dto;
 
 import com.indianeagle.internal.util.SimpleUtils;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Component
 @Entity
 @Table(name = "SALARY_HISTORY")
 public class SalaryHistory  extends BaseDto{

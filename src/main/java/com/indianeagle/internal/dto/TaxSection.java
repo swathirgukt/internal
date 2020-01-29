@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -10,6 +12,8 @@ import java.util.Set;
  * User: kalesha
  * Date: 7/31/2017
  */
+
+@Component
 @Entity
 @Table(name = "TAX_SECTIONS")
 public class TaxSection  extends BaseDto implements Comparable<TaxSection> {
