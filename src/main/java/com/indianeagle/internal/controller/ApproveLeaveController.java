@@ -8,14 +8,10 @@
 
 package com.indianeagle.internal.controller;
 
-import com.indianeagle.internal.dto.LeaveDetails;
 import com.indianeagle.internal.dto.Leaves;
 import com.indianeagle.internal.form.LeaveApproveForm;
 import com.indianeagle.internal.service.LeaveDetailsService;
 import com.indianeagle.internal.service.LeavesService;
-import com.indianeagle.internal.util.SimpleUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -30,6 +26,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Controller to handle leave  requests
+ * Author: Taymur Shaikh
+ * Since: 28/01/2020
+ */
 
 @Controller
 public class ApproveLeaveController {
@@ -44,29 +45,6 @@ public class ApproveLeaveController {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
-
-
-/*
-    public String execute() throws Exception {
-        if (validateSave(leaveDetails)) return ERROR;
-
-        leaveDetailsService.saveOrUpdate(leaveDetails);
-        addActionError(getText("save.or.update.successfull"));
-        return SUCCESS;
-    }
-
-    public String search() {
-        if (validateSearch(leaveDetails)) return ERROR;
-        searchedDeatils = leaveDetailsService.searchLeaveDetails(leaveDetails);
-        return SUCCESS;
-    }
-
-
-    public String edit() {
-        this.leaveDetails = leaveDetailsService.getLeaveDetailsById(empId);
-        return SUCCESS;
-    }
-*/
 
 
     @GetMapping("/approveLeave")
