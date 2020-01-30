@@ -59,7 +59,16 @@ function getLeaveBalance(){
     response.done(function(responseData){
         if(responseData){
             $("#leaveBalanceResult").html(responseData);
-            console.log(responseData);
         }
     });
 }
+
+function findEmployeeLeaves(){
+    var response = makeAJAXCall("/findEmployeeLeaves",'employeeLeavesForm');
+    response.done(function(responseData){
+        if(responseData){
+            $("#leavesResult").html(responseData);
+        }
+    });
+}
+

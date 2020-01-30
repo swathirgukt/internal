@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Add/Edit Leave</title>
-
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
@@ -13,24 +12,17 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container">
-                    <form action="/">
+                    <form action="/updateLeaves" id="employeeLeavesForm" name="employeeLeavesForm" method="post" th:action="@{/updateLeaves}">
                         <div class="Heading">Add/Edit Leave</div>
+                        <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:if="${success}!=null" th:text="${success}"></span>
                         <div class="row">
                             <div class="col-md-12">
                                 Employee ID <span style="color:red">*</span> <b>:</b>
-                                <select name="id" style="width: 200px;height: 23px;border-radius:5px">
-                                    <option value="YSPL1008">YSPL1008</option>
-                                    <option value="YSPL1007">YSPL1007</option>
+                                <select  style="width: 200px;height: 23px;border-radius:5px" onchange="findEmployeeLeaves()" name="employeeId" id="employeeId">
+                                    <option th:each="empId : ${employeeIds}" th:value="${empId}">[[${empId}]]</option>
                                 </select>
-                                PL<b>:</b>
-                                <input class="inputfield" type="" name="">
-                                SL<b>:</b>
-                                <input class="inputfield" type="" name="">
-                                COM.L<b>:</b>
-                                <input class="inputfield" type="" name="">
-                                Previous Leaves<b>:</b>
-                                <input class="inputfield" type="" name="">
-                                <button type="button" class="submitButton" onclick="alert('Submit')"><b>Submit</b>
+                                <div id="leavesResult" th:include="html/fragment/leavesResult :: leavesResult"></div>
+                                <button type="submit" class="submitButton" ><b>Submit</b>
                                 </button>
                             </div>
                         </div>
