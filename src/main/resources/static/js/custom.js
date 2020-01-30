@@ -36,6 +36,15 @@ function searchEmployeeLeaveReport() {
     });
 }
 
+function searchAllEmployeeLeaveReport() {
+    var response = makeAJAXCall("/allEmployeeLeaveReport", 'allEmployeeLeaveReportForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#allEmployeeLeaveReportResult").html(responseData);
+        }
+    });
+}
+
 function saveDepartment() {
     document.departmentForm.action = "/department/save";
     document.departmentForm.submit();

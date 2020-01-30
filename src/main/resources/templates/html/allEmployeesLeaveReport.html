@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <head>
-
         <style type="text/css">
 
             .selectOption {
@@ -15,12 +12,9 @@
                 color: red;
                 border-radius: 5px;
             }
-
-
         </style>
         <title>All Employees Leave Reports</title>
     </head>
-
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
@@ -30,7 +24,7 @@
         <div class="col-lg-8 text-left">
             <div class="jumbotron">
                 <div class="container">
-                    <form action="/">
+                    <form action="/allEmployeeLeaveReport" name="allEmployeeLeaveReportForm" id="allEmployeeLeaveReportForm" method="post" th:action="@{/allEmployeeLeaveReport}">
                         <div class="Heading">Employee's Leave Report</div>
                         <div class="row">
                             <div class=" col-lg-4  col-md-12 col-sm-12 col-xs-12">
@@ -65,11 +59,12 @@
                                 </table>
                             </div>
                             <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" class="submitButton" onclick="alert('Search')">Search</button>
+                                <button type="button" class="submitButton" onclick="searchAllEmployeeLeaveReport()">Search</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <div id="allEmployeeLeaveReportResult"></div>
             </div>
         </div>
     </div>

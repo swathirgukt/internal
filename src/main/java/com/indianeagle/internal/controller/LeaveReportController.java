@@ -41,12 +41,26 @@ public class LeaveReportController {
     }
 
     @PostMapping("/employeeLeaveReport")
-    public String leaveReport(ModelMap modelMap, @RequestParam() String empId, @RequestParam Date fromDate, @RequestParam Date toDate){
-        System.out.println("#leaveReport  "+empId+fromDate+toDate);
+    public String leaveReport(ModelMap modelMap, @RequestParam(required = false) String empId, @RequestParam(required = false) Date fromDate, @RequestParam(required = false) Date toDate){
         if (StringUtils.isBlank(empId) || fromDate == null || toDate == null) {
             return "html/fragment/LeaveReportResult";
         }
         List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves(empId, fromDate, toDate);
+        modelMap.addAttribute("leaveApproveFormList",leaveApproveFormList);
+        return "html/fragment/LeaveReportResult";
+    }
+
+    @GetMapping("/allEmployeeLeaveReport")
+    public String allEmpLeaveReportView(){
+        return "html/allEmployeesLeaveReport";
+    }
+
+    @PostMapping("/allEmployeeLeaveReport")
+    public String allEmpLeaveReport(ModelMap modelMap, @RequestParam(required = false) Date fromDate, @RequestParam(required = false) Date toDate){
+        if (fromDate == null || toDate == null) {
+            return "html/fragment/LeaveReportResult";
+        }
+        List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves( fromDate, toDate);
         modelMap.addAttribute("leaveApproveFormList",leaveApproveFormList);
         return "html/fragment/LeaveReportResult";
     }
