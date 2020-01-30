@@ -158,7 +158,16 @@ public class EmpSalaryDecider {
         return true;
     }
 
+    @Override
     public String toString() {
-        return "" + empId;
+        return "EmpSalaryDecider{" +
+                "empId='" + empId + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", lopDays=" + lopDays +
+                ", arrearsDays=" + arrearsDays +
+                ", salaryInAdvance=" + salaryInAdvance +
+                ", empExclude=" + empExclude +
+                ", performanceIncentives=" + performanceIncentives +
+                '}';
     }
 }

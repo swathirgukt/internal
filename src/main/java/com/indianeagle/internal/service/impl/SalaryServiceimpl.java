@@ -48,9 +48,9 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     private SalaryHistory currentSalary;
     @Autowired
     private MailingEngine mailingEngine;
-    @Autowired
+
     private List<Employee> currSalaryEmpList;
-    @Autowired
+
     private List<SalaryHistory> currentSalaryList;
     @Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
