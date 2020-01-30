@@ -25,10 +25,12 @@
                                             <td width="20px"><b>:</b></td>
                                             <td width="20px">
 
-                                                <select  id="sel_op" class="selectOption" name="empStatus">
+                                                <select id="sel_op" class="selectOption" name="empStatus">
 
-                                                   <!-- <option th:each="iterator:${empStatusMap.entrySet()}" th:value="${iterator.key}"  th:utext="${iterator.value}"></option>-->
-                                                   <option th:each="iterator:${empStatusMap.entrySet()}" th:value="${iterator.key}">[[${iterator.value}]]</option>
+                                                    <!-- <option th:each="iterator:${empStatusMap.entrySet()}" th:value="${iterator.key}"  th:utext="${iterator.value}"></option>-->
+                                                    <option th:each="iterator:${empStatusMap.entrySet()}"
+                                                            th:value="${iterator.key}">[[${iterator.value}]]
+                                                    </option>
 
                                                 </select>
                                                 <!--<select id="sel_op" class="selectOption" name="empStatus">
@@ -49,40 +51,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
-                                <div class="Heading">Search Results</div>
-                            </div>
-                            <div th:if="${employeesList} != null AND ${employeesList.size()}>0" class="tableScrollBar">
-                                <table class="table table-bordered table-md table-responsive-lg" cellpadding="1" cellspacing="1">
-                                    <table cellpadding="1" cellspacing="1" class="table table-bordered">
-                                        <div style="text-align: center;border: 1px solid black">
-                                            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
-                                                <th>S. No.</th>
-                                                <th>EmpId</th>
-                                                <th>Employee Name</th>
-                                                <th>Desgination</th>
-                                                <th>Department</th>
-                                                <th>DOJ</th>
-                                                <th>Basic</th>
-                                                <th>HRA</th>
-                                                <th>CON</th>
-                                                <th>MED</th>
-                                                <th>SPL</th>
-                                                <th>OTHR</th>
-                                                <th>TEL</th>
-                                                <th>INT</th>
-                                                <th>UNI</th>
-                                                <th>Gross</th>
-                                            </tr>
-                                            <tr style="background-color:#FFFFFF;color: #000000;padding: 50px" th:each="employee, status :${employeesList}">
-                                                <td th:text="${status.count}"></td>
-                                                <td th:text="${employee.empId}"></td>
-                                                <td th:text="|${employee.firstName} ${employee.lastName}|"></td>
-                                                <td th:text="${employee.designation}"></td>
-                                                <td th:text="${employee.department}!=null ?${employee.department.department}:null"></td>
-                                                <td th:text="${employee.joinDate}">09-09-2020</td>
-                                                <th:block th:if="${employee.salary !=null}">
+                    </form>
+                    <div class="Heading">Search Results</div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
+                            <div class="tableScrollbar">
+                                <div th:if="${employeesList} != null AND ${employeesList.size()}>0">
+                                    <table cellpadding="1" cellspacing="1"
+                                           class="table table-bordered table-responsive-lg table-hover">
+                                        <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                                            <th>S. No.</th>
+                                            <th>EmpId</th>
+                                            <th>Employee Name</th>
+                                            <th>Desgination</th>
+                                            <th>Department</th>
+                                            <th>DOJ</th>
+                                            <th>Basic</th>
+                                            <th>HRA</th>
+                                            <th>CON</th>
+                                            <th>MED</th>
+                                            <th>SPL</th>
+                                            <th>OTHR</th>
+                                            <th>TEL</th>
+                                            <th>INT</th>
+                                            <th>UNI</th>
+                                            <th>Gross</th>
+                                        </tr>
+                                        <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                                            th:each="employee, status :${employeesList}">
+                                            <td th:text="${status.count}"></td>
+                                            <td th:text="${employee.empId}"></td>
+                                            <td th:text="|${employee.firstName} ${employee.lastName}|"></td>
+                                            <td th:text="${employee.designation}"></td>
+                                            <td th:text="${employee.department}!=null ?${employee.department.department}:null"></td>
+                                            <td th:text="${employee.joinDate}">09-09-2020</td>
+                                            <th:block th:if="${employee.salary !=null}">
                                                 <td th:text="${employee.salary.basic}!=null ?${employee.salary.basic}:''"></td>
                                                 <td th:text="${employee.salary.hra}!=null ?${employee.salary.hra}:''"></td>
                                                 <td th:text="${employee.salary.conveyence}!=null ?${employee.salary.conveyence}:''"></td>
@@ -93,17 +96,15 @@
                                                 <td th:text="${employee.salary.internetAllowance}!=null ?${employee.salary.internetAllowance}:''"></td>
                                                 <td th:text="${employee.salary.uniformAllowance}!=null ?${employee.salary.uniformAllowance}:''"></td>
                                                 <td th:text="${employee.salary.grossSal}!=null ?${employee.salary.grossSal}:''"></td>
-                                                </th:block>
-                                            </tr>
-                                        </div>
+                                            </th:block>
+                                        </tr>
                                     </table>
-                                </table>
+                                </div>
+
                             </div>
-
-
                         </div>
+                    </div>
 
-                    </form>
 
                 </div>
 
