@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style type="text/css">
-        .Type_leaves {
-            float: left;
-            margin-left: 3px;
-        }
-        .Type_leaves_select {
-            width: 30px;
-        }
-        td {
-            padding: 3px;
-        }
-    </style>
     <title>Approve Leave</title>
     <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript"></script>
 </head>
@@ -36,7 +24,7 @@
                                 <div>
                                     <table width="100%" class="table_text_style table-sm">
                                         <tr>
-                                            <td>
+                                            <td style="padding:5px">
                                                 Employee&nbsp;ID
                                             </td>
 
@@ -206,9 +194,6 @@
                                         </div>
                                         <div>
                                             <button type="submit" class="submitButton" ><b>Submit</b></button>
-                                        </div>
-                                        <div>
-                                            <span style="padding-bottom:20px;">&nbsp;</span>
                                         </div>
                                     </div>
                                 </div>
