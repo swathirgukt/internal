@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/html">
 <head>
     <title>Bank Salary Statement</title>
 </head>
@@ -37,9 +37,21 @@
                             </div>
                             <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
                                 <div style="float: right">
+                                    <div th:if="${#form==PT}">
+                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Generate
+                                        PT</b>
+                                    </button>
+                                    </div>
+                                    <div th:if="${#form==ESI}">
+                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Generate
+                                        ESI</b>
+                                    </button>
+                                    </div>
+                                    <div th:if="${#form==PF}">
                                     <button type="button" class="submitButton" onclick="alert('Submit')"><b>Generate
                                         Bank Salaries</b>
                                     </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
