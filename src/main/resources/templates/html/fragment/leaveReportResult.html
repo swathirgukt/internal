@@ -1,0 +1,33 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="leaveReport">
+    <div th:if="${leaveApproveFormList} != null AND ${leaveApproveFormList.size()}>0">
+        <table class="table table-bordered table-md table-responsive-lg" cellpadding="1" cellspacing="1">
+            <table cellpadding="1" cellspacing="1" class="table table-bordered"
+                   style="text-align: center;border: 1px solid black">
+                <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                    <th>Months</th>
+                    <th>CL</th>
+                    <th>SL</th>
+                    <th>Comp. Off</th>
+                    <th>Total Absent Days</th>
+                    <th>LOP</th>
+                    <th>Absent Dates</th>
+                    <th>Leave Balance</th>
+                </tr>
+                <tr style="background-color:#FFFFFF;color: #000000;padding: 30px"
+                    th:each="leave :${leaveApproveFormList}">
+                    <td th:text="${leave.leaveApprovalMonth}"></td>
+                    <td th:text="${leave.casualLeave}"></td>
+                    <td th:text="${leave.sickLeave}"></td>
+                    <td th:text="${leave.compensatoryLeave}"></td>
+                    <td th:text="${leave.totalNumberOfAbsentDays}"></td>
+                    <td th:text="${leave.lop}"></td>
+                    <td th:text="${leave.absentDates}"></td>
+                    <td th:text="${leave.leaveBalance}"></td>
+                </tr>
+            </table></table>
+    </div>
+
+    <div style="font: 15pt 'Arial Black';color: #ff0000;" th:if="${departmentList}!=null  AND ${departmentList.size()}==0">
+        Nothing found to display
+    </div>
+</div>

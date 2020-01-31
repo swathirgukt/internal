@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,6 +11,8 @@ import java.util.Date;
  * Date: 1/17/13
  * Time: 3:56 PM
  */
+
+@Component
 @Entity
 @Table(name = "EMPLOYEE_SETTLEMENT")
 public class EmployeeSettlement extends BaseDto {

@@ -1,6 +1,7 @@
 package com.indianeagle.internal.dto;
 
 import com.indianeagle.internal.util.SimpleUtils;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,6 +12,8 @@ import java.util.Date;
  *
  * @author appala.sambangi
  */
+
+@Component
 @Entity
 @Table(name = "VIEW_MONTHLY_SALARY_REPORT")
 public class MonthlySalaryReport extends BaseDto {

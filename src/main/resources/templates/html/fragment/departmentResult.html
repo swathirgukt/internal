@@ -1,28 +1,28 @@
 <div th:fragment="departmentResult" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${departmentList} != null AND ${departmentList.size()}>0">
-        <table class="table table-bordered table-md table-responsive-lg" cellpadding="1" cellspacing="1">
-            <table cellpadding="1" cellspacing="1" class="table table-bordered">
-                <div style="text-align: center;border: 1px solid black">
-            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
-                <th>Department No</th>
-                <th>Department Name</th>
-                <th>Manager No</th>
-                <th>Location</th>
-                <th>Phone No</th>
-                <th>Edit</th>
-            </tr>
-            <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
-                th:each="department :${departmentList}">
-                <td th:text="${department.deptNo}"></td>
-                <td th:text="${department.department}"></td>
-                <td th:text="${department.mngrNo}"></td>
-                <td th:text="${department.location}"></td>
-                <td th:text="${department.phoneNo}"></td>
-                <td><a th:href="@{/department/edit/{id}(id=${department.id})}">Edit</a></td>
-            </tr>
-                </div>
+
+            <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+
+                    <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                        <th>Department No</th>
+                        <th>Department Name</th>
+                        <th>Manager No</th>
+                        <th>Location</th>
+                        <th>Phone No</th>
+                        <th>Edit</th>
+                    </tr>
+                    <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                        th:each="department :${departmentList}">
+                        <td th:text="${department.deptNo}"></td>
+                        <td th:text="${department.department}"></td>
+                        <td th:text="${department.mngrNo}"></td>
+                        <td th:text="${department.location}"></td>
+                        <td th:text="${department.phoneNo}"></td>
+                        <td><a th:href="@{/department/edit/{id}(id=${department.id})}">Edit</a></td>
+                    </tr>
+
             </table>
-        </table>
+
     </div>
 
     <div style="font: 15pt 'Arial Black';color: #ff0000;"

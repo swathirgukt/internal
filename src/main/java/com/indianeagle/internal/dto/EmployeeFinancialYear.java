@@ -2,6 +2,7 @@ package com.indianeagle.internal.dto;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,6 +13,8 @@ import java.util.Set;
  * User: kalesha
  * Date: 8/9/2017
  */
+
+@Component
 @Entity
 @Table(name = "EMPLOYEE_FINANCIAL_YEAR")
 public class EmployeeFinancialYear extends BaseDto {

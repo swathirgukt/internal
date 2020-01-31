@@ -1,7 +1,4 @@
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>E-salary</title>
@@ -21,56 +18,61 @@
                     <div class="row">
 
                         <!--new-->
-
-                        <div class="col-lg-4  col-sm-6 col-xs-12  col-md-4">
-                            <div>
-                                <Table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td>From&nbsp;Date</td>
-                                        <td><span style="float: right;margin-right:10px;">:</span></td>
-                                        <td>
-                                            <input id="fromdate" type="text" width="170px" name="fromdate"/>
-                                            <script>
+                        <form action="/produceAllSalariesForm" method="post" id="eSalaryForm" name="eSalaryForm"
+                             >
+                            <div class="col-lg-4  col-sm-6 col-xs-12  col-md-4">
+                                <div>
+                                    <Table width="100%" class="table_text_style table-sm">
+                                        <tr>
+                                            <td>From&nbsp;Date</td>
+                                            <td><span style="float: right;margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input id="fromdate" type="text" width="170px" name="fromdate"/>
+                                                <script>
 													$('#fromdate').datepicker({ uiLibrary: 'bootstrap' });
 
-                                            </script>
-                                        </td>
-                                    </tr>
-                                </Table>
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </Table>
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
-                            <div>
-                                <Table width="100%" class="table_text_style  table-sm">
-                                    <tr>
-                                        <td>To&nbsp;Date</td>
-                                        <td><span style="float: right;margin-right:10px;">:</span></td>
-                                        <td>
-                                            <input id="todate" width="170px" name="todate"/>
-                                            <script>
+                            <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
+                                <div>
+                                    <Table width="100%" class="table_text_style  table-sm">
+                                        <tr>
+                                            <td>To&nbsp;Date</td>
+                                            <td><span style="float: right;margin-right:10px;">:</span></td>
+                                            <td>
+                                                <input id="todate" width="170px" name="todate"/>
+                                                <script>
 													$('#todate').datepicker({ uiLibrary: 'bootstrap' });
 
-                                            </script>
-                                        </td>
-                                    </tr>
-                                </Table>
+
+                                                </script>
+                                            </td>
+                                        </tr>
+                                    </Table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
-                            <div style="float: right">
-                                <button class="submitButton" type="button">GO</button>
+                            <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
+                                <div style="float: right">
+                                    <button class="submitButton" type="button">GO</button>
+                                </div>
                             </div>
-                        </div>
-                        <!--new-->
+                            <!--new-->
+                        </form>
                     </div>
 
                     <!--Row -->
-
+                    <form action="/produceAllSalariesForm" method="post" id="salaryForm" name="salaryForm"
+                          th:action="@{/produceAllSalariesForm}" th:object="${generateAllSalariesForm}">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-md-12">
-                            <div>
+                            <div th:with="empSalaryDeciderList=${generateAllSalariesForm.empSalaryDeciderList}">
                                 <table class="table_text_style table  table-bordered ">
                                     <tr style="background-color: black;color: white;">
                                         <td>Exclude</td>
@@ -81,15 +83,26 @@
                                         <td>Salary&nbsp;Advance</td>
                                         <td>Performance&nbsp;Incentives</td>
                                     </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
+                                    <div th:each="index :${#numbers.sequence(0,empSalaryDeciderList.size())}" >
+                                        <tr>
+                                            <td><input type="checkbox" th:field="${empSalaryDeciderList[0]empExclude}"/></td>
+                                            <td th:text="${empSalaryDeciderList[0]empId}"></td>
+                                            <td th:text="${empSalaryDeciderList[0]fullName}"></td>
+                                            <td><input type="text" th:field="${empSalaryDeciderList[0]lopDays}"/></td>
+                                            <td><input type="text" th:field="${empSalaryDeciderList[0]arrearsDays}"/></td>
+                                            <td><input type="text" th:field="${empSalaryDeciderList[0]salaryInAdvance}"/></td>
+                                            <td><input type="text" th:field="${empSalaryDeciderList[0]performanceIncentives}"/> ></td>
+                                        </tr>
+                                    </div>
+                                    <!--<tr th:each="empSalaryDecider : ${empSalaryDeciderList}">
+                                        <td><input type="checkbox" th:field="*{empSalaryDecider.empExclude}"></td>
+                                        <td title="value"></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
-                                    </tr>
+                                    </tr>-->
                                 </table>
                             </div>
                         </div>
@@ -111,5 +124,4 @@
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
-
 </html>

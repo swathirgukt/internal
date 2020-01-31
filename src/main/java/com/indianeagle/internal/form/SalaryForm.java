@@ -4,6 +4,7 @@ import com.indianeagle.internal.dto.Department;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -14,7 +15,8 @@ public class SalaryForm {
     private List<Employee> employeeList;
     private List<Department> departmentList;
     private List<Employee> deptEmployeeList;
-    private Long employeeId;
+    @NotBlank
+    private String employeeId;
     private Employee employee;
     private SalaryRule salaryRule;
     private SalaryHistory currentSalary;
@@ -45,11 +47,11 @@ public class SalaryForm {
         this.employeeList = employeeList;
     }
 
-    public Long getEmployeeId() {
+    public String getEmployeeId() {
         return this.employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 

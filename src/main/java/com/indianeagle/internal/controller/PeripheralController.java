@@ -43,7 +43,6 @@ public class PeripheralController {
 
     @PostMapping("/save")
     public String savePeripheral(ModelMap modelMap, @ModelAttribute @Valid Peripheral peripheral, BindingResult bindingResult) {
-        System.out.println(peripheral);
         if (bindingResult.hasErrors()) {
             return "html/peripheral";
         }
