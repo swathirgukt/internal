@@ -119,15 +119,6 @@ ul.nav a:hover {
     display: block;
 }
 
-.Generate_button{
-    padding:5px;
-     border: 2px solid #ff9900;
-     border-radius: 8px;
-
- }
- .Generate_button:hover {
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
- }
 .footer {
       color: #008000;
       padding: 25px;

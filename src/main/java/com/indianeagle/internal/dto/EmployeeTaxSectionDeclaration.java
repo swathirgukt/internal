@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,6 +13,8 @@ import java.math.BigDecimal;
  * User: kalesha
  * Date: 8/9/2017
  */
+
+@Component
 @Entity
 @Table(name = "EMPLOYEE_TAX_SECTION_DECLARATIONS")
 public class EmployeeTaxSectionDeclaration extends BaseDto {

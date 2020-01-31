@@ -1,10 +1,12 @@
 package com.indianeagle.internal.dto;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Component
 @Entity
 @Table(name = "EMPLOYEE")
 public class Employee extends BaseDto{

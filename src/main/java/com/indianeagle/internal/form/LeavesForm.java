@@ -11,7 +11,7 @@ import java.util.Date;
 public class LeavesForm {
     private Long id;
     private double casualLeaves;
-    private double sinkLeaves;
+    private double sickLeaves;
     private double compensatoryLeaves;
     private double previousYearLeaves;
     private Date currentLeaveYear;
@@ -57,17 +57,17 @@ public class LeavesForm {
      *
      * @return sinkLeaves
      */
-    public double getSinkLeaves() {
-        return sinkLeaves;
+    public double getSickLeaves() {
+        return sickLeaves;
     }
 
     /**
      * Method to set the sinkLeaves
      *
-     * @param sinkLeaves, to set the sinkLeaves
+     * @param sickLeaves, to set the sinkLeaves
      */
-    public void setSinkLeaves(double sinkLeaves) {
-        this.sinkLeaves = sinkLeaves;
+    public void setSickLeaves(double sickLeaves) {
+        this.sickLeaves = sickLeaves;
     }
 
     /**

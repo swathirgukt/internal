@@ -12,7 +12,7 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <form action="/">
+                    <form th:action="@{/monthlySalaryReport}" method="post">
                         <div class="Heading">Monthly Salary Report</div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
@@ -23,14 +23,9 @@
                                             <td width="20px"><span style="color:red"> *</span></td>
                                             <td width="20px"><b>:</b></td>
                                             <td>
-                                                <input style=" float:left; border: 1px solid #ff9900;"
-                                                       id="datepicker" width="200px" name="datepicker"/>
-                                                <script>
-                                                        $('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-
-
-                                                </script>
+                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px" name="salaryDate"/>
+                                                <span th:if="${selectDate}!=null" th:text="${selectDate}"></span>
+                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                     </table>
@@ -38,17 +33,23 @@
                             </div>
                             <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
                                 <div style="float: right">
-                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Search</b>
+                                    <button type="submit" class="submitButton"><b>Search</b>
                                     </button>
                                 </div>
                             </div>
-                        </div>
+
+                </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
                                 <div class="Heading">Search Results</div>
                             </div>
+                            <span th:if="${recordMessage}!=null" th:text="${recordMessage}"></span>
+
+                            <span th:text="${monthlySalaryList}"></span>
 
                         </div>
+                        <span th:text="${monthlySalaryList}"></span>
+
 
                     </form>
 

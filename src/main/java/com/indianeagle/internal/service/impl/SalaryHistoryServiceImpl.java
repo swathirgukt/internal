@@ -38,11 +38,11 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 	private MailingEngine mailingEngine;
 	@Autowired
     private SalaryHistory salaryHistory;
-	@Autowired
+
     private List<Employee> employees;
 	@Autowired
     private TemplateEngine templateEngine;
-	@Autowired
+
 	private FontFactoryImp factoryImp;
 
 	public List<SalaryHistory> searchSalaryHistory(String empId, Date periodDate) {

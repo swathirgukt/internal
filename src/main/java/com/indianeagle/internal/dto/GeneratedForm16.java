@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 /**
@@ -8,6 +10,8 @@ import javax.persistence.*;
  * User: kalesha
  * Date: 8/22/2017
  */
+
+@Component
 @Entity
 @Table(name = "GENERATED_FORM_16")
 public class GeneratedForm16 extends BaseDto{

@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,6 +10,8 @@ import java.util.Date;
  * @author irfan
  * dto for Cheque Details
  */
+
+@Component
 @Entity
 @Table(name = "CHEQUE_DETAILS")
 public class ChequeDetails extends BaseDto {

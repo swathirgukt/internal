@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,6 +14,8 @@ import java.util.Date;
  *
  * @author SVK
  */
+
+@Component
 @Entity
 @Table(name = "PERIPHERAL")
 public class Peripheral  extends BaseDto{

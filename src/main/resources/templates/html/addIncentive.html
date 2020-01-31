@@ -1,7 +1,24 @@
 <!DOCTYPE html>
 <head>
     <title>Add Incentive</title>
+    <script>
+function appendTable(){
+
+    var tableRow="<table name='remove' width='100%'><tr><td style='padding:5px'><select style='width: 200px;height: 23px;border-radius:5px'><option value=''>--SELECT--</option><option value=''>IEPL079</option><option value=''>IEPL0518</option></select></td><td><input name='incentive_amount' type='text' style='width: 200px;height: 23px;'> </td></tr></table>";
+    $("#addTable").append(tableRow);
+}
+function removeTable(){
+var tableName=$('#addTable table:last').attr('name');
+                        if(tableName=="remove"){
+                        $("#addTable table:last").remove();
+                        }
+}
+
+
+
+    </script>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <body>
 <header th:insert="html/fragment/header :: header"></header>
@@ -21,50 +38,62 @@
                                         <tr>
                                             <td>Date <span style="color: #ff0000">*</span></td>
                                             <td><b>:</b></td>
-                                            <td><input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="200px" name="datepicker"/>
-                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Employee Id <span style="color: #ff0000">*</span></td>
-                                            <td><b>:</b></td>
-                                            <td>
-                                                <select style="width: 200px;height: 23px;border-radius:5px">
-                                                    <option value="">--SELECT--</option>
-                                                    <option value="">IEPL079</option>
-                                                    <option value="">IEPL0518</option>
-                                                </select>
+                                            <td style="padding:5px"><input
+                                                    style=" float:left; border: 1px solid #ff9900;" id="datepicker"
+                                                    width="200px" name="datepicker"/>
+                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <div>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-10">
+                                    <div id="addTable">
+                                        <table width="100%" name="constant">
+                                            <tr>
+                                                <td>Employee Id <span style="color: #ff0000">*</span></td>
+                                                <td colspan="2" style="padding:10px">Incentive Amount <span
+                                                        style="color: #ff0000">*</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px">
+                                                    <select style="width: 200px;height: 23px;border-radius:5px">
+                                                        <option value="">--SELECT--</option>
+                                                        <option value="">IEPL079</option>
+                                                        <option value="">IEPL0518</option>
+                                                    </select>
+                                                </td>
+
+                                                <td><input name="incentive_amount" type="text"
+                                                           style="width: 200px;height: 23px;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 col-xs-10">
+                                <div style="float:right">
                                     <table width="100%">
                                         <tr>
-                                            <td colspan="2">Incentive Amount <span style="color: #ff0000">*</span></td>
-                                            <td><b>:</b>&nbsp;<input name="incentive_amount" type="text"
-                                                                     style="width: 200px;height: 23px;border-radius:5px">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button class="submitButton" onclick="submitSave()" type="button">
+                                            <td style="padding:10px">
+                                                <button class="submitButton" onclick="appendTable()" type="button">
                                                     <b>Add</b>
                                                 </button>
                                             </td>
-                                            <td>
-                                                <button class="submitButton" onclick="reset()" type="button">
+                                            <td style="padding:10px">
+                                                <button class="submitButton" onclick="removeTable()" type="button">
                                                     <b>Remove</b>
                                                 </button>
                                             </td>
-                                            <td>
-                                                <button class="submitButton" onclick="submitSearch()" type="button">
+                                            <td style="padding:10px">
+                                                <button class="submitButton" onclick="$('form').submit();"
+                                                        type="button">
                                                     <b>Submit</b>
                                                 </button>
                                             </td>
@@ -86,185 +115,3 @@
 </body>
 
 </html>
-
-
-<!--
-<!DOCTYPE html>
-<head>
-    <title>Add Incentive</title>
-   &lt;!&ndash; <style type="text/css">
-            .sel_op {
-                width: 250px;
-                font-size: 15px;
-                text-align: center;
-                color: red;
-                background-color: #fff2e6;
-            }
-
-            .table_text_style {
-                font-size: 14px;
-            }
-
-            .input_style {
-                width: 250px;
-                height: 20px;
-                margin-top: 3px;
-            }
-
-
-
-
-    </style>&ndash;&gt;
-</head>
-
-<body>
-<header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-        </div>
-        <div class="col-sm-8 text-left">
-            <div class="jumbotron">
-                <div class="container">
-                    <form action="/">
-                        <div class="Heading">Add Incentives</div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <div>
-                                    <table width="100%">
-                                        <tr>
-                                            <td>Date<span style="color: red;">*</span></td>
-                                            <td><b>:</b></td>
-                                            <td><input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="200px" name="datepicker"/>
-                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-                                                </script>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Employee ID<span style="color: red;">*</span></td>
-                                            <td width="20px"><b>:</b></td>
-                                            <td>
-                                                <select>
-                                                    <option value="">&#45;&#45;SELECT&#45;&#45;</option>
-                                                    <option value="">IEPL079</option>
-                                                    <option value="">IEPL0518</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <div>
-                                    <table width="100%">
-                                        <tr>
-                                            <td colspan="2">Incentive Amount<span style="color: red;">*</span></td>
-
-                                            <td width="40px"><b>:</b></td>
-
-                                            <td><input name="incentive_amount" type="text"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button class="submitButton" onclick="alert('Add Incentive!')"
-                                                        type="button"><b>Add</b></button>
-
-                                                <button class="submitButton" onclick="alert('Remove Incentive!')"
-                                                        type="button"><b>Remove</b>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="submitButton" onclick="alert('form Submit!')"
-                                                        type="button"><b>Submit</b>
-                                                </button>
-                                            </td>
-
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<footer th:insert="html/fragment/footer :: footer"></footer>
-
-</body>
-
-</html>
-
-
-&lt;!&ndash;
-<!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
-<head>
-    <title>Add Incentives</title>
-    <style type="text/css">
-        th, td {
-             padding: 15px;
-             }
-
-    </style>
-</head>
-
-<body>
-<header th:insert="html/fragment/header :: header"></header>
- <div class="form-page">
-    <form action="/">
-        <div class="Heading">Add Incentives</div>
-        <div style="padding-top:5px">
-            <table style="width:100%">
-
-                <tr>
-                    <th>Date<span style="color: red;">*</span></th>
-                        <td><b>:</b>
-                           <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px"
-                               name="datepicker"/>
-                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
-                       </td>
-                </tr>
-                <tr>
-                     <th>Employee ID<span style="color: red;">*</span></th>
-                         <td><b>:</b>
-                            <select>
-                               <option value="">&#45;&#45;SELECT&#45;&#45;</option>
-                                <option value="">IEPL079</option>
-                                 <option value="">IEPL0518</option>
-                            </select>
-                          </td>
-                </tr>
-                <tr>
-                    <th colspan="2">Incentive Amount<span style="color: red;">*</span></th>
-                    <td><b>:</b><input name="incentive_amount" type="text"></td>
-
-                </tr>
-                <tr>
-                    <td>
-                        <button class="submitButton" onclick="alert('Add Incentive!')" type="button"><b>Add</b></button>
-                        <button class="submitButton" onclick="alert('Remove Incentive!')" type="button"><b>Remove</b>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="submitButton" onclick="alert('form Submit!')" type="button"><b>Submit</b>
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-
-    </form>
- </div>
-    <footer th:insert="html/fragment/footer :: footer"></footer>
-
-</body>
-</html>&ndash;&gt;
--->

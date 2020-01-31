@@ -1,5 +1,7 @@
 package com.indianeagle.internal.dto;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,6 +11,8 @@ import java.util.Date;
  *
  * @author kiran.paluvadi
  */
+
+@Component
 @Entity
 @Table(name = "INCENTIVES")
 public class Incentives extends BaseDto {

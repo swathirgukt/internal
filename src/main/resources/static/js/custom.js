@@ -2,7 +2,10 @@ function makeAJAXCall(requestUrl,formId) {
     return jQuery.ajax({
         url: requestUrl,
         data: jQuery('#'+formId).serialize(),
-        type: "POST"
+        type: "POST",
+        error: function(msg,err,exc){
+            console.log("#error: "+err);
+        }
     });
 }
 
@@ -24,6 +27,24 @@ function searchPeripheral() {
     });
 }
 
+function searchEmployeeLeaveReport() {
+    var response = makeAJAXCall("/employeeLeaveReport", 'employeeLeaveReportForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#employeeLeaveReportResult").html(responseData);
+        }
+    });
+}
+
+function searchAllEmployeeLeaveReport() {
+    var response = makeAJAXCall("/allEmployeeLeaveReport", 'allEmployeeLeaveReportForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#allEmployeeLeaveReportResult").html(responseData);
+        }
+    });
+}
+
 function saveDepartment() {
     document.departmentForm.action = "/department/save";
     document.departmentForm.submit();
@@ -41,3 +62,13 @@ function getLeaveBalance(){
         }
     });
 }
+
+function findEmployeeLeaves(){
+    var response = makeAJAXCall("/findEmployeeLeaves",'employeeLeavesForm');
+    response.done(function(responseData){
+        if(responseData){
+            $("#leavesResult").html(responseData);
+        }
+    });
+}
+

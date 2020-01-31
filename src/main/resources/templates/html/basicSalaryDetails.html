@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <html>
 <head>
     <title>Basic Salary Details</title>
@@ -12,7 +14,7 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <form action="/">
+                    <form th:action="@{/basicSalaryDetailsReport}" method="post">
                         <div class="Heading">Basic Salary Details</div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
@@ -22,12 +24,21 @@
                                             <td>Employee&nbsp;Status</td>
                                             <td width="20px"><b>:</b></td>
                                             <td width="20px">
-                                                <select id="sel_op" class="selectOption">
+
+                                                <select id="sel_op" class="selectOption" name="empStatus">
+
+                                                    <!-- <option th:each="iterator:${empStatusMap.entrySet()}" th:value="${iterator.key}"  th:utext="${iterator.value}"></option>-->
+                                                    <option th:each="iterator:${empStatusMap.entrySet()}"
+                                                            th:value="${iterator.key}">[[${iterator.value}]]
+                                                    </option>
+
+                                                </select>
+                                                <!--<select id="sel_op" class="selectOption" name="empStatus">
                                                     <option label="All" value="all">All</option>
                                                     <option label="Resigned" value="resigned">Resigned</option>
                                                     <option label="Relieved" value="relieved">Relieved</option>
                                                     <option label="Working" value="working">Working</option>
-                                                </select>
+                                                </select>-->
                                             </td>
                                         </tr>
                                     </table>
@@ -35,19 +46,65 @@
                             </div>
                             <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
                                 <div style="float: right">
-                                    <button type="button" class="submitButton" onclick="alert('Submit')"><b>Search</b>
+                                    <button type="submit" class="submitButton"><b>Search</b>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
-                                <div class="Heading">Search Results</div>
-                            </div>
-
-                        </div>
-
                     </form>
+                    <div class="Heading">Search Results</div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
+                            <div class="tableScrollbar">
+                                <div th:if="${employeesList} != null AND ${employeesList.size()}>0">
+                                    <table cellpadding="1" cellspacing="1"
+                                           class="table table-bordered table-responsive-lg table-hover">
+                                        <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                                            <th>S. No.</th>
+                                            <th>EmpId</th>
+                                            <th>Employee Name</th>
+                                            <th>Desgination</th>
+                                            <th>Department</th>
+                                            <th>DOJ</th>
+                                            <th>Basic</th>
+                                            <th>HRA</th>
+                                            <th>CON</th>
+                                            <th>MED</th>
+                                            <th>SPL</th>
+                                            <th>OTHR</th>
+                                            <th>TEL</th>
+                                            <th>INT</th>
+                                            <th>UNI</th>
+                                            <th>Gross</th>
+                                        </tr>
+                                        <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                                            th:each="employee, status :${employeesList}">
+                                            <td th:text="${status.count}"></td>
+                                            <td th:text="${employee.empId}"></td>
+                                            <td th:text="|${employee.firstName} ${employee.lastName}|"></td>
+                                            <td th:text="${employee.designation}"></td>
+                                            <td th:text="${employee.department}!=null ?${employee.department.department}:null"></td>
+                                            <td th:text="${employee.joinDate}">09-09-2020</td>
+                                            <th:block th:if="${employee.salary !=null}">
+                                                <td th:text="${employee.salary.basic}!=null ?${employee.salary.basic}:''"></td>
+                                                <td th:text="${employee.salary.hra}!=null ?${employee.salary.hra}:''"></td>
+                                                <td th:text="${employee.salary.conveyence}!=null ?${employee.salary.conveyence}:''"></td>
+                                                <td th:text="${employee.salary.medicalAllowance}!=null ?${employee.salary.medicalAllowance}:''"></td>
+                                                <td th:text="${employee.salary.specialAllowance}!=null ?${employee.salary.specialAllowance}:''"></td>
+                                                <td th:text="${employee.salary.otherAllowance}!=null ?${employee.salary.otherAllowance}:''"></td>
+                                                <td th:text="${employee.salary.telephoneAllowance}!=null ?${employee.salary.telephoneAllowance}:''"></td>
+                                                <td th:text="${employee.salary.internetAllowance}!=null ?${employee.salary.internetAllowance}:''"></td>
+                                                <td th:text="${employee.salary.uniformAllowance}!=null ?${employee.salary.uniformAllowance}:''"></td>
+                                                <td th:text="${employee.salary.grossSal}!=null ?${employee.salary.grossSal}:''"></td>
+                                            </th:block>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
 

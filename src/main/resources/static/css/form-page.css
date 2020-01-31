@@ -1,43 +1,39 @@
-.Heading {
-			font-size: 15px;
-			color: #ff751a;
-			border-bottom: 1px solid #CCCCCC;
-			margin-bottom:10px;
-		}
-.inputBoxStyle {
-			      /*width: 250px;*/
-			      /*height: 20px;*/
-			}
+.Heading       {
+			       font-size: 15px;
+			       color: #ff751a;
+			       border-bottom: 1px solid #CCCCCC;
+			       margin-bottom:10px;
+		      }
 
-.inputDiv {
-			 padding-bottom: 2px;
-			 padding-top: 2px;
-		 }
+.inputDiv     {
+			       padding-bottom: 2px;
+			       padding-top: 2px;
+		      }
 
-.inputDate {
-			  width: 50%;
-			  height: 40px;
-		   }
+.inputDate    {
+			       width: 50%;
+			       height: 40px;
+		      }
 
-.inputfield{
-        	  width: 40px;
-        	  height:25px;
-        	}
+.inputfield   {
+        	      width: 40px;
+        	      height:25px;
+        	  }
 
-.Type_leaves {
-             	width: 49px;
-                height: 18px;
-                float: left;
-                text-align: center;
-                font-size: 15px;
-                color: #666666;
-                margin-right: 14px;
-            }
+.Type_leaves  {
+             	  width: 49px;
+                  height: 18px;
+                  float: left;
+                  text-align: center;
+                  font-size: 15px;
+                  color: #666666;
+                  margin-right: 14px;
+             }
 
- .start_date {
-               height: 30px;
-               width: 140px;
-            }
+.start_date  {
+                 height: 30px;
+                 width: 140px;
+             }
 
 .tableScrollbar{
                   display:block;
@@ -52,17 +48,62 @@
                    overflow-x:auto;
                    overflow-y:auto;
                 }
-.selectOption {
-                 width: 177px;
-                 height: 25px;
-                 font-size: 15px;
-                 text-align: center;
-                 color: #664200;
-                 border-radius: 5px;
+
+.selectOption   {
+                   width: 177px;
+                   height: 25px;
+                   font-size: 15px;
+                   text-align: center;
+                   color: #664200;
+                   border-radius: 5px;
                }
+
 .table_text_style{
                     font-size:14px;
                  }
+
 .table-sm th,.table-sm td {
                             padding: 0.3rem;
                            }
+
+
+.retrivesalaryInfoButton {
+
+                     width: 130px;
+                     height: 30px;
+                     border-radius: 10%;
+                     background-color: #ffd9b3;
+                     font-size: 13px;
+                     margin-left: 20px;
+                     cursor: pointer;
+        }
+
+.retrivesalaryInfoButton:hover {
+
+            background-color: #ff9933;
+            box-shadow: 0 8px 6px 0 #ff9933;
+
+        }
+
+
+.claTask {
+
+            width: 200px;
+            height: 50px;
+            border-radius: 10%;
+            background-color: #f7941e;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+
+
+        }
+
+.claTask:hover {
+
+                background-color: #ff9933;
+                box-shadow: 0 8px 6px 0 #ff9933;
+
+              }
+
+
