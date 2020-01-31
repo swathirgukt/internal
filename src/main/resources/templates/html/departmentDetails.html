@@ -37,7 +37,7 @@
                                         <tr>
                                             <td>Manager No <span style="color: #ff0000">*</span></td>
                                             <td width="15px"><b>:</b></td>
-                                            <td style="padding: 5px"><input maxlength="20" th:field="*{mngrNo}"
+                                            <td style="padding: 5px"><input onkeypress="return allowPositiveInt(event)" maxlength="20" th:field="*{mngrNo}"
                                                                             type="text">
                                             </td>
                                         </tr>
@@ -50,7 +50,7 @@
                                         <tr>
                                             <td>Phone No <span style="color: #ff0000">*</span></td>
                                             <td width="15px"><b>:</b></td>
-                                            <td style="padding: 5px"><input maxlength="11" th:field="*{phoneNo}"
+                                            <td style="padding: 5px"><input onkeypress="return allowPositiveInt(event)" maxlength="11" th:field="*{phoneNo}"
                                                                             type="text">
                                             </td>
                                         </tr>

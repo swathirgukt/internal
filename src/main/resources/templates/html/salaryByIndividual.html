@@ -85,16 +85,16 @@
                                         <td>LOP&nbsp;Days</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="Lop Days" name="Lop Days"
-                                                   style="width: 250px;height: 23px;" type="text">
+                                            <input class="input-style" id="lopDays" name="lopDays"
+                                                   style="width: 250px;height: 23px;" type="text" onkeypress="return allowOnlyMonthlyDigits(event,'lopDays')">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>PER&nbsp;Incentives</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="ARR Days" name="ARR Days"
-                                                   style="width: 250px;height: 23px;" type="text">
+                                            <input class="input-style" id="PER Incentives" name="PER Incentives"
+                                                   style="width: 250px;height: 23px;" type="text" maxlength="12" onkeypress="return allowRealNo(event,this.value)">
                                         </td>
                                     </tr>
                                 </table>
@@ -105,9 +105,9 @@
                                         <td>ARR&nbsp;Days</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="PER Incentives" name="PER Incentives"
+                                            <input class="input-style" id="arrearDays"  name="arrearDays"
                                                    style="width: 250px;height: 23px;"
-                                                   type="text"></td>
+                                                   type="text" onkeypress="return allowOnlyMonthlyDigits(event, 'arrearDays')"></td>
                                         <td></td>
                                     </tr>
                                 </table>
@@ -123,7 +123,7 @@
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="Salary In Advance" name="Salary In Advance"
-                                                   type="text" style="width: 240px;height: 23px;">
+                                                   type="text" style="width: 240px;height: 23px;" onkeypress="return allowRealNo(event,this.value)" maxlength="12">
                                         </td>
                                     </tr>
                                 </table>
@@ -136,7 +136,7 @@
                                             <td><b>:</b></td>
                                             <td>
                                                 <input class="input-style" id="Misc Deductions" name="Misc Deductions"
-                                                       type="text" style="width: 240px;height: 23px;">
+                                                       type="text" style="width: 240px;height: 23px;" onkeypress="return allowRealNo(event,this.value)" maxlength="12">
                                             </td>
                                         </tr>
                                     </table>

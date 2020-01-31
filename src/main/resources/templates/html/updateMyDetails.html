@@ -25,7 +25,7 @@
                                                 style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="first_name" id="first_name"
-                                                   value="">
+                                                   value="" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150">
                                         </td>
                                     </tr>
                                     <tr>
@@ -33,15 +33,15 @@
                                                 style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="middle_name" id="middle_name"
-                                                   value="">
+                                                   value="" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150">
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Permanent&nbsp;Address<span class="mandatory">*</span><span
+                                        <td>Permanent&nbsp;Address<span style="color:red">*</span><span
                                                 style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="permanent_address"
-                                                   id="permanent_address" value="">
+                                                   id="permanent_address" value="" maxlength="150">
                                         </td>
                                     </tr>
                                     <tr>
@@ -49,7 +49,7 @@
                                                 style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td><input class="input_style" type="text" name="mobile_no" id="mobile_no"
-                                                   value="">
+                                                   value="" onkeypress="return allowPositiveInt(event);" maxlength="11">
                                         </td>
                                     </tr>
                                     <tr>
@@ -68,7 +68,7 @@
                                         </td>
                                         <td><input class="input_style" type="text" name="personal_email"
                                                    id="personal_email"
-                                                   value="">
+                                                   value="" maxlength="150">
                                         </td>
                                     </tr>
                                     <tr>
@@ -93,7 +93,7 @@
                                         <td>Last&nbsp;Name<span style="color:red">*</span><span
                                                 style="float:right; margin-right:10px;"><b>:</b></span></td>
                                         <td>
-                                            <input class="input_style" type="text">
+                                            <input class="input_style" type="text" onkeypress=" return allowCharactersAndSpaces(event);">
                                         </td>
                                     </tr>
                                     <tr>
@@ -124,7 +124,7 @@
                                         <td>Emergency&nbsp;Contact<span style="color:red">*</span><span
                                                 style="float:right; margin-right:10px;"><b>:</b></span></td>
                                         <td>
-                                            <input class="input_style" type="text">
+                                            <input class="input_style" type="text" onkeypress="return allowPositiveInt(event);" maxlength="11">
                                         </td>
                                     </tr>
                                     <tr>
@@ -132,7 +132,7 @@
                                                 style="float:right; margin-right:10px;"><b>:</b></span>
                                         </td>
                                         <td>
-                                            <input class="input_style" type="text">
+                                            <input class="input_style" type="text" maxlength="20">
                                         </td>
                                     </tr>
                                     <tr>

@@ -68,7 +68,7 @@ var tableName=$('#addTable table:last').attr('name');
                                                 </td>
 
                                                 <td><input name="incentive_amount" type="text"
-                                                           style="width: 200px;height: 23px;">
+                                                           style="width: 200px;height: 23px;" onkeypress="return allowRealNo(event,this.value)" maxlength="12">
                                                 </td>
                                             </tr>
                                         </table>
