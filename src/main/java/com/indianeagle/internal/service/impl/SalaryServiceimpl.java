@@ -36,29 +36,20 @@ import java.util.*;
 @Service
 public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     private static final Logger log = Logger.getLogger(SalaryServiceimpl.class);
-    @Autowired
     private MessageSource messageSource;
     @Autowired
     private SalaryRepository salaryRepository;
     @Autowired
     private SalaryHistoryRepository salaryHistoryRepository;
-    @Autowired
     private Employee employee;
-    @Autowired
     private SalaryHistory currentSalary;
-    @Autowired
     private MailingEngine mailingEngine;
-    @Autowired
     private List<Employee> currSalaryEmpList;
-    @Autowired
     private List<SalaryHistory> currentSalaryList;
     @Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
-    @Autowired
     private EmployeeSettlement employeeSettlement;
-    @Autowired
     private SalaryHistoryService salaryHistoryService;
-    @Autowired
     private TemplateEngine templateEngine;
 
     public List<Employee> loadAllEmployees() {

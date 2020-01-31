@@ -13,11 +13,12 @@ import com.indianeagle.internal.service.LeaveDetailsService;
 import com.indianeagle.internal.util.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class LeaveDetailsServiceImpl implements LeaveDetailsService {
 @Autowired
     private LeaveDetailsRepository leaveDetailsRepository;

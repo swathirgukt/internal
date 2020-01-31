@@ -31,9 +31,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private SalaryHistoryRepository salaryHistoryRepository;
 @Autowired
 	private EmployeeIncomeTaxRepository employeeIncomeTaxRepository;
-@Autowired
 	private TemplateEngine velocityEngine;
-@Autowired
 	private MailingEngine mailingEngine;
 	@Autowired
 	private GeneratedForm16Repository generatedForm16Repository;

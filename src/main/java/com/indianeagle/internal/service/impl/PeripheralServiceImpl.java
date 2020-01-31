@@ -4,12 +4,14 @@ import com.indianeagle.internal.dao.repository.PeripheralRepository;
 import com.indianeagle.internal.dto.Peripheral;
 import com.indianeagle.internal.service.PeripheralService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * @author SVK
  */
+@Service
 public class PeripheralServiceImpl implements PeripheralService {
 	@Autowired
 	private PeripheralRepository peripheralRepository;
@@ -19,11 +21,17 @@ public class PeripheralServiceImpl implements PeripheralService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Optional<Peripheral> findById(long id){
+	/*public Optional<Peripheral> findById(long id){
 
 		return  (peripheralRepository.findById(id));
+	}*/
+	public Peripheral findById(long id){
+			Optional<Peripheral> peripheral=	peripheralRepository.findById(id);
+
+		return  peripheral.isPresent()?peripheral.get():null;
 	}
-	
+
+
 	public List<Peripheral> searchPeripherals(Peripheral peripheral){
 		return peripheralRepository.searchPeripherals(peripheral);
 	}

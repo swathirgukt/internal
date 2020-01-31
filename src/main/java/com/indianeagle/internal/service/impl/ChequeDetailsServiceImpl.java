@@ -7,6 +7,7 @@ import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.ChequeDetailsService;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,12 +15,11 @@ import java.util.Optional;
  * @author Unskrishna
  * service implementation for Cheque Details
  */
+@Service
 public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	@Autowired
 	private ChequeDetailsRepository chequeDetailsRepository;
-	@Autowired
 	private List<ChequeDetails> chequeDetailsList;
-	@Autowired
 	private MailingEngine mailingEngine;
 	
 	/**

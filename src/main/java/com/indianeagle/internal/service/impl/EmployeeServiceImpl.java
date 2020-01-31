@@ -12,17 +12,16 @@ import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
     private UsersRepository usersRepository;
-    @Autowired
     private List<Employee> bufferedEmployees;
-    @Autowired
     private MailingEngine mailingEngine;
 
     public List<Employee> searchEmployees(EmployeeForm employeeForm) {
