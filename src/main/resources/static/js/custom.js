@@ -59,6 +59,7 @@ function getLeaveBalance(){
     response.done(function(responseData){
         if(responseData){
             $("#leaveBalanceResult").html(responseData);
+            console.log(responseData);
         }
     });
 }
@@ -72,3 +73,13 @@ function findEmployeeLeaves(){
     });
 }
 
+
+function saveCheque()
+{	document.chequeForm.action="/saveChequeDetails";
+	document.chequeForm.submit();
+}
+function submitSearch()
+{
+document.cheque.action="./searchChequeDetails.action";
+document.cheque.submit();
+}

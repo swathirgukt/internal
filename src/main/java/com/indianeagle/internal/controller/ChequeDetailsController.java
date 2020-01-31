@@ -23,9 +23,9 @@ import java.util.List;
  */
 @Controller
 public class ChequeDetailsController {
-    //@Autowired
+    @Autowired
     private ChequeDetailsFormValidator chequeDetailsFormValidator;
-   // @Autowired
+    @Autowired
     private ChequeDetailsService service;
 
     @InitBinder("chequeDetailsForm")
@@ -34,8 +34,10 @@ public class ChequeDetailsController {
     }
 
    @ModelAttribute(name= "chequeDetailsFormObject")
-    public void chequeDetailsFormObject(ModelMap model) {
+    public String chequeDetailsFormObject(ModelMap model) {
        ChequeDetailsForm chequeDetailsForm = new ChequeDetailsForm();
+       model.addAttribute("chequeDetailsForm",chequeDetailsForm);
+       return "html/chequeDetails";
     }
 
 
@@ -46,7 +48,7 @@ public class ChequeDetailsController {
      */
     @GetMapping("/chequeDetailsController")
     public String chequeDetails() {
-        return "chequeDetails";
+        return "html/chequeDetails";
     }
 
 
@@ -59,7 +61,7 @@ public class ChequeDetailsController {
     if (bindingResult.hasErrors()) {
         // model.addAttribute("message", "Validate error");
         //bindingResult.reject("Validate error");
-        return "chequeDetails";
+        return "html/chequeDetails";
     }
         if(chequeDetailsForm.getChequeDetails().getId() == null){
             model.addAttribute("saveMessage","Saved Successfully");
@@ -68,7 +70,7 @@ public class ChequeDetailsController {
         }
         service.saveOrUpdateCheque(chequeDetailsForm.getChequeDetails());
         chequeDetailsForm.setChequeDetails(null);
-        return "chequeDetails";
+        return "html/chequeDetails";
     }
 
     /**
@@ -80,14 +82,14 @@ public class ChequeDetailsController {
     if (bindingResult.hasErrors()) {
         // model.addAttribute("message", "Validate error");
         //bindingResult.reject("Validate error");
-        return "chequeDetails";
+        return "html/chequeDetails";
     }
 
     if(!(chequeDetailsForm.getFromDate()==null||chequeDetailsForm.getToDate()==null)) {
         if ((chequeDetailsForm.getFromDate()).after(chequeDetailsForm.getToDate())) {
             model.addAttribute("dateMessage", "Please Provide Valid Dates");
             // addActionError(getText("Please Provide Valid Dates"));
-            return "chequeDetails";
+            return "html/chequeDetails";
 
         }
     }

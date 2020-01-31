@@ -20,6 +20,7 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	@Autowired
 	private ChequeDetailsRepository chequeDetailsRepository;
 	private List<ChequeDetails> chequeDetailsList;
+	@Autowired
 	private MailingEngine mailingEngine;
 	
 	/**
