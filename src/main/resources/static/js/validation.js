@@ -66,8 +66,10 @@ function allowRealNo(evt, strval) {
 // Function  to enter only characters & spaces ,Usage : onkeypress="return allowCharactersAndSpaces(event)"
 function allowCharactersAndSpaces(evt) {
 	var charCode = (evt.which) ? evt.which : event.keyCode;
-	if ((charCode == 8) || (charCode == 32) || (charCode >=65 &&  charCode <= 90) || (charCode >=97 &&  charCode <= 122) ) {
+	if ((charCode == 8) || (charCode == 32) || (charCode >=65 &&  charCode <= 90) || (charCode >=97 &&  charCode <= 122) )
+	 {
 		return true;
 	} else {
 		return false;
-	}
+ }
+}
