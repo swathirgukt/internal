@@ -64,11 +64,8 @@ public class LeaveDetailsServiceImpl implements LeaveDetailsService {
      * @return employeeIds list
      */
     public List<String> findAllEmployeeIds() {
-        List<String> employeeIds = new ArrayList<String>();
-        for (Employee employee : employeeRepository.findAll()) {
-            employeeIds.add(employee.getEmpId());
-        }
-        return employeeIds;
+
+        return employeeRepository.findAllEmpIds();
     }
 
 
