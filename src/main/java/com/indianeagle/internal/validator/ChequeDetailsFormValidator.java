@@ -54,7 +54,7 @@ public class ChequeDetailsFormValidator implements Validator {
 
     /**
      * Check null or empty
-     * @param value
+     * @param date
      * @return
      */
     public static boolean isEmpty(Date date) {
