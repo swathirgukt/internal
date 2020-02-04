@@ -39,10 +39,12 @@ import java.util.List;
  */
 @Service
 public class FormsServiceImpl implements FormsService, MessageSourceAware {
+	@Autowired
 	private MessageSource messageSource;
 	@Autowired
 	private SalaryHistoryRepository salaryHistoryRepository;
-	//private FormsResultData formsResultData;
+
+	private FormsResultData formsResultData;
 	@Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
 	@Autowired

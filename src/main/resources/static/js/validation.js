@@ -1,76 +1,3 @@
-function makeAJAXCall(requestUrl,formId) {
-    return jQuery.ajax({
-        url: requestUrl,
-        data: jQuery('#'+formId).serialize(),
-        type: "POST",
-        error: function(msg,err,exc){
-            console.log("#error: "+err);
-        }
-    });
-}
-
-function searchDepartment() {
-    var response = makeAJAXCall("/department/search", 'departmentForm');
-    response.done(function (responseData) {
-        if (responseData) {
-            $("#departmentResult").html(responseData);
-        }
-    });
-}
-
-function searchPeripheral() {
-    var response = makeAJAXCall("/peripheral/search", 'peripheralForm');
-    response.done(function (responseData) {
-        if (responseData) {
-            $("#peripheralResult").html(responseData);
-        }
-    });
-}
-
-function searchEmployeeLeaveReport() {
-    var response = makeAJAXCall("/employeeLeaveReport", 'employeeLeaveReportForm');
-    response.done(function (responseData) {
-        if (responseData) {
-            $("#employeeLeaveReportResult").html(responseData);
-        }
-    });
-}
-
-function searchAllEmployeeLeaveReport() {
-    var response = makeAJAXCall("/allEmployeeLeaveReport", 'allEmployeeLeaveReportForm');
-    response.done(function (responseData) {
-        if (responseData) {
-            $("#allEmployeeLeaveReportResult").html(responseData);
-        }
-    });
-}
-
-function saveDepartment() {
-    document.departmentForm.action = "/department/save";
-    document.departmentForm.submit();
-}
-function savePeripheral() {
-    document.peripheralForm.action = "/peripheral/save";
-    document.peripheralForm.submit();
-}
-
-function getLeaveBalance(){
-    var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
-    response.done(function(responseData){
-        if(responseData){
-            $("#leaveBalanceResult").html(responseData);
-        }
-    });
-}
-
-function findEmployeeLeaves(){
-    var response = makeAJAXCall("/findEmployeeLeaves",'employeeLeavesForm');
-    response.done(function(responseData){
-        if(responseData){
-            $("#leavesResult").html(responseData);
-        }
-    });
-}
 
 // Function  to enter only positive int value ,Usage : onkeypress="return allowPositiveInt(event)"
 function allowPositiveInt(evt) {
@@ -106,7 +33,7 @@ function allowPositiveInt(evt) {
           }
      }
 
-
+//allow the user to enter only monthly digits(1-31)
 function allowOnlyMonthlyDigits(evt, id) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         var value = document.getElementById(id).value;
@@ -139,9 +66,10 @@ function allowRealNo(evt, strval) {
 // Function  to enter only characters & spaces ,Usage : onkeypress="return allowCharactersAndSpaces(event)"
 function allowCharactersAndSpaces(evt) {
 	var charCode = (evt.which) ? evt.which : event.keyCode;
-	if ((charCode == 8) || (charCode == 32) || (charCode >=65 &&  charCode <= 90) || (charCode >=97 &&  charCode <= 122) ) {
+	if ((charCode == 8) || (charCode == 32) || (charCode >=65 &&  charCode <= 90) || (charCode >=97 &&  charCode <= 122) )
+	 {
 		return true;
 	} else {
 		return false;
-	}
+ }
 }

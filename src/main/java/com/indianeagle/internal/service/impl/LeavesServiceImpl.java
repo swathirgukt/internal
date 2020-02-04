@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
  * Date: 5/29/12
  * Time: 4:07 PM
  */
+
 @Service
 public class LeavesServiceImpl implements LeavesService {
     @Autowired

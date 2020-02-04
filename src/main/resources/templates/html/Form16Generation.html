@@ -40,7 +40,7 @@
                             <div>
                                 <table width="100%">
                                     <tr>
-                                        <td>
+                                        <td style="padding:5px">
                                             Employee&nbsp;ID
                                         </td>
                                         <td><b>:</b></td>
@@ -51,7 +51,7 @@
                                         <td>From</td>
                                         <td>
                                             <select>
-                                                <option value="jan">JAN</option>
+                                                <option value="jan" selected="selected">JAN</option>
                                                 <option value="feb">FEB</option>
                                                 <option value="mar">MAR</option>
                                                 <option value="apr">APR</option>
@@ -80,7 +80,7 @@
                                                 <option value="2008">2017</option>
                                                 <option value="2008">2018</option>
                                                 <option value="2008">2019</option>
-                                                <option value="2008">2020</option>
+                                                <option value="2008" selected="selected">2020</option>
                                                 <option value="2008">2021</option>
                                                 <option value="2008">2022</option>
                                                 <option value="2008">2023</option>
@@ -97,7 +97,7 @@
                                         <td>To</td>
                                         <td>
                                             <select>
-                                                <option value="jan">JAN</option>
+                                                <option value="jan" selected="selected">JAN</option>
                                                 <option value="feb">FEB</option>
                                                 <option value="mar">MAR</option>
                                                 <option value="apr">APR</option>
@@ -126,7 +126,7 @@
                                                 <option value="2008">2017</option>
                                                 <option value="2008">2018</option>
                                                 <option value="2008">2019</option>
-                                                <option value="2008">2020</option>
+                                                <option value="2008" selected="selected">2020</option>
                                                 <option value="2008">2021</option>
                                                 <option value="2008">2022</option>
                                                 <option value="2008">2023</option>
@@ -171,48 +171,48 @@
                     <div class="Heading">Income</div>
                     <div class="row">
                         <div class="col-md-8 col-sm-12 col-xs-10">
-                            <table width="100%">
+                            <table width="100%" id="incomeTable" align="center">
                                 <tr>
                                     <td>GROSS&nbsp;SALARY</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="grossSalary"  readonly="true" style="background-color:orange"></td>
                                 </tr>
                                 <tr>
                                     <td>Incentives</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="form16GenerationForm.incentives" ></td>
                                 </tr>
                                 <tr>
                                     <td>PLB</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="form16GenerationForm.plb"></td>
                                 </tr>
                                 <tr>
                                     <td>Reimbursement</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="form16GenerationForm.reimbursement" ></td>
                                 </tr>
                                 <tr>
                                     <td>Bonus</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="form16GenerationForm.bonus" ></td>
                                 </tr>
                                 <tr>
                                     <td>Others</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="form16GenerationForm.others" ></td>
                                 </tr>
                                 <tr>
                                     <td>Previous&nbsp;Company&nbsp;Income</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="form16GenerationForm.previousCompanyIncome" ></td>
                                 </tr>
                                 <tr>
                                     <td>Income&nbsp;Earned&nbsp;by&nbsp;Employee</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text">
-                                        <button class="submitButton">Save</button>
-                                        <button class="submitButton">Edit</button>
+                                    <td style="padding:5px"><input id="earnedIncome" name="form16GenerationForm.incomeEarnedByEmployee" type="text" readonly="true" style="background-color:orange">
+                                        <button class="submitButton" onClick="saveIncome()" type="button">Save</button>
+                                        <button class="submitButton" onclick="editIncome()" type="button">Edit</button>
                                     </td>
                                 </tr>
                             </table>
@@ -226,22 +226,22 @@
                                 <tr>
                                     <td>Actual&nbsp;HRA&nbsp;PER&nbsp;ANNUM</td>
                                     <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                 </tr>
                                 <tr>
                                     <td>40%&nbsp;of&nbsp;Salary&nbsp;(basic)</td>
                                     <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                 </tr>
                                 <tr>
                                     <td>Employee&nbsp;given&nbsp;-&nbsp;10%&nbsp;of&nbsp;Basic</td>
                                     <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                 </tr>
                                 <tr>
                                     <td>HRA Exempted</td>
                                     <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                 </tr>
                             </table>
                         </div>
@@ -257,42 +257,42 @@
                                     <tr>
                                         <td>GROSS&nbsp;SALARY</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text"></td>
+                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Net Taxable Income</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text"></td>
+                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Tax on Income</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text"></td>
+                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>EDU cess(3%)</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text"></td>
+                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Total Tax on Income</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text"></td>
+                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Less : TDS Deducted</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding;5px"><input name="" type="text"></td>
+                                        <td style="padding;5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Tax to be Deducted</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text"></td>
+                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Per Month Tax</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text">
+                                        <td style="padding:5px"><input name="" type="text" readonly="true">
                                         </td>
                                         <td style="padding:20px">
                                         </td>

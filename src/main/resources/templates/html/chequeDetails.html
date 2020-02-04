@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>Chequess</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
@@ -69,23 +68,18 @@
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
-    <form action="/saveChequeDetails" id="chequeForm" method="post" name="chequeForm" th:action="@{/saveChequeDetails}" th:object="${chequeDetailsForm}">
-
-
-
+    <form action="/">
         <div class="Heading">Cheque Details</div>
         <br>
         <div>
 							<span>
 								<span style="margin-left: 5px;">Cheque Date :</span>
 								<span style="margin-left: 10px;">
-									<input th:field="*{chequeDetails.chequeDate}"
-                                           type="text">
+									<input name="" type="">
 								</span>
 								<span style="margin-left: 60px;">Amount :</span>
 								<span style="margin-left: 10px;">
-									<input th:field="*{amount}"
-                                           type="text">
+									<input name="" type="">
 								</span>
 							</span>
         </div>
@@ -93,37 +87,28 @@
 							<span>
 								<span style="margin-left: 5px;">Cheque No* :</span>
 								<span style="margin-left: 10px;">
-									<input th:field="*{chequeDetails.chequeNo}"
-                                           type="text">
+									<input name="" type="">
 								</span>
 								<span style="margin-left: 70px;">Status :</span>
 								<span style="margin-left: 10px;">
-                                    <!--<select th:field="*{gender}">
-    <option th:value="'M'" th:text="Male"></option>
-    <option th:value="'F'" th:text="Female"></option>
-</select>-->
-									<span> <select th:field="*{chequeDetails.status}" name="id" style="width: 250px;height: 23px;">
-										<!--<option >&#45;&#45;Select&#45;&#45;</option>-->
-                                        <option label="select" value="select">select</option>
-										<option th:value="'i'" th:text="issued">issued</option>
-										<option th:value="'c'" th:text="cancel">cancel</option>
+									<span> <select name="id" style="width: 250px;height: 23px;">
+										<option>--Select--</option>
+										<option value="issued">issued</option>
+										<option value="cancel">cancel</option>
 									</select>
                                         <!-- <input type="" name=""> -->
 								</span>
 							</span>
-                            </span>
         </div>
         <div style="margin-top: 10px;">
 							<span>
 								<span style="margin-left: 5px;">Bank* :</span>
 								<span style="margin-left: 50px;">
-									<input th:field="*{ChequeDetails.bank}"
-                                           type="text">
+									<input name="" type="">
 								</span>
 								<span style="margin-left: 60px;">Name of pay* :</span>
 								<span style="margin-left: 10px;">
-									<input th:field="*{ChequeDetails.nameOfPay}"
-                                           type="text">
+									<input name="" type="">
 								</span>
 							</span>
         </div>
@@ -132,16 +117,12 @@
 							<span>
 								<span style="margin-left: 5px;">Comments:</span>
 								<span style="margin-left: 10px;">
-									<input th:field="*{ChequeDetails.comments}" type="text">
+									<input name="" style="width: 250px;height: 50px;" type="">
 								</span>
 							</span>
         </div>
         <div style="margin-left: 95px;margin-top: 10px;">
-            <button class="submitButton" onclick="saveCheque()" type="button"><b>Save</b></button>
-
-            <span th:if="${saveMessage}!=null" th:text="${saveMessage}"></span>
-            <span th:if="${updateMessage}!=null" th:text="${updateMessage}"></span>
-
+            <button class="btuun" onclick="alert('form Save!')" type="button">Save</button>
         </div>
         <div class="Heading"> Search Cheque Details</div>
         <br>
@@ -175,7 +156,7 @@
 								<input name="" type="">
 
 								<span style="margin-left: 10px;">
-									<button class="btuun" onclick="alert('form Search!')" type="submit">Search</button>
+									<button class="btuun" onclick="alert('form Search!')" type="button">Search</button>
 								</span>
 							</span>
 
