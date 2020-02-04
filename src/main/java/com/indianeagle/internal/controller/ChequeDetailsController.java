@@ -1,3 +1,4 @@
+/*
 package com.indianeagle.internal.controller;
 
 import com.indianeagle.internal.dto.ChequeDetails;
@@ -17,10 +18,12 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
+*/
 /**
  * @author
  * controller to perform operations on Cheque Details
- */
+ *//*
+
 @Controller
 public class ChequeDetailsController {
     //@Autowired
@@ -40,20 +43,24 @@ public class ChequeDetailsController {
 
 
 
-    /**
+    */
+/**
      * shows cheque details
      * @return String
-     */
+     *//*
+
     @GetMapping("/chequeDetailsController")
     public String chequeDetails() {
         return "chequeDetails";
     }
 
 
-    /**
+    */
+/**
      * To save or update the cheque details in database
      * @return
-     */
+     *//*
+
 @PostMapping("/saveChequeDetails")
     public String saveOrUpdate(ModelMap model,@Valid @ModelAttribute("chequeDetailsForm")  ChequeDetailsForm chequeDetailsForm, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
@@ -71,10 +78,12 @@ public class ChequeDetailsController {
         return "chequeDetails";
     }
 
-    /**
+    */
+/**
      * Retrieve the cheque details fromDate is mandatory
      * @return
-     */
+     *//*
+
 @PostMapping("/searchChequeDetails")
     public String search(ModelMap model, @ModelAttribute("chequeDetailsForm") @Valid ChequeDetailsForm chequeDetailsForm, BindingResult bindingResult){
     if (bindingResult.hasErrors()) {
@@ -112,3 +121,4 @@ public class ChequeDetailsController {
 
 
 }
+*/

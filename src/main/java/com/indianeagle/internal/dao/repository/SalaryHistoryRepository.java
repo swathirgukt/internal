@@ -42,7 +42,7 @@ public interface SalaryHistoryRepository extends JpaRepository<SalaryHistory, Lo
      * @param salaryDate
      * @return
      */
-    @Query("SELECT s from SalaryHistory s where MONTH(s.salaryDate) =  MONTH(:salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)")
+    @Query("SELECT  s from SalaryHistory s where MONTH(s.salaryDate) =  MONTH(:salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)")
     List<SalaryHistory> salaryReport(@Param("salaryDate") Date salaryDate);
 
     /**
@@ -76,7 +76,7 @@ public interface SalaryHistoryRepository extends JpaRepository<SalaryHistory, Lo
      * @param salaryDate
      * @return
      */
-    @Query("from SalaryHistory s where s.empId =:empId AND MONTH(s.salaryDate) =  MONTH(:salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)")
+    @Query("  from SalaryHistory s where s.empId =:empId AND MONTH(s.salaryDate) =  MONTH(:salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)")
     List<SalaryHistory> findSalaryHistoryByEmpId(@Param("empId") String empId, @Param("salaryDate") Date salaryDate);
 
     /**
@@ -86,7 +86,7 @@ public interface SalaryHistoryRepository extends JpaRepository<SalaryHistory, Lo
      * @param salaryDate,salaryEndDate
      * @return
      */
-    @Query("from SalaryHistory s where s.empId =:empId AND MONTH(s.salaryDate) =  MONTH(salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)AND MONTH(s.salaryDate) =  MONTH(:salaryEndDate) AND YEAR(s.salaryDate) = YEAR(:salaryEndDate)")
+    @Query(" from SalaryHistory s where s.empId =:empId AND MONTH(s.salaryDate) =  MONTH(salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)AND MONTH(s.salaryDate) =  MONTH(:salaryEndDate) AND YEAR(s.salaryDate) = YEAR(:salaryEndDate)")
     List<SalaryHistory> findSalaryHistoryByEmpId(@Param("empId") String empId, @Param("salaryDate") Date salaryDate, @Param("salaryEndDate") Date salaryEndDate);
 
     /**

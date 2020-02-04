@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@taglib uri="http://displaytag.sf.net" prefix="display" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Form V</title>
+    <style type="text/css">
+body{font-family:Arial;
+font-size:14px;
+margin:0 auto;padding:0px 0px 0px 0px;}
+
+
+    </style>
+    <script language="javascript">
+function printData(){
+    	document.getElementById("printButton").style.visibility = 'hidden';
+    	window.print();
+    }
+
+
+    </script>
+
+</head>
+<body>
+<table align="center" width="690px" cellpadding="0" cellspacing="0" style="border:1px solid #000000; ">
+    <tr>
+        <td>
+            <table align="center" width="690px" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td valign="top" align="center"
+                        style="border:1px solid #000000;border-left:none;border-top:none; width:150px">
+                        <b style="font-size:30px">FORM V</b><br/>
+                        (See Rule 12)
+                    </td>
+                    <td align="center" valign="top"
+                        style="border:1px solid #000000;border-left:none;border-top:none;border-right:none;">
+                        <b style="font-size:20px">RETURNS OF TAX PAYABLE BY EMPLOYER</b><br/>
+                        Under Sub-section (1) of Section 7 of the A.P. Tax on<br/>
+                        Professions, Trades, Calling and Employments Act, 1987
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+            </table>
+            <table align="center" width="690px" cellpadding="0" cellspacing="0"
+                   style="line-height:20px;padding-left:10px;">
+                <tr>
+                    <td width="230">Return of payable for month ending on</td>
+                    <td style="border-bottom:1px dotted #cccccc"><span
+                            th:text="${#dates.monthName(formsResultData.ptForm.returnPayMonth)}">Month</span><span
+                            th:text="${ #dates.year(formsResultData.ptForm.returnPayMonth)}"> year </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name of the Employer</td>
+                    <td style="border-bottom:1px dotted #cccccc"><span th:text="${formsResultData.ptForm.employerName}">Employee Name</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td style="border-bottom:1px dotted #cccccc"><span th:text="${formsResultData.ptForm.orgAddress}">OrganizationAddress</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Registration Certification No</td>
+                    <td style="border-bottom:1px dotted #cccccc"><span
+                            th:text="${formsResultData.ptForm.regiCertificateNo}">Registration Certification No</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">Number of employees during the month in respect of whom the tax is
+                        payble is as under
+                    </td>
+                </tr>
+            </table>
+            <table align="center" width="690px" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td align="center"
+                        style="background-color:#CCCCCC;padding:5px; border:1px solid #000000;border-left:none"><b>Employee
+                        Whose monthly salaries<br/>or wages or both are</b></td>
+                    <td align="center"
+                        style="background-color:#CCCCCC;width:100px;padding:5px; border:1px solid #000000; border-left:none">
+                        <b>Number of<br/>Employees</b></td>
+                    <td align="center"
+                        style="background-color:#CCCCCC;width:100px;padding:5px;border:1px solid #000000; border-left:none">
+                        <b>Rate of Tax<br/>Per month Rs.</b></td>
+                    <td align="center"
+                        style="background-color:#CCCCCC;width:100px;padding:5px;border:1px solid #000000; border-left:none;border-right:none">
+                        <b>Amount of Tax<br/>Deducted Rs.</b></td>
+                </tr>
+
+                <tr th:each="ptCal:${formsResultData.ptForm.ptCalculatorList}">
+                    <td align="left" style="padding:5px;border:1px solid #000000; border-top:none;border-left:none; ">
+                        &nbsp;<span th:text="${ptCal.salaryRange}">salary range</span></td>
+                    <td align="left"
+                        style="width:100px;padding:5px;border:1px solid #000000; border-top:none;border-left:none">
+                        <span th:text="${ptCal.noOfEmps}!=0?${ptCal.noOfEmps}:'NIL'">no of employees</span>
+
+
+                    </td>
+
+                    <td align="center"
+                        style="width:100px;padding:5px;border:1px solid #000000; border-top:none;border-left:none">
+                        <span th:text="${ptCal.taxPerMonth}!=0?${ptCal.taxPerMonth}:'NIL'">tax per month</span>
+
+
+                    </td>
+
+
+                    <td align="center"
+                        style="width:100px;padding:5px;border:1px solid #000000; border-top:none;border-left:none;border-right:none">
+                        <span th:text="${ptCal.deductedTax}!=0?${ptCal.deductedTax}:'NIL'">deducted tax</span>
+
+
+                    </td>
+
+
+                </tr>
+                </s:iterator>
+                <tr>
+                    <td align="justify"
+                        style="padding:5px;border:1px solid #000000; border-top:none; border-right:none;border-left:none">
+                        <b style="float:right">Total Number Of Employees :</b><br/>
+                        Add:Simple interest payble (if any) on the
+                        above amount at two percent per month or
+                        part thereof(vide Section 11 of the Act)
+                    </td>
+                    <td valign="top" colspan="3"
+                        style="padding:5px;border:1px solid #000000; border-top:none; border-left:none;border-right:none">
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td align="left">
+                                    <b><span th:text="${formsResultData.ptForm.empsCount}">Employee Count</span> </b>
+                                </td>
+                                <td align="right"><b>Total Rs. </b>
+                                    <b><span
+                                            th:text="${formsResultData.ptForm.totalAmountPaid}">Total Amount Paid</span>/-</b>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    Rupees&nbsp;<b><span th:text="${formsResultData.ptForm.totalAmountPaidInWords}">Amount in words</span></b>&nbsp;Only
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"
+                        style="padding:5px;border:1px solid #000000; border-right:none;border-top:none;border-left:none">
+                        <b>GRAND TOTAL RS : </b><br>
+                    </td>
+                    <td colspan="3"
+                        style="padding:5px;border:1px solid #000000;  border-left:none;border-top:none;border-right:none">
+                        <b><span th:text="${formsResultData.ptForm.totalAmountPaidInWords}">Amount in words</span>/-</b>
+                    </td>
+                </tr>
+
+            </table>
+            <table align="center" width="690px" cellpadding="0" cellspacing="0"
+                   style="padding-left:5px;padding-right:10px; border-bottom:2px solid #000000;line-height:20px;">
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+                <tr>
+                    <td width="100px">Amount Paid</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;"><b><span
+                            th:text="${formsResultData.ptForm.totalAmountPaid}">total amount</span>/-</b></td>
+                    <td width="100px">under Challan No</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;">&nbsp;</td>
+                    <td width="100px">Dated</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        I certify that all the employees who are liable to pay the tax in my employ during the period of
+                        return have been
+                        covered by the foregoing particulars. i also certify that the necessary revision in the amount
+                        of tax deductible
+                        from the salary or wages of the employees on account of variation in the salary or wages earned
+                        by them has
+                        been made wherever necessary.
+                    </td>
+                </tr>
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="border-bottom:1px dotted #cccccc;">I &nbsp;&nbsp; <span
+                            th:text="${formsResultData.ptForm.authorizedPerson}">Authorized Person</span></td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        solemnly declare that above statements are true to the best of my knowledge and belief.
+                    </td>
+                </tr>
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+                <tr>
+                    <td width="100px">Place</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;"><span
+                            th:text="${formsResultData.ptForm.place}">Place</span></td>
+                    <td colspan="2" width="200px">&nbsp;</td>
+                    <td align="right" width="100px">Signature</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="6" width="690px" align="right">(Employer)</td>
+                </tr>
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+                <tr>
+                    <td width="100px">Date</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;"></td>
+                    <td colspan="2" width="200px">&nbsp;</td>
+                    <td align="right" width="100px">Signature</td>
+                    <td style="border-bottom:1px dotted #cccccc;width:100px;"></td>
+                </tr>
+            </table>
+            <table align="center" width="690px" cellpadding="0" cellspacing="0" style="line-height:20px;">
+                <tr>
+                    <td height="3px"></td>
+                </tr>
+                <tr>
+                    <td align="center">(FOR OFFICIAL USE)</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:10px">The returns is accepted on verification</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table align="center" width="690px" cellpadding="0" cellspacing="0" style="padding-left:10px">
+                            <tr>
+                                <td width="100px">Tax assessed</td>
+                                <td style="border-bottom:1px dotted #cccccc;width:100px;">Rs</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table align="center" width="690px" cellpadding="0" cellspacing="0"
+                               style="padding-left:10px;padding-right:10px;">
+                            <tr>
+                                <td width="100px">Tax Paid</td>
+                                <td style="border-bottom:1px dotted #cccccc;width:100px;">Rs</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table align="center" width="690px" cellpadding="0" cellspacing="0"
+                               style="padding-left:10px;padding-right:10px;">
+                            <tr>
+                                <td width="100px">Blance</td>
+                                <td style="border-bottom:1px dotted #cccccc;width:100px;">Rs</td>
+                                <td>&nbsp;</td>
+                                <td style="border-bottom:1px dotted #cccccc;width:100px;">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" style="padding-right:10px;">Assessing Authority</td>
+                </tr>
+                <tr>
+                    <td align="center">Note: where the return is not acceptable separate order of assessment should be
+                        passed.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table align="center" width="680px" cellpadding="0" cellspacing="0" style="line-height:25px;">
+    <tr>
+        <td align="center"><br/> <a id="printButton" href="#" onclick="javascript:printData()">Print</a></td>
+    </tr>
+</table>
+
+</body>
+</html>
