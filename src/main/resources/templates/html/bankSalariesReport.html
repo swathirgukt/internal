@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns:th="http://www.w3.org/1999/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<style type="text/css">
+body{font-family:Arial;
+font-size:12px;
+margin:0 auto;padding:0px 0px 0px 0px;}
+</style>
+</head>
+
+<body>
+<table align="center" width="600px" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="center" style="line-height:25px;">
+			<b>YANA SOFTWARE PRIVATE LIMITED<br />
+				SALARIES FOR THE MONTH OF  <<span th:text="${formsResultData.bankSalariesForm.salaryDate}" format="MMMMM-yyyy" ></span></b>		</td>
+	</tr>
+	<tr>
+		<td align="right">
+		Date:<span th:text="${#dates.createNow()}"></span></td>
+	</tr>
+	<tr>
+		<td>
+			To,<br />
+			The HDFC Bank Ltd.,<br />
+			Himayatnagar Branch, HYD.<br/>
+		</td>
+	</tr>
+	<tr><td><p style="padding-left:40px"><br/>Sub: Yana Software Private Limited, Employees salaries towards <br/>the month  of <span th:text="${formsResultData.bankSalariesForm.salaryDate}"  ></span></p>
+		<p>Please credit the salaries for the month of <span th:text="${formsResultData.bankSalariesForm.salaryDate}" format="MMMMM-yyyy" ></span> in the below mentioned account numbers from Yana Software Pvt Ltd , HDFC Account No: 00812320006268</p>
+	</td></tr>
+	<tr>
+		<td>
+			<table width="100%" cellpadding="0" cellspacing="0" style="line-height:25px;">
+				<tr>
+					<td align="center" width="50px" style="border:1px solid #000000">S.No.</td>
+					<td align="center" width="210px" style="border:1px solid #000000;border-left:none;">Name</td>
+					<td align="center" width="180px" style="border:1px solid #000000;border-left:none;">Account No.</td>
+					<td align="center" width="150px" style="border:1px solid #000000;border-left:none;">Salary</td>
+				</tr>
+				<tr
+				 th:each="bankSalariesInfo :${formsResultData.bankSalariesForm.bankSalariesInfoList}">
+					<td align="center" width="50px" style="border:1px solid #000000; border-top:none"th:text="${bankSalariesInfo.slNo}"/></td>
+					<td align="left" width="210px" style="border:1px solid #000000;border-left:none; border-top:none"th:text="${bankSalariesInfo.empFullName}"/></td>
+					<td align="center" width="180px" style="border:1px solid #000000;border-left:none; border-top:none;" th:text="${bankSalariesInfo.bankAcNo}">="</td>
+					<td align="right" width="150px" style="border:1px solid #000000;border-left:none;border-top:none;"th:text="${bankSalariesInfo.salary}"/></td>
+				</tr>
+
+				<tr>
+					<td align="center" width="50px" style="border:1px solid #000000; border-top:none">&nbsp;</td>
+					<td align="left" width="210px" style="border:1px solid #000000;border-left:none; border-top:none"><b>Total</b></td>
+					<td align="center" width="180px" style="border:1px solid #000000;border-left:none; border-top:none;"></td>
+					<td align="right" width="150px" style="border:1px solid #000000;border-left:none;border-top:none;"th:text="formsResultData.bankSalariesForm.totalSal" /></td>
+				</tr>
+
+<tr>
+					
+					<td colspan="4" align="center"  >(Rupees)<span th:text="${formsResultData.bankSalariesForm.totalSalInWords}"></span></td>
+					
+					
+				</tr>			</table>
+		</td>
+	</tr>
+	<tr><td height="60px">&nbsp;<br/><br/><br/></td></tr>
+	<tr>
+		<td>Ramesh Kandrakota<br />Manager(O&M)</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -152,14 +152,18 @@ public class FormsActionController {
         FormsResultData formsResultData = new FormsResultData();
         try {
             if (salaryDate == null) {
+                System.out.println("error");
                 modelMap.addAttribute("error", "Please Enter Date");
+                return "html/reportError";
             }
        // FormsResultData formsResultData= new FormsResultData();
                 formsResultData.setBankSalariesForm(monthlyReportService.getBankSalariesReport(salaryDate));
             if(formsResultData.getBankSalariesForm().getBankSalariesInfoList().size()==0){
                modelMap.addAttribute("error","No Records Found");
+                return "html/reportError";
             }
             modelMap.addAttribute("formsResultData",formsResultData);
+            System.out.println(formsResultData.getBankSalariesForm().getBankSalariesInfoList());
         } catch (Exception e) {
             e.printStackTrace();
         }
