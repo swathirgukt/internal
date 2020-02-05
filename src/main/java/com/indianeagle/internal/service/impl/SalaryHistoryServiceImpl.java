@@ -30,13 +30,19 @@ import java.util.List;
 public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSourceAware {
 	
 	private static final Logger log = Logger.getLogger(SalaryHistoryServiceImpl.class);
+	@Autowired
 	private MessageSource messageSource;
 	@Autowired
 	private SalaryHistoryRepository salaryHistoryRepository;
+	@Autowired
 	private MailingEngine mailingEngine;
+	@Autowired
     private SalaryHistory salaryHistory;
+
     private List<Employee> employees;
+	@Autowired
     private TemplateEngine templateEngine;
+
 	private FontFactoryImp factoryImp;
 
 	public List<SalaryHistory> searchSalaryHistory(String empId, Date periodDate) {
