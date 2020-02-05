@@ -23,7 +23,6 @@
                           th:action="@{/generateSalary}" th:object="${salaryForm}">
                         <div class="Heading">Generate salary for Employee</div>
                         <span style="color: #008000;" th:if="${mailSent}!=null" th:text="${mailSent}"></span>
-                        <span style="color: #ff0000;" th:if="${error}!=null" th:text="${error}"></span>
                         <div class="row">
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed">
@@ -166,11 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span style="color:#ff0000;" th:if="${duplicateError}!=null" th:text="${duplicateError}"></span>
-                        <span style="color:#ff0000;" th:if="${technicalError}!=null" th:text="${technicalError}"></span>
-                        <span style="color:#ff0000;" th:if="${invalidDatesError}!=null" th:text="${invalidDatesError}"></span>
-                        <span style="color:#ff0000;" th:if="${exception}!=null" th:text="${exception}"></span>
-
+                        <span style="color:#ff0000;" th:if="${error}!=null" th:text="${error}"></span>
                     </form>
                 </div>
             </div>

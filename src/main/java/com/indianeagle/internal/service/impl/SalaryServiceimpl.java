@@ -32,6 +32,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 
+import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -48,13 +49,8 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     @Autowired
     private Employee employee;
     @Autowired
-    private SalaryHistory currentSalary;
-    @Autowired
     private MailingEngine mailingEngine;
 
-    private List<Employee> currSalaryEmpList;
-
-    private List<SalaryHistory> currentSalaryList;
     @Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
     @Autowired
@@ -90,8 +86,6 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
             emp.setCurrentSalary(currentSalary);
             currSalaryEmpList.add(emp);
         }
-        this.currSalaryEmpList = currSalaryEmpList;
-        this.currentSalaryList = currentSalaryList;
         return currentSalaryList;
     }
 
@@ -138,7 +132,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         return false;
     }
 
-    public List<SalaryHistory> produceAllSalaries(GenerateAllSalariesForm generateAllSalariesForm) throws Exception {
+    public List<SalaryHistory> produceAllSalaries(GenerateAllSalariesForm generateAllSalariesForm, HttpSession httpSession) throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(generateAllSalariesForm.getSalaryDate());
         Calendar calendarForToDate = Calendar.getInstance();
@@ -193,17 +187,19 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
                 throw e;
             }
         }
-        this.currSalaryEmpList = currSalaryEmpList;
-        this.currentSalaryList = currentSalaryList;
+        httpSession.setAttribute("currSalaryEmpList"+httpSession.getId(), currSalaryEmpList);
+        httpSession.setAttribute("currentSalaryList"+httpSession.getId(), currentSalaryList);
         return currentSalaryList;
     }
 
 
 
-    public void sendAllPaySlipMails(String contextPath) throws Exception {
-        this.salaryHistoryRepository.saveAll(this.currentSalaryList);
+    public void sendAllPaySlipMails(HttpSession httpSession) throws Exception {
+        List<SalaryHistory> currentSalaryList = (List)httpSession.getAttribute("currentSalaryList"+httpSession.getId());
+        List<Employee> currSalaryEmpList = (List)httpSession.getAttribute("currSalaryEmpList"+httpSession.getId());
+        salaryHistoryRepository.saveAll(currentSalaryList);
         int counter = 0;
-        for (Employee emp : this.currSalaryEmpList) {
+        for (Employee emp : currSalaryEmpList) {
             if (counter == 20) {
                 log.debug("::::::::: Hold on for 2 minutes :::::::::");
                 counter = 0;
@@ -211,7 +207,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
                 log.debug("Thank you for your time! Continue......");
             }
             ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-            PaySlipPdfUtils.generatePaySlipPdf((TemplateEngine) this.templateEngine, (OutputStream) arrayOutputStream, (String) (TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".vm"), (Object[]) new Object[]{contextPath, emp, emp.getCurrentSalary()});
+            PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "mail/IE_Payslip", (Object[]) new Object[]{ emp, emp.getCurrentSalary()});
             this.mailingEngine.sendMail(emp, emp.getCurrentSalary(), (InputStreamSource) new ByteArrayResource(arrayOutputStream.toByteArray()), false);
             counter += 1;
         }
@@ -256,7 +252,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     public void confirmAndSendMail(Employee employee, SalaryHistory currentSalary) throws Exception {
         SalaryHistory salaryHistory = salaryHistoryRepository.save(currentSalary);
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, (OutputStream)arrayOutputStream, "mail/IE_Payslip", (Object[])new Object[]{ employee, currentSalary});
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "mail/IE_Payslip", (Object[])new Object[]{ employee, currentSalary});
         mailingEngine.sendMail(employee, currentSalary, (InputStreamSource)new ByteArrayResource(arrayOutputStream.toByteArray()), false);
     }
 

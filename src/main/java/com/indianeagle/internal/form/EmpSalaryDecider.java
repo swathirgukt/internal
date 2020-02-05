@@ -22,7 +22,7 @@ public class EmpSalaryDecider {
 
     private String empId;
     private String fullName;
-    private BigDecimal lopDays;
+    private BigDecimal lopDays= BigDecimal.ZERO;
     private BigDecimal arrearsDays = BigDecimal.ZERO;
     private BigDecimal salaryInAdvance = BigDecimal.ZERO;
     private boolean empExclude;

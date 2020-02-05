@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Esalary_Report</title>
+</head>
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<div class="Heading">Monthly Salary Report</div>
+<div th:if="${currentSalaryList} != null AND ${currentSalaryList.size()}>0">
+    <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+        <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+            <th>S.No</th>
+            <th>EMP_ID</th>
+            <th>EMP_NAME</th>
+            <th>DESIGNATIO</th>
+            <th>DOJ</th>
+            <th>SAL_DATE</th>
+            <th>SAL_END_DATE</th>
+            <th>BASIC</th>
+            <th>HRA</th>
+            <th>CON</th>
+            <th>MED</th>
+            <th>SPL</th>
+            <th>GRA</th>
+            <th>BONUS</th>
+            <th>PER</th>
+            <th>N.A.</th>
+            <th>T.A.</th>
+            <th>P.I.</th>
+            <th>OTH</th>
+            <th>GROSS</th>
+            <th>PF</th>
+            <th>ESI</th>
+            <th>PT</th>
+            <th>MED_INS</th>
+            <th>SAL_ADV</th>
+            <th>TDS</th>
+            <th>TOTAL_D</th>
+            <th>NET</th>
+            <th>AC_NO</th>
+            <th>BANK</th>
+            <th>ARR</th>
+            <th>LOP</th>
+        </tr>
+        <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+            th:each="salary , status :${currentSalaryList}" th:object="${salary}">
+            <td th:text="${status.count}"></td>
+            <td th:text="*{empId}"></td>
+            <td th:text="*{fullName}"></td>
+            <td th:text="*{designation}"></td>
+            <td th:text="*{#dates.format(joinDate,'MM-dd-yyyy')}"></td>
+            <td th:text="*{#dates.format(salaryDate,'MM-dd-yyyy')}"></td>
+            <td th:text="*{#dates.format(salaryEndDate,'MM-dd-yyyy')}"></td>
+            <td th:text="*{basic}"></td>
+            <td th:text="*{hra}"></td>
+            <td th:text="*{conveyence}"></td>
+            <td th:text="*{medicalAllowance}"></td>
+            <td th:text="*{specialAllowance}"></td>
+            <td th:text="*{telephoneAllowance}"></td>
+            <td th:text="*{bonus}"></td>
+            <td th:text="*{performanceLinkedPay}"></td>
+            <td th:text="*{internetAllowance}"></td>
+            <td th:text="*{uniformAllowance}"></td>
+            <td th:text="*{performanceIncentives}"></td>
+            <td th:text="*{otherAllowance}"></td>
+            <td th:text="*{grossSalary}"></td>
+            <td th:text="*{pfEmp}"></td>
+            <td th:text="*{esi}"></td>
+            <td th:text="*{PTax}"></td>
+            <td th:text="*{medicalInsurance}"></td>
+            <td th:text="*{salaryInAdvance}"></td>
+            <td th:text="*{incomeTax}"></td>
+            <td th:text="*{totalDeductions}"></td>
+            <td th:text="*{netSalary}"></td>
+            <td th:text="*{bankAc}"></td>
+            <td th:text="*{bankName}"></td>
+            <td th:text="*{arrearsDays}"></td>
+            <td th:text="*{lopDays}"></td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <div style="float: right">
+                <a class="anchorButton" href="javascript: window.history.go(-1);">Re-Generate</a>
+                <a th:href="@{/confirmAndSendPaySlipMails}" class="anchorButton">ConfirmAndSave</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="font: 15pt 'Arial Black';color: #ff0000;"
+     th:if="${currentSalaryList}!=null  AND ${currentSalaryList.size()}==0">
+    Nothing found to display
+</div>
+<footer th:insert="html/fragment/footer :: footer"></footer>
+</body>
+</html>

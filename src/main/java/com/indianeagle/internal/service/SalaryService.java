@@ -6,6 +6,8 @@ import com.indianeagle.internal.dto.SalaryHistory;
 import com.indianeagle.internal.form.EmployeeSettlementForm;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
 import com.indianeagle.internal.form.SalaryRule;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /*
@@ -31,7 +33,7 @@ public interface SalaryService {
 
     List<SalaryHistory> generateSalaries(String department, SalaryRule salaryRule) throws Exception;
 
-    void sendAllPaySlipMails(String contextPath) throws Exception;
+    void sendAllPaySlipMails(HttpSession httpSession) throws Exception;
 
     /**
      * method to load employee based on empID i.e
@@ -66,7 +68,7 @@ public interface SalaryService {
      * @return List<SalaryHistory>
      * @throws Exception
      */
-    List<SalaryHistory> produceAllSalaries(GenerateAllSalariesForm generateAllSalariesForm) throws Exception;
+    List<SalaryHistory> produceAllSalaries(GenerateAllSalariesForm generateAllSalariesForm, HttpSession httpSession) throws Exception;
 
     /**
      * Method to calculate the employee settlement

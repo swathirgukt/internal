@@ -181,12 +181,12 @@
                                                     <td align="center">&nbsp;</td>
                                                     <td width="71">&nbsp;</td>
                                                     <td align="center" height="21px" class="button btnDefault" width="128">
-                                                        <a style="text-decoration:none;color:#FFFFFF" href="javascript: window.history.go(-1);">Re-Generate</a>
+                                                        <a style="text-decoration:none;color:#FFFFFF" href="javascript: window.history.go(-1);"><button>Re-Generate</button></a>
                                                     </td>
                                                     <td style="width:33px;">&nbsp;</td>
 
                                                     <td style="border:none;" height="21px" align="center" class="button btnDefault" width="100">
-                                                        <a cssStyle="text-decoration:none;color:#FFFFFF" th:href="@{/confirmAndSendMail(empId=${salaryForm.employee.empId})}">Confirm</a>
+                                                        <a th:href="@{/confirmAndSendMail(empId=${salaryForm.employee.empId})}"><button>Confirm</button></a>
                                                     </td>
                                                 </table>
                                             </td>
