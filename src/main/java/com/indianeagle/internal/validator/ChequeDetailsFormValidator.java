@@ -1,5 +1,6 @@
 package com.indianeagle.internal.validator;
 
+import com.indianeagle.internal.dto.ChequeDetails;
 import com.indianeagle.internal.form.ChequeDetailsForm;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -18,10 +19,13 @@ public class ChequeDetailsFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         ChequeDetailsForm chequeDetailsForm=(ChequeDetailsForm)target;
+        System.out.println(chequeDetailsForm);
+        ChequeDetails chequeDetails=chequeDetailsForm.getChequeDetails();
+        System.out.println(chequeDetailsForm.getAmount());
 
         if(isEmpty(chequeDetailsForm.getChequeDetails().getChequeDate()))
         {
-            errors.rejectValue("date","provide.date");
+           errors.rejectValue("date","provide.date");
         }
 
         if(chequeDetailsForm.getChequeDetails().getAmount().doubleValue()==0)
@@ -47,14 +51,14 @@ public class ChequeDetailsFormValidator implements Validator {
 
         if(StringUtils.isEmpty(chequeDetailsForm.getChequeDetails().getComments()))
         {
-            errors.rejectValue("nameOfPay","provide.nameOfPay");
+            errors.rejectValue("comments","provide.comments");
         }
 
     }
 
     /**
      * Check null or empty
-     * @param value
+     * @param
      * @return
      */
     public static boolean isEmpty(Date date) {

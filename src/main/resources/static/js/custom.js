@@ -73,13 +73,24 @@ function findEmployeeLeaves(){
     });
 }
 
-
 function saveCheque()
 {	document.chequeForm.action="/saveChequeDetails";
 	document.chequeForm.submit();
 }
-function submitSearch()
+function searchChequeDetails()
 {
-document.cheque.action="./searchChequeDetails.action";
-document.cheque.submit();
+var response = makeAJAXCall("/searchChequeDetails", 'chequeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#chequeSearchResult").html(responseData);
+        }
+
+    });
+/*document.cheque.action="./searchChequeDetails.action";
+document.cheque.submit();*/
+}
+
+function updateMyDetails()
+{	document.updateForm.action="/saveEmployee";
+	document.updateForm.submit();
 }

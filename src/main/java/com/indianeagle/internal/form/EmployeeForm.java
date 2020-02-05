@@ -4,13 +4,14 @@ import com.indianeagle.internal.dto.Department;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.Role;
 import com.indianeagle.internal.dto.User;
+import com.indianeagle.internal.vo.EmployeeVO;
 
 import java.util.Date;
 import java.util.List;
 
 public class EmployeeForm {
 
-    private Employee employee;
+    private EmployeeVO employeeVO;
     private List<Department> departments;
     private List<Employee> employeeList;
     private List<Role> rolesList;
@@ -56,15 +57,15 @@ public class EmployeeForm {
     /**
      * @return the employee
      */
-    public Employee getEmployee() {
-        return employee;
+    public EmployeeVO getEmployeeVO() {
+        return employeeVO;
     }
 
     /**
-     * @param employee the employee to set
+     * @param employeeVO the employee to set
      */
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeVO(EmployeeVO employeeVO) {
+        this.employeeVO = employeeVO;
     }
 
     /**
