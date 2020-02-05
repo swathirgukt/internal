@@ -1,25 +1,10 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Chequess</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet"/>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#calendar1').click(function (event) {
-                $('.start_date').datepicker('show');
-            });
 
 
-            $('#calendar2').click(function (event) {
-                $('.end_date').datepicker('show');
-            });
-        });
-    </script>
     <style type="text/css">
         .Heading {
             font-size: 20px;
@@ -55,31 +40,29 @@
             box-shadow: 0 8px 6px 0 #ff9933;
         }
     </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(function () {
-                console.log('Calendar function-----');
-                $("#datepicker").datepicker();
-            });
-        })
 
-    </script>
     <head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
-    <form action="/">
+    <form action="saveChequeDetails" id="chequeForm" method="post" name="chequeForm" th:action="@{saveChequeDetails}" th:object="${chequeDetailsForm}">
+
+
+
         <div class="Heading">Cheque Details</div>
         <br>
         <div>
 							<span>
 								<span style="margin-left: 5px;">Cheque Date :</span>
 								<span style="margin-left: 10px;">
-									<input name="" type="">
+                                    <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
+                                            width="200px" name="datepicker" th:field="*{chequeDetails.chequeDate}"/>
+                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
 								</span>
 								<span style="margin-left: 60px;">Amount :</span>
 								<span style="margin-left: 10px;">
-									<input name="" type="">
+									<input th:field="*{chequeDetails.amount}"
+                                           type="text"/>
 								</span>
 							</span>
         </div>
@@ -87,28 +70,37 @@
 							<span>
 								<span style="margin-left: 5px;">Cheque No* :</span>
 								<span style="margin-left: 10px;">
-									<input name="" type="">
+									<input th:field="*{chequeDetails.chequeNo}"
+                                           type="text"/>
 								</span>
 								<span style="margin-left: 70px;">Status :</span>
 								<span style="margin-left: 10px;">
-									<span> <select name="id" style="width: 250px;height: 23px;">
-										<option>--Select--</option>
-										<option value="issued">issued</option>
-										<option value="cancel">cancel</option>
+                                    <!--<select th:field="*{gender}">
+    <option th:value="'M'" th:text="Male"></option>
+    <option th:value="'F'" th:text="Female"></option>
+</select>-->
+									<span> <select th:field="*{chequeDetails.status}" name="id" style="width: 250px;height: 23px;">
+										<!--<option >&#45;&#45;Select&#45;&#45;</option>-->
+                                        <option label="select" value="select">select</option>
+										<option th:value="'Issued'" th:text="issued">issued</option>
+										<option th:value="'Issued'" th:text="cancel">cancel</option>
 									</select>
                                         <!-- <input type="" name=""> -->
 								</span>
 							</span>
+                            </span>
         </div>
         <div style="margin-top: 10px;">
 							<span>
 								<span style="margin-left: 5px;">Bank* :</span>
 								<span style="margin-left: 50px;">
-									<input name="" type="">
+									<input th:field="*{ChequeDetails.bank}"
+                                           type="text">
 								</span>
 								<span style="margin-left: 60px;">Name of pay* :</span>
 								<span style="margin-left: 10px;">
-									<input name="" type="">
+									<input th:field="*{ChequeDetails.nameOfPay}"
+                                           type="text">
 								</span>
 							</span>
         </div>
@@ -117,12 +109,16 @@
 							<span>
 								<span style="margin-left: 5px;">Comments:</span>
 								<span style="margin-left: 10px;">
-									<input name="" style="width: 250px;height: 50px;" type="">
+									<input th:field="*{ChequeDetails.comments}" type="text">
 								</span>
 							</span>
         </div>
         <div style="margin-left: 95px;margin-top: 10px;">
-            <button class="btuun" onclick="alert('form Save!')" type="button">Save</button>
+            <button class="submitButton" onclick="saveCheque()" type="button"><b>Save</b></button>
+
+            <span th:if="${saveMessage}!=null" th:text="${saveMessage}"></span>
+            <span th:if="${updateMessage}!=null" th:text="${updateMessage}"></span>
+
         </div>
         <div class="Heading"> Search Cheque Details</div>
         <br>
@@ -132,40 +128,45 @@
             <span>From </span>
             <span style="color: red">*:</span>
             <div class="input-group">
-                <input class="form-control start_date" data-inputmask="'alias':'mm/dd/yyyy'" data-mask=""
-                       id="start_date" name="start_date" type="text" value="">
-                <div class="input-group-addon" id="calendar1">
-                    <i class="fa fa-calendar"></i>
-                </div>
+                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
+                       width="200px" name="datepicker" th:field="*{fromDate}"/>
+                <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
             </div>
         </div>
         <div class="col-md-3">
             <span>To </span>
             <span style="color: red">*:</span>
             <div class="input-group">
-                <input class="form-control end_date" data-inputmask="'alias':'mm/dd/yyyy'" data-mask="" id="end_date"
-                       name="end_date" type="text" value="">
-                <div class="input-group-addon" id="calendar2">
-                    <i class="fa fa-calendar"></i>
-                </div>
+                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
+                       width="200px" name="datepicker" th:field="*{toDate}"/>
+                <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
+
             </div>
         </div>
         <div style="margin-top: 20px">
             <span style="margin-left: 60px;">Amount :</span>
             <span style="margin-left: 10px;">
-								<input name="" type="">
+								<input th:field="*{amount}"
+                                       type="text"/>
 
 								<span style="margin-left: 10px;">
-									<button class="btuun" onclick="alert('form Search!')" type="button">Search</button>
+									<button class="searchButton" onclick="searchChequeDetails()" type="button">Search</button>
 								</span>
 							</span>
 
 
         </div>
 
-</div>
+
 
 </form>
+<div class="row">
+    <div class="col-md-12 col-sm-10 col-xs-5">
+        <div id="chequeSearchResult" class="tableScrollbar">
+        </div>
+    </div>
+
+</div>
 </div>
 
 <footer th:insert="html/fragment/footer :: footer"></footer>

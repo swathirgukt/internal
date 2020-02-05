@@ -71,19 +71,19 @@
                                     <a th:href="@{fSettlement}">F & F Settlement</a>
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Salary
                                         Report <i class="fa fa-caret-right"></i></a>
-                                        <div class="dropdown-menu-2">
+                                        <div  class="dropdown-menu-2">
                                             <a th:href="@{salaryHistory}">Salary History</a>
                                             <a th:href="@{salaryReportHome}">Monthly Salary Report</a>
                                             <a th:href="@{basicSalaryDetailsForm}">Basic Salary Report</a>
-                                            <a th:href="@{bankSalaryStatement}">Bank Salary Statement</a>
+                                            <a th:href="@{organisationForm?form=bankstatement}">Bank Salary Statement</a>
                                         </div>
                                     </div>
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Forms
                                         <i class="fa fa-caret-right"></i></a>
                                         <div class="dropdown-menu-2">
-                                            <a th:href="@{PT}">PT</a>
-                                            <a th:href="@{ESI}">ESI</a>
-                                            <a th:href="@{PF}">PF</a>
+                                            <a th:href="@{organisationForm?form=PT}">PT</a>
+                                            <a th:href="@{organisationForm?form=ESI}">ESI</a>
+                                            <a th:href="@{organisationForm?form=PF}">PF</a>
                                         </div>
                                     </div>
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Incentives
@@ -98,7 +98,7 @@
                                         <div class="dropdown-menu-2">
                                             <a th:href="@{itSections}">IT Sections</a>
                                             <a th:href="@{employeeSavings}">Employee Savings</a>
-                                            <a th:href="@{Form16Generation}">Form16 Generation</a>
+                                            <a th:href="@{/form16Generation}">Form16 Generation</a>
                                             <a th:href="@{savedForms}">Saved Forms</a>
                                         </div>
                                     </div>

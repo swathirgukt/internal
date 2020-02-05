@@ -5,6 +5,7 @@ package com.indianeagle.internal.form;
 
 import com.indianeagle.internal.util.SimpleUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,12 @@ public class PtForm {
         }
         return empsCount;
     }
-
+    public String rtMonth(){
+        String returnPMonth="";
+        Calendar calendar= Calendar.getInstance();
+        returnPMonth=returnPMonth+returnPayMonth.getMonth()+" "+returnPayMonth.getYear();
+        return  returnPMonth;
+    }
     public String getTotalAmountPaidInWords() {
         return SimpleUtils.numberToWord(getTotalAmountPaid().intValue());
     }
