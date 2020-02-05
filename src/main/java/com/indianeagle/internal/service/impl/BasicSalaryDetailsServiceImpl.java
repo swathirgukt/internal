@@ -8,7 +8,6 @@ import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.service.BasicSalaryDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**

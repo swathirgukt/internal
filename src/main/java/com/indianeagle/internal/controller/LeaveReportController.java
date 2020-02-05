@@ -44,7 +44,7 @@ public class LeaveReportController {
     List<String> employeeIds;
 
     @PostConstruct
-    public void prepare(){
+    public void loadData(){
         employeeIds = leaveDetailsService.findAllEmployeeIds();
     }
 

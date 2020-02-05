@@ -1,11 +1,15 @@
 <!Doctype html>
-<html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Salary By Individual</title>
-    <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript"></script>
-</head>
+    <style type="text/css">
+        .input-style {
+			width: 200px;
+			height: 20px;
+		}
 
+    </style>
+</head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
@@ -15,139 +19,158 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container">
-                    <form action="/netSalary">
+                    <form action="/generateSalary" method="post" id="SalaryForm" name="salaryForm"
+                          th:action="@{/generateSalary}" th:object="${salaryForm}">
                         <div class="Heading">Generate salary for Employee</div>
+                        <span style="color: #008000;" th:if="${mailSent}!=null" th:text="${mailSent}"></span>
+                        <span style="color: #ff0000;" th:if="${error}!=null" th:text="${error}"></span>
                         <div class="row">
-                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed">
                                     <tr>
                                         <td>
-                                            Employee&nbsp;ID<span style="color: red">*</span>
+                                            Employee ID<span style="color: red">*</span>
                                         </td>
                                         <td>
                                             <b>:</b>
                                         </td>
                                         <td>
-                                            <select class="selectOption" name="id">
-                                                <option>--Select--</option>
-                                                <option value="IEPL076">IEPL076</option>
-                                                <option value="IEPL077">IEPL077</option>
+                                            <select class="input-style" name="id" th:field="*{employeeId}">
+                                                <option th:each="employee : *{employeeList}"
+                                                        th:value="${employee.empId}">[[${employee.empId}]]
+                                                </option>
                                             </select>
+                                            <span style="color:#ff0000;" th:errors="*{employeeId}"
+                                                  th:if="${#fields.hasErrors('employeeId')}"></span>
+
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
                                 <div>
                                     <table>
                                         <tr>
                                             <td>
                                                 From <span style="color: red">*</span>
                                             </td>
-                                            <td>
-                                                <b>:</b>
-                                            </td>
-                                            <td>
-                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="170px"
-                                                       name="datepicker"/>
-                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td width="20px">To<span style="color: red">*</span>
-                                            </td>
                                             <td width="20px">
                                                 <b>:</b>
                                             </td>
-                                            <td width="20px">
-                                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
-                                                       width="170px"
-                                                       name="datepicker"/>
-                                                <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                                            <td>
+                                                <input id="from" width="150px" name="from"
+                                                       th:field="*{salaryRule.salaryDate}">
+                                                <span style="color:#ff0000;" th:errors="*{salaryRule.salaryDate}"
+                                                      th:if="${#fields.hasErrors('salaryRule.salaryDate')}"></span>
+                                            </td>
+                                            <script>$('#from').datepicker({ uiLibrary: 'bootstrap' });</script>
 
+                                            <td>
+                                                To <span style="color: red">*</span>
+                                            </td>
+                                            <td width="20px">
+                                                <b>:</b>
+                                            </td>
+                                            <td>
+                                                <input id="to" width="150px" name="to"
+                                                       th:field="*{salaryRule.salaryEndDate}">
+                                                <span style="color:#ff0000;" th:errors="*{salaryRule.salaryEndDate}"
+                                                      th:if="${#fields.hasErrors('salaryRule.salaryEndDate')}"></span>
+                                            </td>
+                                            <script>$('#to').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="Heading">Attendance Details</div>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed ">
                                     <tr>
-                                        <td>LOP&nbsp;Days</td>
+                                        <td>LOP Days</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="lopDays" name="lopDays"
-                                                   style="width: 250px;height: 23px;" type="text" onkeypress="return allowOnlyMonthlyDigits(event,'lopDays')">
+                                            <input class="input-style" id="Lop Days" name="Lop Days"
+                                                   style="width: 200px;height: 23px;" type="text"
+                                                   th:field="*{salaryRule.lopDays}">
+                                            <span style="color:#ff0000;" th:errors="*{salaryRule.lopDays}"
+                                                  th:if="${#fields.hasErrors('salaryRule.lopDays')}"></span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>PER&nbsp;Incentives</td>
+                                        <td>PER Incentives</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="PER Incentives" name="PER Incentives"
-                                                   style="width: 250px;height: 23px;" type="text" maxlength="12" onkeypress="return allowRealNo(event,this.value)">
+                                            <input class="input-style" id="ARR Days" name="ARR Days"
+                                                   style="width: 200px;height: 23px;" type="text"
+                                                   th:field="*{salaryRule.performanceIncentives}">
+                                            <span style="color:#ff0000;" th:errors="*{salaryRule.performanceIncentives}"
+                                                  th:if="${#fields.hasErrors('salaryRule.performanceIncentives')}"></span>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed ">
                                     <tr>
-                                        <td>ARR&nbsp;Days</td>
+                                        <td>ARR Days</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="arrearDays"  name="arrearDays"
-                                                   style="width: 250px;height: 23px;"
-                                                   type="text" onkeypress="return allowOnlyMonthlyDigits(event, 'arrearDays')"></td>
+                                            <input class="input-style" id="PER Incentives" name="PER Incentives"
+                                                   style="width: 200px;height: 23px;"
+                                                   type="text" th:field="*{salaryRule.arrearsDays}">
+                                            <span style="color:#ff0000;" th:errors="*{salaryRule.arrearsDays}"
+                                                  th:if="${#fields.hasErrors('salaryRule.arrearsDays')}"></span></td>
+
                                         <td></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
 
-                        <div class="Heading">Deductions&nbsp;Details</div>
+                        <div class="Heading">Deductions Details</div>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table class="table-condensed ">
                                     <tr>
-                                        <td>Salary&nbsp;In&nbsp;Advance</td>
+                                        <td>Salary In Advance</td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="Salary In Advance" name="Salary In Advance"
-                                                   type="text" style="width: 240px;height: 23px;" onkeypress="return allowRealNo(event,this.value)" maxlength="12">
+                                                   type="text" th:field="*{salaryRule.salaryInAdvance}">
+                                            <span style="color:#ff0000;" th:errors="*{salaryRule.salaryInAdvance}"
+                                                  th:if="${#fields.hasErrors('salaryRule.salaryInAdvance')}"></span>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-10">
+                            <div class="col-md-6 col-sm-12 col-xs-10">
                                 <div>
                                     <table class="table-condensed ">
                                         <tr>
-                                            <td> Misc&nbsp;Deductions</td>
+                                            <td> Misc Deductions</td>
                                             <td><b>:</b></td>
                                             <td>
                                                 <input class="input-style" id="Misc Deductions" name="Misc Deductions"
-                                                       type="text" style="width: 240px;height: 23px;" onkeypress="return allowRealNo(event,this.value)" maxlength="12">
+                                                       type="text" th:field="*{salaryRule.miscDeductions}">
+                                                <span style="color:#ff0000;" th:errors="*{salaryRule.miscDeductions}"
+                                                      th:if="${#fields.hasErrors('salaryRule.miscDeductions')}"></span>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div style="float: right">
-                                    <button class="submitButton" onclick="javascript:form.submit" type="button"><b>Generate
-                                        Salary</b>
-                                    </button>
+                                    <button class="submitButton" type="submit">Generate Salary</button>
                                 </div>
                             </div>
                         </div>
+                        <span style="color:#ff0000;" th:if="${duplicateError}!=null" th:text="${duplicateError}"></span>
+                        <span style="color:#ff0000;" th:if="${technicalError}!=null" th:text="${technicalError}"></span>
+                        <span style="color:#ff0000;" th:if="${invalidDatesError}!=null" th:text="${invalidDatesError}"></span>
+                        <span style="color:#ff0000;" th:if="${exception}!=null" th:text="${exception}"></span>
+
                     </form>
                 </div>
             </div>

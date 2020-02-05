@@ -26,11 +26,13 @@ public class ApplicationSessionImpl implements ApplicationSession {
 	 * @return string
 	 */
 	public String loginUserName(){
-		return getContext().getAuthentication().getName();	
+
+		return getContext().getAuthentication().getName();
 	}
 
 	@Override
 	public GrantedAuthority[] ApplicationSession() {
+
 		return new GrantedAuthority[0];
 	}
 

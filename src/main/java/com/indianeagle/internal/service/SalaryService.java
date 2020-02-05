@@ -27,7 +27,7 @@ public interface SalaryService {
 
     SalaryHistory generateSalary(Employee employee, SalaryRule salaryRule) throws Exception;
 
-    void confirmAndSendMail(String contextPath) throws Exception;
+    void confirmAndSendMail(Employee employee, SalaryHistory currrentSalary) throws Exception;
 
     List<SalaryHistory> generateSalaries(String department, SalaryRule salaryRule) throws Exception;
 
@@ -39,7 +39,7 @@ public interface SalaryService {
      * @param empID
      * @return List<Employee>
      */
-    List<Employee> loadEmployee(String empID);
+    Employee loadEmployee(String empID);
 
     /**
      * method to load Employees based on Department
