@@ -69,9 +69,9 @@ public class MailingEngine {
 
                 MimeMessageHelper eMail = new MimeMessageHelper(mimeMessage, true);
                 eMail.setSubject(SUBJECT.concat(SimpleUtils.MONTHYYYY.format(salaryHistory.getSalaryEndDate())).toUpperCase());
-                eMail.setFrom(FROM_MAIL_ID);
+                //eMail.setFrom(FROM_MAIL_ID);
                 eMail.setTo(employee.getOfficialEmail());
-                eMail.setBcc(FROM_MAIL_ID);
+                //eMail.setBcc(FROM_MAIL_ID);
                 eMail.addAttachment(("PAYSLIP-".concat(SimpleUtils.MONTH_YYYY.format(salaryHistory.getSalaryEndDate())).concat(".pdf")).toUpperCase(), inputStreamSource);
                 if (old) {
                     eMail.setText(DEAR.concat(employee.getFullName()).concat(PLEASE_FIND).concat(SimpleUtils.dateInWord(salaryHistory.getSalaryEndDate())).concat(".").concat(OLD_MESSAGE).concat(SALARY_RELATED).concat(StringConstants.HR_MAIL_ID).concat(".").concat(PWD_NOTE), true);

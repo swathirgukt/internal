@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -46,10 +47,13 @@ public class ApproveLeaveController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    @PostConstruct
+    public void loadData(){
+        employeeIds = leaveDetailsService.findAllEmployeeIds();
+    }
 
     @GetMapping("/approveLeave")
     public String approveLeaveView(ModelMap modelMap) {
-        employeeIds = leaveDetailsService.findAllEmployeeIds();
         modelMap.addAttribute("employeeIds", employeeIds);
         modelMap.addAttribute("leaveApproveForm", new LeaveApproveForm());
         return "html/approveLeave";

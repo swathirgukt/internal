@@ -1,9 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/html">
 <head>
     <title>Form16Generation</title>
 
 </head>
+<script>
+function searchEmployeeByNameInForm16Generation(){
+    console.log("in searchemployee java script method");
+  var url="/searchEmployeeByNameInForm16Generation";
+  var form=document.getElementById("form16GenerationData");
+  form.action=url;
+  form.submit();
+    }
+    function setEmployeeId(empId){
+    console.log(empId);
+    document.getElementById('empId').value=empId;
+}
+</script>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
@@ -12,7 +25,7 @@
         </div>
         <div class="col-lg-8 text-left">
             <div class="jumbotron">
-                <form action="/">
+                <form  id="form16GenerationData" method="post" th:action="saveEmployee" name="form16Generation" th:object="${employeeFinancialYearForm}" theme="simple">
                     <div class="Heading">Income Tax Sections</div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-10">
@@ -23,15 +36,25 @@
                                             Employee&nbsp;Name
                                         </td>
                                         <td><b>:</b></td>
-                                        <td><input name="" type=""></td>
+                                        <td><input  type="text" name="empName"/></td>
                                         <td>
-                                            <button class="submitButton" onclick="alert('form Search!')">Search&nbsp;Employee&nbsp;By&nbsp;Name
+                                            <button class="submitButton" onclick="searchEmployeeByNameInForm16Generation()"> Search Employee By Name
                                             </button>
                                         </td>
+
                                         <td style="padding:20px">
                                         </td>
                                     </tr>
                                 </table>
+                                <span style="color;red" th:if="${retrieveNameError}!=null" th:text="${retrieveNameError}"></span>
+                                <div th:if="${employsList}!=null">
+                                    <ul>
+                                    <li style="padding:10px 0px;" th:each="employeeData :${employsList}">
+                                        <label style="color:blue;"><a onclick="setEmployeeId(\'' + ${employeeData.empId} + '\')"><span th:text="${employeeData.empId}"/></a></label>
+                                        &nbsp; &nbsp;<label style="color:blue;"><a onclick="setEmployeeId(\'' + ${employeeData.empId} + '\')"><span th:text="${employeeData.fullName}"/></a></label>
+                                    </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -44,100 +67,37 @@
                                             Employee&nbsp;ID
                                         </td>
                                         <td><b>:</b></td>
-                                        <td><input name="" type=""></td>
+
+                                        <td><input  th:field="${employeeFinancialYearForm.empId}" id="empId" type="text"onblur="retrieveEmployeeInfoInForm16()"/></td>
                                         <td>
                                             Financial&nbsp;Year
                                         </td>
                                         <td>From</td>
                                         <td>
-                                            <select>
-                                                <option value="jan" selected="selected">JAN</option>
-                                                <option value="feb">FEB</option>
-                                                <option value="mar">MAR</option>
-                                                <option value="apr">APR</option>
-                                                <option value="may">MAY</option>
-                                                <option value="jun">JUN</option>
-                                                <option value="jul">JUL</option>
-                                                <option value="aug">AUG</option>
-                                                <option value="sep">SEP</option>
-                                                <option value="oct">OCT</option>
-                                                <option value="nov">NOV</option>
-                                                <option value="dec">DEC</option>
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromMonth}">
+                                                <option th:each="months : ${financialYearForm.months}" th:value="${months}" th:text="${months}">
+                                                </option>
                                             </select>
                                         </td>
                                         <td>
-                                            <select>
-                                                <option value="2007">2007</option>
-                                                <option value="2008">2008</option>
-                                                <option value="2008">2009</option>
-                                                <option value="2008">2010</option>
-                                                <option value="2008">2011</option>
-                                                <option value="2008">2012</option>
-                                                <option value="2008">2013</option>
-                                                <option value="2008">2014</option>
-                                                <option value="2008">2015</option>
-                                                <option value="2008">2016</option>
-                                                <option value="2008">2017</option>
-                                                <option value="2008">2018</option>
-                                                <option value="2008">2019</option>
-                                                <option value="2008" selected="selected">2020</option>
-                                                <option value="2008">2021</option>
-                                                <option value="2008">2022</option>
-                                                <option value="2008">2023</option>
-                                                <option value="2008">2024</option>
-                                                <option value="2008">2025</option>
-                                                <option value="2008">2026</option>
-                                                <option value="2008">2027</option>
-                                                <option value="2008">2028</option>
-                                                <option value="2008">2029</option>
-                                                <option value="2008">2030</option>
-
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromYear}">
+                                                <option th:each="years : ${financialYearForm.years}" th:value="${years}" th:text="${years}">
+                                                </option>
                                             </select>
+
                                         </td>
                                         <td>To</td>
                                         <td>
-                                            <select>
-                                                <option value="jan" selected="selected">JAN</option>
-                                                <option value="feb">FEB</option>
-                                                <option value="mar">MAR</option>
-                                                <option value="apr">APR</option>
-                                                <option value="may">MAY</option>
-                                                <option value="jun">JUN</option>
-                                                <option value="jul">JUL</option>
-                                                <option value="aug">AUG</option>
-                                                <option value="sep">SEP</option>
-                                                <option value="oct">OCT</option>
-                                                <option value="nov">NOV</option>
-                                                <option value="dec">DEC</option>
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromMonth}">
+                                                <option th:each="months : ${financialYearForm.months}" th:value="${months}" th:text="${months}">
+                                                </option>
                                             </select>
+
                                         </td>
                                         <td>
-                                            <select>
-                                                <option value="2007">2007</option>
-                                                <option value="2008">2008</option>
-                                                <option value="2008">2009</option>
-                                                <option value="2008">2010</option>
-                                                <option value="2008">2011</option>
-                                                <option value="2008">2012</option>
-                                                <option value="2008">2013</option>
-                                                <option value="2008">2014</option>
-                                                <option value="2008">2015</option>
-                                                <option value="2008">2016</option>
-                                                <option value="2008">2017</option>
-                                                <option value="2008">2018</option>
-                                                <option value="2008">2019</option>
-                                                <option value="2008" selected="selected">2020</option>
-                                                <option value="2008">2021</option>
-                                                <option value="2008">2022</option>
-                                                <option value="2008">2023</option>
-                                                <option value="2008">2024</option>
-                                                <option value="2008">2025</option>
-                                                <option value="2008">2026</option>
-                                                <option value="2008">2027</option>
-                                                <option value="2008">2028</option>
-                                                <option value="2008">2029</option>
-                                                <option value="2008">2030</option>
-
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromYear}">
+                                                <option th:each="years : ${financialYearForm.years}" th:value="${years}" th:text="${years}">
+                                                </option>
                                             </select>
                                         </td>
                                         <td>

@@ -8,7 +8,6 @@ import com.indianeagle.internal.util.DateUtils;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 /**
@@ -21,10 +20,9 @@ import java.util.*;
 /**
  *  @author Unskrishna
  */
-
 @Service
 public class ApprovedLeaveServiceImpl implements ApprovedLeaveService {
-@Autowired
+       @Autowired
     private ApprovedLeavesRepository approvedLeavesRepository;
 
     /**

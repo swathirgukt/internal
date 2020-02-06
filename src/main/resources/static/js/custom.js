@@ -44,6 +44,14 @@ function searchAllEmployeeLeaveReport() {
         }
     });
 }
+function searchAllESalaryEmployee() {
+    var response = makeAJAXCall("/searchAllESalaryEmployee", 'generateAllSalariesForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#eSalaryResult").html(responseData);
+        }
+    });
+}
 
 function saveDepartment() {
     document.departmentForm.action = "/department/save";
@@ -144,4 +152,25 @@ function allowCharactersAndSpaces(evt) {
 	} else {
 		return false;
 	}
+}
+function saveCheque()
+{	document.chequeForm.action="/saveChequeDetails";
+	document.chequeForm.submit();
+}
+function searchChequeDetails()
+{
+var response = makeAJAXCall("/searchChequeDetails", 'chequeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#chequeSearchResult").html(responseData);
+        }
+
+    });
+/*document.cheque.action="./searchChequeDetails.action";
+document.cheque.submit();*/
+}
+
+function updateMyDetails()
+{	document.updateForm.action="/saveEmployee";
+	document.updateForm.submit();
 }

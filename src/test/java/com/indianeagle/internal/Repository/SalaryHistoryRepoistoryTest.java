@@ -73,4 +73,9 @@ public class SalaryHistoryRepoistoryTest {
     public void getMonthlypFReport() {
         salaryHistoryRepository.getMonthlyPfReport(date, new BigDecimal("5000"));
     }
+    @Test
+    public void salaryReport2(){
+        List<SalaryHistory> salaryHistories=salaryHistoryRepository.salaryReport(date,date1);
+        System.out.println(salaryHistories.size());
+    }
 }
