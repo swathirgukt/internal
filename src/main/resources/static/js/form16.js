@@ -110,6 +110,7 @@
 
 
 
+
 function taxSlabEdit() {
     $("#taxSlabSaveBtn").show();
     $("#taxSlabCancelBtn").show();
@@ -139,7 +140,7 @@ function removeTaxSlab(){
 }
 function addRebate() {
 
-    $("#addRebateTable").append("<tr> <td>Name</td><td><b>:</b></td>  <td><input class='inputfield' name='' type='text' value=''></td><td>Income&nbsp;Limit</td><td><b>:</b></td><td><input class='inputfield' name='' type='text' value=''></td><td>Amount</td><td><b>:</b></td> <td><input class='inputfield' name='' type='text' value=''></td> <td><button class='submitButton' name='rebateSave' onclick='saveRebate()'><b>Save<b></button></td><td><button class='submitButton' name='rebateEdit' onclick='editRebate()'> <b>Edit</b>  </button> </td> <td> <button class='submitButton' onclick='removeRebate()'> <b>Remove</b></button></td></tr>");
+    $("#addRebateTable").append("<tr> <td>Name</td><td><b>:</b></td>  <td><input class='inputfield' name='' type='text' value=''></td><td>Income&nbsp;Limit</td><td><b>:</b></td><td><input class='inputfield' name='' type='text' value=''></td><td>Amount</td><td><b>:</b></td> <td><input class='inputfield' name='' type='text' value=''></td> <td><button class='submitButton' name='rebateSave' onclick='saveRebate()'><b>Save<b></button></td><td><button class='submitButton' name='rebateEdit' onclick='editRebate()'> <b>Edit</b>  </button> </td> <td> <button class='submitButton'  name='rebateRemove'  onclick='removeRebate()'> <b>Remove</b></button></td></tr>");
 }
 //Rebate
 //rebate save
@@ -157,7 +158,9 @@ $(document).on('click', "button[name='rebateEdit']", function() {
 });
 
 function removeRebate(){
-    $("#addRebateTable tr:last").remove();
+   // $("#addRebateTable tr:last").remove(); name="rebateRemove"
+    $('table').on('click', 'button[name="rebateRemove"]', function(e){
+          $(this).closest('tr').remove()});
 }
 
 //Sections-U/s10
@@ -180,14 +183,12 @@ var tableName=$('#addTable table:last').attr('name');
 
 function saveSection(){
 var newSectionName=document.getElementById('sectionName').value;
-
-
-
-     var tableRow="</span><button class='submitButton' onClick='add()' type='button'>ADD</button><table width='100%' class='table_text_style table-sm'><tr><td><span class='head'>Section&nbsp;Limit</span></td>  <td><input class='inputfieldsection' type='text' value=''></td><td><button class='submitButton'><b>Save</b></button></td> <td>  <button class='submitButton'><b>Edit</b></button></td><td><button class='submitButton' style='float:right; margin-right: 5px;'><b>Remove&nbsp;Section</b> </button></td>  </tr> </table></span>";
+     var tableRow="</span><button class='submitButton' onClick='add()' type='button'>ADD</button><table width='100%' class='table_text_style table-sm'><tr><td><span class='head'>Section&nbsp;Limit</span></td>  <td><input class='inputfieldsection' type='text' value=''></td><td><button class='submitButton' name='newSectionSave'><b>Save</b></button></td> <td>  <button class='submitButton' name='newSectionEdit'><b>Edit</b></button></td><td><button class='submitButton' style='float:right; margin-right: 5px;'onclick='removeSection()' name='newSectionRemove'><b>Remove&nbsp;Section</b> </button></td>  </tr> </table></span>";
 
                      $("#addNewSection").append("<span id='additional'><span class='Heading'>");
-                       $("#addNewSection").append(newSectionName);
+              $("#addNewSection").append(newSectionName);
                      $("#addNewSection").append(tableRow);
+
 
                     // document.getElementById('addNameToNewSection').innerHTML=newSectionName;
                       $('#addNew').prop('disabled', false);
@@ -195,7 +196,15 @@ var newSectionName=document.getElementById('sectionName').value;
                         if(tableName=="remove"){
                         $("#addTable table:last").remove();
                         }
+                         $(document).on('click', "button[name='us80dSave']", function() {
+                                                      $(this).closest('tr').find("input").each(function() {
+                                                          $(this).prop("readonly",true).css('background-color','#D3D3D3');
+                                                      });
+                                                  });
+
+
 }
+
 
 function add(){
 
@@ -203,19 +212,82 @@ function add(){
     $("#additional").append(tableRow);
 
 }
-function removeSection(){
-    $("#us10 table").remove();
-    }
-function removeSection(){
-    $("#us80C table").remove();
-    }
 
-    function saveUs10(){
-     $("#us10section tr:last input").prop("readonly", true).css('background-color', '#D3D3D3');
-    }
-     function editUs10(){
-         $("#us10section tr:last input").prop("readonly", false).css('background-color', 'rgb(255, 255, 255)');
-        }
-        function removeUs10(){
-              $("#us10section tr:last").remove();
-             }
+//us10 save
+$(document).on('click', "button[name='us10Save']", function() {
+    $(this).closest('tr').find("input").each(function() {
+        $(this).prop("readonly",true).css('background-color','#D3D3D3');
+    });
+});
+
+//us10 edit
+$(document).on('click', "button[name='us10Edit']", function() {
+    $(this).closest('tr').find("input").each(function() {
+        $(this).prop("readonly",false).css('background-color','#FFFFFF');
+    });
+});
+            //function removeUs10(){
+              //$("#us10section tr:last").remove();us10Remove
+              $(document).on('click', 'button[name="us10Remove"]', function(){
+                        $(this).closest('tr').remove()});
+             //}
+
+             $(document).on('click', "button[name='us80cSave']", function() {
+                 $(this).closest('tr').find("input").each(function() {
+                     $(this).prop("readonly",true).css('background-color','#D3D3D3');
+                 });
+             });
+             $(document).on('click', "button[name='us80cEdit']", function() {
+                 $(this).closest('tr').find("input").each(function() {
+                     $(this).prop("readonly",false).css('background-color','#FFFFFF');
+                 });
+             });
+
+
+                          $(document).on('click', 'button[name="us80cRemove"]', function(){
+                                                        $(this).closest('tr').remove()});
+
+
+             $(document).on('click', "button[name='us80dSave']", function() {
+                              $(this).closest('tr').find("input").each(function() {
+                                  $(this).prop("readonly",true).css('background-color','#D3D3D3');
+                              });
+                          });
+                          $(document).on('click', "button[name='us80dEdit']", function() {
+                                           $(this).closest('tr').find("input").each(function() {
+                                               $(this).prop("readonly",false).css('background-color','#FFFFFF');
+                                           });
+                                       });
+
+                            $(document).on('click', 'button[name="us80dRemove"]', function(){
+                                            $(this).closest('tr').remove()});
+
+            //for new section
+                            $(document).on('click', "button[name='newSectionSave']", function() {
+                             $(this).closest('tr').find("input").each(function() {
+                                 $(this).prop("readonly",true).css('background-color','#D3D3D3');
+                             });
+                         });
+                         $(document).on('click', "button[name='newSectionEdit']", function() {
+                                                      $(this).closest('tr').find("input").each(function() {
+                                                          $(this).prop("readonly",false).css('background-color','#FFFFFF');
+                                                      });
+                                                  });
+
+
+
+
+             $(document).on('click', 'button[name="newSectionRemove"]', function(){
+                            $(this).closest('table').remove()});
+
+
+                           $(document).on('click', 'button[name="us10RemoveSection"]', function(){
+                            $(this).closest('table').remove()});
+
+                      $(document).on('click', 'button[name="us80cRemoveSection"]', function(){
+                         $(this).closest('table').remove()});
+
+                       $(document).on('click', 'button[name="us80dRemoveSection"]', function(){
+                            $(this).closest('table').remove()});
+
+
