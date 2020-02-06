@@ -33,7 +33,6 @@
                                 </Table>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
-                                <div>
                                     <Table width="100%" class="table_text_style  table-sm">
                                         <tr>
                                             <td>To&nbsp;Date</td>
@@ -45,40 +44,17 @@
                                             </td>
                                         </tr>
                                     </Table>
-                                </div>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
                                 <div style="float: right">
-                                    <button class="submitButton" type="button">GO</button>
+                                    <button class="submitButton" onclick="searchAllESalaryEmployee()" type="button">GO</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-md-12">
-                                    <table class="table_text_style table  table-bordered ">
-                                        <tr style="background-color: black;color: white;">
-                                            <td>Exclude</td>
-                                            <td>Employee&nbsp;Id</td>
-                                            <td>Employee&nbsp;Name</td>
-                                            <td>LOP</td>
-                                            <td>ARR. Days</td>
-                                            <td>Salary&nbsp;Advance</td>
-                                            <td>Performance&nbsp;Incentives</td>
-                                        </tr>
-                                        <tr th:each="decider , status : *{empSalaryDeciderList}">
-                                            <td><input type="checkbox" th:field="*{empSalaryDeciderList[__${status.index}__].empExclude}"/></td>
-                                            <td><input style="border:0px none;" readonly="true" type="text" th:field="*{empSalaryDeciderList[__${status.index}__].empId}"/></td>
-                                            <td><input style="border:0px none;" readonly="true" type="text" th:field="*{empSalaryDeciderList[__${status.index}__].fullName}"/></td>
-                                            <td><input type="text" th:field="*{empSalaryDeciderList[__${status.index}__].lopDays}"/></td>
-                                            <td><input type="text" th:field="*{empSalaryDeciderList[__${status.index}__].arrearsDays}"/></td>
-                                            <td><input type="text" th:field="*{empSalaryDeciderList[__${status.index}__].salaryInAdvance}"/></td>
-                                            <td><input type="text" th:field="*{empSalaryDeciderList[__${status.index}__].performanceIncentives}"/></td>
-                                        </tr>
-                                    </table>
-                                <span style="color:#ff0000;font-size:20px;" th:if="*{empSalaryDeciderList}!=null  AND *{empSalaryDeciderList.size()}==0" >
-                                    Salary already generated for this month
-                                </span>
-                            </div>
+                                <div id="eSalaryResult" name="eSalaryResult" th:include="html/fragment/eSalaryResult::eSalaryResult">
+                                </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-md-12">

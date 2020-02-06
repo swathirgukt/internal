@@ -64,18 +64,18 @@ public class SalaryController {
         salaryForm = new SalaryForm();
 
         List departmentList = departmentService.loadAllDepartments();
-        List<DepartmentVO> departmentVOList= new ArrayList<>();
+        List<DepartmentVO> departmentVOList = new ArrayList<>();
         departmentList.stream().forEach(employee -> {
-            DepartmentVO departmentVO= new DepartmentVO();
-            BeanUtils.copyProperties(employee,departmentVO);
+            DepartmentVO departmentVO = new DepartmentVO();
+            BeanUtils.copyProperties(employee, departmentVO);
             departmentVOList.add(departmentVO);
         });
 
         List<Employee> employeeList = salaryService.loadActiveEmployees();
-        List<EmployeeVO> employeeVOList= new ArrayList<>();
+        List<EmployeeVO> employeeVOList = new ArrayList<>();
         employeeList.stream().forEach(employee -> {
-            EmployeeVO employeeVO= new EmployeeVO();
-            BeanUtils.copyProperties(employee,employeeVO);
+            EmployeeVO employeeVO = new EmployeeVO();
+            BeanUtils.copyProperties(employee, employeeVO);
             employeeVOList.add(employeeVO);
         });
 
@@ -92,7 +92,7 @@ public class SalaryController {
     @ModelAttribute
     public void model(ModelMap modelMap) {
         modelMap.addAttribute("salaryform", salaryForm);
-        modelMap.addAttribute("generateAllSalariesForm",new GenerateAllSalariesForm());
+        modelMap.addAttribute("generateAllSalariesForm", new GenerateAllSalariesForm());
     }
 
     @GetMapping("/salaryByIndividual")
@@ -143,7 +143,7 @@ public class SalaryController {
     @GetMapping("/confirmAndSendMail")
     public String confirmAndSendMail(ModelMap model, HttpSession httpSession, @RequestParam String empId) {
         try {
-            model.addAttribute("salaryForm",this.salaryForm);
+            model.addAttribute("salaryForm", this.salaryForm);
             Employee employee = (Employee) httpSession.getAttribute("employee" + empId);
             SalaryHistory currentSalary = (SalaryHistory) httpSession.getAttribute("currentSalary" + empId);
             if (employee != null && currentSalary != null) {
@@ -162,9 +162,9 @@ public class SalaryController {
     }
 
     @GetMapping("/eSalary")
-    public String produceAllSalariesForm(ModelMap model,@ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
+    public String produceAllSalariesForm(ModelMap model,  @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
         try {
-            generateAllSalariesForm = this.salaryService.fillProduceAllSalariesForm(generateAllSalariesForm);
+            generateAllSalariesForm = salaryService.fillProduceAllSalariesForm(generateAllSalariesForm);
             model.addAttribute("generateAllSalariesForm", generateAllSalariesForm);
         } catch (Exception e) {
             model.addAttribute("error", "error occured due to technical problem");
@@ -174,16 +174,31 @@ public class SalaryController {
         return "html/eSalary";
     }
 
+    @PostMapping("/searchAllESalaryEmployee")
+    public String searchAllESalaryEmployee(ModelMap model, @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
+        try {
+            generateAllSalariesForm = salaryService.fillProduceAllSalariesForm(generateAllSalariesForm);
+            model.addAttribute("generateAllSalariesForm", generateAllSalariesForm);
+        } catch (Exception e) {
+            model.addAttribute("error", "error occured due to technical problem");
+            e.printStackTrace();
+            return "html/fragment/eSalaryResult";
+        }
+        return "html/fragment/eSalaryResult";
+    }
+
+
     @PostMapping("/produceAllSalaries")
-    public String produce(ModelMap modelMap, HttpServletRequest servletRequest, HttpSession httpSession, @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm){
+    public String produce(ModelMap modelMap, HttpServletRequest servletRequest, HttpSession httpSession, @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
         log.warn((Object) "###produceAllSalaries started");
         List<SalaryHistory> listOfChangedSalaries = new ArrayList<>();
         List<SalaryHistory> currentSalaryList;
         ArrayList<String> empIdsOfDeductedSalaries = new ArrayList<String>();
         try {
-            if (!SimpleUtils.reqParamExist((Enumeration)servletRequest.getParameterNames())) {
+            if (!SimpleUtils.reqParamExist((Enumeration) servletRequest.getParameterNames())) {
                 for (EmpSalaryDecider empSalaryDecider : generateAllSalariesForm.getEmpSalaryDeciderList()) {
-                    if ((empSalaryDecider.getLopDays() == null || empSalaryDecider.getLopDays().equals(BigDecimal.ZERO)) && empSalaryDecider.getSalaryInAdvance().equals(BigDecimal.ZERO) && empSalaryDecider.getArrearsDays().equals(BigDecimal.ZERO)) continue;
+                    if ((empSalaryDecider.getLopDays() == null || empSalaryDecider.getLopDays().equals(BigDecimal.ZERO)) && empSalaryDecider.getSalaryInAdvance().equals(BigDecimal.ZERO) && empSalaryDecider.getArrearsDays().equals(BigDecimal.ZERO))
+                        continue;
                     empIdsOfDeductedSalaries.add(empSalaryDecider.getEmpId().trim());
                 }
                 currentSalaryList = salaryService.produceAllSalaries(generateAllSalariesForm, httpSession);
@@ -194,18 +209,17 @@ public class SalaryController {
                     }
                 }
             } else {
-                currentSalaryList = (List)httpSession.getAttribute("currentSalaryList");
-                listOfChangedSalaries = (List)httpSession.getAttribute("editedSalaryList");
+                currentSalaryList = (List) httpSession.getAttribute("currentSalaryList");
+                listOfChangedSalaries = (List) httpSession.getAttribute("editedSalaryList");
             }
             modelMap.addAttribute("currentSalaryList", currentSalaryList);
             modelMap.addAttribute("listOfChangedSalaries", listOfChangedSalaries);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             modelMap.addAttribute("error", "error occured due to technical problem");
             e.printStackTrace();
             return "html/eSalary";
         }
-        log.warn((Object)"###produceAllSalaries end");
+        log.warn((Object) "###produceAllSalaries end");
         return "html/eSalaryReport";
     }
 

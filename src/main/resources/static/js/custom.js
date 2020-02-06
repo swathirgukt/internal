@@ -44,6 +44,14 @@ function searchAllEmployeeLeaveReport() {
         }
     });
 }
+function searchAllESalaryEmployee() {
+    var response = makeAJAXCall("/searchAllESalaryEmployee", 'generateAllSalariesForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#eSalaryResult").html(responseData);
+        }
+    });
+}
 
 function saveDepartment() {
     document.departmentForm.action = "/department/save";
@@ -144,6 +152,7 @@ function allowCharactersAndSpaces(evt) {
 	} else {
 		return false;
 	}
+}
 function saveCheque()
 {	document.chequeForm.action="/saveChequeDetails";
 	document.chequeForm.submit();

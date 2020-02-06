@@ -4,7 +4,7 @@ import com.indianeagle.internal.dto.Department;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.Role;
 import com.indianeagle.internal.dto.User;
-import com.indianeagle.internal.vo.EmployeeVO;
+import com.indianeagle.internal.form.vo.EmployeeVO;
 
 import java.util.Date;
 import java.util.List;

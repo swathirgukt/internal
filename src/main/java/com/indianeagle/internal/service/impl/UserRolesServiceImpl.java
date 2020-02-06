@@ -4,12 +4,15 @@ import com.indianeagle.internal.dao.repository.UserRolesRepository;
 import com.indianeagle.internal.dto.Role;
 import com.indianeagle.internal.service.UserRolesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
  * @author kiran.paluvadi
  * User Roles Service to load all roles from USER_ROLES table
  */
+@Service
 public class UserRolesServiceImpl implements UserRolesService {
 @Autowired
 	private UserRolesRepository rolesRepository;
