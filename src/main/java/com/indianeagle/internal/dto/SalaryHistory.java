@@ -1,11 +1,11 @@
 package com.indianeagle.internal.dto;
 
 import com.indianeagle.internal.util.SimpleUtils;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.BooleanType;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -104,6 +104,11 @@ public class SalaryHistory  extends BaseDto{
     private BigDecimal bonus = BigDecimal.ZERO;
     @Column(name = "SALARY_END_DATE")
     private Date salaryEndDate;
+
+    @Column(name = "MAIL_SENT")
+    private Boolean mailSent = Boolean.FALSE;
+
+
     /**
      * @return the empId
      */
@@ -666,5 +671,28 @@ public class SalaryHistory  extends BaseDto{
 
     public void setBankName(String bankName) {
         this.bankName = bankName;
+    }
+
+    public Boolean getMailSent() {
+        return mailSent;
+    }
+
+    public void setMailSent(Boolean mailSent) {
+        this.mailSent = mailSent;
+    }
+
+    @Override
+    public String toString() {
+        return "SalaryHistory{" +
+                "id='" + super.getId() + '\'' +
+                "empId='" + empId + '\'' +
+                ", salaryDate=" + salaryDate +
+                ", performanceIncentives=" + performanceIncentives +
+                ", salaryInAdvance=" + salaryInAdvance +
+                ", arrearsDays=" + arrearsDays +
+                ", lopDays=" + lopDays +
+                ", salaryEndDate=" + salaryEndDate +
+                ", mailSent=" + mailSent +
+                '}';
     }
 }

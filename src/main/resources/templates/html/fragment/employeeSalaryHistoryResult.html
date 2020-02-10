@@ -1,0 +1,28 @@
+<div th:fragment="departmentResult" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${salaryHistories} != null AND ${salaryHistories.size()}>0">
+        <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                <th>EMP_ID</th>
+                <th>DATE(MM-DD-YYYY)</th>
+                <th>Gross Salary</th>
+                <th>Net Salary</th>
+                <th>Print</th>
+                <th>Mail</th>
+            </tr>
+            <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                th:each="salary :${salaryHistories}">
+                <td th:text="${salary.empId}"></td>
+                <td th:text="${#dates.format(salary.salaryDate,'MM/dd/yyyy')}"></td>
+                <td th:text="${salary.grossSalary}"></td>
+                <td th:text="${salary.netSalary}"></td>
+                <td><a th:href="@{/salaryHistory/print/{id}(id=${salary.id})}">Print</a></td>
+                <td><a th:href="@{/salaryHistory/mail/{id}(id=${salary.id})}">Mail</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+         th:if="${salaryHistories}!=null  AND ${salaryHistories.size()}==0">
+        Nothing found to display
+    </div>
+</div>

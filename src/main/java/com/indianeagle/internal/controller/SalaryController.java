@@ -13,13 +13,13 @@ import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.service.SalaryService;
 import com.indianeagle.internal.util.DateUtils;
 import com.indianeagle.internal.util.SimpleUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +41,7 @@ import java.util.List;
 
 @Controller
 public class SalaryController {
-    private static final Logger log = Logger.getLogger(SalaryController.class);
+    private static final Logger log = LogManager.getLogger(SalaryController.class);
     @Autowired
     private SalaryHistoryService salaryHistoryService;
     @Autowired
@@ -53,7 +53,6 @@ public class SalaryController {
 
     List<SalaryHistory> listOfChangedSalaries;
 
-    private List<SalaryHistory> currentSalaryList;
 
     private String department;
     private int newDept;
@@ -162,7 +161,7 @@ public class SalaryController {
     }
 
     @GetMapping("/eSalary")
-    public String produceAllSalariesForm(ModelMap model,  @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
+    public String produceAllSalariesForm(ModelMap model, @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
         try {
             generateAllSalariesForm = salaryService.fillProduceAllSalariesForm(generateAllSalariesForm);
             model.addAttribute("generateAllSalariesForm", generateAllSalariesForm);
@@ -191,29 +190,10 @@ public class SalaryController {
     @PostMapping("/produceAllSalaries")
     public String produce(ModelMap modelMap, HttpServletRequest servletRequest, HttpSession httpSession, @ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
         log.warn((Object) "###produceAllSalaries started");
-        List<SalaryHistory> listOfChangedSalaries = new ArrayList<>();
         List<SalaryHistory> currentSalaryList;
-        ArrayList<String> empIdsOfDeductedSalaries = new ArrayList<String>();
         try {
-            if (!SimpleUtils.reqParamExist((Enumeration) servletRequest.getParameterNames())) {
-                for (EmpSalaryDecider empSalaryDecider : generateAllSalariesForm.getEmpSalaryDeciderList()) {
-                    if ((empSalaryDecider.getLopDays() == null || empSalaryDecider.getLopDays().equals(BigDecimal.ZERO)) && empSalaryDecider.getSalaryInAdvance().equals(BigDecimal.ZERO) && empSalaryDecider.getArrearsDays().equals(BigDecimal.ZERO))
-                        continue;
-                    empIdsOfDeductedSalaries.add(empSalaryDecider.getEmpId().trim());
-                }
-                currentSalaryList = salaryService.produceAllSalaries(generateAllSalariesForm, httpSession);
-                if (null != empIdsOfDeductedSalaries && !empIdsOfDeductedSalaries.isEmpty()) {
-                    for (SalaryHistory salaryHistory : currentSalaryList) {
-                        if (!empIdsOfDeductedSalaries.contains(salaryHistory.getEmpId().trim())) continue;
-                        listOfChangedSalaries.add(salaryHistory);
-                    }
-                }
-            } else {
-                currentSalaryList = (List) httpSession.getAttribute("currentSalaryList");
-                listOfChangedSalaries = (List) httpSession.getAttribute("editedSalaryList");
-            }
+            currentSalaryList = salaryService.produceAllSalaries(generateAllSalariesForm, httpSession);
             modelMap.addAttribute("currentSalaryList", currentSalaryList);
-            modelMap.addAttribute("listOfChangedSalaries", listOfChangedSalaries);
         } catch (Exception e) {
             modelMap.addAttribute("error", "error occured due to technical problem");
             e.printStackTrace();

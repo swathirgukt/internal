@@ -4,7 +4,8 @@ import com.indianeagle.internal.dto.MonthlySalaryReport;
 //import com.indianeagle.internal.facade.MonthlyReportService;
 import com.indianeagle.internal.service.MonthlyReportService;
 import com.indianeagle.internal.util.SimpleUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Controller
 public class MonthlyReportController {
-    private static final Logger LOG = Logger.getLogger(MonthlyReportController.class);
+    private static final Logger LOG = LogManager.getLogger(MonthlyReportController.class);
     //@Autowired
     private MonthlyReportService monthlyReportService;
 

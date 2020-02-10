@@ -1,7 +1,8 @@
 package com.indianeagle.internal.form;
 
-import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
+import com.indianeagle.internal.form.vo.EmployeeVO;
+import com.indianeagle.internal.form.vo.SalaryHistoryVO;
 
 import java.util.Date;
 import java.util.List;
@@ -12,24 +13,24 @@ import java.util.List;
  */
 public class SalaryHistoryForm {
 
-    private List<Employee> employeeList;
+    private List<EmployeeVO> employeeVOList;
     private String employeeId;
 
     private Date salaryDate;
-    private List<SalaryHistory> salaryHistory;
+    private List<SalaryHistoryVO> salaryHistoryVOList;
 
     /**
      * @return the employeeList
      */
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public List<EmployeeVO> getEmployeeVOList() {
+        return employeeVOList;
     }
 
     /**
-     * @param employeeList the employeeList to set
+     * @param employeeVOList the employeeList to set
      */
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployeeVOList(List<EmployeeVO> employeeVOList) {
+        this.employeeVOList = employeeVOList;
     }
 
     /**
@@ -49,15 +50,15 @@ public class SalaryHistoryForm {
     /**
      * @return the salaryHistory
      */
-    public List<SalaryHistory> getSalaryHistory() {
-        return salaryHistory;
+    public List<SalaryHistoryVO> getSalaryHistoryVOList() {
+        return salaryHistoryVOList;
     }
 
     /**
-     * @param salaryHistory the salaryHistory to set
+     * @param salaryHistoryVOList the salaryHistory to set
      */
-    public void setSalaryHistory(List<SalaryHistory> salaryHistory) {
-        this.salaryHistory = salaryHistory;
+    public void setSalaryHistoryVOList(List<SalaryHistoryVO> salaryHistoryVOList) {
+        this.salaryHistoryVOList = salaryHistoryVOList;
     }
 
     /**

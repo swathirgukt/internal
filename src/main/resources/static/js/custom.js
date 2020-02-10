@@ -52,6 +52,22 @@ function searchAllESalaryEmployee() {
         }
     });
 }
+function searchEmployeeSalaryHitory(){
+    var response = jQuery.ajax({
+            url: "/salaryHistory/search",
+            data: jQuery('#salaryHistoryForm').serialize(),
+            type: "GET",
+            error: function(msg,err,exc){
+                console.log("#error: "+err);
+            }
+        });
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#employeeSalaryHistoryResult").html(responseData);
+        }
+    });
+}
+
 
 function saveDepartment() {
     document.departmentForm.action = "/department/save";

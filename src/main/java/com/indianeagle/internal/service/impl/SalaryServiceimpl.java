@@ -7,7 +7,6 @@ import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.EmployeeSettlement;
 import com.indianeagle.internal.dto.Salary;
 import com.indianeagle.internal.dto.SalaryHistory;
-import com.indianeagle.internal.enums.TemplateNames;
 import com.indianeagle.internal.form.EmpSalaryDecider;
 import com.indianeagle.internal.form.EmployeeSettlementForm;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
@@ -20,7 +19,8 @@ import com.indianeagle.internal.util.DateUtils;
 import com.indianeagle.internal.util.PaySlipPdfUtils;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,12 +34,13 @@ import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
-    private static final Logger log = Logger.getLogger(SalaryServiceimpl.class);
+    private static final Logger logger = LogManager.getLogger(SalaryServiceimpl.class);
     @Autowired
     private MessageSource messageSource;
     @Autowired
@@ -65,15 +66,13 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     }
 
 
-
     public List<Employee> loadActiveEmployees() {
         return this.salaryRepository.loadActiveEmployees();
     }
 
 
-
     public List<SalaryHistory> generateSalaries(String department, SalaryRule salaryRule) throws Exception {
-        log.debug((Object)"Generate Salary for All Employees");
+        logger.debug("Generate Salary for All Employees");
         List<Employee> employeeList = this.loadEmployeesByDepartment(department);
         ArrayList<SalaryHistory> currentSalaryList = new ArrayList<SalaryHistory>();
         ArrayList<Employee> currSalaryEmpList = new ArrayList<Employee>();
@@ -103,20 +102,38 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
             generateAllSalariesForm.setSalaryEndDate(calforEndDate.getTime());
         }
         cal.setTime(generateAllSalariesForm.getSalaryDate());
-        List<Employee> allEmpsList = this.salaryRepository.loadActiveEmployees();
-        List salaryHistoryList = this.salaryHistoryService.salaryReport(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
-        ArrayList<EmpSalaryDecider> empSalaryDeciderList = new ArrayList<EmpSalaryDecider>();
+        List<Employee> allEmpsList = salaryRepository.loadActiveEmployees();
+        List<SalaryHistory> salaryHistoryList = salaryHistoryService.salaryReport(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
+        List<SalaryHistory> salaryHistoriesOfMailNotSent = salaryHistoryList.stream().filter(salaryHistory -> salaryHistory.getMailSent().equals(Boolean.FALSE)).collect(Collectors.toList());
+
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
         if (allEmpsList != null && !allEmpsList.isEmpty()) {
             for (Employee employee : allEmpsList) {
-                if (this.checkEmployeeSalaryGenerated(employee, salaryHistoryList)) continue;
-                employeeList.add(employee);
+                if (checkIfPresent(employee, salaryHistoriesOfMailNotSent)) {
+                    employeeList.add(employee);
+                    continue;
+                }
+                if (!checkIfPresent(employee, salaryHistoryList)) {
+                    employeeList.add(employee);
+                }
             }
         }
-        for (Employee emp : employeeList) {
+
+
+        ArrayList<EmpSalaryDecider> empSalaryDeciderList = new ArrayList<EmpSalaryDecider>();
+        for (Employee employee : employeeList) {
             EmpSalaryDecider empSalaryDecider = new EmpSalaryDecider();
-            empSalaryDecider.setEmpId(emp.getEmpId());
-            empSalaryDecider.setFullName(emp.getFullName());
+            empSalaryDecider.setEmpId(employee.getEmpId());
+            empSalaryDecider.setFullName(employee.getFullName());
+
+            int index = getIndexIfPresent(employee, salaryHistoriesOfMailNotSent);
+            if (index != -1) {
+                SalaryHistory salaryHistory = salaryHistoriesOfMailNotSent.get(index);
+                empSalaryDecider.setLopDays(salaryHistory.getLopDays());
+                empSalaryDecider.setArrearsDays(salaryHistory.getArrearsDays());
+                empSalaryDecider.setSalaryInAdvance(salaryHistory.getSalaryInAdvance());
+                empSalaryDecider.setPerformanceIncentives(salaryHistory.getPerformanceIncentives());
+            }
             empSalaryDeciderList.add(empSalaryDecider);
         }
         generateAllSalariesForm.setTotalWorkingDays(new BigDecimal(cal.getActualMaximum(5)));
@@ -124,9 +141,10 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         return generateAllSalariesForm;
     }
 
-    private boolean checkEmployeeSalaryGenerated(Employee employee, List<SalaryHistory> salaryHistoryList) {
+    private boolean checkIfPresent(Employee employee, List<SalaryHistory> salaryHistoryList) {
         for (SalaryHistory salaryHistory : salaryHistoryList) {
-            if (!StringUtils.equalsIgnoreCase((String)employee.getEmpId(), (String)salaryHistory.getEmpId())) continue;
+            if (!StringUtils.equalsIgnoreCase((String) employee.getEmpId(), (String) salaryHistory.getEmpId()))
+                continue;
             return true;
         }
         return false;
@@ -137,24 +155,31 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         calendar.setTime(generateAllSalariesForm.getSalaryDate());
         Calendar calendarForToDate = Calendar.getInstance();
         calendarForToDate.setTime(generateAllSalariesForm.getSalaryEndDate());
-        generateAllSalariesForm.setTotalWorkingDays(new BigDecimal(DateUtils.differenceInDays((Date)calendar.getTime(), (Date)calendarForToDate.getTime())));
+        generateAllSalariesForm.setTotalWorkingDays(new BigDecimal(DateUtils.differenceInDays((Date) calendar.getTime(), (Date) calendarForToDate.getTime())));
         SalaryHistory currentSalary = null;
         EmpSalaryDecider empSalaryDecider = new EmpSalaryDecider();
         List<EmpSalaryDecider> empSalaryDeciderList = generateAllSalariesForm.getEmpSalaryDeciderList();
         ArrayList<SalaryHistory> currentSalaryList = new ArrayList<SalaryHistory>();
         ArrayList<Employee> currSalaryEmpList = new ArrayList<Employee>();
         List<Employee> allEmpsList = this.salaryRepository.loadActiveEmployees();
-        List salaryHistoryList = this.salaryHistoryService.salaryReport(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
+        List<SalaryHistory> salaryHistoryList = this.salaryHistoryService.salaryReport(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
+        List<SalaryHistory> salaryHistoriesOfMailNotSent = salaryHistoryList.stream().filter(salaryHistory -> salaryHistory.getMailSent().equals(Boolean.FALSE)).collect(Collectors.toList());
+
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
         if (allEmpsList != null && !allEmpsList.isEmpty()) {
             for (Employee employee : allEmpsList) {
-                if (this.checkEmployeeSalaryGenerated(employee, salaryHistoryList)) continue;
-                employeeList.add(employee);
+                if (checkIfPresent(employee, salaryHistoriesOfMailNotSent)) {
+                    employeeList.add(employee);
+                    continue;
+                }
+                if (!checkIfPresent(employee, salaryHistoryList)) {
+                    employeeList.add(employee);
+                }
             }
         }
         for (Employee emp : employeeList) {
             try {
-                log.debug("in loop: "+emp.getOfficialEmail()+" empSalaryDeciderList:"+empSalaryDeciderList);
+                logger.debug("in loop: " + emp.getOfficialEmail() + " empSalaryDeciderList:" + empSalaryDeciderList);
                 currentSalary = new SalaryHistory();
                 SalaryRule salaryRule = new SalaryRule();
                 for (EmpSalaryDecider esd : empSalaryDeciderList) {
@@ -181,52 +206,51 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
                 emp.setCurrentSalary(currentSalary);
                 currSalaryEmpList.add(emp);
                 continue;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
             }
         }
-        httpSession.setAttribute("currSalaryEmpList"+httpSession.getId(), currSalaryEmpList);
-        httpSession.setAttribute("currentSalaryList"+httpSession.getId(), currentSalaryList);
+        httpSession.setAttribute("currSalaryEmpList" + httpSession.getId(), currSalaryEmpList);
+        httpSession.setAttribute("currentSalaryList" + httpSession.getId(), currentSalaryList);
+        salaryHistoryRepository.saveAll(currentSalaryList);
         return currentSalaryList;
     }
 
 
-
     public void sendAllPaySlipMails(HttpSession httpSession) throws Exception {
-        List<SalaryHistory> currentSalaryList = (List)httpSession.getAttribute("currentSalaryList"+httpSession.getId());
-        List<Employee> currSalaryEmpList = (List)httpSession.getAttribute("currSalaryEmpList"+httpSession.getId());
-        salaryHistoryRepository.saveAll(currentSalaryList);
+        List<SalaryHistory> currentSalaryList = (List) httpSession.getAttribute("currentSalaryList" + httpSession.getId());
+        List<Employee> currSalaryEmpList = (List) httpSession.getAttribute("currSalaryEmpList" + httpSession.getId());
+
         int counter = 0;
         for (Employee emp : currSalaryEmpList) {
             if (counter == 20) {
-                log.debug("::::::::: Hold on for 2 minutes :::::::::");
+                logger.debug("::::::::: Hold on for 2 minutes :::::::::");
                 counter = 0;
                 Thread.sleep(120000);
-                log.debug("Thank you for your time! Continue......");
+                logger.debug("Thank you for your time! Continue......");
             }
             ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-            PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "mail/IE_Payslip", (Object[]) new Object[]{ emp, emp.getCurrentSalary()});
+            PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "mail/IE_Payslip", (Object[]) new Object[]{emp, emp.getCurrentSalary()});
             this.mailingEngine.sendMail(emp, emp.getCurrentSalary(), (InputStreamSource) new ByteArrayResource(arrayOutputStream.toByteArray()), false);
             counter += 1;
         }
     }
 
     public SalaryHistory generateSalary(Employee employee, SalaryRule salaryRule) throws Exception {
-        log.debug((Object)("Generate Salary for Employee ID:" + employee.getEmpId()));
+        logger.debug((Object) ("Generate Salary for Employee ID:" + employee.getEmpId()));
         Calendar cal = GregorianCalendar.getInstance();
         Calendar cal1 = GregorianCalendar.getInstance();
         cal.setTime(salaryRule.getSalaryDate());
         cal1.setTime(salaryRule.getSalaryEndDate());
-        salaryRule.setTotalDays(new BigDecimal(DateUtils.differenceInDays((Date)cal.getTime(), (Date)cal1.getTime())));
+        salaryRule.setTotalDays(new BigDecimal(DateUtils.differenceInDays((Date) cal.getTime(), (Date) cal1.getTime())));
         SalaryHistory salaryHistory = this.createSalaryHistory(salaryRule, null, employee);
         this.generateNetSalary(employee.getSalary(), salaryHistory, new BigDecimal(cal.getActualMaximum(5)), salaryHistory.getDaysWorked(), employee.getEmpId());
         return salaryHistory;
     }
 
     public EmployeeSettlement generateSalarySettlement(Employee employee, EmployeeSettlementForm employeeSettlementForm) throws Exception {
-        log.debug((Object)("Generate Salary for Employee ID:" + employee.getEmpId()));
+        logger.debug((Object) ("Generate Salary for Employee ID:" + employee.getEmpId()));
         SalaryHistory salaryHistory = this.createSalaryHistory(null, employeeSettlementForm, employee);
         this.generateNetSalary(employee.getSalary(), salaryHistory, salaryHistory.getTotalDays(), salaryHistory.getDaysWorked(), employee.getEmpId());
         EmployeeSettlement employeeSettlement = this.prepareEmployeeSettlement(salaryHistory);
@@ -243,7 +267,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
 
     private EmployeeSettlement prepareEmployeeSettlement(SalaryHistory salaryHistory) {
         EmployeeSettlement employeeSettlement = new EmployeeSettlement();
-        BeanUtils.copyProperties((Object)salaryHistory, (Object)employeeSettlement);
+        BeanUtils.copyProperties((Object) salaryHistory, (Object) employeeSettlement);
         employeeSettlement.setTotalDays(salaryHistory.getDaysWorked());
         return employeeSettlement;
     }
@@ -252,8 +276,8 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     public void confirmAndSendMail(Employee employee, SalaryHistory currentSalary) throws Exception {
         SalaryHistory salaryHistory = salaryHistoryRepository.save(currentSalary);
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "mail/IE_Payslip", (Object[])new Object[]{ employee, currentSalary});
-        mailingEngine.sendMail(employee, currentSalary, (InputStreamSource)new ByteArrayResource(arrayOutputStream.toByteArray()), false);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "mail/IE_Payslip", (Object[]) new Object[]{employee, currentSalary});
+        mailingEngine.sendMail(employee, currentSalary, (InputStreamSource) new ByteArrayResource(arrayOutputStream.toByteArray()), false);
     }
 
     public void confirmEmployeeSettlement() {
@@ -263,7 +287,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     private SalaryHistory createSalaryHistory(SalaryRule salaryRule, EmployeeSettlementForm salarySettlementForm, Employee emp) {
         SalaryHistory salaryHistory = new SalaryHistory();
         if (salaryRule != null) {
-            BigDecimal salaryForDays = SimpleUtils.isEmptyValue((BigDecimal)salaryRule.getTotalDays()).add(SimpleUtils.isEmptyValue((BigDecimal)salaryRule.getArrearsDays())).subtract(SimpleUtils.isEmptyValue((BigDecimal)salaryRule.getLopDays()));
+            BigDecimal salaryForDays = SimpleUtils.isEmptyValue((BigDecimal) salaryRule.getTotalDays()).add(SimpleUtils.isEmptyValue((BigDecimal) salaryRule.getArrearsDays())).subtract(SimpleUtils.isEmptyValue((BigDecimal) salaryRule.getLopDays()));
             salaryHistory.setTotalDays(salaryRule.getTotalDays());
             salaryHistory.setLopDays(salaryRule.getLopDays());
             salaryHistory.setArrearsDays(salaryRule.getArrearsDays());
@@ -290,34 +314,34 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
 
     private void updateSalaryHistoryForNewEmployee(SalaryHistory salaryHistory, Employee emp) {
         Calendar joinDate = Calendar.getInstance();
-        if (DateUtils.findMonthsDifference((Date)emp.getJoinDate(), (Date)salaryHistory.getSalaryDate()) == 1 && this.salaryHistoryService.searchSalaryHistoryByEmployeeId(emp.getEmpId()).size() == 0) {
+        if (DateUtils.findMonthsDifference((Date) emp.getJoinDate(), (Date) salaryHistory.getSalaryDate()) == 1 && this.salaryHistoryService.searchSalaryHistoryByEmployeeId(emp.getEmpId()).size() == 0) {
             joinDate.setTime(emp.getJoinDate());
-            BigDecimal previousMonthWorkingDays = new BigDecimal(DateUtils.differenceInDays((Date)joinDate.getTime(), (Date)salaryHistory.getSalaryDate()) - 1);
+            BigDecimal previousMonthWorkingDays = new BigDecimal(DateUtils.differenceInDays((Date) joinDate.getTime(), (Date) salaryHistory.getSalaryDate()) - 1);
             salaryHistory.setArrearsDays(salaryHistory.getArrearsDays().add(previousMonthWorkingDays));
             salaryHistory.setDaysWorked(salaryHistory.getDaysWorked().add(previousMonthWorkingDays));
-        } else if (DateUtils.findMonthsDifference((Date)emp.getJoinDate(), (Date)salaryHistory.getSalaryDate()) == 0) {
+        } else if (DateUtils.findMonthsDifference((Date) emp.getJoinDate(), (Date) salaryHistory.getSalaryDate()) == 0) {
             joinDate = Calendar.getInstance();
             joinDate.setTime(emp.getJoinDate());
-            int daysDifference = DateUtils.differenceInDays((Date)joinDate.getTime(), (Date)salaryHistory.getSalaryDate()) - 1;
+            int daysDifference = DateUtils.differenceInDays((Date) joinDate.getTime(), (Date) salaryHistory.getSalaryDate()) - 1;
             if (daysDifference > 0) {
-                log.warn((Object)"Vijay if block");
+                logger.warn((Object) "Vijay if block");
                 salaryHistory.setArrearsDays(salaryHistory.getArrearsDays().add(new BigDecimal(daysDifference)));
                 salaryHistory.setDaysWorked(salaryHistory.getDaysWorked().add(new BigDecimal(daysDifference)));
-                log.warn((Object)("******Vijay if block days worked is" + salaryHistory.getDaysWorked()));
+                logger.warn((Object) ("******Vijay if block days worked is" + salaryHistory.getDaysWorked()));
             } else if (daysDifference < 0) {
-                log.warn((Object)"Vijay else block");
-                log.warn((Object)("******Vijay joindate is" + new BigDecimal(joinDate.get(5))));
-                salaryHistory.setDaysWorked(salaryHistory.getDaysWorked().subtract(new BigDecimal(DateUtils.differenceInDays((Date)salaryHistory.getSalaryDate(), (Date)joinDate.getTime()) - 1)));
-                log.warn((Object)("******Vijay else block days worked is" + salaryHistory.getDaysWorked()));
+                logger.warn((Object) "Vijay else block");
+                logger.warn((Object) ("******Vijay joindate is" + new BigDecimal(joinDate.get(5))));
+                salaryHistory.setDaysWorked(salaryHistory.getDaysWorked().subtract(new BigDecimal(DateUtils.differenceInDays((Date) salaryHistory.getSalaryDate(), (Date) joinDate.getTime()) - 1)));
+                logger.warn((Object) ("******Vijay else block days worked is" + salaryHistory.getDaysWorked()));
             }
-        } else if (DateUtils.findMonthsDifference((Date)emp.getJoinDate(), (Date)salaryHistory.getSalaryDate()) < 0 && this.salaryHistoryService.searchSalaryHistoryByEmployeeId(emp.getEmpId()).size() == 0) {
+        } else if (DateUtils.findMonthsDifference((Date) emp.getJoinDate(), (Date) salaryHistory.getSalaryDate()) < 0 && this.salaryHistoryService.searchSalaryHistoryByEmployeeId(emp.getEmpId()).size() == 0) {
             joinDate.setTime(emp.getJoinDate());
-            salaryHistory.setDaysWorked(salaryHistory.getDaysWorked().subtract(new BigDecimal(DateUtils.differenceInDays((Date)salaryHistory.getSalaryDate(), (Date)joinDate.getTime()) - 1)));
+            salaryHistory.setDaysWorked(salaryHistory.getDaysWorked().subtract(new BigDecimal(DateUtils.differenceInDays((Date) salaryHistory.getSalaryDate(), (Date) joinDate.getTime()) - 1)));
         }
     }
 
     private void generateNetSalary(Salary salary, SalaryHistory salaryHistory, BigDecimal totalDays, BigDecimal salaryForDays, String empId) throws Exception {
-        log.debug((Object)("Start:Calculating Net Salary for Employee ID:" + empId));
+        logger.debug((Object) ("Start:Calculating Net Salary for Employee ID:" + empId));
         try {
             salaryHistory.setEmpId(empId);
             boolean calculate = false;
@@ -341,8 +365,8 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
             salaryHistory.setPerformanceLinkedPay(salary.getPerformanceLinkedPay());
             salaryHistory.setBonus(this.calculateAmount(salary.getBonus(), totalDays, salaryForDays, calculate));
             salaryHistory.setOtherAllowance(this.calculateAmount(salary.getOtherAllowance(), totalDays, salaryForDays, calculate));
-            salaryHistory.setMedicalInsurance(SimpleUtils.isEmptyValue((BigDecimal)salary.getMedicalInsurance()));
-            salaryHistory.setLoanAmount(SimpleUtils.isEmptyValue((BigDecimal)salary.getLoanAmount()));
+            salaryHistory.setMedicalInsurance(SimpleUtils.isEmptyValue((BigDecimal) salary.getMedicalInsurance()));
+            salaryHistory.setLoanAmount(SimpleUtils.isEmptyValue((BigDecimal) salary.getLoanAmount()));
             BigDecimal pfAmount = BigDecimal.ZERO;
             if (salary.isPfRequired()) {
                 pfAmount = CalculationRules.ELIGIBLE_PF_AMOUNT.compareTo(salaryHistory.getBasic()) == 1 ? salaryHistory.getBasic().divide(new BigDecimal(100), 2, 0).multiply(CalculationRules.PER_PF).setScale(0, 5) : CalculationRules.MIN_PF_AMOUNT;
@@ -369,30 +393,29 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
             } else {
                 ArrayList inputList = new ArrayList(CalculationRules.PT_RANGE.keySet());
                 for (int index = 0; index < inputList.size() - 1; ++index) {
-                    Integer minPT = (Integer)inputList.get(index) + 1;
-                    Integer maxPT = (Integer)inputList.get(index + 1);
-                    if (grossSalary.intValue() > (Integer)inputList.get(inputList.size() - 1)) {
-                        salaryHistory.setPTax(new BigDecimal((Integer)CalculationRules.PT_RANGE.get(inputList.get(inputList.size() - 1))).setScale(2));
+                    Integer minPT = (Integer) inputList.get(index) + 1;
+                    Integer maxPT = (Integer) inputList.get(index + 1);
+                    if (grossSalary.intValue() > (Integer) inputList.get(inputList.size() - 1)) {
+                        salaryHistory.setPTax(new BigDecimal((Integer) CalculationRules.PT_RANGE.get(inputList.get(inputList.size() - 1))).setScale(2));
                         break;
                     }
                     if (grossSalary.intValue() < minPT || maxPT < grossSalary.intValue()) continue;
-                    salaryHistory.setPTax(new BigDecimal((Integer)CalculationRules.PT_RANGE.get(inputList.get(index))).setScale(2));
+                    salaryHistory.setPTax(new BigDecimal((Integer) CalculationRules.PT_RANGE.get(inputList.get(index))).setScale(2));
                     break;
                 }
             }
             salaryHistory.setIncomeTax(salary.getIncomeTax());
             totalDeductions = totalDeductions.add(salaryHistory.getPTax()).add(salaryHistory.getIncomeTax()).add(salaryHistory.getPfEmp()).add(salaryHistory.getSalaryInAdvance()).add(salaryHistory.getEsi()).add(salaryHistory.getMiscDeductions()).add(salaryHistory.getMedicalInsurance()).add(salaryHistory.getLoanAmount()).setScale(0, 5);
             netSalary = grossSalary.subtract(totalDeductions);
-            log.info((Object)("Employee - Salary Date::" + salaryHistory.getSalaryDate() + " Gross Salary::" + grossSalary + " Total Deductions::" + totalDeductions + " Net Salary::" + netSalary));
+            logger.info((Object) ("Employee - Salary Date::" + salaryHistory.getSalaryDate() + " Gross Salary::" + grossSalary + " Total Deductions::" + totalDeductions + " Net Salary::" + netSalary));
             salaryHistory.setTotalEarnings(grossSalary.setScale(2));
             salaryHistory.setTotalDeductions(totalDeductions.setScale(2));
             salaryHistory.setGrossSalary(grossSalary.setScale(2));
             salaryHistory.setNetSalary(netSalary.setScale(2));
-            log.debug((Object)("End:Calculating Net Salary for Employee ID:" + empId));
-        }
-        catch (Exception e) {
+            logger.debug((Object) ("End:Calculating Net Salary for Employee ID:" + empId));
+        } catch (Exception e) {
             e.printStackTrace();
-            log.error((Object)("Error: While Generating Employee ID:" + empId + "Please try again..!"));
+            logger.error((Object) ("Error: While Generating Employee ID:" + empId + "Please try again..!"));
             throw new Exception("Error: While Generating Employee ID:" + empId + "Please try again..!");
         }
     }
@@ -415,6 +438,15 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     public List<Employee> loadEmployeesByDepartment(String department) {
         return this.salaryRepository.loadEmployeesByDepartment(department);
     }
+
+    public int getIndexIfPresent(Employee employee, List<SalaryHistory> salaryHistories) {
+        for (int index = 0; index < salaryHistories.size(); index++) {
+            if (employee.getEmpId().equalsIgnoreCase(salaryHistories.get(index).getEmpId()))
+                return index;
+        }
+        return -1;
+    }
+
 
     public void setSalaryDAO(SalaryRepository salaryDAO) {
         this.salaryRepository = salaryDAO;

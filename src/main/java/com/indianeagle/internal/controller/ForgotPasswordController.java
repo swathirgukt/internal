@@ -4,7 +4,8 @@ import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.form.UserForm;
 import com.indianeagle.internal.mail.MailingEngine;
 import com.indianeagle.internal.service.UsersService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ForgotPasswordController {
-    public static final Logger log = Logger.getLogger(ForgotPasswordController.class);
+    public static final Logger log = LogManager.getLogger(ForgotPasswordController.class);
     @Autowired
     private UsersService usersservice;
     @Autowired

@@ -10,7 +10,8 @@ import com.indianeagle.internal.util.DateFormatter;
 import com.indianeagle.internal.util.MailContentBuilder;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.apache.commons.lang.WordUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -34,7 +35,7 @@ import java.util.Map;
 @Component
 public class MailingEngine {
 
-    private static final Logger log = Logger.getLogger(MailingEngine.class);
+    private static final Logger logger = LogManager.getLogger(MailingEngine.class);
     private static final String BCC_MAIL_ID = "accounts-india@indianeagle.com";
     private static final String FROM_MAIL_ID = "accounts-india@indianeagle.com";
     private static final String DEAR = "Dear ";
@@ -81,7 +82,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("EMP_ID::" + employee.getEmpId() + " MAIL:" + SUBJECT.concat(SimpleUtils.dateInWord(salaryHistory.getSalaryEndDate())) + " Sent to :: " + employee.getOfficialEmail());
+        logger.debug("EMP_ID::" + employee.getEmpId() + " MAIL:" + SUBJECT.concat(SimpleUtils.dateInWord(salaryHistory.getSalaryEndDate())) + " Sent to :: " + employee.getOfficialEmail());
     }
 
     /**
@@ -107,7 +108,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("MAIL: Password is Reset and Sent to :: " + user.getEmail());
+        logger.debug("MAIL: Password is Reset and Sent to :: " + user.getEmail());
 
     }
 
@@ -137,9 +138,9 @@ public class MailingEngine {
         try {
             mailSender.send(preparator);
         } catch (Exception e) {
-            log.debug("Got exception while sending email: " + e, e);
+            logger.debug("Got exception while sending email: " + e, e);
         }
-        log.debug("MAIL: Account Info Sent to :: " + user.getEmail());
+        logger.debug("MAIL: Account Info Sent to :: " + user.getEmail());
     }
 
     /**
@@ -165,7 +166,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("MAIL: Account details saved mail Sent to :: " + email);
+        logger.debug("MAIL: Account details saved mail Sent to :: " + email);
     }
 
 
@@ -189,7 +190,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("MAIL: Sending Post Cheque Details to :: " + BCC_MAIL_ID);
+        logger.debug("MAIL: Sending Post Cheque Details to :: " + BCC_MAIL_ID);
     }
 
     /**
@@ -211,7 +212,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("MAIL: Sending Upcoming birthday of employee " + employee.getFullName() + " mail to :: " + BCC_MAIL_ID);
+        logger.debug("MAIL: Sending Upcoming birthday of employee " + employee.getFullName() + " mail to :: " + BCC_MAIL_ID);
     }
 
     /**
@@ -233,7 +234,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("MAIL: Sending joined date of the Employee " + employee.getFullName() + " mail to :: " + BCC_MAIL_ID);
+        logger.debug("MAIL: Sending joined date of the Employee " + employee.getFullName() + " mail to :: " + BCC_MAIL_ID);
     }
 
     /**
@@ -258,7 +259,7 @@ public class MailingEngine {
             }
         };
         mailSender.send(preparator);
-        log.debug("EMP_ID::" + employee.getEmpId() + " MAIL: Employee Income Tax Details of Financial Year " + financialYear.getFromYear() + " - " + financialYear.getToYear() + " Sent to :: " + employee.getOfficialEmail());
+        logger.debug("EMP_ID::" + employee.getEmpId() + " MAIL: Employee Income Tax Details of Financial Year " + financialYear.getFromYear() + " - " + financialYear.getToYear() + " Sent to :: " + employee.getOfficialEmail());
     }
 
 
