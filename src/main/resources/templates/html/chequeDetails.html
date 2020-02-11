@@ -42,6 +42,30 @@
     </style>
 
     <head>
+        <script>
+        function makeAJAXCall(requestUrl,formId) {
+    return jQuery.ajax({
+        url: requestUrl,
+        data: jQuery('#'+formId).serialize(),
+        type: "POST",
+        error: function(msg,err,exc){
+            console.log("#error: "+err);
+        }
+    });
+}
+            function searchChequeDetails()
+{
+var response = makeAJAXCall("/searchChequeDetails", 'chequeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#chequeSearchResult").html(responseData);
+        }
+
+    });
+/*document.cheque.action="./searchChequeDetails.action";
+document.cheque.submit();*/
+}
+        </script>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="form-page">
@@ -59,11 +83,14 @@
                                             width="200px" name="datepicker" th:field="*{chequeDetails.chequeDate}"/>
                                                 <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
 								</span>
+
+
 								<span style="margin-left: 60px;">Amount :</span>
 								<span style="margin-left: 10px;">
 									<input th:field="*{chequeDetails.amount}"
                                            type="text"/>
 								</span>
+
 							</span>
         </div>
         <div style="margin-top: 10px;">
@@ -73,6 +100,8 @@
 									<input th:field="*{chequeDetails.chequeNo}"
                                            type="text"/>
 								</span>
+
+
 								<span style="margin-left: 70px;">Status :</span>
 								<span style="margin-left: 10px;">
                                     <!--<select th:field="*{gender}">
@@ -87,6 +116,7 @@
 									</select>
                                         <!-- <input type="" name=""> -->
 								</span>
+
 							</span>
                             </span>
         </div>
@@ -97,11 +127,14 @@
 									<input th:field="*{ChequeDetails.bank}"
                                            type="text">
 								</span>
+
 								<span style="margin-left: 60px;">Name of pay* :</span>
 								<span style="margin-left: 10px;">
 									<input th:field="*{ChequeDetails.nameOfPay}"
                                            type="text">
 								</span>
+
+
 							</span>
         </div>
 
@@ -132,6 +165,8 @@
                        width="200px" name="datepicker" th:field="*{fromDate}"/>
                 <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
             </div>
+
+
         </div>
         <div class="col-md-3">
             <span>To </span>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <html lang="en">
 
 <head>
@@ -16,7 +18,9 @@
             <div class="jumbotron">
                 <div class="container-fluid">
                     <div class="container">
-                        <form action="#" method="POST" id="employeedetailsform">
+
+                            <form action="searchEmployee" id="searchEmployeeForm" method="post" name="searchEmployeeForm" th:action="@{searchEmployee}" th:object="${employeeForm}">
+
                             <div class="Heading">Employee Details</div>
                             <div class="row">
 
@@ -28,15 +32,15 @@
                                                     <span style="float:right;margin-right: 10px;"><b>:</b></span>
                                                 </td>
                                                 <td>
-                                                    <input class="input_style" type="text" name="employeeid"
-                                                           id="employeeid" value="">
+                                                    <input class="input_style"  th:field="${employeeForm.empId}"
+                                                           type="text"/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Status
                                                     <span style="float: right;margin-right: 10px;"><b>:</b></span></td>
                                                 <td>
-                                                    <select class="selectOption" name="status" id="status">
+                                                    <select class="selectOption" th:field="${employeeForm.status}">
                                                         <option value="working">Working</option>
                                                         <option value="resigned">Resigned</option>
                                                     </select>
@@ -57,8 +61,9 @@
                                                     <span style="float: right; margin-right: 10px"><b>:</b></span></td>
 
                                                 <td>
-                                                    <input class="input_style" type="text" name="first_name"
-                                                           id="first_name" value="" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150">
+                                                    <input class="input_style" name="first_name" id="first_name" th:field="${employeeForm.firstName}"
+                                                           type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>
+
                                                 </td>
                                             </tr>
                                             <tr>
@@ -67,23 +72,18 @@
                                                 </td>
 
                                                 <td>
-                                                    <select class="selectOption">
-                                                        <option value="all">All</option>
-                                                        <option value="admin">Admin</option>
-                                                        <option value="it">IT</option>
-                                                        <option value="cc-ie">CC-IE</option>
-                                                        <option value="cc-tts">CC-TTS</option>
-                                                        <option value="operations">Operations</option>
-                                                        <option value="hr">HR</option>
-                                                        <option value="accounts">Accounts</option>
-                                                        <option value="iti">ITI</option>
+                                                    <select th:field="${employeeForm.department}">
+                                                        <option value="">select </option>
+                                                        <option th:each="branches : ${employeeForm.departments}"
+                                                                th:value="${branches.department}"
+                                                                th:text="${branches.department}"/>
                                                     </select>
                                                 </td>
                                             </tr>
 
                                         </table>
                                         <div style="float: right;">
-                                            <button class=" submitButton" onclick="getFormtData()" type="button"><b>Search</b>
+                                            <button class="searchButton" onclick="getFormtData()" type="button"><b>Search</b>
                                             </button>
                                         </div>
                                     </div>
@@ -94,14 +94,9 @@
                             </div>
                             <div class="Heading">Search Result</div>
                             <div class="row">
-                                <div class="col-lg-12">
-                                    <!--<div>
-                                        <table class="table table-bordered">
-                                            <tr>
-                                                <td></td>
-                                            </tr>
-                                        </table>
-                                    </div>-->
+                                <div class="col-md-12 col-sm-10 col-xs-5">
+                                    <div id="employeeSearchResult" class="tableScrollbar">
+                                    </div>
                                 </div>
                             </div>
                             <!--Container -->

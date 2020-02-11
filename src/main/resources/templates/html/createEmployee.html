@@ -88,6 +88,8 @@
                         <div class="row">
                             <div class="col-sm-12 col-xs-12 col-md-6">
                                 <div class="form-align">
+                                    <input type="hidden" th:field="${employeeForm.empId}" >
+
                                     <table width="100%" class="table-sm table_text_style">
                                         <tr>
                                             <td>First Name<span style="color:red">*</span><span
@@ -286,7 +288,7 @@
                                             <td>First Name<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.nominee.firstName}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.nomineeVO.firstName}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -294,7 +296,7 @@
                                             <td>Middle Name<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.nominee.middleName}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.nomineeVO.middleName}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -303,7 +305,7 @@
                                             </td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
-                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.nominee.dateOfBirth}"/>
+                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.nomineeVO.dateOfBirth}"/>
                                                 <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
@@ -318,13 +320,13 @@
                                         <tr>
                                             <td>Last Name<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.nominee.lastName}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.nomineeVO.lastName}"
                                                        type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Relation<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select class="selectOption" th:field="${employeeForm.employeeVO.nominee.relation}">
+                                                <select class="selectOption" th:field="${employeeForm.employeeVO.nomineeVO.relation}">
                                                     <option value="">--Select--</option>
                                                     <option value="Father">Father</option>
                                                     <option value="Mother">Mother</option>
@@ -370,8 +372,8 @@
                                         <tr>
                                             <td>Password<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:value="${employeeForm.user.password}" th:field="${employeeForm.user.password}"
-                                                       type="password"/>
+                                                <input class="input_style" type="password" th:value="${employeeForm.user}!=null?${employeeForm.user.password}:''" th:field="${employeeForm.user.password}"
+                                                       />
                                             </td>
                                         </tr>
                                     </table>
@@ -576,6 +578,8 @@
                                     <button class="submitButton" type=reset>Reset</button>
                                 </div>
                             </div>
+                            <span th:if="${saveMessage}!=null" th:text="${saveMessage}"></span>
+                            <span th:if="${updateMessage}!=null" th:text="${updateMessage}"></span>
                         </div>
                     </form>
                 </div>
