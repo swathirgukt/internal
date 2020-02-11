@@ -32,6 +32,36 @@
                            th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].performanceIncentives}"/>
                 </td>
             </tr>
+   <div class="tableScrollbar">
+    <table class="table_text_style table  table-bordered " style="width:1%;max-width:100%;margin-bottom:20px;}">
+        <tr style="background-color: black;color: white;">
+            <td>Exclude</td>
+            <td>Employee&nbsp;Id</td>
+            <td>Employee&nbsp;Name</td>
+            <td>LOP</td>
+            <td>ARR. Days</td>
+            <td>Salary&nbsp;Advance</td>
+            <td>Performance&nbsp;Incentives</td>
+        </tr>
+        <tr th:each="decider , status : ${generateAllSalariesForm.empSalaryDeciderList}" style="font-size:12px">
+            <td><input type="checkbox"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].empExclude}"/></td>
+            <td><input style="border:0px none;" readonly="true" type="text"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].empId}"/></td>
+            <td><input style="border:0px none;" readonly="true" type="text"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].fullName}"/></td>
+            <td><input type="text"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].lopDays}"/></td>
+            <td><input type="text"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].arrearsDays}"/>
+            </td>
+            <td><input type="text"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].salaryInAdvance}"/>
+            </td>
+            <td><input type="text"
+                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].performanceIncentives}"/>
+            </td>
+        </tr>
 
             <span style="color:#ff0000;font-size:20px;"
                   th:if="${generateAllSalariesForm.empSalaryDeciderVOList}!=null  AND ${generateAllSalariesForm.empSalaryDeciderVOList.size()}==0">

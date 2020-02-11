@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!doctype html>
 <html lang="en">
@@ -18,8 +18,11 @@
             <div class="jumbotron">
 
                 <div class="container">
+                    <form action="searchEmployeeStatus" id="statusEmployeeForm" method="post" name="statusEmployeeForm" th:action="@{searchEmployeeStatus}" th:object="${employeeForm}">
+
                     <div class="Heading">Employee Status Search</div>
                     <div class="row">
+
 
                         <!--new-->
                         <div class="col-lg-4 col-sm-12 col-md-4">
@@ -29,7 +32,7 @@
                                         <td>Type</td>
                                         <td><span style="float: right;margin-right:10px;">:</span></td>
                                         <td>
-                                            <select class="selectOption">
+                                            <select class="selectOption" th:field="${employeeForm.type}">
                                                 <option value="joined">Joined</option>
                                                 <option value="relieved">Relieved</option>
                                             </select>
@@ -46,8 +49,7 @@
                                         <td><span style="float: right;margin-right:10px;">:</span></td>
                                         <td>
                                             <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                   width="176px"
-                                                   name="datepicker"/>
+                                                   width="200px" name="datepicker" th:field="${employeeForm.fromDate}"/>
                                             <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
                                     </tr>
@@ -64,8 +66,7 @@
                                         <td><span style="float: right;margin-right:10px;">:</span></td>
                                         <td>
                                             <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
-                                                   width="176px"
-                                                   name="datepicker"/>
+                                                   width="200px" name="datepicker1" th:field="${employeeForm.toDate}"/>
                                             <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
                                     </tr>
@@ -77,7 +78,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-md-12">
                             <div style="float: right">
-                                <button class="submitButton" type="button">Search</button>
+                                <button class="submitButton" type="button" onclick="searchEmployeeStatus()">Search</button>
                             </div>
                         </div>
                     </div>
@@ -90,7 +91,14 @@
 
                     </div>
 
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-10 col-xs-5">
+                            <div id="statusSearchResult" class="tableScrollbar">
+                            </div>
+                        </div>
 
+                    </div>
                 </div>
                 <!--Container -->
             </div>
