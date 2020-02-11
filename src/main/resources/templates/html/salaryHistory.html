@@ -21,7 +21,7 @@
                                         <td> Employee ID<span style="color:red"> *</span></td>
                                         <td width="20px"><b>:</b></td>
                                         <td>
-                                            <select id="employeeId" name="employeeId" th:field="*{employeeId}">
+                                            <select id="employeeId" name="employeeId" th:field="*{employeeId}" class="selectOption">
                                                 <option th:each="employee : *{employeeVOList}"
                                                         th:value="${employee.empId}"
                                                         th:text="${employee.empId}"></option>

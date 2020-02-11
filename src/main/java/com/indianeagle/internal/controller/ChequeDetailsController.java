@@ -17,9 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author controller to perform operations on Cheque Details
- */
+
 @Controller
 public class ChequeDetailsController {
     @Autowired
@@ -45,23 +43,11 @@ public class ChequeDetailsController {
         return "html/chequeDetails";
     }
 
-
-    /**
-     * shows cheque details
-     *
-     * @return String
-     */
     @GetMapping("/chequeDetails")
     public String chequeDetails() {
         return "html/chequeDetails";
     }
 
-
-    /**
-     * To save or update the cheque details in database
-     *
-     * @return
-     */
     @PostMapping("/saveChequeDetails")
     public String saveOrUpdate(ModelMap model, @ModelAttribute("chequeDetailsForm") ChequeDetailsForm chequeDetailsForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -73,22 +59,18 @@ public class ChequeDetailsController {
             model.addAttribute("updateMessage", "Updated Successfully");
         }
         service.saveOrUpdateCheque(chequeDetailsForm.getChequeDetails());
-        System.out.println("##CheqDtls: "+chequeDetailsForm.getChequeDetails());
+        System.out.println("##CheqDtls: " + chequeDetailsForm.getChequeDetails());
 
         chequeDetailsForm.setChequeDetails(null);
         return "html/chequeDetails";
     }
 
-    /**
-     * Retrieve the cheque details fromDate is mandatory
-     *
-     * @return
-     */
+
     @PostMapping("/searchCheques")
     public String search(ModelMap model, @ModelAttribute("chequeDetailsForm") ChequeDetailsForm chequeDetailsForm) {
 
-        System.out.println("@@@@@@@@InsideSearch >> "+chequeDetailsForm.getFromDate()+">> "+chequeDetailsForm.getToDate()+"  >> "+chequeDetailsForm.getAmount());
-        if (chequeDetailsForm.getFromDate() == null || chequeDetailsForm.getToDate() == null||chequeDetailsForm.getAmount()==null){
+        System.out.println("@@@@@@@@InsideSearch >> " + chequeDetailsForm.getFromDate() + ">> " + chequeDetailsForm.getToDate() + "  >> " + chequeDetailsForm.getAmount());
+        if (chequeDetailsForm.getFromDate() == null || chequeDetailsForm.getToDate() == null || chequeDetailsForm.getAmount() == null) {
             return "html/fragment/chequeDetailsResult";
         }
 
@@ -96,7 +78,7 @@ public class ChequeDetailsController {
         System.out.println(chequeDetailsList);
 
         BigDecimal total = BigDecimal.ZERO;
-        for (ChequeDetails chequeDetails:chequeDetailsList) {
+        for (ChequeDetails chequeDetails : chequeDetailsList) {
             total = total.add(chequeDetails.getAmount());
         }
 
@@ -106,15 +88,15 @@ public class ChequeDetailsController {
         chequeDetails.setNameOfPay("Total Amount");
         chequeDetailsList.add(chequeDetails);
         chequeDetailsForm.setChequeDetailsList(chequeDetailsList);
-        model.addAttribute("chequeDetailsForm",chequeDetailsForm);
+        model.addAttribute("chequeDetailsForm", chequeDetailsForm);
         return "html/fragment/chequeDetailsResult";
     }
 
     @GetMapping("/editChequeDetails/{chequeId}")
     public String edit(ModelMap model, ChequeDetailsForm chequeDetailsForm, @PathVariable("chequeId") Long chequeId) {
 
-       chequeDetailsForm.setChequeDetails(service.findBy(chequeId));
-       model.addAttribute("chequeDetailsForm",chequeDetailsForm);
+        chequeDetailsForm.setChequeDetails(service.findBy(chequeId));
+        model.addAttribute("chequeDetailsForm", chequeDetailsForm);
         return "html/chequeDetails";
     }
 

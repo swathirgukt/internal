@@ -92,4 +92,6 @@ public interface SalaryService {
      * @return
      */
     EmployeeSettlement loadResignedEmployeeSettlement(String empId);
+
+    void saveSalaries(HttpSession httpSession);
 }
