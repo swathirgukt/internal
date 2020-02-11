@@ -175,7 +175,7 @@ function saveCheque()
 }
 function searchChequeDetails()
 {
-var response = makeAJAXCall("/searchChequeDetails", 'chequeForm');
+var response = makeAJAXCall("/searchCheques", 'chequeForm');
     response.done(function (responseData) {
         if (responseData) {
             $("#chequeSearchResult").html(responseData);
@@ -189,4 +189,22 @@ document.cheque.submit();*/
 function updateMyDetails()
 {	document.updateForm.action="/saveEmployee";
 	document.updateForm.submit();
+}
+
+function getFormtData() {
+    var response = makeAJAXCall("/searchEmployee", 'searchEmployeeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#employeeSearchResult").html(responseData);
+        }
+    });
+}
+
+function searchEmployeeStatus() {
+    var response = makeAJAXCall("/searchEmployeeStatus", 'statusEmployeeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#statusSearchResult").html(responseData);
+        }
+    });
 }
