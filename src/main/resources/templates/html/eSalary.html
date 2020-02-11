@@ -12,8 +12,8 @@
             <div class="jumbotron">
                 <div class="container">
                     <div class="Heading">Monthly Salary Report</div>
-                    <span style="color: #008000;" th:if="${mailSent}!=null" th:text="${mailSent}"></span>
-                    <span style="color:#ff0000;" th:if="${error}!=null" th:text="${error}"></span>
+                    <span style="color: #008000;" th:text="${mailSent}?:''" id="mailSent"></span>
+                    <span style="color:#ff0000;" th:text="${error}?:''" id="error"></span>
                     <form action="/produceAllSalaries" method="post" id="generateAllSalariesForm"
                           name="generateAllSalariesForm" th:action="@{/produceAllSalaries}"
                           th:object="${generateAllSalariesForm}">

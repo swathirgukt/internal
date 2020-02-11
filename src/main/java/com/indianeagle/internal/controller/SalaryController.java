@@ -2,7 +2,6 @@ package com.indianeagle.internal.controller;
 
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
-import com.indianeagle.internal.form.EmpSalaryDecider;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
 import com.indianeagle.internal.form.SalaryForm;
 import com.indianeagle.internal.form.vo.DepartmentVO;
@@ -26,11 +25,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -272,6 +269,19 @@ public class SalaryController {
         }
         return "generateSalary";
     }*/
+
+   @GetMapping("/saveSalaries")
+   @ResponseBody
+   public String saveSalaries(ModelMap modelMap,HttpSession httpSession){
+       try {
+           this.salaryService.saveSalaries(httpSession);
+           return "Saved salaries for later modification success.";
+       } catch (Exception e) {
+           e.printStackTrace();
+           return "Error occured due to technical error.";
+       }
+   }
+
 
     @GetMapping("/confirmAndSendPaySlipMails")
     public String confirmAndSendPaySlipMails(ModelMap model, HttpSession httpSession, GenerateAllSalariesForm generateAllSalariesForm) {

@@ -25,7 +25,7 @@ public class GenerateAllSalariesForm {
     private Date salaryDate;
     private Date salaryEndDate;
     private BigDecimal totalWorkingDays;
-    private List<EmpSalaryDecider> empSalaryDeciderList;
+    private List<EmpSalaryDeciderVO> empSalaryDeciderVOList;
 
     /**
      * @return the salaryDate
@@ -58,15 +58,15 @@ public class GenerateAllSalariesForm {
     /**
      * @return the empSalaryDeciderList
      */
-    public List<EmpSalaryDecider> getEmpSalaryDeciderList() {
-        return empSalaryDeciderList;
+    public List<EmpSalaryDeciderVO> getEmpSalaryDeciderVOList() {
+        return empSalaryDeciderVOList;
     }
 
     /**
-     * @param empSalaryDeciderList the empSalaryDeciderList to set
+     * @param empSalaryDeciderVOList the empSalaryDeciderList to set
      */
-    public void setEmpSalaryDeciderList(List<EmpSalaryDecider> empSalaryDeciderList) {
-        this.empSalaryDeciderList = empSalaryDeciderList;
+    public void setEmpSalaryDeciderVOList(List<EmpSalaryDeciderVO> empSalaryDeciderVOList) {
+        this.empSalaryDeciderVOList = empSalaryDeciderVOList;
     }
 
     public Date getSalaryEndDate() {

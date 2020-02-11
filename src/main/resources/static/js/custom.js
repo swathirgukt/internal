@@ -45,6 +45,8 @@ function searchAllEmployeeLeaveReport() {
     });
 }
 function searchAllESalaryEmployee() {
+    $("#mailSent").html("");
+    $("#error").html("");
     var response = makeAJAXCall("/searchAllESalaryEmployee", 'generateAllSalariesForm');
     response.done(function (responseData) {
         if (responseData) {
@@ -78,6 +80,21 @@ function savePeripheral() {
     document.peripheralForm.submit();
 }
 
+function saveSalaryDecider(){
+    var response = jQuery.ajax({
+            url: "/saveSalaries",
+            type: "GET",
+            error: function(msg,err,exc){
+                console.log("#error: "+err);
+            }
+        });
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#saveSalariesResult").text(responseData);
+        }
+    });
+}
+
 function getLeaveBalance(){
     var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
     response.done(function(responseData){
@@ -96,7 +113,6 @@ function findEmployeeLeaves(){
     });
 }
 
-// Function  to enter only positive int value ,Usage : onkeypress="return allowPositiveInt(event)"
 function allowPositiveInt(evt) {
 	var charCode = (evt.which) ? evt.which : event.keyCode;
 	if ((charCode != 8) && (charCode < 48 || charCode > 57)) {
@@ -182,8 +198,6 @@ var response = makeAJAXCall("/searchCheques", 'chequeForm');
         }
 
     });
-/*document.cheque.action="./searchChequeDetails.action";
-document.cheque.submit();*/
 }
 
 function updateMyDetails()
