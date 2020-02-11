@@ -1,4 +1,5 @@
 <div th:fragment="eSalaryResult" xmlns:th="http://www.thymeleaf.org">
+   <div class="tableScrollbar">
     <table class="table_text_style table  table-bordered ">
         <tr style="background-color: black;color: white;">
             <td>Exclude</td>
@@ -9,8 +10,7 @@
             <td>Salary&nbsp;Advance</td>
             <td>Performance&nbsp;Incentives</td>
         </tr>
-
-        <tr th:each="decider , status : ${generateAllSalariesForm.empSalaryDeciderList}">
+        <tr th:each="decider , status : ${generateAllSalariesForm.empSalaryDeciderList}" style="font-size:12px">
             <td><input type="checkbox"
                        th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].empExclude}"/></td>
             <td><input style="border:0px none;" readonly="true" type="text"
@@ -34,5 +34,5 @@
               th:if="${generateAllSalariesForm.empSalaryDeciderList}!=null  AND ${generateAllSalariesForm.empSalaryDeciderList.size()}==0">
             Salary already generated for this month
     </span>
-    </table>
+    </table></div>
 </div>

@@ -4,26 +4,21 @@
     <head>
         <title>Employee Leave Reports</title>
     </head>
-
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-lg-2 sidenav">
-        </div>
+        <div class="col-lg-2 sidenav"></div>
         <div class="col-lg-8 text-left">
             <div class="jumbotron">
                 <div class="container">
                     <form action="/employeeLeaveReport" name="employeeLeaveReportForm" id="employeeLeaveReportForm" method="post" th:action="@{/employeeLeaveReport}">
                         <div class="Heading">Leave Report</div>
                         <div class="row">
-                            <div class=" col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                            <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <table>
                                     <tr>
-                                        <td>Employee&nbsp;ID</td>
-                                        <td>
-                                            <span style="color: red">*</span>
-                                        <td>
+                                        <td>Employee&nbsp;ID<span style="color: red">*</span></td>
                                         <td><b>:</b></td>
                                         <td>
                                             <select class="selectOption" id="empId" name="empId">
@@ -34,31 +29,26 @@
                                 </table>
                             </div>
                             <div class=" col-lg-4  col-md-12 col-sm-12 col-xs-12">
-                                <div style="float: left;">
+                                <div>
                                     <table>
                                         <tr>
-                                            <td> From</td>
-                                            <td width="30px;"><span style="color: red">*</span>
-                                            <td>
+                                            <td>From<span style="color: red">*</span></td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <input id="fromDate" width="150px" name="fromDate"/>
+                                                <input id="fromDate" width="150px" name="fromDate" style="border: 1px solid #ff9900;"/>
                                                 <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
-                            <div class=" col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <table>
                                     <tr>
-                                        <td> To</td>
-                                        <td>
-                                            <span style="color: red">*</span>
-                                        <td>
+                                        <td>To<span style="color: red">*</span></td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input id="toDate" width="150px" name="toDate"/>
+                                            <input id="toDate" width="150px" name="toDate" style="border: 1px solid #ff9900;"/>
                                             <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
                                     </tr>
@@ -67,7 +57,7 @@
                         </div>
                         <div class="row">
                             <div class=" col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" class="submitButton" onclick="searchEmployeeLeaveReport()">Search</button>
+                                <button type="button" class="submitButton" onclick="searchEmployeeLeaveReport()"><b>Search</b></button>
                             </div>
                         </div>
                     </form>

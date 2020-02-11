@@ -175,7 +175,7 @@ function saveCheque()
 }
 function searchChequeDetails()
 {
-var response = makeAJAXCall("/searchChequeDetails", 'chequeForm');
+var response = makeAJAXCall("/searchCheques", 'chequeForm');
     response.done(function (responseData) {
         if (responseData) {
             $("#chequeSearchResult").html(responseData);
