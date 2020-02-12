@@ -8,12 +8,12 @@ import java.util.Date;
  * @author kiran.paluvadi
  *
  */
-public class Incentives {
+public class IncentivesVO {
 	
 	private Long id;
 	private BigDecimal incentiveAmount;
 	private Date incentiveDate;
-	private EmployeeVO employee;
+	private EmployeeVO employeeVO;
 	private String empName;
 	
 	/**
@@ -55,14 +55,14 @@ public class Incentives {
 	/**
 	 * @return the employee
 	 */
-	public EmployeeVO getEmployee() {
-		return employee;
+	public EmployeeVO getEmployeeVO() {
+		return employeeVO;
 	}
 	/**
-	 * @param employee the employee to set
+	 * @param employeeVO the employee to set
 	 */
-	public void setEmployee(EmployeeVO employee) {
-		this.employee = employee;
+	public void setEmployeeVO(EmployeeVO employeeVO) {
+		this.employeeVO = employeeVO;
 	}
 	/**
 	 * @return the empName

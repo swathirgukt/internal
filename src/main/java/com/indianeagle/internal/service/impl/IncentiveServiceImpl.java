@@ -3,6 +3,7 @@ package com.indianeagle.internal.service.impl;
 import com.indianeagle.internal.dao.repository.IncentiveRepository;
 import com.indianeagle.internal.dto.Incentives;
 import com.indianeagle.internal.form.IncentiveForm;
+import com.indianeagle.internal.form.vo.IncentivesVO;
 import com.indianeagle.internal.service.IncentiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,11 @@ public class IncentiveServiceImpl implements IncentiveService {
 	 * @param incentiveForm 
 	 */
 	public void saveIncentives(IncentiveForm incentiveForm){
-		List<Incentives> incentiveList = incentiveForm.getIncentivesList();
-		for(Incentives incentives : incentiveList){
+		List<IncentivesVO> incentiveList = incentiveForm.getIncentivesVOList();
+		for(IncentivesVO incentives : incentiveList){
 			incentives.setIncentiveDate(incentiveForm.getIncentiveDate());
 		}
-		incentiveRepository.saveAll(incentiveList);
+		//incentiveRepository.saveAll(incentiveList);
 	}
 
 

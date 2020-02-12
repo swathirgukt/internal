@@ -149,3 +149,14 @@ function searchEmployeeStatus() {
         }
     });
 }
+
+function appendTable(){
+    var tableRow="<table name='remove' width='100%'><tr><td style='padding:5px'><select style='width: 200px;height: 23px;border-radius:5px'><option value=''>--SELECT--</option><option value=''>IEPL079</option><option value=''>IEPL0518</option></select></td><td><input name='incentive_amount' type='text' style='width: 200px;height: 23px;'> </td></tr></table>";
+    $("#addTable").append(tableRow);
+}
+function removeTable(){
+    var tableName=$('#addTable table:last').attr('name');
+    if(tableName=="remove"){
+       $("#addTable table:last").remove();
+    }
+}

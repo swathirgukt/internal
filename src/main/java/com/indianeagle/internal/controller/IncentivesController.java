@@ -3,10 +3,12 @@ package com.indianeagle.internal.controller;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.Incentives;
 import com.indianeagle.internal.form.IncentiveForm;
+import com.indianeagle.internal.form.vo.EmployeeVO;
+import com.indianeagle.internal.form.vo.IncentivesVO;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.IncentiveService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,7 +22,6 @@ import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Action class for adding incentives for employees
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/addIncentive")
 public class IncentivesController {
-    Map<String, Employee> employeeMap;
+    Map<String, EmployeeVO> employeeMap;
 
     @Autowired
     EmployeeService employeeService;
@@ -38,32 +39,30 @@ public class IncentivesController {
     private IncentiveService incentiveService;
 
     @PostConstruct
-    public void prepare() {
+    public void loadData() {
         employeeMap = new HashMap<>();
         for (Employee employee : employeeService.getEmployeeList()) {
-            employeeMap.put(employee.getEmpId(), employee);
+            EmployeeVO employeeVO = new EmployeeVO();
+            BeanUtils.copyProperties(employee,employeeVO);
+            employeeMap.put(employee.getEmpId(), employeeVO);
         }
     }
 
     @GetMapping
     public String addIncentiveView(Model model) {
         IncentiveForm incentiveForm = new IncentiveForm();
-        incentiveForm.setEmployeeList(new ArrayList(employeeMap.values()));
+        incentiveForm.setEmployeeVOList(new ArrayList(employeeMap.values()));
         model.addAttribute("incentiveForm", incentiveForm);
         return "html/addIncentive";
     }
 
     @PostMapping("/save")
-    public String saveIncentives(ModelMap modelMap, @Valid IncentiveForm incentiveForm, BindingResult bindingResult) {
+    public String saveIncentives(ModelMap modelMap, IncentiveForm incentiveForm) {
         System.out.println("##Incetive: " + incentiveForm.getIncentiveDate());
-        System.out.println("##Incetive: " + incentiveForm.getIncentivesList().get(0).getEmployee().getEmpId());
-        System.out.println("##Incetive: " + incentiveForm.getIncentivesList().get(0).getIncentiveAmount());
-        if (bindingResult.hasErrors()) {
-            return "html/addIncentive";
-        }
-        System.out.println("##save incentive");
-        for (Incentives incentives:incentiveForm.getIncentivesList()){
-            incentives.setEmployee(employeeMap.get(incentives.getEmployee().getEmpId()));
+        System.out.println("##Incetive: " + incentiveForm.getIncentivesVOList().get(0).getEmployeeVO().getId());
+        System.out.println("##Incetive: " + incentiveForm.getIncentivesVOList().get(0).getIncentiveAmount());
+        for (IncentivesVO incentivesVO:incentiveForm.getIncentivesVOList()){
+            incentivesVO.setEmployeeVO(employeeMap.get(incentivesVO.getEmployeeVO().getEmpId()));
         }
         incentiveService.saveIncentives(incentiveForm);
         modelMap.addAttribute("success", "Save incentive Successfull");
