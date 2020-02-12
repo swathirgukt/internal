@@ -330,4 +330,5 @@ public class Salary  extends BaseDto{
     public void setBonus(BigDecimal bonus) {
         this.bonus = bonus;
     }
+
 }

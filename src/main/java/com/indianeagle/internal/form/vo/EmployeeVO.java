@@ -39,7 +39,7 @@ public class EmployeeVO {
     private String passportNo;
     private String uanNumber;
 
-	private Salary salary;
+	private SalaryVO salaryVO;
 	private DepartmentVO department;
 	private SalaryHistoryVO currentSalary;
     private Leaves leaves;
@@ -258,16 +258,16 @@ public class EmployeeVO {
 	/**
 	 * @return the salary
 	 */
-	public Salary getSalary() {
-		return salary;
+	public SalaryVO getSalaryVO() {
+		return salaryVO;
 	}
 
 	/**
-	 * @param salary
+	 * @param salaryVO
 	 *            the salary to set
 	 */
-	public void setSalary(Salary salary) {
-		this.salary = salary;
+	public void setSalaryVO(SalaryVO salaryVO) {
+		this.salaryVO = salaryVO;
 	}
 
 	/**
@@ -551,7 +551,7 @@ public class EmployeeVO {
 				", emergencyContact='" + emergencyContact + '\'' +
 				", passportNo='" + passportNo + '\'' +
 				", uanNumber='" + uanNumber + '\'' +
-				", salary=" + salary +
+				", salary=" + salaryVO +
 				", department=" + department +
 				", currentSalary=" + currentSalary +
 				", leaves=" + leaves +

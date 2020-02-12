@@ -285,7 +285,7 @@
                                             <td>First Name<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.nominee.firstName}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.nomineeVO.firstName}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -293,7 +293,7 @@
                                             <td>Middle Name<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.nominee.middleName}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.nomineeVO.middleName}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -302,7 +302,7 @@
                                             </td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
-                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.nominee.dateOfBirth}"/>
+                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.nomineeVO.dateOfBirth}"/>
                                                 <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
@@ -317,13 +317,13 @@
                                         <tr>
                                             <td>Last Name<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.nominee.lastName}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.nomineeVO.lastName}"
                                                        type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Relation<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select class="selectOption" th:field="${employeeForm.employeeVO.nominee.relation}">
+                                                <select class="selectOption" th:field="${employeeForm.employeeVO.nomineeVO.relation}">
                                                     <option value="">--Select--</option>
                                                     <option value="Father">Father</option>
                                                     <option value="Mother">Mother</option>
@@ -369,7 +369,7 @@
                                         <tr>
                                             <td>Password<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:value="${employeeForm.user.password}" th:field="${employeeForm.user.password}"
+                                                <input class="input_style" th:value="${employeeForm.user}!=null?${employeeForm.user.password}:''" th:field="${employeeForm.user.password}"
                                                        type="password"/>
                                             </td>
                                         </tr>
@@ -395,14 +395,14 @@
                                         <tr>
                                             <td>Basic<span style="float:right; margin-right:10px;"><b>:</b></span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.basic}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.basic}"
                                                        type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>HRA<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.hra}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.hra}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -410,7 +410,7 @@
                                             <td>Conveyance<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.conveyence}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.conveyence}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -418,7 +418,7 @@
                                             <td>Medical Allowance<span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.medicalAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.medicalAllowance}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -426,21 +426,21 @@
                                             <td>Special Allowance<span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.specialAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.specialAllowance}"
                                                        type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Gratuity<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.telephoneAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.telephoneAllowance}"
                                                        type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Bonus<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.bonus}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.bonus}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -449,14 +449,14 @@
                                                     style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.performanceLinkedPay}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.performanceLinkedPay}"
                                                        type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>UAN<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.uanNumber}"
+                                                <input class="input_style"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -464,7 +464,7 @@
                                             <td>Shift Allowance<span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.internetAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.internetAllowance}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -473,7 +473,7 @@
                                                     style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.uniformAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.uniformAllowance}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -481,7 +481,7 @@
                                             <td>Other Allowance<span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.otherAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.otherAllowance}"
                                                        type="text"/>
                                             </td>
                                         </tr>
@@ -502,21 +502,21 @@
                                             <td>Medical Insurance<span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.medicalAllowance}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.medicalAllowance}"
                                                        type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Loan Amount<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.loanAmount}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.loanAmount}"
                                                        type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>PF Required<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <select class="selectOption" th:field="${employeeForm.employeeVO.salary.pfRequired}">
+                                                <select class="selectOption" th:field="${employeeForm.employeeVO.salaryVO.pfRequired}">
                                                     <option value="YES">YES</option>
                                                     <option value="NO">NO</option>
 
@@ -528,14 +528,14 @@
                                             <td>Income Tax<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <input class="input_style" th:field="${employeeForm.employeeVO.salary.incomeTax}"
+                                                <input class="input_style" th:field="${employeeForm.employeeVO.salaryVO.incomeTax}"
                                                        type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>ESI Eligible<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
-                                                <select class="selectOption"  th:field="${employeeForm.employeeVO.salary.esiEligible}">
+                                                <select class="selectOption"  th:field="${employeeForm.employeeVO.salaryVO.esiEligible}">
                                                     <option value="YES">YES</option>
                                                     <option value="NO">NO</option>
 
@@ -559,7 +559,7 @@
                                             <td>Pay Slip Format<span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select class="selectOption"  th:field="${employeeForm.employeeVO.salary.incomeTaxEligible}">
+                                                <select class="selectOption"  th:field="${employeeForm.employeeVO.salaryVO.incomeTaxEligible}">
                                                     <option value=true>IT</option>
                                                     <option value=false>NON-IT</option>
                                                 </select>
@@ -575,6 +575,8 @@
                                     <button class="submitButton" type=reset>Reset</button>
                                 </div>
                             </div>
+                            <span th:if="${saveMessage}!=null" th:text="${saveMessage}"></span>
+                            <span th:if="${updateMessage}!=null" th:text="${updateMessage}"></span>
                         </div>
                     </form>
                 </div>
