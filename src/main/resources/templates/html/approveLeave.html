@@ -2,6 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Approve Leave</title>
+    <script>
+        $(function() {
+            var dates = $("#fromDateId, #toDateId").datepicker({
+                changeMonth: true,
+                onSelect: function(selectedDate) {
+                    var option = this.id == "fromDateId" ? "minDate" : "maxDate",
+                            instance = $(this).data("datepicker"),
+                            date = $.datepicker.parseDate(
+                                    instance.settings.dateFormat ||
+                                            $.datepicker._defaults.dateFormat,
+                                    selectedDate, instance.settings);
+                    if (this.id == "fromDateId") {
+                        $(this).datepicker("option", "altField", "#alternate");
+                        $(this).datepicker("option", "altFormat", "DD, d MM, yy");// altFormat: "DD, d MM, yy" ,
+                    }
+                    if (this.id == "toDateId") {
+                        $(this).datepicker("option", "altField", "#alternate2");
+                        $(this).datepicker("option", "altFormat", "DD, d MM, yy");// altFormat: "DD, d MM, yy" ,
+                    }
+                    dates.not(this).datepicker("option", option, date);
+                    calculateLeaveDays();
+                }
+            });
+        });
+        function calculateLeaveDays() {
+            if ($("#fromDateId").val() != '' && $("#toDateId").val() != '') {
+                if ($("#leaveTypeId").val() == 'LOP 1/2 Day' || $("#leaveTypeId").val() == 'Half Day Leave' || $("#leaveTypeId").val() == 'Comp. Leave Half Day') {
+                    $('#leaveDaysId').val(0.5);
+                } else {
+                    var d1 = new Date($("#fromDateId").val());
+                    var d2 = new Date($("#toDateId").val());
+                    if ($("#leaveTypeId").val() == 'LOP inc Holidays' || $("#leaveTypeId").val() == 'Marriage Leave inc Holidays') {
+                        $('#leaveDaysId').val(getDatesDiff(d1, d2));
+                    } else {
+                        $('#leaveDaysId').val(calcBusinessDays(d1, d2));
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -26,10 +66,7 @@
                                             <td style="padding:5px">
                                                 Employee&nbsp;ID
                                             </td>
-
-                                            <td>
-                                                <span style="float: right;margin-right:10px; "><b>:</b></span>
-                                            </td>
+                                            <td><b>:</b></td>
                                             <td>
                                                 <select name="id" class="selectOption" onchange="getLeaveBalance()" th:field="*{empId}">
                                                     <option th:each="empId : ${employeeIds}" th:value="${empId}">[[${empId}]]</option>
@@ -40,12 +77,9 @@
                                             <td>
                                                 Leave &nbsp;Type
                                             </td>
-
+                                            <td><b>:</b></td>
                                             <td>
-                                                <span style="float: right;margin-right:10px;"><b>:</b></span>
-                                            </td>
-                                            <td>
-                                                <select class="selectOption" th:field="*{leaveType}">
+                                                <select class="selectOption" th:field="*{leaveType}" id="leaveTypeId">
                                                     <option value="Casual Leave">Casual Leave</option>
                                                     <option value="Sick Leave">Sick Leave</option>
                                                     <option value="Compensatory Leave">Compensatory Leave</option>
@@ -64,133 +98,121 @@
                                         </tr>
                                         <tr>
                                             <td> Absent&nbsp;From</td>
+                                            <td><b>:</b></td>
                                             <td>
-                                                <span style="float: right;margin-right:10px; "><b>:</b></span>
-                                            </td>
-                                            <td><input style="  border: 1px solid #ff9900;" id="datepicker"
-                                                       width="180px" name="datepicker" th:field="*{fromDate}"/>
-                                                <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-                                                </script>
+                                                <input style=" border: 1px solid #ff9900;" id="fromDateId"
+                                                       width="180px" name="approveLeaveForm.fromDate" th:field="*{fromDate}"/>
+                                                <script>$('#fromDateId').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td> To</td>
-
+                                            <td><b>:</b></td>
                                             <td>
-                                                <span style="float: right;margin-right:10px; "><b>:</b></span>
-                                            </td>
-                                            <td>
-                                                <input style="border: 1px solid #ff9900;" id="datepicker1" width="180px"
-                                                       name="datepicker" th:field="*{toDate}"/>
-                                                <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
-
-                                                </script>
+                                                <input style="border: 1px solid #ff9900;" id="toDateId" width="180px"
+                                                       name="approveLeaveForm.toDate" th:field="*{toDate}"/>
+                                                <script>$('#toDateId').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td> Leave&nbsp;Days</td>
-
+                                            <td><b>:</b></td>
                                             <td>
-                                                <span style="float: right;margin-right:10px; "><b>:</b></span>
-                                            </td>
-                                            <td>
-                                                <input type="text" name="leaveApproveForm.totalNumberOfAbsentDays" th:field="*{totalNumberOfAbsentDays}" id="leaveDaysId"/>
+                                                <input type="text" name="approveLeaveForm.totalNumberOfAbsentDays" th:field="*{totalNumberOfAbsentDays}" id="leaveDaysId"/>
                                             </td>
                                         </tr>
                                     </table>
-
-
+                                    <table width="100%" class="table_text_style table-sm">
+                                        <tr>
+                                            <td>Type</td>
+                                            <td><b>:</b></td>
+                                            <td>CL</td>
+                                            <td>SL</td>
+                                            <td>C.Off</td>
+                                            <td>LOP</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><select th:field="*{casualLeave}">
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            </td>
+                                            <td><select th:field="*{sickLeave}">
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            </td>
+                                            <td><select th:field="*{compensatoryLeave}">
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            </td>
+                                            <td><select th:field="*{lop}">
+                                                <option value="0">00</option>
+                                                <option value="0.5">0.5</option>
+                                                <option value="1">01</option>
+                                                <option value="2">02</option>
+                                                <option value="3">03</option>
+                                                <option value="4">04</option>
+                                                <option value="5">05</option>
+                                                <option value="6">06</option>
+                                                <option value="7">07</option>
+                                                <option value="8">08</option>
+                                                <option value="9">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table width="100%" class="table_text_style table-sm">
+                                        <tr>
+                                            <td width="50px">Note</td>
+                                            <td><b>:</b></td>
+                                            <td><textarea rows="3" cols="25" th:field="*{note}"></textarea></td>
+                                        </tr>
+                                    </table>
                                     <div>
-                                            <span class="Type_leaves"><b>Type</b><span
-                                                    style="margin-left:75px;">:</span></span>
-                                        <div style="float: right; margin-right:70px">
-                                            <table width="100%">
-                                                <tr>
-                                                    <td>CL</td>
-                                                    <td>SL</td>
-                                                    <td>C.Off</td>
-                                                    <td>LOP</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><select th:field="*{casualLeave}">
-                                                        <option value="0">00</option>
-                                                        <option value="0.5">0.5</option>
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                        <option value="5">05</option>
-                                                        <option value="6">06</option>
-                                                        <option value="7">07</option>
-                                                        <option value="8">08</option>
-                                                        <option value="9">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                    </select></td>
-                                                    <td><select th:field="*{sickLeave}">
-                                                        <option value="0">00</option>
-                                                        <option value="0.5">0.5</option>
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                        <option value="5">05</option>
-                                                        <option value="6">06</option>
-                                                        <option value="7">07</option>
-                                                        <option value="8">08</option>
-                                                        <option value="9">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                    </select></td>
-                                                    <td><select th:field="*{compensatoryLeave}">
-                                                        <option value="0">00</option>
-                                                        <option value="0.5">0.5</option>
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                        <option value="5">05</option>
-                                                        <option value="6">06</option>
-                                                        <option value="7">07</option>
-                                                        <option value="8">08</option>
-                                                        <option value="9">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                    </select></td>
-                                                    <td><select th:field="*{lop}">
-                                                        <option value="0">00</option>
-                                                        <option value="0.5">0.5</option>
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                        <option value="5">05</option>
-                                                        <option value="6">06</option>
-                                                        <option value="7">07</option>
-                                                        <option value="8">08</option>
-                                                        <option value="9">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                    </select></td>
-
-                                                </tr>
-                                            </table>
-
-
-                                        </div>
-                                    </div>
-                                    <div class="Type_leaves">
-                                        <div style="margin-top: 30px">
-                                            <label>Note
-                                                <span><b>:</b></span>
-                                                <textarea rows="3" cols="25" th:field="*{note}" style="margin-left:120px"></textarea></label>
-                                        </div>
-                                        <div>
+                                        <div style="float:right">
                                             <button type="submit" class="submitButton" ><b>Submit</b></button>
                                         </div>
                                     </div>
