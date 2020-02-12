@@ -25,12 +25,12 @@ import java.util.List;
 /**
  * Controller to monthly salary report of all employees
  *
- * @author
+ * @author CH.Srinath
  */
 @Controller
 public class MonthlyReportController {
     private static final Logger LOG = LogManager.getLogger(MonthlyReportController.class);
-    //@Autowired
+    @Autowired
     private MonthlyReportService monthlyReportService;
 
     @InitBinder
@@ -41,7 +41,6 @@ public class MonthlyReportController {
 
     @RequestMapping("/salaryReportHome")
     public String salaryReportHome() {
-        System.out.println("in no url");
         return "html/monthlySalaryReport";
     }
 
@@ -52,32 +51,20 @@ public class MonthlyReportController {
      */
     @PostMapping("/monthlySalaryReport")
     public String getmonthlySalaryReport(ModelMap model, @RequestParam @DateTimeFormat(pattern = "YYYY-MM-dd") Date salaryDate) {
-        System.out.println(salaryDate);
-
-        System.out.println("======================");
-
         try {
             if (salaryDate == null) {
-                System.out.println("date is null");
                 model.addAttribute("selectDate", "please select date");
                 return "html/monthlySalaryReport";
             }
-            System.out.println("before query");
-            List<MonthlySalaryReport> monthlySalaryList =new ArrayList<>();/* monthlyReportService.getMonthlySalaryReport(salaryDate);*/
-            System.out.println(monthlySalaryList.size());
+            List<MonthlySalaryReport> monthlySalaryList = new ArrayList<>();/* monthlyReportService.getMonthlySalaryReport(salaryDate);*/
             if (monthlySalaryList.isEmpty()) {
-                System.out.println("ghft");
                 model.addAttribute("recordMessage", "No Records Found");
-                //addActionMessage("No Records Found");
                 return "html/monthlySalaryReport";
             }
-            System.out.println("monthly slalry list");
             model.addAttribute("monthlySalaryList", monthlySalaryList);
-            //session.put("monthlySalaryList",monthlySalaryList);
             return "html/monthlySalaryReport";
         } catch (Exception e) {
             model.addAttribute("Problem occured due to technical problem");
-            //addActionError("Problem occured due to technical problem");
             LOG.error("Problem occured due to technical problem", e);
             return "html/monthlySalaryReport";
         }

@@ -17,6 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author CH.Srinath
+ * controller to save or update cheque details
+ */
 
 @Controller
 public class ChequeDetailsController {
@@ -59,7 +63,6 @@ public class ChequeDetailsController {
             model.addAttribute("updateMessage", "Updated Successfully");
         }
         service.saveOrUpdateCheque(chequeDetailsForm.getChequeDetails());
-        System.out.println("##CheqDtls: " + chequeDetailsForm.getChequeDetails());
 
         chequeDetailsForm.setChequeDetails(null);
         return "html/chequeDetails";
@@ -69,20 +72,17 @@ public class ChequeDetailsController {
     @PostMapping("/searchCheques")
     public String search(ModelMap model, @ModelAttribute("chequeDetailsForm") ChequeDetailsForm chequeDetailsForm) {
 
-        System.out.println("@@@@@@@@InsideSearch >> " + chequeDetailsForm.getFromDate() + ">> " + chequeDetailsForm.getToDate() + "  >> " + chequeDetailsForm.getAmount());
         if (chequeDetailsForm.getFromDate() == null || chequeDetailsForm.getToDate() == null || chequeDetailsForm.getAmount() == null) {
             return "html/fragment/chequeDetailsResult";
         }
 
         List<ChequeDetails> chequeDetailsList = service.searchChequeDetails(chequeDetailsForm);
-        System.out.println(chequeDetailsList);
 
         BigDecimal total = BigDecimal.ZERO;
         for (ChequeDetails chequeDetails : chequeDetailsList) {
             total = total.add(chequeDetails.getAmount());
         }
 
-        System.out.println(total);
         ChequeDetails chequeDetails = new ChequeDetails();
         chequeDetails.setAmount(total);
         chequeDetails.setNameOfPay("Total Amount");

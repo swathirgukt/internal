@@ -18,15 +18,11 @@ import java.util.Map;
 /**
  * Controller to  render the BasicSalaryDetails Report
  *
- * @author
+ * @author CH.Srinath
  */
 @Controller
 public class BasicSalaryDetailsController {
-
-
     public Map<String, String> empStatusMap;
-
-    //public List<Employee> employeesList;
     @Autowired
     public BasicSalaryDetailsService basicSalaryDetailsService;
 
@@ -37,7 +33,7 @@ public class BasicSalaryDetailsController {
         empStatusMap.put(EmployeeStatusEnum.RELIEVED.name(), "Relieved");
         empStatusMap.put(EmployeeStatusEnum.RESIGNED.name(), "Resigned");
         empStatusMap.put(EmployeeStatusEnum.WORKING.name(), "Working");
-        model.addAttribute("empStatusMap",empStatusMap);
+        model.addAttribute("empStatusMap", empStatusMap);
         return "html/basicSalaryDetails";
     }
 
@@ -59,14 +55,10 @@ public class BasicSalaryDetailsController {
     @PostMapping("/basicSalaryDetailsReport")
     public String basicSalaryReport(@RequestParam String empStatus, ModelMap model) {
         try {
-            System.out.println("empStatus="+empStatus);
-            System.out.println("=================================");
-            List<Employee> employeesList =  basicSalaryDetailsService.getBasicSalaryDetails(empStatus);
-            System.out.println("employeeList= "+employeesList);
+            List<Employee> employeesList = basicSalaryDetailsService.getBasicSalaryDetails(empStatus);
             model.addAttribute("employeesList", employeesList);
         } catch (Exception e) {
             model.addAttribute("exceptionMessage", "service problem");
-            //addActionError("service proplem");
             return "html/basicSalaryDetails";
         }
         return "html/basicSalaryDetails";
