@@ -44,7 +44,7 @@ public class EmployeeVO {
 	private SalaryHistoryVO currentSalary;
     private Leaves leaves;
     private EmployeeSettlement employeeSettlement;
-    private Nominee nominee;
+    private NomineeVO nomineeVO;
 	
 	/**
 	 * @return the id
@@ -492,12 +492,12 @@ public class EmployeeVO {
         this.employeeSettlement = employeeSettlement;
     }
 
-    public Nominee getNominee() {
-        return nominee;
+    public NomineeVO getNomineeVO() {
+        return nomineeVO;
     }
 
-    public void setNominee(Nominee nominee) {
-        this.nominee = nominee;
+    public void setNomineeVO(NomineeVO nomineeVO) {
+        this.nomineeVO = nomineeVO;
     }
 
 
@@ -556,7 +556,7 @@ public class EmployeeVO {
 				", currentSalary=" + currentSalary +
 				", leaves=" + leaves +
 				", employeeSettlement=" + employeeSettlement +
-				", nominee=" + nominee +
+				", nominee=" + nomineeVO +
 				'}';
 	}
 }

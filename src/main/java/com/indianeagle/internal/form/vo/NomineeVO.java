@@ -10,7 +10,7 @@ import java.util.Date;
  * Date: 1/23/13
  * Time: 10:46 AM
  */
-public class Nominee {
+public class NomineeVO {
     private Long id;
     private String firstName;
     private String middleName;

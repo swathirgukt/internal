@@ -85,13 +85,15 @@
                         <div class="row">
                             <div class="col-sm-12 col-xs-12 col-md-6">
                                 <div class="form-align">
+                                    <input type="hidden" th:field="${employeeForm.empId}" >
+
                                     <table width="100%" class="table-sm table_text_style">
                                         <tr>
                                             <td>First Name<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" name="first_name" id="first_name" th:field="${employeeForm.employeeVO.firstName}"
-                                                       type="text" onkeypress="return allowCharactersAndSpaces(event);" maxlength="150"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -99,7 +101,7 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" name="middle_name" id="middle_name" th:field="${employeeForm.employeeVO.middleName}"
-                                                       type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -107,7 +109,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" name="per_Address" id="per_Address" th:field="${employeeForm.employeeVO.perAddress}"
-                                                       type="text" />
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -154,21 +156,21 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" name="mobile_No" id="mobile_No" th:field="${employeeForm.employeeVO.mobileNo}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)" maxlength="11"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Emergency Contact<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.emergencyContact}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)" maxlength="11"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Join Date<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="172px" name="datepicker" th:field="${employeeForm.employeeVO.joinDate}"/>
+                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.joinDate}"/>
                                                 <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
@@ -185,13 +187,13 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.lastName}"
-                                                       type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Department<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select th:field="${employeeForm.department}" class="selectOption">
+                                                <select th:field="${employeeForm.department}">
                                                     <option value="">select </option>
                                                     <option th:each="branches : ${employeeForm.departments}"
                                                             th:value="${branches.department}"
@@ -212,7 +214,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
-                                                       width="172px" name="datepicker" th:field="${employeeForm.employeeVO.dob}"/>
+                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.dob}"/>
                                                 <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
@@ -284,7 +286,7 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.nominee.firstName}"
-                                                       type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -292,7 +294,7 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.nominee.middleName}"
-                                                       type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -300,7 +302,7 @@
                                             </td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
-                                                       width="172px" name="datepicker" th:field="${employeeForm.employeeVO.nominee.dateOfBirth}"/>
+                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.nominee.dateOfBirth}"/>
                                                 <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
@@ -316,7 +318,7 @@
                                             <td>Last Name<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.nominee.lastName}"
-                                                       type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Relation<span style="float:right; margin-right:10px;">:</span></td>
@@ -348,7 +350,7 @@
                                             <td>Role<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select th:field="${employeeForm.roleName}" class="selectOption">
+                                                <select th:field="${employeeForm.roleName}">
                                                     <option value="">select </option>
                                                     <option th:each="roles : ${employeeForm.rolesList}"
                                                             th:value="${roles.roleName}"
@@ -394,14 +396,14 @@
                                             <td>Basic<span style="float:right; margin-right:10px;"><b>:</b></span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.basic}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>HRA<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.hra}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -409,7 +411,7 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.conveyence}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -417,7 +419,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.medicalAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -425,21 +427,21 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.specialAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Gratuity<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.telephoneAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Bonus<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.bonus}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -448,14 +450,14 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.performanceLinkedPay}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>UAN<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.uanNumber}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -463,7 +465,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.internetAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -472,7 +474,7 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.uniformAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -480,7 +482,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.otherAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>
+                                                       type="text"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -501,14 +503,14 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.medicalAllowance}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Loan Amount<span style="float:right; margin-right:10px;">:</span>
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.loanAmount}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>PF Required<span style="float:right; margin-right:10px;">:</span>
@@ -527,7 +529,7 @@
                                             </td>
                                             <td>
                                                 <input class="input_style" th:field="${employeeForm.employeeVO.salary.incomeTax}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/>                                            </td>
+                                                       type="text"/>                                            </td>
                                         </tr>
                                         <tr>
                                             <td>ESI Eligible<span style="float:right; margin-right:10px;">:</span>

@@ -8,28 +8,23 @@ import com.indianeagle.internal.form.vo.EmployeeVO;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.UserRolesService;
 import com.indianeagle.internal.service.UsersService;
-import com.indianeagle.internal.util.CryptoUtil;
+import com.indianeagle.internal.util.BCryptPasswordUtil;
 import com.indianeagle.internal.validator.EmployeeFormValidator;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author Satya.Neelam
@@ -51,14 +46,19 @@ public class EmployeeController {
 
     private UserDetails userDetails;
 
-
-    @InitBinder("employeeForm")
-    void initBinder(WebDataBinder webDataBinder) {
-        webDataBinder.setValidator(employeeFormValidator);
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+   /* @InitBinder("employeeForm")
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(employeeFormValidator);
+    }*/
+
     @ModelAttribute("createEmployeeform")
-    public String createEmployeeForm(ModelMap model) throws Exception {
+    public String createEmployeeForm(ModelMap model){
         EmployeeForm employeeForm = new EmployeeForm();
         userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        //  userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getCredentials();
@@ -86,18 +86,9 @@ public class EmployeeController {
         return "html/updateMyDetails";
     }
 
-    @GetMapping("/search")
-    public String search(ModelMap model, EmployeeForm employeeForm /*@ModelAttribute("employeeForm") @Valid EmployeeForm employeeForm*/) {
-        Employee employee = employeeService.findEmployeeByEmpId(userDetails.getUsername());
-        System.out.println("employee is"+employee);
-        EmployeeVO employeeVO= new EmployeeVO();
-        BeanUtils.copyProperties(employee,employeeVO);
-        employeeForm.setEmployeeVO(employeeVO);
-        employeeForm.setDepartments(employeeService.getDepartmentList());
-        model.addAttribute("departmentList", employeeForm.getDepartments());
 
-        return "searchEmployee";
-    }
+
+
 
 
     /*  */
@@ -143,9 +134,9 @@ public class EmployeeController {
         employeeForm.setDepartments(employeeService.getDepartmentList());
         User user= new User();
         System.out.println("username="+userDetails.getUsername());
-        System.out.println("userPassword="+userDetails.getPassword());
+        System.out.println("userPassword="+ usersService.findByUserName(userDetails.getUsername()).getPassword());
         user.setUserName(userDetails.getUsername());
-        user.setPassword("yana123");
+        user.setPassword(usersService.findByUserName(userDetails.getUsername()).getPassword());
         employeeForm.setUser(user);
         employeeForm.setRolesList(userRolesService.loadAll());
         model.addAttribute("employeeForm", employeeForm);
@@ -157,45 +148,104 @@ public class EmployeeController {
      * To update the employee details
      */
     @PostMapping("/updateEmployeeController")
-    public String updateEmployee(ModelMap model,@Valid @ModelAttribute("employeeForm")  EmployeeForm employeeForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String updateEmployee(ModelMap model,@ModelAttribute("employeeForm") EmployeeForm employeeForm/*, BindingResult bindingResult*/) {
+        System.out.println("============UpdateBeforeCondition==================");
+       /* if (bindingResult.hasErrors()) {
             // model.addAttribute("message", "Validate error");
             //bindingResult.reject("Validate error");
+            System.out.println("errors");
             return "html/createEmployee";
-        }
-        System.out.println("userPassword="+employeeForm.getUser().getPassword());
+        }*/
+        System.out.println("userPassword=" + employeeForm.getUser().getPassword());
         if (StringUtils.isEmpty(employeeForm.getUser().getPassword())) {
+            System.out.println("emptyPassword");
+
             model.addAttribute("passwordRequired", "Password is required");
             return "html/createEmployee";
         }
+        System.out.println("====employeeFormId==="+employeeForm.getEmpId());
+        try {
+            if (StringUtils.isEmpty(employeeForm.getEmpId())) {
+                System.out.println("============Updatein if ==================");
 
-        if (StringUtils.isEmpty(employeeForm.getEmpId())) {
-            if (usersService.findByUserName(employeeForm.getEmployeeVO().getEmpId()) != null) {
-                model.addAttribute("employeeIdExists", "Employee Id already exists");
-                return "html/createEmployee";
-            }
-            //validatePFAndBankAccount(employeeForm);
+
+                if (employeeService.findEmployeeByEmpId(employeeForm.getEmployeeVO().getEmpId()) != null) {
+                    model.addAttribute("employeeIdExists", "Employee Id already exists");
+                    return "html/createEmployee";
+                }
+                //validatePFAndBankAccount(employeeForm);
             /*if (hasActionErrors()) {
                 return ERROR;
             }*/
-            employeeService.createEmployee(employeeForm);
-          //  createUser(employeeForm);
-            model.addAttribute("saveMessage", "SuccessFully Saved");
-        } else {
-            User user = usersService.findByUserName(employeeForm.getEmpId());
+
+                employeeService.createEmployee(employeeForm);
+                //  createUser(employeeForm);
+
+                model.addAttribute("saveMessage", "SuccessFully Saved");
+
+            }else {
+                System.out.println("============Update in else==================");
+
+                User user = usersService.findByUserName(employeeForm.getEmpId());
             /*if(!user.getPassword().equals(employeeForm.getUser().getPassword())){
                 employeeForm.getUser().setPassword(CryptoUtil.encryptPassWord(employeeForm.getUser().getPassword()));
             }*/
-            employeeForm.getUser().setPassword(CryptoUtil.encryptPassWord(employeeForm.getUser().getPassword()));
-            employeeService.updateEmployee(employeeForm);
-            model.addAttribute("updateMessage", "SuccessFully Updated");
+                employeeForm.getUser().setPassword(BCryptPasswordUtil.encode(employeeForm.getUser().getPassword()));
+                employeeService.updateEmployee(employeeForm);
+                model.addAttribute("updateMessage", "SuccessFully Updated");
 
+            }
+            System.out.println("new employee Form");
+
+            employeeForm = new EmployeeForm();
+            employeeForm.setDepartments(employeeService.getDepartmentList());
+            employeeForm.setRolesList(userRolesService.loadAll());
+            return "html/createEmployee";
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("exception occured");
+            model.addAttribute("exceptionMessage","insert again");
         }
-        employeeForm = new EmployeeForm();
-        employeeForm.setDepartments(employeeService.getDepartmentList());
-        employeeForm.setRolesList(userRolesService.loadAll());
+        System.out.println("===========END======");
         return "html/createEmployee";
     }
+
+    @GetMapping("/search")
+    public String searchEmployeeForm(ModelMap model){
+        EmployeeForm employeeForm = new EmployeeForm();
+        userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //  userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getCredentials();
+        Employee employee = employeeService.findEmployeeByEmpId(userDetails.getUsername());
+        System.out.println("=======employee====="+employee);
+
+        System.out.println("userdetails"+userDetails);
+        employeeForm.setDepartments(employeeService.getDepartmentList());
+        employeeForm.setRolesList(userRolesService.loadAll());
+        EmployeeVO employeeVO= new EmployeeVO();
+        BeanUtils.copyProperties(employee,employeeVO);
+        employeeForm.setEmployeeVO(employeeVO);
+        model.addAttribute("employeeForm",employeeForm);
+        System.out.println("model"+ this);
+        return "html/searchEmployeeDetails";
+    }
+
+   /* public String search(ModelMap model, EmployeeForm employeeForm *//*@ModelAttribute("employeeForm") @Valid EmployeeForm employeeForm*//*) {
+         System.out.println("update details");
+         System.out.println("==============================");
+         System.out.println("user details"+userDetails.getUsername());
+         System.out.println("==============================");
+
+         Employee employee = employeeService.findEmployeeByEmpId(userDetails.getUsername());
+         System.out.println("employee is"+employee);
+         EmployeeVO employeeVO= new EmployeeVO();
+         BeanUtils.copyProperties(employee,employeeVO);
+         employeeForm.setEmployeeVO(employeeVO);
+         System.out.println("uodateMy"+ this);
+         return "html/searchEmployee";
+    }*/
+
+
 
     /**
      * To search employees
@@ -205,41 +255,94 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             // model.addAttribute("message", "Validate error");
             //bindingResult.reject("Validate error");
-            return "searchEmployee";
+            return "html/searchEmployeeDetails";
         }
         employeeForm.setEmployeeList(employeeService.searchEmployees(employeeForm));
         model.addAttribute("employeeList", employeeForm.getEmployeeList());
 
-        return "searchEmployee";
+        return "html/fragment/searchEmployeeResult";
     }
+
+
 
     /**
      * To edit employee
      *
      * @return
      */
-    @GetMapping("/editEmployee")
-    public String editEmployee(HttpServletRequest servletRequest, EmployeeForm employeeForm, ModelMap model) {
-        String id = servletRequest.getParameter("employeeId");
-        Employee selectedEmployee = employeeService.findEmpFromBuffer(id);
+    @GetMapping("/editEmployee/{id}")
+    public String editEmployee(EmployeeForm employeeForm, ModelMap model,@PathVariable("id") Long id) {
+        // String id = servletRequest.getParameter("employeeId");
+        String uniqueId = String.valueOf(id);
+        Employee selectedEmployee = employeeService.findEmpFromBuffer(uniqueId);
 
-        EmployeeVO selectedEmployeeVO= new EmployeeVO();
+       /* EmployeeVO selectedEmployeeVO= new EmployeeVO();
         BeanUtils.copyProperties(selectedEmployee,selectedEmployeeVO);
-
+*/
         User user = usersService.findByUserName(selectedEmployee.getEmpId());
+        EmployeeVO selectedEmployeeVO = new EmployeeVO();
+        BeanUtils.copyProperties(selectedEmployee, selectedEmployeeVO);
         employeeForm.setEmployeeVO(selectedEmployeeVO);
-        model.addAttribute("getEmployee", employeeForm.getEmployeeVO());
-        employeeForm.setEmpId(selectedEmployee.getEmpId());
-        model.addAttribute("getEmployeeId", employeeForm.getEmpId());
+        System.out.println("selectedEmployeeId"+selectedEmployeeVO.getEmpId());
+        employeeForm.setEmpId(selectedEmployeeVO.getEmpId());
+        System.out.println("employeeFormId"+employeeForm.getEmpId());
+
 
         if (user != null) {
-            user.setPassword(user.getPassword());
+            System.out.println("==========userPassword========" + user.getPassword());
             employeeForm.setUser(user);
-            List<Role> roles = new ArrayList<Role>(user.getRoles());
-            employeeForm.setRoleName(roles.get(0).getRoleName());
+            System.out.println("====employeeFormPassword======" + employeeForm.getUser().getPassword());
+            System.out.println("=====userroles======" + user.getRoles());
+            if (user.getRoles().size() > 0) {
+                List<Role> roles = new ArrayList<Role>(user.getRoles());
+                employeeForm.setRoleName(roles.get(0).getRoleName());
+            }
         }
-        return "addEmployee";
+        model.addAttribute("employeeForm",employeeForm);
+        return "html/createEmployee";
+
     }
+
+    @GetMapping("/employeeStatus")
+    public String empStatus(ModelMap modelMap)
+    {
+        EmployeeForm employeeForm=new EmployeeForm();
+        userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        employeeForm.setDepartments(employeeService.getDepartmentList());
+        employeeForm.setRolesList(userRolesService.loadAll());
+        Employee employee = employeeService.findEmployeeByEmpId(userDetails.getUsername());
+
+        EmployeeVO employeeVO= new EmployeeVO();
+        BeanUtils.copyProperties(employee,employeeVO);
+        employeeForm.setEmployeeVO(employeeVO);
+        modelMap.addAttribute("employeeForm",employeeForm);
+        System.out.println("model"+ this);
+        return "html/searchEmployeeStatus";
+    }
+
+    /**
+     * To get the Employees based on Status
+     */
+    @PostMapping("/searchEmployeeStatus")
+    public String searchBasedOnEmpStatus(@ModelAttribute("employeeForm") EmployeeForm employeeForm, ModelMap modelMap) {
+       String fromDate= String.valueOf(employeeForm.getFromDate());
+        if (StringUtils.isEmpty(fromDate)) {
+            modelMap.addAttribute("errorMessage","FromDate is required");
+            return "html/searchEmployeeStatus";
+        }
+        String toDate= String.valueOf(employeeForm.getToDate());
+        if (!StringUtils.isEmpty(toDate)) {
+            if (employeeForm.getFromDate().after(employeeForm.getToDate())) {
+                modelMap.addAttribute("invaliDates","Please provide valid Dates");
+                return "html/searchEmployeeStatus";
+            }
+        }
+        employeeForm.setEmployeeList(employeeService.searchBasedOnEmpStatus(employeeForm));
+        modelMap.addAttribute("employeeForm",employeeForm);
+        return "html/fragment/searchEmployeeStatusResult";
+    }
+
+
 
     /**
      * Method to create user

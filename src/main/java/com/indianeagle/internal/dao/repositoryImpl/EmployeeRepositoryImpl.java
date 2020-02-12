@@ -90,7 +90,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
             }
         }
         queryEmpStatus.append(" ORDER BY EMP_ID");
-        query = entityManager.createQuery(queryEmpStatus.toString());
+        query = entityManager.createNativeQuery(queryEmpStatus.toString(),Employee.class);
         return query.getResultList();
     }
 
