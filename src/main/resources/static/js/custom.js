@@ -163,6 +163,13 @@ function removeRow(){
     if(rows>2){
        $("#incentiveTable tr:last").remove();
     }
+function searchFemployee() {
+    var response = makeAJAXCall("/searchEmployeeSettlement", 'searchFEmployeeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#settlementResult").html(responseData);
+        }
+    });
 }
 
 function searchIncentive() {

@@ -222,4 +222,6 @@ public class EmployeeForm {
         this.type = type;
     }
 
+
+    public Employee setEmployee(Employee employee) { return employee; }
 }
