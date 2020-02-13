@@ -150,13 +150,26 @@ function searchEmployeeStatus() {
     });
 }
 
-function appendTable(){
-    var tableRow="<table name='remove' width='100%'><tr><td style='padding:5px'><select style='width: 200px;height: 23px;border-radius:5px'><option value=''>--SELECT--</option><option value=''>IEPL079</option><option value=''>IEPL0518</option></select></td><td><input name='incentive_amount' type='text' style='width: 200px;height: 23px;'> </td></tr></table>";
-    $("#addTable").append(tableRow);
+function addRow(){
+    var count = $('#incentiveTable tr').length-1;
+    var tableRow="<tr><td style='padding:5px'><select style='width: 200px;height: 23px;border-radius:5px' name='incentivesVOList["+count+"].employeeVO.Id' id='employeeId"+count+"'></select></td><td><input name='incentivesVOList["+count+"].incentiveAmount' type='text' style='width: 200px;height: 23px;'> </td></tr></table>";
+    $("#incentiveTable").append(tableRow);
+    $('#employeeId option').each(function(){
+        $('#employeeId'+count).append("<option value='"+$(this).attr('value')+"'>"+$(this).text()+"</option>");
+    });
 }
-function removeTable(){
-    var tableName=$('#addTable table:last').attr('name');
-    if(tableName=="remove"){
-       $("#addTable table:last").remove();
+function removeRow(){
+    var rows=$('#incentiveTable tr').length;
+    if(rows>2){
+       $("#incentiveTable tr:last").remove();
     }
+}
+
+function searchIncentive() {
+    var response = makeAJAXCall('/incentive/search','incentiveForm');
+        response.done(function (responseData) {
+            if (responseData) {
+                $("#searchIncentiveResults").text(responseData);
+            }
+        });
 }
