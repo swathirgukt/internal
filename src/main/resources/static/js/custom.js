@@ -163,7 +163,8 @@ function removeRow(){
     if(rows>2){
        $("#incentiveTable tr:last").remove();
     }
-function searchFemployee() {
+}
+function searchFEmployee() {
     var response = makeAJAXCall("/searchEmployeeSettlement", 'searchFEmployeeForm');
     response.done(function (responseData) {
         if (responseData) {
@@ -180,3 +181,17 @@ function searchIncentive() {
             }
         });
 }
+
+ function submitCalculate(){
+        document.employeeSettlementForm.action="/viewSettlement";
+	    document.employeeSettlementForm.submit();
+    }
+
+ function saveEmployeeSettlement(){
+         document.employeeSettlementForm.action="/saveSettlement";
+ 	     document.employeeSettlementForm.submit();
+
+     }
+ function goBack() {
+   window.history.back();
+ }

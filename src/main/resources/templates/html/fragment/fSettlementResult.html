@@ -16,7 +16,7 @@
                 <td th:text="${employee.fullName}"></td>
                 <td th:text="${employee.designation}"></td>
                 <td th:text="${employee.department.department}"></td>
-                <td><a th:href="@{/goUrl()}">Go</a></td>
+                <td><a th:href="@{/goUrl(employeeName=${employee.fullName},employeeDesignation=${employee.designation},employeeId=${employee.empId})}">Go</a></td>
             </tr>
 
         </table>
