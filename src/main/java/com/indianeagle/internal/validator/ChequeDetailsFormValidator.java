@@ -13,16 +13,14 @@ import java.util.Date;
 public class ChequeDetailsFormValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
-
-        return clazz.isAssignableFrom(ChequeDetailsForm.class);
+return ChequeDetailsForm.class.equals(clazz);
+        //return clazz.isAssignableFrom(ChequeDetailsForm.class);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
         ChequeDetailsForm chequeDetailsForm=(ChequeDetailsForm)target;
-        System.out.println(chequeDetailsForm);
         ChequeDetails chequeDetails=chequeDetailsForm.getChequeDetails();
-        System.out.println(chequeDetailsForm.getAmount());
 
         if(isEmpty(chequeDetailsForm.getChequeDetails().getChequeDate()))
         {

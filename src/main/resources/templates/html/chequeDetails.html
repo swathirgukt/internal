@@ -118,7 +118,7 @@
                             <div style="margin-top: 20px">
                                 <span style="margin-left: 60px;">Amount :</span>
                                 <span style="margin-left: 10px;">
-								<input th:field="*{amount}"
+								<input th:field="*{amount}" onkeypress="return allowRealNo(event,this.value)"
                                        type="text"/>
 
 								<span style="margin-left: 10px;">

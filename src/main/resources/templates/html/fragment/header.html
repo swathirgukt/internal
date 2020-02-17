@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar1">
-                <span style="margin-left:450px">Welcome </span>
+                <span style="margin-left:450px">Welcome&nbsp;Back <span sec:authentication="username"></span></span>
                 <span style="float:right">Last login: Jan 17, 2013</span>
                 <span style="margin-left:370px">You have <span>0</span> notification</span>
             </div>
@@ -68,7 +68,7 @@
                                 <div class="dropdown-menu">
                                     <a th:href="@{/salaryByIndividual}">Salary by Individual</a>
                                     <a th:href="@{/eSalary}">E-Salary</a>
-                                    <a th:href="@{fSettlement}">F & F Settlement</a>
+                                    <a th:href="@{employeeSettlement}">F & F Settlement</a>
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Salary
                                         Report <i class="fa fa-caret-right"></i></a>
                                         <div  class="dropdown-menu-2">
@@ -89,8 +89,8 @@
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Incentives
                                         <i class="fa fa-caret-right"></i></a>
                                         <div class="dropdown-menu-2">
-                                            <a th:href="@{/addIncentive}">Add Incentives</a>
-                                            <a th:href="@{reports}">Reports</a>
+                                            <a th:href="@{/incentive}">Add Incentives</a>
+                                            <a th:href="@{/incentive/report}">Reports</a>
                                         </div>
                                     </div>
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Form16
@@ -117,7 +117,7 @@
                                             <a th:href="@{/approveLeave}">Approve Leaves</a>
                                             <a th:href="@{/employeeLeaveReport}">Employee Leave Reports</a>
                                             <a th:href="@{/allEmployeeLeaveReport}">All Employee Leave Reports</a>
-                                            <a th:href="@{addEdit}">Add/Edit Leaves</a>
+                                            <a th:href="@{/addEditLeaves}">Add/Edit Leaves</a>
                                         </div>
                                     </div>
                                     <div><a href="#">Holiday List</a></div>

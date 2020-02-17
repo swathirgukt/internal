@@ -112,79 +112,6 @@ function findEmployeeLeaves(){
         }
     });
 }
-
-function allowPositiveInt(evt) {
-	var charCode = (evt.which) ? evt.which : event.keyCode;
-	if ((charCode != 8) && (charCode < 48 || charCode > 57)) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
-
- //To calculate LeaveDays
-    function calculateLeaveDays()
-     {
-         if ($(".fromDateId").val() != '' && $(".toDateId").val() != '')
-          {
-             if ($("#leaveTypeId").val() == 'LOP 1/2 Day' || $("#leaveTypeId").val() == 'Half Day Leave' || $("#leaveTypeId").val() == 'Comp. Leave Half Day')
-              {
-                $('#leaveDaysId').val(0.5);
-             } else
-             {
-               var d1 = new Date($(".fromDateId").val());
-               var d2 = new Date($(".toDateId").val());
-               if ($("#leaveTypeId").val() == 'LOP inc Holidays' || $("#leaveTypeId").val() == 'Marriage Leave inc Holidays')
-               {
-                 $('#leaveDaysId').val(getDatesDiff(d1, d2));
-               } else
-                {
-                  $('#leaveDaysId').val(calcBusinessDays(d1, d2));
-                }
-              }
-          }
-     }
-
-
-function allowOnlyMonthlyDigits(evt, id) {
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        var value = document.getElementById(id).value;
-        if ((charCode == 46 && value.indexOf(".") == -1) || charCode == 8) {
-            return true;
-        }
-        if(((charCode >= 48 && charCode <= 57))) {
-            value = value+''+String.fromCharCode(charCode);
-            if (value == '' || value <= 31) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-// allow the  user to enter only real no only ,Usage : onkeypress="return allowRealNo(event,this.value)"
-function allowRealNo(evt, strval) {
-	var charCode = (evt.which) ? evt.which : event.keyCode;
-	if ((charCode != 8) && (charCode != 46) && (charCode < 48 || charCode > 57)) {
-		return false;
-	} else {
-		if (((charCode == 46) && strval.indexOf(".") != -1)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-}
-
-// Function  to enter only characters & spaces ,Usage : onkeypress="return allowCharactersAndSpaces(event)"
-function allowCharactersAndSpaces(evt) {
-	var charCode = (evt.which) ? evt.which : event.keyCode;
-	if ((charCode == 8) || (charCode == 32) || (charCode >=65 &&  charCode <= 90) || (charCode >=97 &&  charCode <= 122) ) {
-		return true;
-	} else {
-		return false;
-	}
-}
 function saveCheque()
 {	document.chequeForm.action="/saveChequeDetails";
 	document.chequeForm.submit();
@@ -222,3 +149,49 @@ function searchEmployeeStatus() {
         }
     });
 }
+
+function addRow(){
+    var count = $('#incentiveTable tr').length-1;
+    var tableRow="<tr><td style='padding:5px'><select style='width: 200px;height: 23px;border-radius:5px' name='incentivesVOList["+count+"].employeeVO.Id' id='employeeId"+count+"'></select></td><td><input name='incentivesVOList["+count+"].incentiveAmount' type='text' style='width: 200px;height: 23px;'> </td></tr></table>";
+    $("#incentiveTable").append(tableRow);
+    $('#employeeId option').each(function(){
+        $('#employeeId'+count).append("<option value='"+$(this).attr('value')+"'>"+$(this).text()+"</option>");
+    });
+}
+function removeRow(){
+    var rows=$('#incentiveTable tr').length;
+    if(rows>2){
+       $("#incentiveTable tr:last").remove();
+    }
+}
+function searchFEmployee() {
+    var response = makeAJAXCall("/searchEmployeeSettlement", 'searchFEmployeeForm');
+    response.done(function (responseData) {
+        if (responseData) {
+            $("#settlementResult").html(responseData);
+        }
+    });
+}
+
+function searchIncentive() {
+    var response = makeAJAXCall('/incentive/search','incentiveForm');
+        response.done(function (responseData) {
+            if (responseData) {
+                $("#searchIncentiveResults").text(responseData);
+            }
+        });
+}
+
+ function submitCalculate(){
+        document.employeeSettlementForm.action="/viewSettlement";
+	    document.employeeSettlementForm.submit();
+    }
+
+ function saveEmployeeSettlement(){
+         document.employeeSettlementForm.action="/saveSettlement";
+ 	     document.employeeSettlementForm.submit();
+
+     }
+ function goBack() {
+   window.history.back();
+ }

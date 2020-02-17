@@ -1,6 +1,5 @@
 //Form16 Generation
-
-    function calculateTotalIncomeEarnedByEmployee() {
+function calculateTotalIncomeEarnedByEmployee() {
         var grossSalary = $('#incomeTable tr td input[name="grossSalary"]').val();
         grossSalary = grossSalary == '' ? 0 : parseFloat(grossSalary);
         var incentive = $('#incomeTable tr td input[name="form16GenerationForm.incentives"]').val();
@@ -16,31 +15,30 @@
         var previousCompanyIncome = $('#incomeTable tr td input[name="form16GenerationForm.previousCompanyIncome"]').val();
         previousCompanyIncome = previousCompanyIncome == '' ? 0 : parseFloat(previousCompanyIncome);
         totIncome = parseFloat(grossSalary) + incentive + plb + reimbursement + bonus + others + previousCompanyIncome;
-        if(grossSalary != null){
+        if(grossSalary != null)
+        {
             $('#earnedIncome').val(parseFloat(totIncome));
         }
     }
 
-
-    /*Form 16 Generation*/
-    function saveIncome(){
+/*Form 16 Generation*/
+function saveIncome(){
         $('#incomeTable tr td input').attr('readonly',true).css('background-color','#D3D3D3');
         $('#incomeTable tr td input[name="grossSalary"]').css('background-color','#f7941e');
         $('#incomeTable tr td input[name="form16GenerationForm.incomeEarnedByEmployee"]').css('background-color','#f7941e');
     }
-    function editIncome(){
+
+function editIncome(){
         $('#incomeTable tr td input').attr('readonly',false).css('background-color','#FFFFFF');
         $('#incomeTable tr td input[name="grossSalary"]').css('background-color','#f7941e').attr('readonly',true);
         $('#incomeTable tr td input[name="form16GenerationForm.incomeEarnedByEmployee"]').css('background-color','#f7941e').attr('readonly',true);
     }
 
-
-     $(document).on('blur', '#incomeTable tr td input', function(){
+$(document).on('blur', '#incomeTable tr td input', function(){
             calculateTotalIncomeEarnedByEmployee();
         });
 
-
-        function retrieveSalaryInfoForForm16(){
+function retrieveSalaryInfoForForm16(){
             var overlay = new loadOverlay();
             overlay.show("MenuWrapper");
             $.ajax({url:"./retrieveSalaryInfoForForm16.action",
@@ -55,8 +53,7 @@
             });
         }
 
-
-        function calculateTax(){
+function calculateTax(){
             var overlay = new loadOverlay();
             overlay.show("MenuWrapper");
             $.ajax({url:"./calculateTax.action",
@@ -72,7 +69,7 @@
             });
         }
 
-        function saveEmployeeIncomeTax(){
+function saveEmployeeIncomeTax(){
             var overlay = new loadOverlay();
             overlay.show("MenuWrapper");
             $.ajax({url:"./saveEmployeeIncomeTax.action",
@@ -87,7 +84,7 @@
             });
         }
 
-        function sendMailEmployeeIncomeTax(){
+function sendMailEmployeeIncomeTax(){
             var overlay = new loadOverlay();
             overlay.show("MenuWrapper");
             $.ajax({url:"./sendMailEmployeeIncomeTax.action",
@@ -103,23 +100,17 @@
         }
 
 
-
-
-
-
-
-
-
-
 function taxSlabEdit() {
     $("#taxSlabSaveBtn").show();
     $("#taxSlabCancelBtn").show();
     $("#taxSlabEditBtn").hide();
     $("#taskSlabsTable input").prop("readonly", false).css('background-color', '#FFFFFF');
 }
+
 function taxSlabSave() {
     saveOrCancelTaxSlabs();
 }
+
 function taxSlabCancel() {
     saveOrCancelTaxSlabs();
 }
@@ -130,19 +121,20 @@ function saveOrCancelTaxSlabs() {
     $("#taxSlabEditBtn").show();
     $("#taskSlabsTable input").prop("readonly", true).css('background-color', '#D3D3D3');
 }
-function addTaxSlab() {
 
+function addTaxSlab() {
     taxSlabEdit();
     $("#taskSlabsTable tr:last").before(" <tr> <td>From</td><td> <input name='' type='text'  ></td><td>To</td><td><input name='' type='text' ></td><td>Tax Rate</td> <td><input name='' type='text' ></td>  <td><button class='glyphicon glyphicon-remove' onclick='$(this).parent().parent().remove();'></button></td>  </tr>");
 }
+
 function removeTaxSlab(){
     $("#taskSlabsTable tr:last").remove();
 }
-function addRebate() {
 
+function addRebate() {
     $("#addRebateTable").append("<tr> <td>Name</td><td><b>:</b></td>  <td><input class='inputfield' name='' type='text' value=''></td><td>Income&nbsp;Limit</td><td><b>:</b></td><td><input class='inputfield' name='' type='text' value=''></td><td>Amount</td><td><b>:</b></td> <td><input class='inputfield' name='' type='text' value=''></td> <td><button class='submitButton' name='rebateSave' onclick='saveRebate()'><b>Save<b></button></td><td><button class='submitButton' name='rebateEdit' onclick='editRebate()'> <b>Edit</b>  </button> </td> <td> <button class='submitButton'  name='rebateRemove'  onclick='removeRebate()'> <b>Remove</b></button></td></tr>");
 }
-//Rebate
+
 //rebate save
 $(document).on('click', "button[name='rebateSave']", function() {
     $(this).closest('tr').find("input").each(function() {
@@ -178,36 +170,27 @@ var tableName=$('#addTable table:last').attr('name');
                         $("#addTable table:last").remove();
                         $('#addNew').prop('disabled', false);
                         }
-
-}
+         }
 
 function saveSection(){
 var newSectionName=document.getElementById('sectionName').value;
      var tableRow="</span><button class='submitButton' onClick='add()' type='button'>ADD</button><table width='100%' class='table_text_style table-sm'><tr><td><span class='head'>Section&nbsp;Limit</span></td>  <td><input class='inputfieldsection' type='text' value=''></td><td><button class='submitButton' name='newSectionSave'><b>Save</b></button></td> <td>  <button class='submitButton' name='newSectionEdit'><b>Edit</b></button></td><td><button class='submitButton' style='float:right; margin-right: 5px;'onclick='removeSection()' name='newSectionRemove'><b>Remove&nbsp;Section</b> </button></td>  </tr> </table></span>";
-
-                     $("#addNewSection").append("<span id='additional'><span class='Heading'>");
-              $("#addNewSection").append(newSectionName);
-                     $("#addNewSection").append(tableRow);
-
-
-                    // document.getElementById('addNameToNewSection').innerHTML=newSectionName;
-                      $('#addNew').prop('disabled', false);
-                        var tableName=$('#addTable table:last').attr('name');
-                        if(tableName=="remove"){
-                        $("#addTable table:last").remove();
-                        }
-                         $(document).on('click', "button[name='us80dSave']", function() {
-                                                      $(this).closest('tr').find("input").each(function() {
-                                                          $(this).prop("readonly",true).css('background-color','#D3D3D3');
-                                                      });
-                                                  });
-
-
+     $("#addNewSection").append("<span id='additional'><span class='Heading'>");
+     $("#addNewSection").append(newSectionName);
+     $("#addNewSection").append(tableRow);
+ // document.getElementById('addNameToNewSection').innerHTML=newSectionName;
+            $('#addNew').prop('disabled', false);
+            var tableName=$('#addTable table:last').attr('name');
+            if(tableName=="remove"){$("#addTable table:last").remove();}
+            $(document).on('click', "button[name='us80dSave']", function() {
+                   $(this).closest('tr').find("input").each(function() {
+                          $(this).prop("readonly",true).css('background-color','#D3D3D3');
+                          });
+                   });
 }
 
 
 function add(){
-
     var tableRow="<table width='100%'><tr><td><input id='sectionName' type='text'></td><td><button onClick='saveSection()' class='button btnOrange' type='button'><b>Save</b></button></td><td><button onClick='removeTable()' class='button btnGray' type='button'><b>Edit</b></button></td><td><button onClick='removeTable()' class='submitButton' type='button' onClick='removeTable()'><b>Remove</b></button></td></tr></table>";
     $("#additional").append(tableRow);
 
@@ -226,68 +209,73 @@ $(document).on('click', "button[name='us10Edit']", function() {
         $(this).prop("readonly",false).css('background-color','#FFFFFF');
     });
 });
-            //function removeUs10(){
-              //$("#us10section tr:last").remove();us10Remove
-              $(document).on('click', 'button[name="us10Remove"]', function(){
-                        $(this).closest('tr').remove()});
-             //}
 
-             $(document).on('click', "button[name='us80cSave']", function() {
+//function removeUs10(){
+//$("#us10section tr:last").remove();us10Remove
+$(document).on('click', 'button[name="us10Remove"]', function(){
+                        $(this).closest('tr').remove()
+                        });
+
+$(document).on('click', "button[name='us80cSave']", function() {
                  $(this).closest('tr').find("input").each(function() {
                      $(this).prop("readonly",true).css('background-color','#D3D3D3');
                  });
              });
-             $(document).on('click', "button[name='us80cEdit']", function() {
+
+$(document).on('click', "button[name='us80cEdit']", function() {
                  $(this).closest('tr').find("input").each(function() {
                      $(this).prop("readonly",false).css('background-color','#FFFFFF');
                  });
              });
 
+$(document).on('click', 'button[name="us80cRemove"]', function(){
+                      $(this).closest('tr').remove()
+                   });
 
-                          $(document).on('click', 'button[name="us80cRemove"]', function(){
-                                                        $(this).closest('tr').remove()});
 
-
-             $(document).on('click', "button[name='us80dSave']", function() {
-                              $(this).closest('tr').find("input").each(function() {
-                                  $(this).prop("readonly",true).css('background-color','#D3D3D3');
+$(document).on('click', "button[name='us80dSave']", function() {
+                      $(this).closest('tr').find("input").each(function() {
+                           $(this).prop("readonly",true).css('background-color','#D3D3D3');
                               });
-                          });
-                          $(document).on('click', "button[name='us80dEdit']", function() {
-                                           $(this).closest('tr').find("input").each(function() {
-                                               $(this).prop("readonly",false).css('background-color','#FFFFFF');
-                                           });
-                                       });
+                });
 
-                            $(document).on('click', 'button[name="us80dRemove"]', function(){
-                                            $(this).closest('tr').remove()});
+$(document).on('click', "button[name='us80dEdit']", function() {
+                       $(this).closest('tr').find("input").each(function() {
+                            $(this).prop("readonly",false).css('background-color','#FFFFFF');
+                               });
+                 });
 
-            //for new section
-                            $(document).on('click', "button[name='newSectionSave']", function() {
-                             $(this).closest('tr').find("input").each(function() {
-                                 $(this).prop("readonly",true).css('background-color','#D3D3D3');
-                             });
-                         });
-                         $(document).on('click', "button[name='newSectionEdit']", function() {
-                                                      $(this).closest('tr').find("input").each(function() {
-                                                          $(this).prop("readonly",false).css('background-color','#FFFFFF');
-                                                      });
-                                                  });
+$(document).on('click', 'button[name="us80dRemove"]', function(){
+                       $(this).closest('tr').remove()
+                       });
 
+//for new section
+$(document).on('click', "button[name='newSectionSave']", function() {
+                        $(this).closest('tr').find("input").each(function() {
+                              $(this).prop("readonly",true).css('background-color','#D3D3D3');
+                        });
+                 });
 
+$(document).on('click', "button[name='newSectionEdit']", function() {
+                        $(this).closest('tr').find("input").each(function() {
+                               $(this).prop("readonly",false).css('background-color','#FFFFFF');
+                        });
+                  });
 
+$(document).on('click', 'button[name="newSectionRemove"]', function(){
+                            $(this).closest('table').remove()
+                  });
 
-             $(document).on('click', 'button[name="newSectionRemove"]', function(){
-                            $(this).closest('table').remove()});
+$(document).on('click', 'button[name="us10RemoveSection"]', function(){
+                            $(this).closest('table').remove()
+                  });
 
+$(document).on('click', 'button[name="us80cRemoveSection"]', function(){
+                         $(this).closest('table').remove()
+                  });
 
-                           $(document).on('click', 'button[name="us10RemoveSection"]', function(){
-                            $(this).closest('table').remove()});
-
-                      $(document).on('click', 'button[name="us80cRemoveSection"]', function(){
-                         $(this).closest('table').remove()});
-
-                       $(document).on('click', 'button[name="us80dRemoveSection"]', function(){
-                            $(this).closest('table').remove()});
+$(document).on('click', 'button[name="us80dRemoveSection"]', function(){
+                            $(this).closest('table').remove()
+                  });
 
 

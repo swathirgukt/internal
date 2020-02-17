@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/fSettlement.css}" />
+    <script>
+        function printReport() {
+                document.getElementById("print").style.visibility = 'hidden';
+                window.print();
+            }
+
+    </script>
+</head>
+<body>
+    <div class="SettlementMainWrapper">
+        <div class="SettlementInnerWrapper">
+            <div class="SettlementWrapper">
+                <div class="SettlementMainHeading">YANA SOFTWARE PRIVATE LIMITED</div>
+                <div class="SettlementMainHeading">HYDERABAD</div>
+                <div class="SettlementMainHeading">FULL AND FINAL SETTLEMENT</div>
+                <div class="SettlementFromAndTo">
+                    <div class="SettlementFromText">From</div>
+                    <div class="SettlementToText">To</div>
+                </div>
+                <div class="SettlementFromAndTo">
+                    <div class="SettlementFromText">HR Department</div>
+                    <div class="SettlementToText">Accounts Department</div>
+                </div>
+                <div class="SettlementContent">This is to inform you that <span class="textWithBold">Mr. <span th:text="${employeeSettlementForm.employeeName}" />, Code No: <span th:text="${employeeSettlementForm.employeeId}"/></span>, working
+                    as
+                    <span th:text="${employeeSettlementForm.employeeDesignation}"/>
+                    ,
+                    <div th:if="${employeeSettlementForm.empStatus} == 'Terminated'">
+                        has been terminated from the services with effect from <span class="textWithBold"><span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}" /></span>.
+                    </div>
+                    <div th:else>
+                        has submitted his resignation on <span class="textWithBold"><span th:text="${#dates.format(employeeSettlementForm.resignationDate, 'dd-MMM-yyyy')}" /></span>.
+                        He is relieved from his duties with effect from <span class="textWithBold"><span th:text="${#dates.format(employeeSettlementForm.relievingDate, 'dd-MMM-yyyy')}" /></span> after closing of working hours.
+                    </div>
+                </div>
+                <div class="SettlementSalaryDetails">
+                    <div class="SettlementSalContentWrapper">Salary as on <span
+                            class="textWithBold">Last Working Day</span></div>
+                    <div class="SettlementSalContentWrapper">
+                        <div class="SettlementSalContent">
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">Basic</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary.basic}"/>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">HRA</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary.hra}"/>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">Conv.</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary}?${salary.conveyence}:'nill'"/>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">Med.</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary.medicalAllowance}"/>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">Spl.</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary.specialAllowance}"/>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">Others</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary.otherAllowance}"/>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryBasicDetailsHeading">GROSS</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${salary.getGrossSal()}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="SettlementDatesWrapper">
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryDetailsHeading">Date of Joining</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${#dates.format(employee.joinDate, 'dd-MMM-yyyy')}" />
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryDetailsHeading">Date&nbsp;of&nbsp;<div th:if="${employeeSettlementForm.empStatus} == 'Terminated'">Termination</div><div th:else>Resignation</div>
+                                </div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <div th:if="${employeeSettlementForm.empStatus} == 'Terminated'">
+                                        <span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}" />
+                                    </div>
+                                    <div th:else>
+                                        <span th:text="${#dates.format(employeeSettlementForm.resignationDate, 'dd-MMM-yyyy')}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryDetailsHeading">Date&nbsp;of&nbsp;Relieving</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <div th:if="employee.empStatus == 'Terminated'">
+                                        <span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}" />
+                                    </div>
+                                    <div th:else>
+                                        <span th:text="${#dates.format(employeeSettlementForm.relievingDate, 'dd-MMM-yyyy')}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryDetailsHeading">Last&nbsp;working&nbsp;day</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount">
+                                    <span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}" />
+                                </div>
+                            </div>
+                            <div class="SettlementSalDetails">
+                                <div class="SettlementSalaryDetailsHeading">Cheque No</div>
+                                <div class="SettlementSalary">:</div>
+                                <div class="SettlementSalaryAmount"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="SettlementSalDetailsWrapper">
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">1.
+                            <span th:text="${employeeSettlement.totalDays}"/>
+                            days Salary payable for the month of
+                            <span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}" />
+                        </div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${T(com.indianeagle.internal.util.SimpleUtils).calculateEmployeeSettlementPayableSalary(employeeSettlement.basic, employeeSettlement.hra, employeeSettlement.conveyence, employeeSettlement.medicalAllowance, employeeSettlement.specialAllowance, employeeSettlement.otherAllowance)}"/>
+
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">2. Other Earnings</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.previousArrears + employeeSettlement.otherEarnings}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">3. Gross Earnings</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.grossSalary}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementDeductionsHeading">DEDUCTIONS:</div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">4. PF on Salary</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.pfEmp}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">5. ESI</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.esi}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">6. Professional Tax</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.PTax}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">7. Due in the HR Department (ID Card)</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.adminCharges}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">8. Medical Insurance</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.medicalInsurance}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">9. Other Deductions</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.otherDeductions + employeeSettlement.incomeTax}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">10. Total Deductions</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.totalDeductions}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementSalAmountDetails">
+                        <div class="SettlementSalDeductions">11. Net Amount Payable</div>
+                        <div class="SettlementSalary">:</div>
+                        <div class="SettlementSalAmount">
+                            <span th:text="${employeeSettlement.netSalary}"/>
+                        </div>
+                    </div>
+                    <div class="SettlementAmountInWords">(
+                        <span th:text="${employeeSettlement.netSalary.intValue()}"/>
+                        Only)
+                    </div>
+                </div>
+                <div class="SettlementAdvisedMessage">You are advised to relieve the above said amount to settle his
+                    full&final settlement.
+                </div>
+                <div class="SettlementAdvisedMessage">This is computer Generated Settlement.</div>
+                <div id="print" style="clear:both;margin-left:330px;">
+                    <button onclick="printReport()">Print</button>
+                    <!--<a onclick="printReport()">Print</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

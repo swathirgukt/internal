@@ -1,9 +1,9 @@
 package com.indianeagle.internal.form;
 
-import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.Incentives;
+import com.indianeagle.internal.form.vo.EmployeeVO;
+import com.indianeagle.internal.form.vo.IncentivesVO;
 import com.indianeagle.internal.util.SimpleUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,8 +17,8 @@ import java.util.List;
 public class IncentiveForm {
 
     private Date incentiveDate;
-    private List<Employee> employeeList;
-    private List<Incentives> incentivesList;
+    private List<EmployeeVO> employeeVOList;
+    private List<IncentivesVO> incentivesVOList;
     private BigDecimal totalSal = BigDecimal.ZERO;
 
     public String getTotalSalInWords() {
@@ -42,15 +42,15 @@ public class IncentiveForm {
     /**
      * @return the employeeList
      */
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public List<EmployeeVO> getEmployeeVOList() {
+        return employeeVOList;
     }
 
     /**
      * @param employeeList the employeeList to set
      */
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployeeVOList(List<EmployeeVO> employeeList) {
+        this.employeeVOList = employeeList;
     }
 
     /**
@@ -70,15 +70,15 @@ public class IncentiveForm {
     /**
      * @return the incentivesList
      */
-    public List<Incentives> getIncentivesList() {
-        return incentivesList;
+    public List<IncentivesVO> getIncentivesVOList() {
+        return incentivesVOList;
     }
 
     /**
-     * @param incentivesList the incentivesList to set
+     * @param incentivesVOList the incentivesList to set
      */
-    public void setIncentivesList(List<Incentives> incentivesList) {
-        this.incentivesList = incentivesList;
+    public void setIncentivesVOList(List<IncentivesVO> incentivesVOList) {
+        this.incentivesVOList = incentivesVOList;
     }
 
 }

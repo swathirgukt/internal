@@ -45,19 +45,17 @@ public class EmployeeServiceImpl implements EmployeeService {
             this.employeeRepository.save(employee);
         } else {
             employee = new Employee();
-            System.out.println("####employeeVo=" + employeeForm.getEmployeeVO());
-            System.out.println("#####employee=" + employee);
             BeanUtils.copyProperties(employeeForm.getEmployeeVO(), employee);
 
-            System.out.println(employee);
-            NomineeVO nomineeVO = (employeeForm.getEmployeeVO().getNomineeVO());
             Nominee nominee = new Nominee();
-            BeanUtils.copyProperties(nomineeVO, nominee);
+            BeanUtils.copyProperties(employeeForm.getEmployeeVO().getNomineeVO(), nominee);
             employee.setNominee(nominee);
-
             employee.getNominee().setEmployee(employee);
-            // employee.setEmpId(employee.getEmpId());
-            System.out.println();
+
+            Salary salary = new Salary();
+            BeanUtils.copyProperties(employeeForm.getEmployeeVO().getSalaryVO(),salary);
+            employee.setSalary(salary);
+
             Leaves leaves = new Leaves();
             leaves.setEmployee(employee);
             employee.setLeaves(leaves);
@@ -84,14 +82,20 @@ public class EmployeeServiceImpl implements EmployeeService {
             this.usersRepository.save(user);
         }
         if (employee.getSalary() != null) {
-            employeeForm.getEmployeeVO().getSalary().setId(employee.getSalary().getId());
+            System.out.println("==salry==="+employee.getSalary());
+            employeeForm.getEmployeeVO().getSalaryVO().setId(employee.getSalary().getId());
         }
         employeeForm.getEmployeeVO().setId(employee.getId());
         if (employee.getNominee() != null) {
+            System.out.println("==nominee==="+employee.getNominee());
             employeeForm.getEmployeeVO().getNomineeVO().setId(employee.getNominee().getId());
         }
-        BeanUtils.copyProperties((Object) employeeForm.getEmployeeVO(), (Object) employee);
+        BeanUtils.copyProperties( employeeForm.getEmployeeVO(),  employee);
+        System.out.println("==employee="+employee.getSalary());
         employee.getNominee().setEmployee(employee);
+        Salary salary=new Salary();
+        BeanUtils.copyProperties(employeeForm.getEmployeeVO().getSalaryVO(),salary);
+        employee.setSalary(salary);
         this.employeeRepository.save(employee);
         // this.mailingEngine.mailAccountDetails(employee.getEmpId(), employee.getOfficialEmail());
     }

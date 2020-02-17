@@ -6,7 +6,7 @@
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
+<div class="container-fluid text-center" style="margin-top:-100px;">
     <div class="row content">
         <div class="col-sm-12 text-left">
             <div class="jumbotron">
@@ -14,7 +14,6 @@
                     <div class="Heading">Monthly Salary Report</div>
                     <div id="tableScrollbar">
                         <div th:if="${currentSalaryList} != null AND ${currentSalaryList.size()}>0">
-
                             <table style="font-size:12px;" cellpadding="1" cellspacing="1"
                                    class="table table-bordered table-hover">
                                 <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
@@ -87,20 +86,29 @@
                                     <td th:text="*{lopDays}"></td>
                                 </tr>
                             </table>
-
-    <div class="row">
-        <div class="col-lg-12 col-sm-12 col-md-12">
-            <div style="float: right">
-                <a class="submitButton" href="javascript: window.history.go(-1);">Re-Generate</a>
-                <a class="submitButton" onclick="saveSalaryDecider()">Save</a>
-                <a th:href="@{/confirmAndSendPaySlipMails}" class="submitButton">ConfirmAndMail</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-md-12">
+                            <div style="float: right">
+                                <button class="submitButton"
+                                        href="javascript: window.history.go(-1);">Re-Generate
+                                </button>
+                                <button class="submitButton" onclick="saveSalaryDecider()">Save</button>
+                                <button th:href="@{/confirmAndSendPaySlipMails}"
+                                        class="submitButton">ConfirmAndMail
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+                         th:if="${currentSalaryList}!=null  AND ${currentSalaryList.size()}==0">
+                        Nothing found to display
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div style="font: 15pt 'Arial Black';color: #ff0000;"
-     th:if="${currentSalaryList}!=null  AND ${currentSalaryList.size()}==0">
-    Nothing found to display
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
