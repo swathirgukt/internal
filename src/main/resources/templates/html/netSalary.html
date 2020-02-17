@@ -14,187 +14,128 @@
                 <div class="container">
                     <form action="" th:object="${salaryForm.currentSalary}">
                         <div class="Heading">Net Salary</div>
-                        <div style="min-height:170px;">
-                            <div style="border:1px solid #6e6c6b;margin-left: 12px;width:965px; ">
-                                <table width="100%" cellpadding="0" cellspacing="0">
+                                <table width="100%" cellpadding="0" cellspacing="0" class="table table-bordered table-responsive-lg table-hover">
                                     <tr>
-                                        <td align="center" style="border:1px solid #6e6c6b; border-top:none;border-left:none;border-right:none;"><b>Net Salary Calculation Details</b></td>
+                                        <td align="center" colspan="4" style="font-size:190%"><b>Net Salary Calculation Details</b></td>
                                     </tr>
-                                </table>
-                                <div align="center" style="padding:10px">
-                                    <table width="80%" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td align="left" style="border:1px solid #6e6c6b;border-right:none; width:150px">Employee Name</td>
-                                            <td align="left" style="border:1px solid #6e6c6b;"><span th:text="${salaryForm.employee.fullName}"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" style="border:1px solid #6e6c6b;border-right:none;border-top:none; width:150px">Designation</td>
-                                            <td align="left" style="border:1px solid #6e6c6b;border-top:none;"><span th:text="${salaryForm.employee.designation}"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" style="border:1px solid #6e6c6b;border-right:none;border-top:none; width:150px">Employee ID</td>
-                                            <td style="border-right:1px solid #6e6c6b; width:170px"><span th:text="${salaryForm.employee.empId}"></span></td>
-                                            <td style="border-right:1px solid #6e6c6b; width:170px">Joining Date</td>
+                                    <tr>
+                                        <td colspan="2"><b>Employee Name</b></td>
+                                        <td colspan="2"><span th:text="${salaryForm.employee.fullName}"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><b>Designation</b></td>
+                                        <td colspan="2"><span th:text="${salaryForm.employee.designation}"></span></td>
+                                    </tr>
+                                    <tr>
+                                            <td><b>Employee ID</b></td>
+                                            <td><span th:text="${salaryForm.employee.empId}"></span></td>
+                                            <td><b>Joining Date</b></td>
                                             <td><span th:text="${#calendars.format(salaryForm.employee.joinDate,'MMMM dd yyyy')}"></span></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="border:1px solid #6e6c6b;border-right:none;border-top:none; width:150px">Bank A/C No.</td>
-                                            <td style="border-right:1px solid #6e6c6b; width:170px"><span th:text="${salaryForm.employee.bankAc}"></span></td>
-                                            <td style="border-right:1px solid #6e6c6b; width:170px">PF No</td>
+                                            <td><b>Bank A/C No.</b></td>
+                                            <td><span th:text="${salaryForm.employee.bankAc}"></span></td>
+                                            <td><b>PF No</b></td>
                                             <td><span th:text="${salaryForm.employee.pfNo}"></span></td>
                                         </tr>
-
                                         <tr>
-                                            <td align="left" style="border:1px solid #6e6c6b;border-right:none;border-top:none; width:150px">ARR Days</td>
-                                            <td style="border-right:1px solid #6e6c6b; width:170px"><span th:text="*{arrearsDays}"></span></td>
-                                            <td style="border-right:1px solid #6e6c6b; width:170px">LOP Days</td>
+                                            <td><b>ARR Days</b></td>
+                                            <td><span th:text="*{arrearsDays}"></span></td>
+                                            <td><b>LOP Days</b></td>
                                             <td><span th:text="*{lopDays}"></span></td>
                                         </tr>
+                                        <tr style="background-color:#999999">
+                                            <td><b>Earnings</b></td>
+                                            <td><b>Amount</b></td>
+                                            <td><b>Deductions</b></td>
+                                            <td><b>Amount</b></td>
+                                        </tr>
+                                         <tr>
+                                             <td><b>Basic Salary</b></td>
+                                            <td><span th:text="*{basic}"></span></td>
+                                             <td><b>Emp PF</b></td>
+                                            <td><span th:text="*{pfEmp}"></span></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3" height="20px">
-                                                <table width="100%" cellpadding="0" cellspacing="0" style="color: #FFFFFF;">
-                                                    <td style="border:1px solid #6e6c6b;padding:5px; border-top:none;border-right:none; width:170px;background-color:#999999;"><b>Earnings</b></td>
-                                                    <td style="border:1px solid #6e6c6b;padding:5px;  border-top:none;border-right:none;width:170px;background-color:#999999;"><b>Amount</b></td>
-                                                    <td style="border:1px solid #6e6c6b;padding:5px; border-top:none;border-right:none;background-color:#999999;width:170px;"><b>Deductions</b></td>
-                                                    <td style="border:1px solid #6e6c6b;padding:5px;  border-top:none;background-color:#999999;"><b>Amount</b></td>
-                                                </table>
-                                            </td>
+                                            <td><b>HRA</b></td>
+                                            <td><span th:text="*{hra}"></span></td>
+                                            <td><b>ESI</b></td>
+                                            <td><span th:text="*{esi}"></span></td>
+                                        </tr>
+                                         <tr>
+                                             <td><b>Conveyance</b></td>
+                                            <td><span th:text="*{conveyence}"></span></td>
+                                             <td><b>Professional Tax</b></td>
+                                            <td><span th:text="*{PTax}"></span></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Basic Salary</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{basic}"></span></td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;">Emp PF</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;"><span th:text="*{pfEmp}"></span></td>
-                                                </table>
-                                            </td>
+                                            <td><b>Medical Allowance</b></td>
+                                            <td><span th:text="*{medicalAllowance}"></span></td>
+                                            <td><b>Income Taxs</b></td>
+                                            <td><span th:text="*{incomeTax}"></span></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">HRA</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{hra}"></span></td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;">ESI</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;"><span th:text="*{esi}"></span></td>
-                                                </table>
-                                            </td>
+                                            <td><b>Special Allowance</b></td>
+                                            <td><span th:text="*{specialAllowance}"></span></td>
+                                            <td><b>Salary In Advance</b></td>
+                                            <td><span th:text="*{salaryInAdvance}"></span></td>
+                                        </tr>
+                                         <tr>
+                                             <td><b>Performance Inc</b></td>
+                                             <td><span th:text="*{performanceIncentives}"></span></td>
+                                             <td><b>Misc Deductions</b></td>
+                                             <td><span th:text="*{miscDeductions}"></span></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Conveyance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{conveyence}"></span>
-                                                    </td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;">Professional Tax</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;"><span th:text="*{PTax}"></span>
-                                                    </td>
-                                                </table>
-                                            </td>
+                                            <td><b>Other Allowance</b></td>
+                                            <td><span th:text="*{otherAllowance}"></span></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Medical Allowance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{medicalAllowance}"></span></td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;">Income Taxs</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;"><span th:text="*{incomeTax}"></span></td>
-                                                </table>
-                                            </td>
+                                            <td><b>Telephone Allowance</b></td>
+                                            <td><span th:text="*{telephoneAllowance}"></span></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Special Allowance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{specialAllowance}"></span></td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;">Salary In Advance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;"><span th:text="*{salaryInAdvance}"></span></td>
-                                                </table>
-                                            </td>
-                                        <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Performance Inc</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{performanceIncentives}"></span></td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;">Misc Deductions</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;"><span th:text="*{miscDeductions}"></span></td>
-                                                </table>
-                                            </td>
-                                        <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Other Allowance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{otherAllowance}"></span></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none; border-bottom:none;">&nbsp;
-                                                    </td>
-                                                </table>
-                                            </td>
-                                        <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Telephone Allowance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{telephoneAllowance}"></span></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none; border-bottom:none;">&nbsp;</td>
-                                                </table>
-                                            </td>
-                                        <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Internet Allowance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{internetAllowance}"></span></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none; border-bottom:none;">&nbsp;</td>
-                                                </table>
-                                            </td>
-                                        <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;">Uniform Allowance</td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{uniformAllowance}"></span></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none; border-bottom:none;">&nbsp;</td>
-                                                </table>
-                                            </td>
+                                            <td><b>Internet Allowance</b></td>
+                                            <td><span th:text="*{internetAllowance}"></span></td>
+                                            <td></td>
+                                            <td></td>
 
+                                        </tr>
+                                         <tr>
+                                             <td><b>Uniform Allowance</b></td>
+                                             <td><span th:text="*{uniformAllowance}"></span></td>
+                                             <td></td>
+                                             <td></td>
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none;border-right:none; width:180px;"><b>Total Earnings</b></td>
-                                                    <td style="border:1px solid #6e6c6b; border-top:none;border-right:none;width:180px;"><span th:text="*{totalEarnings}"></span></td>
-                                                    <td align="left" style="border:1px solid #6e6c6b; border-top:none; border-right:none;width:180px;"><b>Total Deductions</b></td>
-                                                    <td style="border:1px solid #6e6c6b; "><span th:text="*{totalDeductions}"></span></td>
-                                                </table>
-                                            </td>
+                                                <td style="color:#008000;font-size:120%"><b>Total Earnings</b></td>
+                                                <td><span th:text="*{totalEarnings}"></span></td>
+                                                <td style="color:red;font-size:120%"><b>Total Deductions</b></td>
+                                                <td><span th:text="*{totalDeductions}"></span></td>
+
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td align="left" style="border:1px solid #6e6c6b;width:361px;text-align:center; border-top:none; border-right: none;"><b>Net Salary</b></td>
-                                                    <td align="left" colspan="2" style="border:1px solid #6e6c6b;text-align:center;font-weight:bold; border-top:none;"><span th:text="*{netSalary}"></span></td>
-                                                </table>
-                                            </td>
+                                            <td style="color:#008000;font-size:120%"><b>Net Salary</b></td>
+                                            <td><span th:text="*{netSalary}"></span></td>
+
+                                        </tr>
                                         <tr>
-                                            <td colspan="3">
-                                                <table width="100%" cellpadding="0" cellspacing="0">
-                                                    <td style="width:170px;">&nbsp;</td>
-                                                </table>
-                                            </td>
-                                        <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 <table align="right" width="25%" cellpadding="0" cellspacing="0">
-                                                    <td align="center">&nbsp;</td>
-                                                    <td width="71">&nbsp;</td>
-                                                    <td align="center" height="21px" class="button btnDefault" width="128">
-                                                        <a style="text-decoration:none;color:#FFFFFF" href="javascript: window.history.go(-1);"><button>Re-Generate</button></a>
+                                                    <td align="center" height="21px" width="128">
+                                                        <a style="text-decoration:none" href="javascript: window.history.go(-1);"><button class="submitButton">Re-&nbsp;Generate</button></a>
                                                     </td>
-                                                    <td style="width:33px;">&nbsp;</td>
-
                                                     <td style="border:none;" height="21px" align="center" class="button btnDefault" width="100">
-                                                        <a th:href="@{/confirmAndSendMail(empId=${salaryForm.employee.empId})}"><button>Confirm</button></a>
+                                                        <a th:href="@{/confirmAndSendMail(empId=${salaryForm.employee.empId})}"><button class="submitButton">Confirm</button></a>
                                                     </td>
                                                 </table>
                                             </td>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
+                                        </tr>
+                                </table>
                     </form>
                 </div>
             </div>

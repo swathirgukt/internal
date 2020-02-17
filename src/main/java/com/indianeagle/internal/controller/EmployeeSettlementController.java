@@ -65,13 +65,13 @@ public class EmployeeSettlementController {
         return "html/fSettlement";
     }
 
+    /**
+     *  Method to search employees
+     */
     @PostMapping("/searchEmployeeSettlement")
     public String searchEmployee(@ModelAttribute("employeeForm") EmployeeForm employeeForm, ModelMap model) {
-        System.out.println("@@@Dept :: "+employeeForm.getDepartment());
-
         employeeForm.setEmployeeList(employeeService.searchEmployees(employeeForm));
         model.addAttribute("employeeList", employeeForm.getEmployeeList());
-        System.out.println(employeeForm.getDepartment());
         return "html/fragment/fSettlementResult";
     }
 
@@ -102,9 +102,6 @@ public class EmployeeSettlementController {
 
     /**
      * Method to calculate employee settlement details
-     *
-     * @return
-     * @throws Exception
      */
     @PostMapping("/viewSettlement")
     public String calculateEmployeeSettlement(ModelMap modelMap, EmployeeSettlementForm employeeSettlementForm){
@@ -134,10 +131,6 @@ public class EmployeeSettlementController {
      */
     @PostMapping("/saveSettlement")
     public String saveEmployeeSettlement(ModelMap modelMap,EmployeeSettlementForm employeeSettlementForm) {
-        /*if (validate(modelMap, employeeSettlementForm)) {
-            modelMap.addAttribute("error","all * fields are reuired" );
-            return "html/fSettlementDetails";
-        } else {*/
             employee = employeeService.findEmployeeByEmpId(employeeSettlementForm.getEmployeeId());
             copyEmployeeSettlementProperties(employeeSettlementForm);
             try {
