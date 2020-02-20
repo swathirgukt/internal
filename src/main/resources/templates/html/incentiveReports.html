@@ -12,7 +12,7 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <form action="/incentive/search"  id="incentiveForm" name="incentiveForm" th:object="${incentiveForm}">
+                    <form action="/incentive/search" th:action="@{/incentive/search}" method="post" id="incentiveForm" name="incentiveForm" th:object="${incentiveForm}">
                         <div class="Heading">Monthly Incentives Search</div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
                                 <div style="float: right">
-                                    <button type="submit" class="submitButton" ><b>Search</b>
+                                    <button type="button" onclick="searchIncentive()" class="submitButton" ><b>Search</b>
                                     </button>
                                 </div>
                             </div>

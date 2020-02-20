@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * User: kalesha
  * Date: 8/16/2017
  */
-public class Rebate {
+public class RebateVO {
 
     private Long id;
     private String rebateName;

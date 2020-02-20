@@ -76,14 +76,14 @@ public class IncentivesController {
         return "html/incentiveReports";
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String searchIncentives(ModelMap modelMap, @RequestParam Date incentiveDate) {
         System.out.println("##date "+incentiveDate);
         List<Incentives> incentivesList = incentiveService.searchIncentives(incentiveDate);
 
         modelMap.addAttribute("incentivesList", incentivesList);
         modelMap.addAttribute("incentiveForm",incentiveForm);
-        return "html/incentiveReports";
+        return "html/fragment/incentiveResult";
     }
 
 

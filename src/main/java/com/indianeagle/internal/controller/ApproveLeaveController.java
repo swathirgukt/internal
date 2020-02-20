@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.PostConstruct;
@@ -60,7 +61,7 @@ public class ApproveLeaveController {
     }
 
     @PostMapping("/approveLeave")
-    public String approveLeave(ModelMap modelMap, LeaveApproveForm leaveApproveForm, BindingResult bindingResult) {
+    public String approveLeave(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "html/approveLeave";
         }
@@ -72,7 +73,7 @@ public class ApproveLeaveController {
     }
 
     @PostMapping("/findLeaveBalance")
-    public String findBalanceLeaves(ModelMap modelMap, LeaveApproveForm leaveApproveForm) {
+    public String findBalanceLeaves(ModelMap modelMap,@ModelAttribute LeaveApproveForm leaveApproveForm) {
         Leaves leaves = leavesService.findLeaveByEmployeeId(leaveApproveForm.getEmpId());
         if (leaves!=null) {
             leaveApproveForm = new LeaveApproveForm();
