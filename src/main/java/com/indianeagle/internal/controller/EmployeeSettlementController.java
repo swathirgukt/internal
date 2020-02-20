@@ -56,12 +56,13 @@ public class EmployeeSettlementController {
         model.addAttribute("employeeForm", employeeForm);
         return "html/fSettlement";
     }
-
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
     @GetMapping("/employeeSettlement")
     public String employee() {
-        EmployeeForm employeeForm=new EmployeeForm();
-        Employee employee = employeeService.findEmployeeByEmpId(userDetails.getUsername());
-        employeeForm.setEmployee(employee);
         return "html/fSettlement";
     }
 
@@ -73,6 +74,29 @@ public class EmployeeSettlementController {
         employeeForm.setEmployeeList(employeeService.searchEmployees(employeeForm));
         model.addAttribute("employeeList", employeeForm.getEmployeeList());
         return "html/fragment/fSettlementResult";
+    }
+
+    /**
+     * Method to view resigned employee settlement details
+     */
+    @GetMapping("/viewUrl")
+    public String viewResignedEmployeeSettlement(ModelMap modelMap,@RequestParam("employeeId") String employeeId,EmployeeSettlementForm employeeSettlementForm){
+        employeeSettlement = salaryService.loadResignedEmployeeSettlement(employeeSettlementForm.getEmployeeId());
+        employee = employeeSettlement.getEmployee();
+        salary = employee.getSalary();
+        employeeSettlementForm = new EmployeeSettlementForm();
+        employeeSettlementForm.setEmployeeId(employeeId);
+        employeeSettlementForm.setEmployeeName(employee.getFullName());
+        employeeSettlementForm.setEmployeeDesignation(employee.getDesignation());
+        employeeSettlementForm.setRelievingDate(employee.getRelieveDate());
+        employeeSettlementForm.setResignationDate(employee.getResignDate());
+        employeeSettlementForm.setSettlementDate(employeeSettlement.getSettlementDate());
+        modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
+        modelMap.addAttribute("employeeSettlement",employeeSettlement );
+        modelMap.addAttribute("employee",employee );
+        modelMap.addAttribute("salary",salary );
+        return "html/viewEmployeeSettlement";
+
     }
 
     @GetMapping("/goUrl")
@@ -98,7 +122,6 @@ public class EmployeeSettlementController {
             employee.setReasonsForResign(employeeSettlementForm.getReasonRelieving());
         }
     }
-
 
     /**
      * Method to calculate employee settlement details

@@ -195,3 +195,13 @@ function searchIncentive() {
  function goBack() {
    window.history.back();
  }
+ function updateDatesRow(selectedValue){
+              if(selectedValue == 'Resigned'){
+                  $('#resignationDateId').show();
+                  document.getElementById('RelevingDate').innerHTML = 'Relieving';
+              }else if(selectedValue == 'Terminated'){
+                  $('#resignationDateId').hide();
+                  document.getElementById('RelevingDate').innerHTML = 'Termination';
+              }
+          }
+

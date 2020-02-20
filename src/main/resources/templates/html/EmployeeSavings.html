@@ -13,24 +13,23 @@
             <div class="jumbotron">
                 <div class="container">
                     <form action="">
-                        <div class="Heading">Employee Savings</div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
+                        <div style="padding-bottom:50px">
+                            <div class="Heading">Employee Savings</div>
+                            <div class="col-md-10 col-sm-12 col-xs-10">
                                 <table width="100%" class="table_text_style table-sm">
                                     <tr>
                                         <td>Employee Name</td>
                                         <td><b>:</b></td>
                                         <td><input type="text"></td>
-                                        <td style="padding:20px">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                        <td>
+                                            <button class="submitButton" onclick="searchEmployeeByName()" type="button">
                                                 <b>Search Employee By Name</b>
                                             </button>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                        </div>
-                        <div>
+
                             <div class="col-md-12 col-sm-12 col-xs-10">
                                 <table width="100%" class="table_text_style table-sm">
                                     <tr>
@@ -110,8 +109,8 @@
                                                 <option value="2020">2020</option>
                                             </select>
                                         </td>
-                                        <td style="padding:20px">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
+                                        <td>
+                                            <button class="submitButton" onclick="retrieveFinancialYearDataToEmployee()" type="button">
                                                 <b>Retrieve</b>
                                             </button>
                                         </td>
@@ -119,194 +118,73 @@
                                 </table>
                             </div>
                         </div>
-                        <div>
-                            <div class="Heading">Employee Details</div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td><input placeholder="Full Name" type="text"></td>
-                                        <td><input placeholder="Designation" type="text"></td>
-                                        <td><input placeholder="PAN CARD NO" type="text"></td>
-                                        <td><input placeholder="ADDRESS" type="text"></td>
-                                        <td style="padding:20px">
-                                            <button class="submitButton" onclick="submitSearch()">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <div class="Heading">Employee Details</div>
+                        <div class="col-md-12 col-sm-12 col-xs-10" >
+                            <table width="100%" class="table_text_style table-sm">
+                                <tr id="employeeInfo">
+                                    <td><input placeholder="Full Name" type="text" name="employee.fullName"></td>
+                                    <td><input placeholder="Designation" type="text" name="employee.designation"></td>
+                                    <td><input placeholder="PAN CARD NO" type="text" name="employee.panNo"></td>
+                                    <td><input placeholder="ADDRESS" type="text" name="employee.perAddress"></td>
+                                    <td>
+                                        <button class="submitButton" id="saveBtn" onclick="saveEmpInfo()" style="display:none;">
+                                            <b>Save</b>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="submitButton" id="editBtn" onclick="editEmpInfo()" type="button">
+                                            <b>Edit</b>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="submitButton" id="cancelBtn" onclick="cancelEmpInfo()" style="display:none;" type="button">
+                                            <b>Cancel</b>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <div>
-                            <div class="Heading">Sections</div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td><label>U/S 10</label></td>
-                                        <td><input style="background-color: rgb(211,211,211);" type="text"
-                                                   value="1000000.00">
-
-                                            <button class="submitButton" onclick="submitSearch()">
-                                                <b>Add</b>
-                                            </button>
-
-                                        </td>
-                                        <td style="padding:20px">
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <div class="Heading">Sections</div>
+                        <div class="col-md-12 col-sm-12 col-xs-10">
+                            <table width="100%" class="table_text_style table-sm">
+                                <tr>
+                                    <td><label>Section1</label></td>
+                                    <td><input style="background-color: rgb(211,211,211);" type="text"
+                                               value="120000.00" readonly="readonly"></td>
+                                    <td>
+                                        <button class="submitButton" onclick="submitSearch()">
+                                            <b>Add</b>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select class="selectOption">
+                                            <option>Item1</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" readonly="readonly"></td>
+                                    <td>
+                                        <button class="submitButton" onclick="submitSearch()">
+                                            <b>Save</b>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="submitButton" onclick="submitSearch()">
+                                            <b>Edit</b>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="submitButton" onclick="submitSearch()">
+                                            <b>Remove</b>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
+                        <div style="float:right">
+                            <div class="col-md-3 col-sm-12 col-xs-10">
                                 <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td>
-                                            <select>
-                                                <option value="MEDICAL ALLOWANCE">Medical&nbsp;Allowance</option>
-                                                <option value="HRA">HRA</option>
-                                                <option value="HOME LOAN">Home&nbsp;Loan</option>
-                                                <option value="TRAVEL ALLOWANCE" selected="selected">Travel&nbsp;Allowance
-                                                </option>
-                                                <option value="FOOD COUPONS">Food&nbsp;Coupons</option>
-                                                <option value="LTA">LTA</option>
-                                                <option value="PT">PT</option>
-                                            </select>
-                                        </td>
-                                        <td><input style="background-color: rgb(255,255,255);" type="text"></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Save</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td style="padding:20px">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td><label>U/S 80C</label></td>
-                                        <td><input style="background-color: rgb(211,211,211);" type="text"
-                                                   value="150000.00">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Add</b>
-                                            </button>
-                                        </td>
-                                        <td style="padding:20px">
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td>
-                                            <select>
-                                                <option value="Pradanmantri Sukanya Samvrudi">Pradanmantri&nbsp;Sukanya&nbsp;Samvrudi
-                                                </option>
-                                                <option value="LIFE INSURANCE POLICES">Life&nbsp;Insurance&nbsp;Policies
-                                                </option>
-                                                <option value="PFF">PPF</option>
-                                                <option value="HOME LOAN PRINCIPLE AMOUNT">Home&nbsp;Loan&nbsp;Principle&nbsp;Amount</option>
-                                                <option value="FIXED DEPOSIT">Fixed&nbsp;Deposite</option>
-                                                <option value="PF">PF</option>
-                                                <option value="TUTION FEE">Tution&nbsp;Fee</option>
-                                            </select>
-                                        </td>
-                                        <td><input style="background-color: rgb(211,211,211);" type="text"
-                                                   value="150000.00"></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Save</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td style="padding:20px">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td><label>U/S 80D</label></td>
-                                        <td><input style="background-color: rgb(211,211,211);" type="text"
-                                                   value="25000.00">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Add</b>
-                                            </button>
-
-                                        </td>
-                                        <td style="padding:20px">
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td>
-                                            <select>
-                                                <option value="Medical Insurance-self with family">Medical&nbsp;Insurance-Self&nbsp;With&nbsp;Family
-                                                </option>
-                                                <option value="Medical Insurance-Self">Medical Insurance-Self</option>
-                                                <option value="Medical Insurance-Self with Family&Parents">Medical
-                                                    Insurance-Self with Family&Parents
-                                                </option>
-                                            </select>
-                                        </td>
-                                        <td><input style="background-color: rgb(211,211,211);" type="text"
-                                                   value="150000.00"></td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Save</b>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Edit</b>
-                                            </button>
-                                        </td>
-                                        <td style="padding:10px">
-                                            <button class="submitButton" onclick="submitSearch()" type="button">
-                                                <b>Remove</b>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm" style="float:right">
                                     <tr>
                                         <td>
                                             <button class="submitButton" onclick="submitSearch()" type="button">
@@ -327,7 +205,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>

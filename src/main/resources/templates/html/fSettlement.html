@@ -30,7 +30,7 @@
                                             <td width="15px"><b>:</b></td>
                                             <td><select class="selectOption" th:field="${employeeForm.status}">
                                                 <option th:value="working">working</option>
-                                                <option th:value="resigned">Resigned</option>
+                                                <option th:value="Resigned">Resigned</option>
                                             </select>
                                             </td>
                                         </tr>
@@ -48,7 +48,7 @@
                                             <td> Department</td>
                                             <td width="15px"><b>:</b></td>
                                             <td><select th:field="${employeeForm.department}" class="selectOption">
-                                                <option value="">select</option>
+                                                <option value="">All</option>
                                                 <option th:each="branches : ${employeeForm.departments}" th:value="${branches.department}" th:text="${branches.department}"/>
                                             </select>
                                             </td>
