@@ -20,15 +20,15 @@
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                     <table width="100%">
                                         <tr>
-                                            <td>First Name <span style="color: #ff0000">*</span></td>
+                                            <td>First Name</td>
                                             <td width="15px"><b>:</b></td>
-                                            <td style="padding: 5px"><input type="text" style="border-radius:5px" onkeypress=" return allowCharactersAndSpaces(event);">
+                                            <td style="padding: 5px"><input th:field="${employeeForm.firstName}" type="text" style="border-radius:5px" onkeypress=" return allowCharactersAndSpaces(event);">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Status<span style="color: #ff0000">*</span></td>
+                                            <td>Status</td>
                                             <td width="15px"><b>:</b></td>
-                                            <td><select class="selectOption">
+                                            <td><select class="selectOption" th:field="${employeeForm.status}">
                                                 <option th:value="working">working</option>
                                                 <option th:value="resigned">Resigned</option>
                                             </select>
@@ -39,13 +39,13 @@
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                     <table width="100%">
                                         <tr>
-                                            <td>Last&nbsp;Name <span style="color: #ff0000">*</span></td>
+                                            <td>Last&nbsp;Name</td>
                                             <td width="15px"><b>:</b></td>
-                                            <td style="padding: 5px"><input type="text" style="border-radius:5px" onkeypress=" return allowCharactersAndSpaces(event);">
+                                            <td style="padding: 5px"><input th:field="${employeeForm.lastName}" type="text" style="border-radius:5px" onkeypress=" return allowCharactersAndSpaces(event);">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td> Department<span style="color: #ff0000">*</span></td>
+                                            <td> Department</td>
                                             <td width="15px"><b>:</b></td>
                                             <td><select th:field="${employeeForm.department}" class="selectOption">
                                                 <option value="">select</option>
@@ -55,7 +55,7 @@
                                         </tr>
                                     </table>
                                 <div style="float:right">
-                                    <button class="submitButton" onclick="searchFemployee()" type="button">
+                                    <button class="submitButton" onclick="searchFEmployee()" type="button">
                                         <b>Search</b>
                                     </button>
                                 </div>
