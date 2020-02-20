@@ -199,7 +199,7 @@ public class SalaryController {
    public String saveSalaries(ModelMap modelMap,HttpSession httpSession){
        try {
            this.salaryService.saveSalaries(httpSession);
-           return "Saved salaries for later modification success.";
+           return "Saved salaries for later modification successfully.";
        } catch (Exception e) {
            e.printStackTrace();
            return "Error occured due to technical error.";

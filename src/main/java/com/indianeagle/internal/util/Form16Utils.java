@@ -2,11 +2,13 @@ package com.indianeagle.internal.util;
 
 import com.indianeagle.internal.dto.*;
 import com.indianeagle.internal.form.*;
-import org.apache.commons.beanutils.BeanUtils;
+import com.indianeagle.internal.form.vo.IncomeTaxSlabVO;
+import com.indianeagle.internal.form.vo.RebateVO;
+import com.indianeagle.internal.form.vo.TaxSectionDeclarationVO;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.springframework.beans.BeanUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -34,9 +36,16 @@ public class Form16Utils {
         financialYear.setFromYear(financialYearForm.getFromYear());
         financialYear.setToMonth(financialYearForm.getToMonth());
         financialYear.setToYear(financialYearForm.getToYear());
-        if(financialYearForm.getIncomeTaxSlabs() != null && !financialYearForm.getIncomeTaxSlabs().isEmpty()) {
-            Collections.sort(financialYearForm.getIncomeTaxSlabs());
-            financialYear.setIncomeTaxSlabs(new TreeSet<IncomeTaxSlab>(financialYearForm.getIncomeTaxSlabs()));
+        if(financialYearForm.getIncomeTaxSlabVOS() != null && !financialYearForm.getIncomeTaxSlabVOS().isEmpty()) {
+            Collections.sort(financialYearForm.getIncomeTaxSlabVOS());
+
+            Set<IncomeTaxSlab> incomeTaxSlabSet = new TreeSet<>();
+            for (IncomeTaxSlabVO incomeTaxSlabVO: financialYearForm.getIncomeTaxSlabVOS() ){
+                IncomeTaxSlab incomeTaxSlab = new IncomeTaxSlab();
+                BeanUtils.copyProperties(incomeTaxSlabVO,incomeTaxSlab);
+                incomeTaxSlabSet.add(incomeTaxSlab);
+            }
+            financialYear.setIncomeTaxSlabs(incomeTaxSlabSet);
         }
         Set<TaxSection> taxSections = new HashSet<TaxSection>();
         if (financialYearForm.getTaxSectionForms() != null) {
@@ -46,13 +55,26 @@ public class Form16Utils {
                 taxSection.setSectionName(taxSectionForm.getSectionName());
                 taxSection.setSectionLimit(taxSectionForm.getSectionLimit());
                 taxSection.setActive(taxSectionForm.isActive());
-                taxSection.setTaxSectionDeclarations(new HashSet<TaxSectionDeclaration>(taxSectionForm.getTaxSectionDeclarations()));
+                Set<TaxSectionDeclaration> taxSectionDeclarationSet = new HashSet<>();
+                for (TaxSectionDeclarationVO taxSectionDeclarationVO : taxSectionForm.getTaxSectionDeclarationVOS()){
+                    TaxSectionDeclaration taxSectionDeclaration = new TaxSectionDeclaration();
+                    BeanUtils.copyProperties(taxSectionDeclarationVO,taxSectionDeclaration);
+                    taxSectionDeclarationSet.add(taxSectionDeclaration);
+                }
+                taxSection.setTaxSectionDeclarations(taxSectionDeclarationSet);
                 taxSections.add(taxSection);
             }
         }
         financialYear.setTaxSections(taxSections);
-        if(financialYearForm.getRebates() != null && !financialYearForm.getRebates().isEmpty()) {
-            financialYear.setRebates(new HashSet<Rebate>(financialYearForm.getRebates()));
+        if(financialYearForm.getRebateVOS() != null && !financialYearForm.getRebateVOS().isEmpty()) {
+
+            Set<Rebate> rebateSet = new HashSet<>();
+            for (RebateVO rebateVO : financialYearForm.getRebateVOS()){
+                Rebate rebate = new Rebate();
+                BeanUtils.copyProperties(rebateVO,rebate);
+                rebateSet.add(rebate);
+            }
+            financialYear.setRebates(rebateSet);
         }
         return financialYear;
     }
@@ -71,8 +93,14 @@ public class Form16Utils {
         financialYearForm.setToMonth(financialYear.getToMonth());
         financialYearForm.setToYear(financialYear.getToYear());
         if (financialYear.getIncomeTaxSlabs() != null && !financialYear.getIncomeTaxSlabs().isEmpty()) {
-            financialYearForm.setIncomeTaxSlabs(new ArrayList<IncomeTaxSlab>(financialYear.getIncomeTaxSlabs()));
-            Collections.sort(financialYearForm.getIncomeTaxSlabs());
+            List<IncomeTaxSlabVO> incomeTaxSlabVOS = new ArrayList<>();
+            for (IncomeTaxSlab incomeTaxSlab : financialYear.getIncomeTaxSlabs()) {
+                IncomeTaxSlabVO incomeTaxSlabVO = new IncomeTaxSlabVO();
+                BeanUtils.copyProperties(incomeTaxSlab, incomeTaxSlabVO);
+                incomeTaxSlabVOS.add(incomeTaxSlabVO);
+            }
+            financialYearForm.setIncomeTaxSlabVOS(incomeTaxSlabVOS);
+            Collections.sort(financialYearForm.getIncomeTaxSlabVOS());
         }
         List<TaxSectionForm> taxSectionForms = new ArrayList<TaxSectionForm>();
         if (financialYear.getTaxSections() != null) {
@@ -84,13 +112,27 @@ public class Form16Utils {
                 taxSectionForm.setSectionName(taxSection.getSectionName());
                 taxSectionForm.setSectionLimit(taxSection.getSectionLimit());
                 taxSectionForm.setActive(taxSection.isActive());
-                taxSectionForm.setTaxSectionDeclarations(new ArrayList<TaxSectionDeclaration>(taxSection.getTaxSectionDeclarations()));
+
+                List<TaxSectionDeclarationVO> taxSectionDeclarationVOS = new ArrayList<>();
+                for (TaxSectionDeclaration taxSectionDeclaration : taxSection.getTaxSectionDeclarations()){
+                    TaxSectionDeclarationVO taxSectionDeclarationVO = new TaxSectionDeclarationVO();
+                    BeanUtils.copyProperties(taxSectionDeclaration,taxSectionDeclarationVO);
+                    taxSectionDeclarationVOS.add(taxSectionDeclarationVO);
+                }
+
+                taxSectionForm.setTaxSectionDeclarationVOS(taxSectionDeclarationVOS);
                 taxSectionForms.add(taxSectionForm);
             }
         }
         financialYearForm.setTaxSectionForms(taxSectionForms);
         if (financialYear.getRebates() != null && !financialYear.getRebates().isEmpty()) {
-            financialYearForm.setRebates(new ArrayList<Rebate>(financialYear.getRebates()));
+            List<RebateVO> rebateVOS = new ArrayList<>();
+            for (Rebate rebate : financialYear.getRebates()) {
+                RebateVO rebateVO = new RebateVO();
+                BeanUtils.copyProperties(rebate, rebateVO);
+                rebateVOS.add(rebateVO);
+            }
+            financialYearForm.setRebateVOS(rebateVOS);
         }
         return financialYearForm;
     }
@@ -160,7 +202,7 @@ public class Form16Utils {
      * To Prepare a date by using financial Year month and year
      *
      * @param month financial Year start month or end month
-     * @param year financial Year
+     * @param year  financial Year
      * @return date
      */
     public static Date prepareDateWithMonthAndYear(String month, String year) {
@@ -234,9 +276,9 @@ public class Form16Utils {
                 totalDeductions = totalDeductions.add(salaryHistory.getTotalDeductions());
                 totalNetSalary = totalNetSalary.add(salaryHistory.getNetSalary());
             }
-            SalaryHistory lastSalary = salaryHistories.get(salaryHistories.size()-1);
+            SalaryHistory lastSalary = salaryHistories.get(salaryHistories.size() - 1);
             int remainingMonths = calculateUnSalariedMonths(financialYear, lastSalary.getSalaryDate());
-            for(int i=0; i<= remainingMonths; i++) {
+            for (int i = 0; i <= remainingMonths; i++) {
                 totalBasic = totalBasic.add(lastSalary.getActlBasic());
                 totalHRA = totalHRA.add(lastSalary.getActlHra());
                 totalConveyence = totalConveyence.add(lastSalary.getActlConveyence());
@@ -289,18 +331,14 @@ public class Form16Utils {
      * @param empId
      * @return Employee Income Tax
      */
-    public static EmployeeIncomeTax prepareEmployeeIncomeTax(Form16GenerationForm form16GenerationForm, FinancialYear financialYear, String empId){
+    public static EmployeeIncomeTax prepareEmployeeIncomeTax(Form16GenerationForm form16GenerationForm, FinancialYear financialYear, String empId) {
         EmployeeIncomeTax employeeIncomeTax = new EmployeeIncomeTax();
-        try {
-            BeanUtils.copyProperties(employeeIncomeTax, form16GenerationForm);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+
+        BeanUtils.copyProperties(employeeIncomeTax, form16GenerationForm);
+
         employeeIncomeTax.setEmpId(empId);
         employeeIncomeTax.setFinancialYear(financialYear);
-        if(employeeIncomeTax.getId() == 0L){
+        if (employeeIncomeTax.getId() == 0L) {
             employeeIncomeTax.setId(null);
         }
         return employeeIncomeTax;
@@ -314,13 +352,9 @@ public class Form16Utils {
      */
     public static Form16GenerationForm prepareForm16GenerationForm(EmployeeIncomeTax employeeIncomeTax) {
         Form16GenerationForm form16GenerationForm = new Form16GenerationForm();
-        try {
-            BeanUtils.copyProperties(form16GenerationForm, employeeIncomeTax);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+
+        BeanUtils.copyProperties(form16GenerationForm, employeeIncomeTax);
+
         return form16GenerationForm;
     }
 
@@ -417,7 +451,7 @@ public class Form16Utils {
      * @return minimum of ActualHRA , 40% of Basic and (hra - 10% of basic)
      */
     public static BigDecimal calculateHRA(BigDecimal totalActualHRA, BigDecimal hraWithBasic10per, BigDecimal basic40per) {
-        return (totalActualHRA.min(hraWithBasic10per).min(basic40per)).setScale(2,BigDecimal.ROUND_CEILING);
+        return (totalActualHRA.min(hraWithBasic10per).min(basic40per)).setScale(2, BigDecimal.ROUND_CEILING);
     }
 
     /**
@@ -507,16 +541,16 @@ public class Form16Utils {
         return totalActualHRA.setScale(0, BigDecimal.ROUND_HALF_UP);
     }
 
-    public static List<TaxSectionDeclaration> taxSectionDeclarationList(TaxSectionForm taxSectionForm) {
-        return taxSectionForm.getTaxSectionDeclarations();
+    public static List<TaxSectionDeclarationVO> taxSectionDeclarationList(TaxSectionForm taxSectionForm) {
+        return taxSectionForm.getTaxSectionDeclarationVOS();
     }
 
     /**
      * In this method we genarate the excel sheet and build the employee salary details.
      *
-     * @param salaryHistories paid months salaries in the selected financial year.
+     * @param salaryHistories        paid months salaries in the selected financial year.
      * @param totalSalaryHistoryForm total salary for an employee in the selected financial year.
-     * @param remainedMonths remained months salary in the selected financial year.
+     * @param remainedMonths         remained months salary in the selected financial year.
      * @return HSSFWorkbook
      */
     public static HSSFWorkbook genarateForm16Excel(List<SalaryHistory> salaryHistories, TotalSalaryHistoryForm totalSalaryHistoryForm, List remainedMonths) {

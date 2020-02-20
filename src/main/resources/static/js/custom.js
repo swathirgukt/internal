@@ -177,7 +177,7 @@ function searchIncentive() {
     var response = makeAJAXCall('/incentive/search','incentiveForm');
         response.done(function (responseData) {
             if (responseData) {
-                $("#searchIncentiveResults").text(responseData);
+                $("#searchIncentiveResults").html(responseData);
             }
         });
 }

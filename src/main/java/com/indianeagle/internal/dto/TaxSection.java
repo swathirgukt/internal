@@ -22,7 +22,7 @@ public class TaxSection  extends BaseDto implements Comparable<TaxSection> {
     private String sectionName;
     @Column(name = "SECTION_LIMIT")
     private BigDecimal sectionLimit;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "TAX_SECTION_ID", nullable = false)
     private Set<TaxSectionDeclaration> taxSectionDeclarations;
     @Column(name = "ACTIVE")
