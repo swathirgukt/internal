@@ -164,14 +164,6 @@ function removeRow(){
        $("#incentiveTable tr:last").remove();
     }
 }
-function searchFEmployee() {
-    var response = makeAJAXCall("/searchEmployeeSettlement", 'searchFEmployeeForm');
-    response.done(function (responseData) {
-        if (responseData) {
-            $("#settlementResult").html(responseData);
-        }
-    });
-}
 
 function searchIncentive() {
     var response = makeAJAXCall('/incentive/search','incentiveForm');
@@ -181,27 +173,4 @@ function searchIncentive() {
             }
         });
 }
-
- function submitCalculate(){
-        document.employeeSettlementForm.action="/viewSettlement";
-	    document.employeeSettlementForm.submit();
-    }
-
- function saveEmployeeSettlement(){
-         document.employeeSettlementForm.action="/saveSettlement";
- 	     document.employeeSettlementForm.submit();
-
-     }
- function goBack() {
-   window.history.back();
- }
- function updateDatesRow(selectedValue){
-              if(selectedValue == 'Resigned'){
-                  $('#resignationDateId').show();
-                  document.getElementById('RelevingDate').innerHTML = 'Relieving';
-              }else if(selectedValue == 'Terminated'){
-                  $('#resignationDateId').hide();
-                  document.getElementById('RelevingDate').innerHTML = 'Termination';
-              }
-          }
 

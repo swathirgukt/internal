@@ -18,6 +18,12 @@
                         <div th:if="${save}!=null">
                             <span th:text="${save}" style="color:green;font-size:17px;"></span>
                         </div>
+                        <span id="demo" style="color:red;font-size:17px;"></span>
+                        <span id="demo6" style="color:red;font-size:17px;"></span>
+                        <span id="demo9" style="color:red;font-size:17px;"></span>
+                        <div>
+                            <span id='error' style="color:green;font-size:17px;"></span>
+                        </div>
                         <div class="row" style="border-bottom:1px solid #adad85">
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table width="100%">
@@ -34,55 +40,59 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%">
+                            <div class="col-md-10 col-sm-12 col-xs-10">
+                                <table width="80%">
                                     <tr>
                                         <td>Type<span style="color: #ff0000">*</span></td>
                                         <td><b>:</b></td>
                                         <td style="padding:10px">
-                                            <select class="selectOption" th:field="*{empStatus}" onchange="updateDatesRow(this.value)">
+                                            <select class="selectOption" th:field="*{empStatus}"
+                                                    onchange="updateDatesRow(this.value)">
                                                 <option th:value="Resigned">Resigned</option>
                                                 <option th:value="Terminated">Terminated</option>
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr>
                                     <tr id="resignationDateId" style="display:block;">
-                                        <td>Date&nbsp;of&nbsp;Resignation<span style="color: #ff0000">*</span></td>
-                                        <td><b>:</b></td>
-                                        <td><input style="border: 1px solid #ff9900;" id="datepicker"
-                                                   width="200px" name="datepicker" th:field="*{resignationDate}"/>
+                                        <td style="padding: 5px">Date&nbsp;of&nbsp;Resignation<span style="color: #ff0000">*</span></td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding: 5px"><input style="border: 1px solid #ff9900;" id="datepicker"
+                                                   width="200px" name="resignationDate" th:field="*{resignationDate}"
+                                                   required/>
                                             <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
+                                        <td><span id="demo1" style="color:red"></span></td>
+
                                     </tr>
-                                    <td> Date&nbsp;of&nbsp;<span id="RelevingDate">Relieving</span><span style="color: #ff0000">*</span></td>
-                                    <td><b>:</b></td>
-                                    <td><input style="border: 1px solid #ff9900;" id="datepicker2" width="200px"
-                                               name="datepicker" th:field="*{relievingDate}"/>
-                                        <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
-                                    </td>
-                                    <td> Date&nbsp;of&nbsp;Settlement<span style="color: #ff0000">*</span></td>
-                                    <td><b>:</b></td>
-                                    <td style="padding:10px"><input style="border: 1px solid #ff9900;" id="datepicker3"
-                                                                    width="200px" name="datepicker"
-                                                                    th:field="*{settlementDate}"/>
-                                        <script>$('#datepicker3').datepicker({ uiLibrary: 'bootstrap' }); </script>
-                                    </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row" style="border-bottom:1px solid #adad85">
-                            <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
                                     <tr>
-                                        <td>Reason&nbsp;For&nbsp;Leaving</td>
-                                        <td><b>:</b></td>
-                                        <td><textarea rows="3" cols="25" th:field="*{reasonRelieving}"></textarea></td>
+                                        <td style="padding: 5px"> Date&nbsp;of&nbsp;<span id="RelevingDate">Relieving</span><span
+                                                style="color: #ff0000">*</span></td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding: 5px"><input style="border: 1px solid #ff9900;" id="datepicker2" width="200px"
+                                                   name="relievingDate" th:field="*{relievingDate}" required/>
+                                            <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
+
+                                        </td>
+                                        <td><span id="demo2" style="color:red"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px"> Date&nbsp;of&nbsp;Settlement<span style="color: #ff0000">*</span></td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding: 5px"><input style="border: 1px solid #ff9900;" id="datepicker3" width="200px" name="settlementDate"
+                                                                        th:field="*{settlementDate}" required/>
+                                            <script>$('#datepicker3').datepicker({ uiLibrary: 'bootstrap' }); </script>
+
+                                        </td>
+                                        <td><span id="demo3" style="color:red"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px">Reason&nbsp;For&nbsp;Leaving</td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}"></textarea></td>
                                     </tr>
                                 </table>
                             </div>
-                        </div>
+                        </div><hr>
                         <div class="row">
                             <div class="col-md-6 col-sm-10 col-xs-5">
                                 <table>
@@ -90,15 +100,15 @@
                                         <th>Earnings</th>
                                     </tr>
                                     <tr>
-                                        <td>Previous&nbsp;ARR</td>
-                                        <td><b>:</b></td>
-                                        <td style="padding:10px"><input type="text"
+                                        <td  style="padding: 5px">Previous&nbsp;ARR</td>
+                                        <td  style="padding: 5px"><b>:</b></td>
+                                        <td style="padding:5px"><input type="text"
                                                                         th:field="*{previousArrearsEarnings}"></td>
                                     </tr>
                                     <tr>
-                                        <td>Other&nbsp;Earnings</td>
-                                        <td><b>:</b></td>
-                                        <td><input type="text" th:field="*{otherSettlementEarnings}"></td>
+                                        <td style="padding: 5px">Other&nbsp;Earnings</td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementEarnings}"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -108,14 +118,14 @@
                                         <th>Deductions</th>
                                     </tr>
                                     <tr>
-                                        <td>Admin&nbsp;Charges</td>
-                                        <td><b>:</b></td>
-                                        <td style="padding:10px"><input type="text" th:field="*{adminCharges}"></td>
+                                        <td style="padding: 5px">Admin&nbsp;Charges</td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding:5px"><input type="text" th:field="*{adminCharges}"></td>
                                     </tr>
                                     <tr>
-                                        <td>Other&nbsp;Deductions</td>
-                                        <td><b>:</b></td>
-                                        <td><input type="text" th:field="*{otherSettlementDeductions}"></td>
+                                        <td style="padding: 5px">Other&nbsp;Deductions</td>
+                                        <td style="padding: 5px"><b>:</b></td>
+                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementDeductions}"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -125,7 +135,7 @@
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <button class="submitButton" onclick="submitCalculate()">
+                                            <button class="submitButton" onclick="submitCalculate()" type="button">
                                                 <b>Calculate</b>
                                             </button>
                                         </td>
@@ -134,7 +144,6 @@
                                                     type="button">
                                                 <b>Save</b>
                                             </button>
-
                                         </td>
                                         <td>
                                             <button class="submitButton" onclick="goBack()" type="button">
@@ -144,11 +153,8 @@
                                     </tr>
                                 </table>
                             </div>
-
                         </div>
-
                     </form>
-
                 </div>
             </div>
         </div>
