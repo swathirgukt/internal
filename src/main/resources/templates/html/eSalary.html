@@ -6,15 +6,16 @@
 
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
+ <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-lg-2 sidenav"></div>
+        <div class="col-lg-2 sidenav">
+        </div>
         <div class="col-lg-8 text-left">
             <div class="jumbotron">
                 <div class="container">
                     <div class="Heading">Monthly Salary Report</div>
-                    <span style="color: #008000;" th:if="${mailSent}!=null" th:text="${mailSent}"></span>
-                    <span style="color:#ff0000;" th:if="${error}!=null" th:text="${error}"></span>
+                    <span style="color: #008000;" th:text="${mailSent}?:''" id="mailSent"></span>
+                    <span style="color:#ff0000;" th:text="${error}?:''" id="error"></span>
                     <form action="/produceAllSalaries" method="post" id="generateAllSalariesForm"
                           name="generateAllSalariesForm" th:action="@{/produceAllSalaries}"
                           th:object="${generateAllSalariesForm}">
@@ -23,38 +24,34 @@
                                 <Table width="100%" class="table_text_style table-sm">
                                     <tr>
                                         <td>From&nbsp;Date</td>
-                                        <td><span style="float: right;margin-right:10px;">:</span></td>
+                                        <td><b>:</b></td>
                                         <td>
-                                            <input id="fromDate" type="text" width="170px" name="fromDate"
-                                                   th:field="*{salaryDate}"/>
+                                            <input id="fromDate" type="text" width="200px" name="fromDate"
+                                                   th:field="*{salaryDate}" style="border: 1px solid #ff9900"/>
                                             <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
                                     </tr>
                                 </Table>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
+                            <div class="col-lg-5 col-sm-6 col-xs-12 col-md-4">
                                     <Table width="100%" class="table_text_style  table-sm">
                                         <tr>
                                             <td>To&nbsp;Date</td>
-                                            <td><span style="float: right;margin-right:10px;">:</span></td>
+                                            <td><b>:</b></td>
                                             <td>
-                                                <input id="toDate" width="170px" name="toDate"
-                                                       th:field="*{salaryEndDate}"/>
+                                                <input id="toDate" width="200px" name="toDate"
+                                                       th:field="*{salaryEndDate}" style="border: 1px solid #ff9900"/>
                                                 <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                            </td>
+                                            <td>
+                                                <button class="submitButton" onclick="searchAllESalaryEmployee()" type="button"><b>GO</b></button>
                                             </td>
                                         </tr>
                                     </Table>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
-                                <div style="float: right">
-                                    <button class="submitButton" onclick="searchAllESalaryEmployee()" type="button">GO</button>
-                                </div>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-12 col-md-12">
-                                <div id="eSalaryResult" name="eSalaryResult" th:include="html/fragment/eSalaryResult::eSalaryResult">
-                                </div>
+                        <div style="width:100%">
+                            <div id="eSalaryResult" name="eSalaryResult" th:include="html/fragment/eSalaryResult::eSalaryResult"></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-md-12">

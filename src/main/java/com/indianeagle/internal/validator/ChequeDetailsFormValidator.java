@@ -8,51 +8,50 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.util.Date;
+
 @Component
 public class ChequeDetailsFormValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
-
-        return clazz.isAssignableFrom(ChequeDetailsForm.class);
+return ChequeDetailsForm.class.equals(clazz);
+        //return clazz.isAssignableFrom(ChequeDetailsForm.class);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
         ChequeDetailsForm chequeDetailsForm=(ChequeDetailsForm)target;
-        System.out.println(chequeDetailsForm);
         ChequeDetails chequeDetails=chequeDetailsForm.getChequeDetails();
-        System.out.println(chequeDetailsForm.getAmount());
 
         if(isEmpty(chequeDetailsForm.getChequeDetails().getChequeDate()))
         {
-           errors.rejectValue("date","provide.date");
+           errors.rejectValue("chequeDate","provide date");
         }
 
         if(chequeDetailsForm.getChequeDetails().getAmount().doubleValue()==0)
         {
-            errors.rejectValue("amount","provide.amount");
+            errors.rejectValue("amount","provide amount");
         }
         if(chequeDetailsForm.getChequeDetails().getChequeNo()==0)
         {
-            errors.rejectValue("chequeNumber","provide.chequeNumber");
+            errors.rejectValue("chequeNumber","provide chequeNumber");
         }
         if(StringUtils.isEmpty(chequeDetailsForm.getChequeDetails().getBank()))
         {
-            errors.rejectValue("bank","provide.bank");
+            errors.rejectValue("bank","provide bank");
         }
         if(StringUtils.isEmpty(chequeDetailsForm.getChequeDetails().getStatus()))
         {
-            errors.rejectValue("status","provide.Status");
+            errors.rejectValue("status","provide Status");
         }
         if(StringUtils.isEmpty(chequeDetailsForm.getChequeDetails().getNameOfPay()))
         {
-            errors.rejectValue("nameOfPay","provide.nameOfPay");
+            errors.rejectValue("nameOfPay","provide nameOfPay");
         }
 
-        if(StringUtils.isEmpty(chequeDetailsForm.getChequeDetails().getComments()))
+        /*if(StringUtils.isEmpty(chequeDetailsForm.getChequeDetails().getComments()))
         {
             errors.rejectValue("comments","provide.comments");
-        }
+        }*/
 
     }
 

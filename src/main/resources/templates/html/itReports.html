@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>IT REPORT</title>
 </head>
@@ -12,7 +12,7 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <form action="/">
+                    <form th:action="@{/getITReports}" method="post" id="reportForm">
                         <div class="Heading">IT REPORT</div>
                         <div class="row">
                             <div class="col-xs-6 col-md-8">
@@ -21,32 +21,71 @@
                                     <div style="margin-top:10px;color:red;float:left;">*</div>
                                     <div style="margin-left:20px;margin-top:10px;float:left;"><b>:</b></div>
                                     <div style="margin-left:40px; width:300px;float:left;">
-
-                                        <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                               width="200px" name="datepicker"/>
-                                        <script>
-								$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
-
-
-                                        </script>
+                                        <input style=" float:left; border: 1px solid #ff9900;" id="salaryDate"
+                                               width="200px" name="salaryDate"/>
+                                        <script>$('#salaryDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                     </div>
                                 </div>
+                                <span th:if="${Date}!=null" th:text="${Date}"></span>
+                                <span th:if="${monthName}!=null" th:text="${monthName}"></span>
+                                <span th:if="${noRecords}!=null" th:text="${noRecords}"></span>
+                                <span th:if="${technicalError}!=null" th:text="${technicalError}" style="color:red"></span>
                             </div>
                             <div class="col-xs-6 col-md-4">
-                                <button type="button" class="submitButton" onclick="alert('Submit')"><b>Search</b>
+                                <button class="submitButton" onclick="getITReports()"><b>Search</b>
                                 </button>
                             </div>
                         </div>
-
                     </form>
+                    <div class="Heading">Search Results</div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-10">
+
+                            <div th:if="${itList} != null AND ${itList.size()}>0">
+
+                                    <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+                                    <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                                        <th>EmpId</th>
+                                        <th>Apr</th>
+                                        <th>May</th>
+                                        <th>Jun</th>
+                                        <th>Jul</th>
+                                        <th>Aug</th>
+                                        <th>Sept</th>
+                                        <th>oct</th>
+                                        <th>Nov</th>
+                                        <th>Dec</th>
+                                        <th>Jan</th>
+                                        <th>Feb</th>
+                                        <th>Mar</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    <tr style="background-color:#FFFFFF;color: #000000;padding: 50px;border:">
+                                        <td th:text="${employeeId}"></td>
+
+                                        <td th:each="it: ${itList}" th:text="${it}!=null?${it}:''"></td>
+
+                                        <td th:text= "${total}"></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+                         th:if="${itList}!=null  AND ${itList.size()}==0">
+                        Nothing found to display
+                    </div>
+                    <div id="itReport">
+
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
-
-
 </div>
+
 
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>

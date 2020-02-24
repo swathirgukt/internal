@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Salary History</title>
+    <title>Monthly Incentives Search</title>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
@@ -12,52 +12,41 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <form action="/salaryHistory/search" id="salaryHistoryForm" name="salaryHistoryForm" th:object="${salaryHistoryForm}">
-                        <div class="Heading">Salary History</div>
+                    <form action="/incentive/search" th:action="@{/incentive/search}" method="post" id="incentiveForm" name="incentiveForm" th:object="${incentiveForm}">
+                        <div class="Heading">Monthly Incentives Search</div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
                                 <table>
                                     <tr>
-                                        <td> Employee ID<span style="color:red"> *</span></td>
+                                        <td> DATE</td>
+                                        <td width="20px"><span style="color:red"> *</span></td>
                                         <td width="20px"><b>:</b></td>
                                         <td>
-                                            <select id="employeeId" name="employeeId" th:field="*{employeeId}" class="selectOption">
-                                                <option th:each="employee : *{employeeVOList}"
-                                                        th:value="${employee.empId}"
-                                                        th:text="${employee.empId}"></option>
-                                            </select>
+                                            <input style=" float:left; border: 1px solid #ff9900;" id="incentiveDate" width="200px" th:field="*{incentiveDate}" type="text"/>
+                                            <script>$('#incentiveDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
                                 <div style="float: right">
-                                    <button type="button" onclick="searchEmployeeSalaryHitory()" class="submitButton" ><b>Search</b>
+                                    <button type="button" onclick="searchIncentive()" class="submitButton" ><b>Search</b>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
-                                <div class="Heading">Salary History Details</div>
-                            </div>
-                            <div id="employeeSalaryHistoryResult"></div>
-                        </div>
-
                     </form>
-
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12  col-md-12 col-lg-12 ">
+                            <div class="Heading">Search Results</div>
+                        </div>
+                    </div>
+                    <div id="searchIncentiveResults" th:include="html/fragment/incentiveResult :: incentiveResult"></div>
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
 </div>
-
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
-
-
 </html>

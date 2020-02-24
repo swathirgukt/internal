@@ -1,32 +1,40 @@
-/*
- * ---------------------------------------------------------------------------
- * COPYRIGHT NOTICE
- * Copyright (c) 2011 by Yana Software (P) Limited.
- * All rights reserved. These materials are confidential and proprietary to
- * Yana Software (P) Limited.  No part of this code may be reproduced, published
- * in any form by any means (electronic or mechanical, including photocopy or
- * any information storage or retrieval system), nor may the materials be
- * disclosed to third parties, or used in derivative works without the
- * express written authorization of Yana Software (P) Limited.
- * ---------------------------------------------------------------------------
- */
-package com.indianeagle.internal.form;
+package com.indianeagle.internal.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
- * @author Hari.Pondreti
- * @since Jun 17, 2011
+ * @Author : Taymur Shaikh
+ * @since : 11-02-2020
  */
-public class EmpSalaryDecider {
 
+@Entity
+@Table(name = "SALARY_DECIDER")
+public class EmpSalaryDecider extends BaseDto {
+
+    @Column(name = "EMPLOYEE_ID")
     private String empId;
+    @Transient
     private String fullName;
-    private BigDecimal lopDays= BigDecimal.ZERO;
+    @Column(name = "LOP_DAYS")
+    private BigDecimal lopDays = BigDecimal.ZERO;
+    @Column(name = "ARREAR_DAYS")
     private BigDecimal arrearsDays = BigDecimal.ZERO;
+    @Column(name = "SALARY_ADVANCE")
     private BigDecimal salaryInAdvance = BigDecimal.ZERO;
-    private boolean empExclude;
+    @Transient
+    private Boolean empExclude = Boolean.FALSE;
+    @Column(name = "PERFORMANCE_INCETIVE")
     private BigDecimal performanceIncentives = BigDecimal.ZERO;
+
+    @Column(name = "SALARY_DATE")
+    private Date salaryDate;
+    @Column(name = "SALARY_END_DATE")
+    private Date salaryEndDate;
 
 
     /**
@@ -125,6 +133,26 @@ public class EmpSalaryDecider {
      */
     public void setPerformanceIncentives(BigDecimal performanceIncentives) {
         this.performanceIncentives = performanceIncentives;
+    }
+
+    public boolean isEmpExclude() {
+        return empExclude;
+    }
+
+    public Date getSalaryDate() {
+        return salaryDate;
+    }
+
+    public void setSalaryDate(Date salaryDate) {
+        this.salaryDate = salaryDate;
+    }
+
+    public Date getSalaryEndDate() {
+        return salaryEndDate;
+    }
+
+    public void setSalaryEndDate(Date salaryEndDate) {
+        this.salaryEndDate = salaryEndDate;
     }
 
     /* (non-Javadoc)

@@ -1,7 +1,8 @@
 package com.indianeagle.internal.form;
 
-import com.indianeagle.internal.dto.IncomeTaxSlab;
 import com.indianeagle.internal.dto.Rebate;
+import com.indianeagle.internal.form.vo.IncomeTaxSlabVO;
+import com.indianeagle.internal.form.vo.RebateVO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,9 +22,9 @@ public class FinancialYearForm {
     private String fromYear;
     private String toMonth;
     private String toYear;
-    private List<IncomeTaxSlab> incomeTaxSlabs;
+   private List<IncomeTaxSlabVO> incomeTaxSlabVOS;
     private List<TaxSectionForm> taxSectionForms;
-    private List<Rebate> rebates;
+    private List<RebateVO> rebateVOS;
     private String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private String[] years = {"2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"};
 
@@ -67,12 +68,12 @@ public class FinancialYearForm {
         this.toYear = toYear;
     }
 
-    public List<IncomeTaxSlab> getIncomeTaxSlabs() {
-        return incomeTaxSlabs;
+    public List<IncomeTaxSlabVO> getIncomeTaxSlabVOS() {
+        return incomeTaxSlabVOS;
     }
 
-    public void setIncomeTaxSlabs(List<IncomeTaxSlab> incomeTaxSlabs) {
-        this.incomeTaxSlabs = incomeTaxSlabs;
+    public void setIncomeTaxSlabVOS(List<IncomeTaxSlabVO> incomeTaxSlabVOS) {
+        this.incomeTaxSlabVOS = incomeTaxSlabVOS;
     }
 
     public List<TaxSectionForm> getTaxSectionForms() {
@@ -83,12 +84,12 @@ public class FinancialYearForm {
         this.taxSectionForms = taxSectionForms;
     }
 
-    public List<Rebate> getRebates() {
-        return rebates;
+    public List<RebateVO> getRebateVOS() {
+        return rebateVOS;
     }
 
-    public void setRebates(List<Rebate> rebates) {
-        this.rebates = rebates;
+    public void setRebateVOS(List<RebateVO> rebateVOS) {
+        this.rebateVOS = rebateVOS;
     }
 
     public String[] getMonths() {

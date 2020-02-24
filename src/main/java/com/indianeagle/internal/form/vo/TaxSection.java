@@ -14,7 +14,7 @@ public class TaxSection implements Comparable<TaxSection> {
     private Long id;
     private String sectionName;
     private BigDecimal sectionLimit;
-    private Set<TaxSectionDeclaration> taxSectionDeclarations;
+    private Set<TaxSectionDeclarationVO> taxSectionDeclarationVOS;
     private boolean active = true;
 
     public Long getId() {
@@ -41,12 +41,12 @@ public class TaxSection implements Comparable<TaxSection> {
         this.sectionLimit = sectionLimit;
     }
 
-    public Set<TaxSectionDeclaration> getTaxSectionDeclarations() {
-        return taxSectionDeclarations;
+    public Set<TaxSectionDeclarationVO> getTaxSectionDeclarationVOS() {
+        return taxSectionDeclarationVOS;
     }
 
-    public void setTaxSectionDeclarations(Set<TaxSectionDeclaration> taxSectionDeclarations) {
-        this.taxSectionDeclarations = taxSectionDeclarations;
+    public void setTaxSectionDeclarationVOS(Set<TaxSectionDeclarationVO> taxSectionDeclarationVOS) {
+        this.taxSectionDeclarationVOS = taxSectionDeclarationVOS;
     }
 
     public boolean isActive() {

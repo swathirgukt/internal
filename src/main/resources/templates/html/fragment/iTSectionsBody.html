@@ -1,0 +1,222 @@
+<div th:fragment="iTSectionsBody" xmlns:th="http://www.thymeleaf.org">
+    <div class="Heading"><label>Income Tax Sections</label></div>
+    <form th:action="@{/incomeTaxSections/retrieveFinancialYear}" id="financialYearForm" name="financialYearForm"
+          method="post" th:object="${financialYearForm}">
+        <div id="hiddenForm" th:if="${financialYearForm} !=null" hidden>
+            <input name="isTaxSlab" value="true"
+                   th:if="*{incomeTaxSlabVOS} == null"/>
+
+            <input th:field="*{id}"/>
+
+            <div>
+                <input th:each="incomeTaxSlab, status : *{incomeTaxSlabVOS}"
+                       th:field="*{incomeTaxSlabVOS[__${status.index}__].id}" type="hidden"/>
+            </div>
+
+            <div>
+                <input th:each="rebate, status : *{rebateVOS}" th:field="*{rebateVOS[__${status.index}__].id}"
+                       type="hidden"/>
+            </div>
+            <div th:each="section, status : *{taxSectionForms}">
+                <input th:field="*{taxSectionForms[__${status.index}__].id}" type="hidden"/>
+                <div>
+                    <input th:each="sectionDeclaration, innerStatus : ${section.taxSectionDeclarationVOS}"
+                           th:field="*{taxSectionForms[__${status.index}__].taxSectionDeclarationVOS[__${innerStatus.index}__].id}"
+                           type="hidden"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-10">
+                <table class="table_text_style">
+                    <tr>
+                        <td>Financial&nbsp;Year</td>
+                        <td><b>:</b></td>
+                        <td>From</td>
+                        <td>
+                            <select th:field="*{fromMonth}">
+                                <option th:each="month : *{months}" th:value="${month}" th:text="${month}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <select th:field="*{fromYear}">
+                                <option th:each="year : *{years}" th:value="${year}" th:text="${year}"></option>
+                            </select>
+                        </td>
+                        <td>To</td>
+                        <td>
+                            <select th:field="*{toMonth}">
+                                <option th:each="month : *{months}" th:value="${month}" th:text="${month}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <select th:field="*{toYear}">
+                                <option th:each="year : *{years}" th:value="${year}" th:text="${year}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="submitButton" type="button" onclick="retrieveFinancialYear()">
+                                <b>Retrieve</b>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <span style="color:red;" th:text="${duplicateError}?:''" id="duplicateError"></span>
+                <span style="color:red;" th:text="${noDataError}?:''" id="noDataError"></span>
+                <span style="color:green;" th:text="${success}?:''" id="success"></span>
+            </div>
+        </div>
+        <div class="Heading"><label>Income Tax Slabs</label>
+            <button style="float: right;" name="addTaxSlabButton" type="button">ADD TAX SLAB</button>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-10">
+                <span id="taxSlabError"></span>
+                <table width="100%" class="table_text_style" name="taxSlabTable" id="taxSlabTable">
+                    <tr th:each="slab, status : *{incomeTaxSlabVOS}" th:if="${slab.maxIncome}!=null">
+                        <td>From</td>
+                        <td><input type="text" th:field="*{incomeTaxSlabVOS[__${status.index}__].minIncome}">
+                        </td>
+                        <td>To</td>
+
+                        <td><input type="text" th:field="*{incomeTaxSlabVOS[__${status.index}__].maxIncome}">
+                        </td>
+                        <td>Tax Rate</td>
+
+                        <td><input type="text" th:field="*{incomeTaxSlabVOS[__${status.index}__].taxRate}">
+                        </td>
+                    </tr>
+                    <tr th:each="slab, status: *{incomeTaxSlabVOS}" th:if="${slab.maxIncome}==null">
+                        <td>Above</td>
+                        <td><input type="text" th:field="*{incomeTaxSlabVOS[__${status.index}__].minIncome}">
+                        </td>
+                        <td>Tax Rate</td>
+                        <td><input type="text" th:field="*{incomeTaxSlabVOS[__${status.index}__].taxRate}"></td>
+                    </tr>
+
+                    <tr th:each="index : ${#numbers.sequence(0,2)}" th:if="*{incomeTaxSlabVOS.size()}==0">
+                        <td>From</td>
+                        <td><input type="text" th:name="|incomeTaxSlabVOS[${index}].minIncome|">
+                        </td>
+                        <td>To</td>
+
+                        <td><input type="text" th:name="|incomeTaxSlabVOS[${index}].maxIncome|">
+                        </td>
+                        <td>Tax Rate</td>
+
+                        <td><input type="text" th:name="|incomeTaxSlabVOS[${index}].taxRate|">
+                        </td>
+                    </tr>
+                    <tr th:if="*{incomeTaxSlabVOS.size()}==0">
+                        <td>Above</td>
+                        <td><input type="text" th:name="incomeTaxSlabVOS[3].minIncome">
+                        </td>
+                        <td>Tax Rate</td>
+                        <td><input type="text" th:name="incomeTaxSlabVOS[3].taxRate"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="Heading"><label>Rebates</label>
+            <button style="float: right;" onclick="addRebate()" type="button">ADD&nbsp;REBATE
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-10">
+                <span id="rebateError"></span>
+                <table width="100%" class="table_text_style" id="rebateTable">
+                    <tr th:each="rebate, status : *{rebateVOS}">
+                        <td>Name</td>
+                        <td><b>:</b></td>
+                        <td><input class="inputfield" th:field="*{rebateVOS[__${status.index}__].rebateName}"
+                                   type="text"></td>
+                        <td>Income&nbsp;Limit</td>
+                        <td><b>:</b></td>
+                        <td><input class="inputfield" th:field="*{rebateVOS[__${status.index}__].rebateApplySalary}"
+                                   type="text">
+                        </td>
+                        <td>Amount</td>
+                        <td><b>:</b></td>
+                        <td><input class="inputfield" th:field="*{rebateVOS[__${status.index}__].rebateAmount}"
+                                   type="text"></td>
+                        <td>
+                            <button class="submitButton" name="rebateRemoveButton" type="button">
+                                <b>Remove</b>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="Heading"><label>Sections</label>
+            <button style="float: right; padding-right: 10px; margin-right: 30px;" onclick="showAddSectionRow()"
+                    type="button"
+                    id="addNewSectionBtn">ADD&nbsp;NEW&nbsp;SECTION
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-10" id="iTSectionTableDiv">
+                <table hidden>
+                    <tr style='border:1px solid black;'>
+                        <td><input id='sectionNameInput' type='text' placeholder='Section Name'></td>
+                        <td>
+                            <button onClick='addSection()' class='button btnOrange' type='button'><b>Add</b></button>
+                        </td>
+                        <td>
+                            <button onClick='cancelAddSection()' class='button btnGray' type='button'><b>Cancel</b>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span id="sectionNameError"></span></td>
+                    </tr>
+                </table>
+                <span id="sectionError"></span>
+                <table th:each="section, status : *{taxSectionForms}" width="100%" class="table_text_style">
+                    <tr>
+                        <td><input type="text" th:field="*{taxSectionForms[__${status.index}__].sectionName}"
+                                   style="border:0px none;" readonly="true"></td>
+                        <td><b>
+                            <button type="button" onclick="addSectionDeclaration($(this))">Add</button>
+                        </b></td>
+                    </tr>
+                    <tr>
+                        <td>Section&nbsp;Limit</td>
+                        <td><input class="inputfieldsection" type="text"
+                                   th:field="*{taxSectionForms[__${status.index}__].sectionLimit}">
+                        </td>
+                        <td>
+                            <button style="float: right; padding-right: 10px; margin-right: 30px;" class="submitButton"
+                                    name="sectionRemoveButton" type="button">
+                                Remove&nbsp;Section
+                            </button>
+                        </td>
+                    </tr>
+                    <tr th:each="sectionDeclaration, innerStatus : ${section.taxSectionDeclarationVOS}">
+                        <td><input class="inputfieldsection"
+                                   th:field="*{taxSectionForms[__${status.index}__].taxSectionDeclarationVOS[__${innerStatus.index}__].subSectionName}"
+                                   type="text"></td>
+                        <td>
+                            <button class="submitButton" type="button" name="subSectionRemoveButton">
+                                <b>Remove</b>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <button style="width: 100px; height: 30px;" class="submitButton" name="financialYearUpdateButton"
+                    type="button">UPDATE
+            </button>
+
+            <button style="width: 200px; height: 30px;" class="submitButton" name="financialYearSaveButton"
+                    type="button">SAVE AS NEW
+            </button>
+
+            <button style="width: 100px; height: 30px;" class="submitButton" onclick="reset();" type="button">RESET
+            </button>
+        </div>
+    </form>
+</div>

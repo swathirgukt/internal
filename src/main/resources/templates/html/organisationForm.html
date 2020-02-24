@@ -67,25 +67,25 @@
                             <div style="float: right">
                                 <div th:switch="${param.form[0]}">
                                     <div th:case="PT">
-                                        <button type="button" class="button"
+                                        <button type="button" class="submitButton"
                                                 onclick="PopupCenter('/formV', '',700,500);"><b>Generate
                                             PT</b>
                                         </button>
                                     </div>
                                     <div th:case="ESI">
-                                        <button type="button" class="Button"
+                                        <button type="button" class="submitButton"
                                                 onclick="PopupCenter('/esiReport', '',700,500);"><b>Generate
                                             ESI</b>
                                         </button>
                                     </div>
                                     <div th:case="PF">
-                                        <button type="button" class="button"
+                                        <button type="button" class="submitButton"
                                                 onclick="PopupCenter('/pfForm', '',700,500);"><b>Generate
                                             PF</b>
                                         </button>
                                     </div>
                                     <div th:case="bankstatement">
-                                        <button type="button" class="button"
+                                        <button type="button" class="submitButton"
                                                 onclick="PopupCenter('/bankSalariesReport', '',700,500);"><b>Generate
                                             Bank Salaries</b>
                                         </button>

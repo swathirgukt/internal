@@ -1,13 +1,11 @@
 package com.indianeagle.internal.service.impl;
 
 import com.indianeagle.internal.dao.repository.EmployeeSettlementRepository;
+import com.indianeagle.internal.dao.repository.SalaryDeciderRepository;
 import com.indianeagle.internal.dao.repository.SalaryHistoryRepository;
 import com.indianeagle.internal.dao.repository.SalaryRepository;
-import com.indianeagle.internal.dto.Employee;
-import com.indianeagle.internal.dto.EmployeeSettlement;
-import com.indianeagle.internal.dto.Salary;
-import com.indianeagle.internal.dto.SalaryHistory;
-import com.indianeagle.internal.form.EmpSalaryDecider;
+import com.indianeagle.internal.dto.*;
+import com.indianeagle.internal.form.EmpSalaryDeciderVO;
 import com.indianeagle.internal.form.EmployeeSettlementForm;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
 import com.indianeagle.internal.form.SalaryRule;
@@ -28,15 +26,14 @@ import org.springframework.context.MessageSourceAware;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+import java.beans.Transient;
 import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
@@ -54,6 +51,8 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
 
     @Autowired
     private EmployeeSettlementRepository employeeSettlementRepository;
+    @Autowired
+    private SalaryDeciderRepository salaryDeciderRepository;
     @Autowired
     private EmployeeSettlement employeeSettlement;
     @Autowired
@@ -104,48 +103,62 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         cal.setTime(generateAllSalariesForm.getSalaryDate());
         List<Employee> allEmpsList = salaryRepository.loadActiveEmployees();
         List<SalaryHistory> salaryHistoryList = salaryHistoryService.salaryReport(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
-        List<SalaryHistory> salaryHistoriesOfMailNotSent = salaryHistoryList.stream().filter(salaryHistory -> salaryHistory.getMailSent().equals(Boolean.FALSE)).collect(Collectors.toList());
+        //List<SalaryHistory> salaryHistoriesOfMailNotSent = salaryHistoryList.stream().filter(salaryHistory -> salaryHistory.getMailSent().equals(Boolean.FALSE)).collect(Collectors.toList());
+        List<EmpSalaryDecider> salaryDecidersOfMailNotSent = salaryDeciderRepository.findAllBetween(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
 
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
         if (allEmpsList != null && !allEmpsList.isEmpty()) {
             for (Employee employee : allEmpsList) {
-                if (checkIfPresent(employee, salaryHistoriesOfMailNotSent)) {
+                if (checkIfPresent(employee.getEmpId(), salaryDecidersOfMailNotSent)) {
                     employeeList.add(employee);
                     continue;
                 }
-                if (!checkIfPresent(employee, salaryHistoryList)) {
+                if (!checkIfPresent(employee.getEmpId(), salaryHistoryList)) {
                     employeeList.add(employee);
                 }
             }
         }
 
 
-        ArrayList<EmpSalaryDecider> empSalaryDeciderList = new ArrayList<EmpSalaryDecider>();
+        ArrayList<EmpSalaryDeciderVO> empSalaryDeciderVOList = new ArrayList<EmpSalaryDeciderVO>();
         for (Employee employee : employeeList) {
-            EmpSalaryDecider empSalaryDecider = new EmpSalaryDecider();
-            empSalaryDecider.setEmpId(employee.getEmpId());
-            empSalaryDecider.setFullName(employee.getFullName());
+            EmpSalaryDeciderVO empSalaryDeciderVO = new EmpSalaryDeciderVO();
+            empSalaryDeciderVO.setEmpId(employee.getEmpId());
+            empSalaryDeciderVO.setFullName(employee.getFullName());
 
-            int index = getIndexIfPresent(employee, salaryHistoriesOfMailNotSent);
-            if (index != -1) {
-                SalaryHistory salaryHistory = salaryHistoriesOfMailNotSent.get(index);
-                empSalaryDecider.setLopDays(salaryHistory.getLopDays());
-                empSalaryDecider.setArrearsDays(salaryHistory.getArrearsDays());
-                empSalaryDecider.setSalaryInAdvance(salaryHistory.getSalaryInAdvance());
-                empSalaryDecider.setPerformanceIncentives(salaryHistory.getPerformanceIncentives());
+            EmpSalaryDecider decider = getSalaryDeciderIfPresent(employee, salaryDecidersOfMailNotSent);
+            if (decider != null) {
+                empSalaryDeciderVO.setLopDays(decider.getLopDays());
+                empSalaryDeciderVO.setArrearsDays(decider.getArrearsDays());
+                empSalaryDeciderVO.setSalaryInAdvance(decider.getSalaryInAdvance());
+                empSalaryDeciderVO.setPerformanceIncentives(decider.getPerformanceIncentives());
             }
-            empSalaryDeciderList.add(empSalaryDecider);
+            empSalaryDeciderVOList.add(empSalaryDeciderVO);
         }
         generateAllSalariesForm.setTotalWorkingDays(new BigDecimal(cal.getActualMaximum(5)));
-        generateAllSalariesForm.setEmpSalaryDeciderList(empSalaryDeciderList);
+        generateAllSalariesForm.setEmpSalaryDeciderVOList(empSalaryDeciderVOList);
         return generateAllSalariesForm;
     }
 
-    private boolean checkIfPresent(Employee employee, List<SalaryHistory> salaryHistoryList) {
-        for (SalaryHistory salaryHistory : salaryHistoryList) {
-            if (!StringUtils.equalsIgnoreCase((String) employee.getEmpId(), (String) salaryHistory.getEmpId()))
-                continue;
-            return true;
+    private boolean checkIfPresent(String employeeId, List list) {
+        if (list == null || list.isEmpty()) {
+            return false;
+        }
+        Object object = list.get(0);
+        if (object instanceof SalaryHistory) {
+            List<SalaryHistory> salaryList = (List<SalaryHistory>) list;
+            for (SalaryHistory salaryHistory : salaryList) {
+                if (!StringUtils.equalsIgnoreCase(employeeId, salaryHistory.getEmpId()))
+                    continue;
+                return true;
+            }
+        } else if (object instanceof EmpSalaryDecider) {
+            List<EmpSalaryDecider> empSalaryDeciders = (List<EmpSalaryDecider>) list;
+            for (EmpSalaryDecider decider : empSalaryDeciders) {
+                if (!StringUtils.equalsIgnoreCase(employeeId, decider.getEmpId()))
+                    continue;
+                return true;
+            }
         }
         return false;
     }
@@ -157,41 +170,42 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         calendarForToDate.setTime(generateAllSalariesForm.getSalaryEndDate());
         generateAllSalariesForm.setTotalWorkingDays(new BigDecimal(DateUtils.differenceInDays((Date) calendar.getTime(), (Date) calendarForToDate.getTime())));
         SalaryHistory currentSalary = null;
-        EmpSalaryDecider empSalaryDecider = new EmpSalaryDecider();
-        List<EmpSalaryDecider> empSalaryDeciderList = generateAllSalariesForm.getEmpSalaryDeciderList();
+        EmpSalaryDeciderVO empSalaryDeciderVO = new EmpSalaryDeciderVO();
+        List<EmpSalaryDeciderVO> empSalaryDeciderVOList = generateAllSalariesForm.getEmpSalaryDeciderVOList();
         ArrayList<SalaryHistory> currentSalaryList = new ArrayList<SalaryHistory>();
         ArrayList<Employee> currSalaryEmpList = new ArrayList<Employee>();
         List<Employee> allEmpsList = this.salaryRepository.loadActiveEmployees();
         List<SalaryHistory> salaryHistoryList = this.salaryHistoryService.salaryReport(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
-        List<SalaryHistory> salaryHistoriesOfMailNotSent = salaryHistoryList.stream().filter(salaryHistory -> salaryHistory.getMailSent().equals(Boolean.FALSE)).collect(Collectors.toList());
+        //List<SalaryHistory> salaryHistoriesOfMailNotSent = salaryHistoryList.stream().filter(salaryHistory -> salaryHistory.getMailSent().equals(Boolean.FALSE)).collect(Collectors.toList());
+        List<EmpSalaryDecider> salaryDecidersOfMailNotSent = salaryDeciderRepository.findAllBetween(generateAllSalariesForm.getSalaryDate(), generateAllSalariesForm.getSalaryEndDate());
 
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
         if (allEmpsList != null && !allEmpsList.isEmpty()) {
             for (Employee employee : allEmpsList) {
-                if (checkIfPresent(employee, salaryHistoriesOfMailNotSent)) {
+                if (checkIfPresent(employee.getEmpId(), salaryDecidersOfMailNotSent)) {
                     employeeList.add(employee);
                     continue;
                 }
-                if (!checkIfPresent(employee, salaryHistoryList)) {
+                if (!checkIfPresent(employee.getEmpId(), salaryHistoryList)) {
                     employeeList.add(employee);
                 }
             }
         }
         for (Employee emp : employeeList) {
             try {
-                logger.debug("in loop: " + emp.getOfficialEmail() + " empSalaryDeciderList:" + empSalaryDeciderList);
+                logger.debug("in loop: " + emp.getOfficialEmail() + " empSalaryDeciderList:" + empSalaryDeciderVOList);
                 currentSalary = new SalaryHistory();
                 SalaryRule salaryRule = new SalaryRule();
-                for (EmpSalaryDecider esd : empSalaryDeciderList) {
+                for (EmpSalaryDeciderVO esd : empSalaryDeciderVOList) {
                     if (esd.getEmpId() == null || !emp.getEmpId().equals(esd.getEmpId())) continue;
-                    empSalaryDecider = esd;
+                    empSalaryDeciderVO = esd;
                     break;
                 }
-                if (empSalaryDecider.getEmpExclude()) continue;
-                salaryRule.setArrearsDays(empSalaryDecider.getArrearsDays());
-                salaryRule.setLopDays(empSalaryDecider.getLopDays());
-                salaryRule.setSalaryInAdvance(empSalaryDecider.getSalaryInAdvance());
-                salaryRule.setPerformanceIncentives(empSalaryDecider.getPerformanceIncentives());
+                if (empSalaryDeciderVO.getEmpExclude()) continue;
+                salaryRule.setArrearsDays(empSalaryDeciderVO.getArrearsDays());
+                salaryRule.setLopDays(empSalaryDeciderVO.getLopDays());
+                salaryRule.setSalaryInAdvance(empSalaryDeciderVO.getSalaryInAdvance());
+                salaryRule.setPerformanceIncentives(empSalaryDeciderVO.getPerformanceIncentives());
                 salaryRule.setSalaryDate(generateAllSalariesForm.getSalaryDate());
                 salaryRule.setSalaryEndDate(generateAllSalariesForm.getSalaryEndDate());
                 salaryRule.setTotalDays(generateAllSalariesForm.getTotalWorkingDays());
@@ -213,15 +227,24 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         }
         httpSession.setAttribute("currSalaryEmpList" + httpSession.getId(), currSalaryEmpList);
         httpSession.setAttribute("currentSalaryList" + httpSession.getId(), currentSalaryList);
-        salaryHistoryRepository.saveAll(currentSalaryList);
         return currentSalaryList;
     }
 
-
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void sendAllPaySlipMails(HttpSession httpSession) throws Exception {
         List<SalaryHistory> currentSalaryList = (List) httpSession.getAttribute("currentSalaryList" + httpSession.getId());
         List<Employee> currSalaryEmpList = (List) httpSession.getAttribute("currSalaryEmpList" + httpSession.getId());
 
+        List<EmpSalaryDecider> deciderList = salaryDeciderRepository.findAllBetween(currentSalaryList.get(0).getSalaryDate(), currentSalaryList.get(0).getSalaryEndDate());
+        for (EmpSalaryDecider salaryDecider: deciderList){
+            System.out.println("@@@@Decider:: "+salaryDecider.getEmpId());
+            if (checkIfPresent(salaryDecider.getEmpId(),currentSalaryList)) {
+                System.out.println("@@@FoundToDelete >> "+salaryDecider.getEmpId());
+                salaryDeciderRepository.delete(salaryDecider);
+            }
+        }
+
+        salaryHistoryRepository.saveAll(currentSalaryList);
         int counter = 0;
         for (Employee emp : currSalaryEmpList) {
             if (counter == 20) {
@@ -235,6 +258,8 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
             this.mailingEngine.sendMail(emp, emp.getCurrentSalary(), (InputStreamSource) new ByteArrayResource(arrayOutputStream.toByteArray()), false);
             counter += 1;
         }
+        httpSession.removeAttribute("currentSalaryList" + httpSession.getId());
+        httpSession.removeAttribute("currSalaryEmpList" + httpSession.getId());
     }
 
     public SalaryHistory generateSalary(Employee employee, SalaryRule salaryRule) throws Exception {
@@ -272,7 +297,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         return employeeSettlement;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     public void confirmAndSendMail(Employee employee, SalaryHistory currentSalary) throws Exception {
         SalaryHistory salaryHistory = salaryHistoryRepository.save(currentSalary);
         ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
@@ -420,6 +445,59 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         }
     }
 
+    @Transactional(value = Transactional.TxType.REQUIRES_NEW)
+    public void saveSalaries(HttpSession httpSession) {
+        List<SalaryHistory> currentSalaryList = (List) httpSession.getAttribute("currentSalaryList" + httpSession.getId());
+
+        List<EmpSalaryDecider> newDeciderList = new ArrayList<>();
+
+        for (SalaryHistory salary : currentSalaryList) {
+            if (salary.getLopDays().equals(BigDecimal.ZERO) && salary.getArrearsDays().equals(BigDecimal.ZERO) && salary.getSalaryInAdvance().equals(BigDecimal.ZERO) && salary.getPerformanceIncentives().equals(BigDecimal.ZERO)) {
+                continue;
+            }
+            EmpSalaryDecider decider = new EmpSalaryDecider();
+            decider.setEmpId(salary.getEmpId());
+            decider.setSalaryDate(salary.getSalaryDate());
+            decider.setSalaryEndDate(salary.getSalaryEndDate());
+            decider.setLopDays(salary.getLopDays());
+            decider.setArrearsDays(salary.getArrearsDays());
+            decider.setPerformanceIncentives(salary.getPerformanceIncentives());
+            decider.setSalaryInAdvance(salary.getSalaryInAdvance());
+            newDeciderList.add(decider);
+        }
+
+        List<EmpSalaryDecider> deciderList = salaryDeciderRepository.findAllBetween(currentSalaryList.get(0).getSalaryDate(), currentSalaryList.get(0).getSalaryEndDate());
+        List<EmpSalaryDecider> deciderListToBeSaved = new ArrayList<>();
+        for (EmpSalaryDecider empSalaryDecider : newDeciderList) {
+            if (!checkIfPresent(empSalaryDecider.getEmpId(), deciderList)) {
+                deciderListToBeSaved.add(empSalaryDecider);
+                continue;
+            }
+            saveIfUpdated(empSalaryDecider, deciderList);
+        }
+
+        salaryDeciderRepository.saveAll(deciderListToBeSaved);
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    private void saveIfUpdated(EmpSalaryDecider salaryDecider, List<EmpSalaryDecider> deciderList) {
+        for (EmpSalaryDecider decider : deciderList) {
+            if (StringUtils.equalsIgnoreCase(salaryDecider.getEmpId(), decider.getEmpId())) {
+                if (salaryDecider.getLopDays() != decider.getLopDays())
+                    decider.setLopDays(salaryDecider.getLopDays());
+
+                if (salaryDecider.getArrearsDays() != decider.getArrearsDays())
+                    decider.setArrearsDays(salaryDecider.getArrearsDays());
+
+                if (salaryDecider.getPerformanceIncentives() != decider.getPerformanceIncentives())
+                    decider.setPerformanceIncentives(salaryDecider.getPerformanceIncentives());
+
+                if (salaryDecider.getSalaryInAdvance() != decider.getSalaryInAdvance())
+                    decider.setSalaryInAdvance(salaryDecider.getSalaryInAdvance());
+            }
+        }
+    }
+
     private BigDecimal calculateAmount(BigDecimal amount, BigDecimal totalDays, BigDecimal totalWorkingDays, boolean calculate) {
         BigDecimal finalValue = new BigDecimal(0.0);
         finalValue = calculate ? amount.divide(totalDays, 2, 5).multiply(totalWorkingDays) : amount;
@@ -439,12 +517,20 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
         return this.salaryRepository.loadEmployeesByDepartment(department);
     }
 
-    public int getIndexIfPresent(Employee employee, List<SalaryHistory> salaryHistories) {
-        for (int index = 0; index < salaryHistories.size(); index++) {
-            if (employee.getEmpId().equalsIgnoreCase(salaryHistories.get(index).getEmpId()))
-                return index;
+    public EmpSalaryDecider getSalaryDeciderIfPresent(Employee employee, List<EmpSalaryDecider> salaryDeciders) {
+        for (EmpSalaryDecider salaryDecider : salaryDeciders) {
+            if (salaryDecider.getEmpId().equalsIgnoreCase(employee.getEmpId()))
+                return salaryDecider;
         }
-        return -1;
+        return null;
+    }
+
+    public EmpSalaryDecider getIf(Employee employee, List<EmpSalaryDecider> salaryDeciders) {
+        for (EmpSalaryDecider salaryDecider : salaryDeciders) {
+            if (salaryDecider.getEmpId().equalsIgnoreCase(employee.getEmpId()))
+                return salaryDecider;
+        }
+        return null;
     }
 
 

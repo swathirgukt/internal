@@ -1,38 +1,40 @@
 <div th:fragment="eSalaryResult" xmlns:th="http://www.thymeleaf.org">
-    <table class="table_text_style table  table-bordered ">
-        <tr style="background-color: black;color: white;">
-            <td>Exclude</td>
-            <td>Employee&nbsp;Id</td>
-            <td>Employee&nbsp;Name</td>
-            <td>LOP</td>
-            <td>ARR. Days</td>
-            <td>Salary&nbsp;Advance</td>
-            <td>Performance&nbsp;Incentives</td>
-        </tr>
-
-        <tr th:each="decider , status : ${generateAllSalariesForm.empSalaryDeciderList}">
-            <td><input type="checkbox"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].empExclude}"/></td>
-            <td><input style="border:0px none;" readonly="true" type="text"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].empId}"/></td>
-            <td><input style="border:0px none;" readonly="true" type="text"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].fullName}"/></td>
-            <td><input type="text"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].lopDays}"/></td>
-            <td><input type="text"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].arrearsDays}"/>
-            </td>
-            <td><input type="text"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].salaryInAdvance}"/>
-            </td>
-            <td><input type="text"
-                       th:field="${generateAllSalariesForm.empSalaryDeciderList[__${status.index}__].performanceIncentives}"/>
-            </td>
-        </tr>
-
-        <span style="color:#ff0000;font-size:20px;"
-              th:if="${generateAllSalariesForm.empSalaryDeciderList}!=null  AND ${generateAllSalariesForm.empSalaryDeciderList.size()}==0">
-            Salary already generated for this month
-    </span>
-    </table>
+    <div>
+        <table class="table_text_style table  table-bordered ">
+            <tr style="background-color: black;color: white;">
+                <td>Exclude</td>
+                <td>Employee&nbsp;Id</td>
+                <td>Employee&nbsp;Name</td>
+                <td style="text-align: center;">LOP</td>
+                <td>ARR. Days</td>
+                <td>Salary&nbsp;Advance</td>
+                <td>Performance&nbsp;Incentives</td>
+            </tr>
+            <tr th:each="decider , status : ${generateAllSalariesForm.empSalaryDeciderVOList}" style="font-size:12px">
+                <td><input type="checkbox"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].empExclude}"/>
+                </td>
+                <td><input style="border:0px none;width:60%" readonly="true" type="text"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].empId}"/>
+                </td>
+                <td><input style="border:0px none;width:220px" readonly="true" type="text"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].fullName}"/>
+                </td>
+                <td style="text-align: center;"><input type="text" style="width:60%;border-radius:5px" id="lopDays"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].lopDays}" onkeypress="return allowOnlyMonthlyDigits(event,'lopDays')" />
+                </td>
+                <td style="text-align: center;"><input type="text"  style="width:60%;border-radius:5px" id="arrDays"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].arrearsDays}" onkeypress="return allowOnlyMonthlyDigits(event,'arrDays')" />
+                </td>
+                <td style="text-align: center;"><input type="text" style="width:80%;border-radius:5px"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].salaryInAdvance}" onkeypress="return allowRealNo(event,this.value)"/>
+                </td>
+                <td><input type="text" style="border-radius:5px"
+                           th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].performanceIncentives}" onkeypress="return allowRealNo(event,this.value)"/>
+                </td>
+            </tr>
+            <span style="color:#ff0000;font-size:20px;" th:if="${generateAllSalariesForm.empSalaryDeciderVOList}!=null  AND ${generateAllSalariesForm.empSalaryDeciderVOList.size()}==0">
+                Salary already generated for this month </span>
+        </table>
+    </div>
 </div>

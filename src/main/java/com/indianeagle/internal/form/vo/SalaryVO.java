@@ -2,7 +2,7 @@ package com.indianeagle.internal.form.vo;
 
 import java.math.BigDecimal;
 
-public class Salary {
+public class SalaryVO {
 
 	private Long id;
 	private BigDecimal basic = BigDecimal.ZERO;

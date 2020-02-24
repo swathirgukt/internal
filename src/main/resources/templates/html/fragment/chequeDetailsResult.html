@@ -1,0 +1,37 @@
+<div th:fragment="chequeSearchResult" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${chequeDetailsForm} != null AND ${chequeDetailsForm.chequeDetailsList.size()}>0">
+
+            <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+
+                    <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                        <th>NameOfPay</th>
+                        <th>Amount</th>
+                        <th>ChequeNo</th>
+                        <th>Status</th>
+                        <th>Bank</th>
+                        <th>ChequeDate</th>
+                        <th>Comments</th>
+                        <th>Edit</th>
+
+                    </tr>
+                    <tr style="background-color:#FFFFFF;color: #000000;padding: 50px" th:each="cheque :${chequeDetailsForm.chequeDetailsList}">
+                        <td th:text="${cheque.nameOfPay}"></td>
+                        <td th:text="${cheque.amount}"></td>
+                        <td th:text="${cheque.chequeNo}"></td>
+                        <td th:text="${cheque.status}"></td>
+                        <td th:text="${cheque.bank}"></td>
+                        <td th:text="${cheque.chequeDate}"></td>
+                        <td th:text="${cheque.comments}"></td>
+
+                        <td><a th:href="@{/editChequeDetails/{id}(id=${cheque.id})}">Edit</a></td>
+                    </tr>
+
+            </table>
+
+    </div>
+
+    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+         th:if="${chequeDetailsForm}!=null  AND ${chequeDetailsForm.chequeDetailsList.size()}==0">
+        Nothing found to display
+    </div>
+</div>

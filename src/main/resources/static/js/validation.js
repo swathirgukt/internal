@@ -1,4 +1,3 @@
-
 // Function  to enter only positive int value ,Usage : onkeypress="return allowPositiveInt(event)"
 function allowPositiveInt(evt) {
 	var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -8,31 +7,6 @@ function allowPositiveInt(evt) {
 		return true;
 	}
 }
-
-
- //To calculate LeaveDays
-    function calculateLeaveDays()
-     {
-         if ($(".fromDateId").val() != '' && $(".toDateId").val() != '')
-          {
-             if ($("#leaveTypeId").val() == 'LOP 1/2 Day' || $("#leaveTypeId").val() == 'Half Day Leave' || $("#leaveTypeId").val() == 'Comp. Leave Half Day')
-              {
-                $('#leaveDaysId').val(0.5);
-             } else
-             {
-               var d1 = new Date($(".fromDateId").val());
-               var d2 = new Date($(".toDateId").val());
-               if ($("#leaveTypeId").val() == 'LOP inc Holidays' || $("#leaveTypeId").val() == 'Marriage Leave inc Holidays')
-               {
-                 $('#leaveDaysId').val(getDatesDiff(d1, d2));
-               } else
-                {
-                  $('#leaveDaysId').val(calcBusinessDays(d1, d2));
-                }
-              }
-          }
-     }
-
 //allow the user to enter only monthly digits(1-31)
 function allowOnlyMonthlyDigits(evt, id) {
         var charCode = (evt.which) ? evt.which : event.keyCode;

@@ -2,7 +2,6 @@ package com.indianeagle.internal.controller;
 
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
-import com.indianeagle.internal.form.EmpSalaryDecider;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
 import com.indianeagle.internal.form.SalaryForm;
 import com.indianeagle.internal.form.vo.DepartmentVO;
@@ -12,7 +11,6 @@ import com.indianeagle.internal.service.DepartmentService;
 import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.service.SalaryService;
 import com.indianeagle.internal.util.DateUtils;
-import com.indianeagle.internal.util.SimpleUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -26,17 +24,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 /**
  * Controller to get salary details of all employees
  *
- * @author
+ * @Author : Taymur Shaikh
+ * @Since  : 2020-02-11
  */
 
 @Controller
@@ -49,14 +46,8 @@ public class SalaryController {
     @Autowired
     private DepartmentService departmentService;
 
-    SalaryForm salaryForm;
+    private SalaryForm salaryForm;
 
-    List<SalaryHistory> listOfChangedSalaries;
-
-
-    private String department;
-    private int newDept;
-    private int allSalariesFormActionInd = 1;
 
     @PostConstruct
     public void loadData() {
@@ -203,75 +194,18 @@ public class SalaryController {
         return "html/eSalaryReport";
     }
 
+   @GetMapping("/saveSalaries")
+   @ResponseBody
+   public String saveSalaries(ModelMap modelMap,HttpSession httpSession){
+       try {
+           this.salaryService.saveSalaries(httpSession);
+           return "Saved salaries for later modification successfully.";
+       } catch (Exception e) {
+           e.printStackTrace();
+           return "Error occured due to technical error.";
+       }
+   }
 
-    /*@GetMapping("/produceAllSalaries")
-    public String produceAllSalaries(ModelMap model, HttpServletRequest servletRequest,@ModelAttribute GenerateAllSalariesForm generateAllSalariesForm) {
-        log.warn((Object) "###produceAllSalaries started");
-        this.listOfChangedSalaries = new ArrayList<SalaryHistory>();
-        ArrayList<String> empIdsOfDeductedSalaries = new ArrayList<String>();
-        try {
-            if (!SimpleUtils.reqParamExist((Enumeration) servletRequest.getParameterNames())) {
-                for (EmpSalaryDecider empSalaryDecider : generateAllSalariesForm.getEmpSalaryDeciderList()) {
-                    if ((empSalaryDecider.getLopDays() == null || empSalaryDecider.getLopDays().equals(BigDecimal.ZERO)) && empSalaryDecider.getSalaryInAdvance().equals(BigDecimal.ZERO) && empSalaryDecider.getArrearsDays().equals(BigDecimal.ZERO))
-                        continue;
-                    empIdsOfDeductedSalaries.add(empSalaryDecider.getEmpId().trim());
-                }
-                this.currentSalaryList = this.salaryService.produceAllSalaries(generateAllSalariesForm);
-                if (null != empIdsOfDeductedSalaries && !empIdsOfDeductedSalaries.isEmpty()) {
-                    for (SalaryHistory salaryHistory : this.currentSalaryList) {
-                        if (!empIdsOfDeductedSalaries.contains(salaryHistory.getEmpId().trim())) continue;
-                        this.listOfChangedSalaries.add(salaryHistory);
-                    }
-                }
-                model.addAttribute("currentSalaryList", this.currentSalaryList);
-                model.addAttribute("editedSalaryList", this.listOfChangedSalaries);
-                //this.session.put("currentSalaryList", this.currentSalaryList);
-                //  this.session.put("editedSalaryList", this.listOfChangedSalaries);
-            } else {
-                this.currentSalaryList = (List<SalaryHistory>) model.getAttribute("currentSalaryList");
-                this.listOfChangedSalaries = (List<SalaryHistory>) model.getAttribute("editedSalaryList");
-
-
-                //this.currentSalaryList = (List)this.session.get("currentSalaryList");
-                //this.listOfChangedSalaries = (List)this.session.get("editedSalaryList\t");
-            }
-        } catch (Exception e) {
-            //this.addActionError("error occured due to technical problem");
-            model.addAttribute("exceptionMessage", "error occured due to technical problem");
-            e.printStackTrace();
-            return "generateAllSalaries";
-        }
-        log.warn("Vijay produceAllSalaries method is end");
-        return "generateAllSalaries";
-    }*/
-
-   /* @GetMapping("/generateAllSalaries")
-    public String generateAllSalaries(ModelMap model, HttpServletRequest servletRequest, @ModelAttribute("salaryForm") SalaryForm salaryForm, BindingResult bindingResult) {
-        try {
-            if (bindingResult.hasErrors()) {
-                // model.addAttribute("message", "Validate error");
-                bindingResult.reject("Validate error");
-                return "generateSalary";
-            }
-
-            if (!SimpleUtils.reqParamExist((Enumeration) servletRequest.getParameterNames())) {
-
-                this.currentSalaryList = this.salaryService.generateSalaries(this.department, salaryForm.getSalaryRule());
-                model.addAttribute("currentSalaryList", this.currentSalaryList);
-                // this.session.put("currentSalaryList", this.currentSalaryList);
-            } else {
-                this.currentSalaryList = (List) model.getAttribute("currentSalaryList");
-
-                // this.currentSalaryList = (List)this.session.get("currentSalaryList");
-            }
-        } catch (Exception e) {
-            //this.addActionError("error occured due to technical problem");
-            model.addAttribute("exceptionMessage", "error occured due to technical problem");
-            e.printStackTrace();
-            return "generateSalary";
-        }
-        return "generateSalary";
-    }*/
 
     @GetMapping("/confirmAndSendPaySlipMails")
     public String confirmAndSendPaySlipMails(ModelMap model, HttpSession httpSession, GenerateAllSalariesForm generateAllSalariesForm) {
@@ -287,7 +221,7 @@ public class SalaryController {
     }
 
 
-    @GetMapping("/populateEmployees")
+    /*@GetMapping("/populateEmployees")
     public String populateEmployees(ModelMap model, SalaryForm salaryForm) {
         List deptEmployeeList = this.salaryService.loadEmployeesByDepartment(this.department);
         if (this.newDept != 1) {
@@ -297,20 +231,6 @@ public class SalaryController {
             salaryForm.getSalaryRule().setDeptExcludedEmpList(null);
         }
         return "populateEmployees";
-    }
-
-   /* public boolean validate(SalaryForm salaryForm) {
-        boolean status = false;
-        if (SimpleUtils.isEmpty((Date)salaryForm.getSalaryRule().getSalaryDate())) {
-            this.addActionError("Salary Date is required");
-        }
-        if (SimpleUtils.isEmpty((Date)salaryForm.getSalaryRule().getSalaryEndDate())) {
-            this.addActionError("Salary End Date is required");
-        }
-        if (this.hasActionErrors()) {
-            status = true;
-        }
-        return status;
     }*/
 
     private EmployeeVO getEmployee(String employeeId, SalaryForm salaryForm) {
@@ -321,73 +241,5 @@ public class SalaryController {
             }
         }
         return null;
-    }
-
-    /*public SalaryForm getSalaryForm() {
-        return salaryForm;
-    }
-
-    public void setSalaryForm(SalaryForm salaryForm) {
-        this.salaryForm = salaryForm;
-    }*/
-
-   /* public Map getSession() {
-        return this.session;
-    }
-
-    public void setSession(Map session) {
-        this.session = session;
-    }*/
-
-    public DepartmentService getDepartmentService() {
-        return this.departmentService;
-    }
-
-    public void setDepartmentService(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
-
-    public String getDepartment() {
-        return this.department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public int getNewDept() {
-        return this.newDept;
-    }
-
-    public void setNewDept(int newDept) {
-        this.newDept = newDept;
-    }
-
-    /*public GenerateAllSalariesForm getGenerateAllSalariesForm() {
-        return this.generateAllSalariesForm;
-    }
-
-    public void setGenerateAllSalariesForm(GenerateAllSalariesForm generateAllSalariesForm) {
-        this.generateAllSalariesForm = generateAllSalariesForm;
-    }*/
-
-    public int getAllSalariesFormActionInd() {
-        return this.allSalariesFormActionInd;
-    }
-
-    public void setAllSalariesFormActionInd(int allSalariesFormActionInd) {
-        this.allSalariesFormActionInd = allSalariesFormActionInd;
-    }
-
-    public List<SalaryHistory> getListOfChangedSalaries() {
-        return this.listOfChangedSalaries;
-    }
-
-    public SalaryHistoryService getSalaryHistoryService() {
-        return this.salaryHistoryService;
-    }
-
-    public void setSalaryHistoryService(SalaryHistoryService salaryHistoryService) {
-        this.salaryHistoryService = salaryHistoryService;
     }
 }

@@ -1,0 +1,23 @@
+<div th:fragment="incentiveResult" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${incentivesList} != null AND ${incentivesList.size()}>0">
+        <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                <th>S. NO</th>
+                <th>EMPLOYEE NAME</th>
+                <th>ACCOUNT NO</th>
+                <th>INCENTIVE AMOUNT</th>
+            </tr>
+            <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                th:each="incentive, status :${incentivesList}">
+                <td th:text="${status.count}"></td>
+                <td th:text="|${incentive.employee.firstName} ${incentive.employee.lastName}|"></td>
+                <td th:text="${incentive.employee.bankAc}"></td>
+                <td th:text="${incentive.incentiveAmount}"></td>
+            </tr>
+        </table>
+    </div>
+    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+         th:if="${incentivesList}!=null  AND ${incentivesList.size()}==0">
+        Nothing found to display
+    </div>
+</div>

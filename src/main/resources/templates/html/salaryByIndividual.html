@@ -2,13 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Salary By Individual</title>
-    <style type="text/css">
-        .input-style {
-			width: 200px;
-			height: 20px;
-		}
-
-    </style>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
@@ -34,14 +27,13 @@
                                             <b>:</b>
                                         </td>
                                         <td>
-                                            <select class="input-style" name="id" th:field="*{employeeId}">
+                                            <select class="selectOption" name="id" th:field="*{employeeId}">
                                                 <option th:each="employee : *{employeeList}"
                                                         th:value="${employee.empId}">[[${employee.empId}]]
                                                 </option>
                                             </select>
                                             <span style="color:#ff0000;" th:errors="*{employeeId}"
                                                   th:if="${#fields.hasErrors('employeeId')}"></span>
-
                                         </td>
                                     </tr>
                                 </table>
@@ -57,12 +49,12 @@
                                                 <b>:</b>
                                             </td>
                                             <td>
-                                                <input id="from" width="150px" name="from"
-                                                       th:field="*{salaryRule.salaryDate}">
+                                                <input id="datepicker1" width="150px" name="datepicker"
+                                                       th:field="*{salaryRule.salaryDate}" style="border: 1px solid #ff9900" >
                                                 <span style="color:#ff0000;" th:errors="*{salaryRule.salaryDate}"
                                                       th:if="${#fields.hasErrors('salaryRule.salaryDate')}"></span>
                                             </td>
-                                            <script>$('#from').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });</script>
 
                                             <td>
                                                 To <span style="color: red">*</span>
@@ -71,12 +63,12 @@
                                                 <b>:</b>
                                             </td>
                                             <td>
-                                                <input id="to" width="150px" name="to"
-                                                       th:field="*{salaryRule.salaryEndDate}">
+                                                <input id="datepicker" width="150px" name="datepicker"
+                                                       th:field="*{salaryRule.salaryEndDate}" style="border: 1px solid #ff9900">
                                                 <span style="color:#ff0000;" th:errors="*{salaryRule.salaryEndDate}"
                                                       th:if="${#fields.hasErrors('salaryRule.salaryEndDate')}"></span>
                                             </td>
-                                            <script>$('#to').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </tr>
                                     </table>
                                 </div>
@@ -91,11 +83,11 @@
                                         <td>LOP Days</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="Lop Days" name="Lop Days"
+                                            <input class="input-style" id="lopDays" name="Lop Days"
                                                    style="width: 200px;height: 23px;" type="text"
-                                                   th:field="*{salaryRule.lopDays}">
+                                                   th:field="*{salaryRule.lopDays}" onkeypress="return allowOnlyMonthlyDigits(event,'lopDays')" />
                                             <span style="color:#ff0000;" th:errors="*{salaryRule.lopDays}"
-                                                  th:if="${#fields.hasErrors('salaryRule.lopDays')}"></span>
+                                                  th:if="${#fields.hasErrors('salaryRule.lopDays')}" ></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -104,7 +96,7 @@
                                         <td>
                                             <input class="input-style" id="ARR Days" name="ARR Days"
                                                    style="width: 200px;height: 23px;" type="text"
-                                                   th:field="*{salaryRule.performanceIncentives}">
+                                                   th:field="*{salaryRule.performanceIncentives}" onkeypress="return allowRealNo(event,this.value)" />
                                             <span style="color:#ff0000;" th:errors="*{salaryRule.performanceIncentives}"
                                                   th:if="${#fields.hasErrors('salaryRule.performanceIncentives')}"></span>
                                         </td>
@@ -117,9 +109,9 @@
                                         <td>ARR Days</td>
                                         <td><b>:</b></td>
                                         <td>
-                                            <input class="input-style" id="PER Incentives" name="PER Incentives"
+                                            <input class="input-style" id="arrdays" name="PER Incentives"
                                                    style="width: 200px;height: 23px;"
-                                                   type="text" th:field="*{salaryRule.arrearsDays}">
+                                                   type="text" th:field="*{salaryRule.arrearsDays}" onkeypress="return allowOnlyMonthlyDigits(event,'arrdays')" />
                                             <span style="color:#ff0000;" th:errors="*{salaryRule.arrearsDays}"
                                                   th:if="${#fields.hasErrors('salaryRule.arrearsDays')}"></span></td>
 
@@ -138,7 +130,7 @@
                                         <td><b>:</b></td>
                                         <td>
                                             <input class="input-style" id="Salary In Advance" name="Salary In Advance"
-                                                   type="text" th:field="*{salaryRule.salaryInAdvance}">
+                                                   type="text" th:field="*{salaryRule.salaryInAdvance}" onkeypress="return allowRealNo(event,this.value)" />
                                             <span style="color:#ff0000;" th:errors="*{salaryRule.salaryInAdvance}"
                                                   th:if="${#fields.hasErrors('salaryRule.salaryInAdvance')}"></span>
                                         </td>
@@ -153,7 +145,7 @@
                                             <td><b>:</b></td>
                                             <td>
                                                 <input class="input-style" id="Misc Deductions" name="Misc Deductions"
-                                                       type="text" th:field="*{salaryRule.miscDeductions}">
+                                                       type="text" th:field="*{salaryRule.miscDeductions}" onkeypress="return allowRealNo(event,this.value)" />
                                                 <span style="color:#ff0000;" th:errors="*{salaryRule.miscDeductions}"
                                                       th:if="${#fields.hasErrors('salaryRule.miscDeductions')}"></span>
                                             </td>

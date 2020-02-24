@@ -1,12 +1,14 @@
 package com.indianeagle.internal.form.vo;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * DTO for TaxSectionDeclaration
  *
  * User: kalesha
  * Date: 7/31/2017
  */
-public class TaxSectionDeclaration {
+public class TaxSectionDeclarationVO {
 
     private Long id;
     private String subSectionName;
