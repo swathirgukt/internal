@@ -463,7 +463,7 @@
                                 </td>
                                 <td height="20"
                                     style="font-family:Calibri;font:Calibri;font-size:9px;color: #666;text-decoration:none;text-align:left;text-transform:uppercase;">
-                                    <div th:with="daysWorked = ${salaryHistory.basic / (salaryHistory.actlBasic / salaryHistory.totalDays)}">
+                                    <div th:with="daysWorked = ${salaryHistory.basic / (salaryHistory.actlBasic?:1 / salaryHistory.totalDays?:1)}">
                                         [[${daysWorked.intValue()}]]
                                     </div>
                                 </td>

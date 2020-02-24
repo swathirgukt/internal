@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -126,31 +126,21 @@ span.psw {
 </head>
 <body>
 <div id="id01" class="modal">
-
-    <form class="modal-content animate" action="/welcome" method="post">
+    <form class="modal-content animate" action="/authenticateTheUser" method="post">
         <div class="imgcontainer">
-
-            <img src="../../../static/images/IE_Logo.png"
-                 th:src="@{images/IE_Logo.png}">
+            <img src="/../../static/images/IE_Logo.png" th:src="@{/images/IE_Logo.png}">
         </div>
-
         <div class="container">
-            <label><b>Employee Id</b></label>
+            <label><b>Employee ID</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
-
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="psw" required>
-
-             <button type="submit" >Login</button>
+            <button type="submit" >Login</button>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
             <label>
                 <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="" class="cancelbtn">
-                Cancel
-            </button>
             <span class="psw"><a href="#">Forgot&nbsp;password?</a></span>
         </div>
     </form>

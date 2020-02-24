@@ -16,9 +16,14 @@
                     <form action="/incentive/save" id="IncentiveForm" name="IncentiveForm" method="post" th:action="@{/incentive/save}" th:object="${incentiveForm}">
                         <div class="Heading">Add Incentives</div>
                         <div class="row">
-                            <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:if="${success}!=null" th:text="${success}"></span>
+                            <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" id="success" th:text="${success}?:''"></span>
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table width="100%">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span id="incentiveDateError" style="color:red;"></span></td>
+                                    </tr>
                                     <tr>
                                         <td>Date <span style="color: #ff0000">*</span></td>
                                         <td><b>:</b></td>
@@ -68,7 +73,7 @@
                                                 </button>
                                             </td>
                                             <td style="padding:10px">
-                                                <button class="submitButton" type="submit">
+                                                <button class="submitButton" type="button" onclick="submitIncentive();">
                                                     <b>Submit</b>
                                                 </button>
                                             </td>

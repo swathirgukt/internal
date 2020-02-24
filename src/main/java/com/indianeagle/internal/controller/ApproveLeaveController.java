@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -61,10 +60,7 @@ public class ApproveLeaveController {
     }
 
     @PostMapping("/approveLeave")
-    public String approveLeave(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "html/approveLeave";
-        }
+    public String approveLeave(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm) {
         leaveDetailsService.approveLeave(leaveApproveForm);
         modelMap.addAttribute("success", "Leave approved successfully for employee " + leaveApproveForm.getEmpId());
         modelMap.addAttribute("employeeIds", employeeIds);
@@ -79,7 +75,7 @@ public class ApproveLeaveController {
             leaveApproveForm = new LeaveApproveForm();
             leaveApproveForm.setRemainingCL(leaves.getCasualLeaves() + leaves.getPreviousYearLeaves());
             leaveApproveForm.setRemainingCompOff(leaves.getCompensatoryLeaves());
-            leaveApproveForm.setRemainingSL(leaves.getSinkLeaves());
+            leaveApproveForm.setRemainingSL(leaves.getSickLeaves());
             modelMap.addAttribute("leaveApproveForm", leaveApproveForm);
             return "html/fragment/leaveBalanceResult";
         }

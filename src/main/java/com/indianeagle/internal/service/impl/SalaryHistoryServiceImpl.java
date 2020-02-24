@@ -90,9 +90,7 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 		salaryHistory = salaryHistoryRepository.findById(id).get();
 		employees = salaryHistoryRepository.findEmployeeByEmpId(salaryHistory.getEmpId());
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-		//PDFUtil.generatePdf(employees.get(0), salaryHistory, arrayOutputStream,contextPath,messageSource);
-        /*YP-4: added vm file for paySlip*/
-        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() +".html", contextPath, employees.get(0), salaryHistory);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "/mail/IE_Payslip", contextPath, employees.get(0), salaryHistory);
 		mailingEngine.sendMail(employees.get(0), salaryHistory ,new ByteArrayResource(arrayOutputStream.toByteArray()),true);
 		return salaryHistory;
 	}
@@ -101,9 +99,7 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 		salaryHistory = salaryHistoryRepository.findById(id).get();
 		employees = salaryHistoryRepository.findEmployeeByEmpId(salaryHistory.getEmpId());
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        /*PDFUtil.generatePdf(employees.get(0), salaryHistory, arrayOutputStream,contextPath,messageSource);*/
-        /*YP-4: added vm file for paySlip*/
-        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, TemplateNames.MAIL_TEMPLATE_PATH.getPath() + TemplateNames.IE_Payslip.name() + ".html", contextPath, employees.get(0), salaryHistory);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "/mail/IE_Payslip", contextPath, employees.get(0), salaryHistory);
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(arrayOutputStream.toByteArray());
 		return byteArrayInputStream;
 	}

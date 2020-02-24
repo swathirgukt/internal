@@ -5,7 +5,6 @@ import com.indianeagle.internal.dao.repository.EmployeeRepository;
 import com.indianeagle.internal.dao.repository.LeaveDetailsRepository;
 import com.indianeagle.internal.dao.repository.LeavesRepository;
 import com.indianeagle.internal.dto.ApprovedLeaves;
-import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.LeaveDetails;
 import com.indianeagle.internal.dto.Leaves;
 import com.indianeagle.internal.form.LeaveApproveForm;
@@ -15,7 +14,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -79,7 +77,7 @@ public class LeaveDetailsServiceImpl implements LeaveDetailsService {
     public void approveLeave(LeaveApproveForm leaveApproveForm) {
 
         Leaves leaves = findLeaveByEmployeeId(leaveApproveForm.getEmpId());
-        Double totalRemainingLeaves = leaves.getCasualLeaves() + leaves.getCompensatoryLeaves() + leaves.getSinkLeaves() + leaves.getPreviousYearLeaves();
+        Double totalRemainingLeaves = leaves.getCasualLeaves() + leaves.getCompensatoryLeaves() + leaves.getSickLeaves() + leaves.getPreviousYearLeaves();
         createAndSaveLeaves(leaveApproveForm, leaves);
 
         int monthsDifference = 0;
@@ -113,7 +111,7 @@ public class LeaveDetailsServiceImpl implements LeaveDetailsService {
         } else {
             leaves.setCasualLeaves(casualLeaves - leaveApproveForm.getCasualLeave());
         }
-        leaves.setSinkLeaves(leaveApproveForm.getRemainingSL() - leaveApproveForm.getSickLeave());
+        leaves.setSickLeaves(leaveApproveForm.getRemainingSL() - leaveApproveForm.getSickLeave());
         leaves.setCompensatoryLeaves(leaveApproveForm.getRemainingCompOff() - leaveApproveForm.getCompensatoryLeave());
         leavesRepository.save(leaves);
     }

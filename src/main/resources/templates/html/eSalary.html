@@ -6,7 +6,7 @@
 
 <body>
 <header th:insert="html/fragment/header :: header"></header>
- <div class="container-fluid text-center">
+<div class="container-fluid text-center">
     <div class="row content">
         <div class="col-lg-2 sidenav">
         </div>
@@ -23,6 +23,18 @@
                             <div class="col-lg-4  col-sm-6 col-xs-12  col-md-4">
                                 <Table width="100%" class="table_text_style table-sm">
                                     <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span id="fromDateError"></span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span id="toDateError"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>From&nbsp;Date</td>
                                         <td><b>:</b></td>
                                         <td>
@@ -30,33 +42,29 @@
                                                    th:field="*{salaryDate}" style="border: 1px solid #ff9900"/>
                                             <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
+                                        <td style="left-padding:20%">To&nbsp;Date</td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <input id="toDate" width="200px" name="toDate"
+                                                   th:field="*{salaryEndDate}" style="border: 1px solid #ff9900"/>
+                                            <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" onclick="searchAllESalaryEmployee()"
+                                                    type="button"><b>GO</b></button>
+                                        </td>
                                     </tr>
                                 </Table>
                             </div>
-                            <div class="col-lg-5 col-sm-6 col-xs-12 col-md-4">
-                                    <Table width="100%" class="table_text_style  table-sm">
-                                        <tr>
-                                            <td>To&nbsp;Date</td>
-                                            <td><b>:</b></td>
-                                            <td>
-                                                <input id="toDate" width="200px" name="toDate"
-                                                       th:field="*{salaryEndDate}" style="border: 1px solid #ff9900"/>
-                                                <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
-                                            </td>
-                                            <td>
-                                                <button class="submitButton" onclick="searchAllESalaryEmployee()" type="button"><b>GO</b></button>
-                                            </td>
-                                        </tr>
-                                    </Table>
-                            </div>
                         </div>
                         <div style="width:100%">
-                            <div id="eSalaryResult" name="eSalaryResult" th:include="html/fragment/eSalaryResult::eSalaryResult"></div>
+                            <div id="eSalaryResult" name="eSalaryResult"
+                                 th:include="html/fragment/eSalaryResult::eSalaryResult"></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-sm-12 col-md-12">
                                 <div style="float: right">
-                                    <button class="submitButton" type="submit">Generate All Salary</button>
+                                    <button class="submitButton" type="button" onclick="submitGenerateSalaryForm()">Generate All Salary</button>
                                 </div>
                             </div>
                         </div>

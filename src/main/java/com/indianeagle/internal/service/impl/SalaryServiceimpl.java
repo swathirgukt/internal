@@ -90,10 +90,10 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     public GenerateAllSalariesForm fillProduceAllSalariesForm(GenerateAllSalariesForm generateAllSalariesForm) {
         Calendar cal = GregorianCalendar.getInstance();
         Calendar calforEndDate = GregorianCalendar.getInstance();
-        cal.add(2, -1);
-        calforEndDate.add(2, -1);
-        cal.set(5, cal.getActualMinimum(5));
-        calforEndDate.set(5, calforEndDate.getActualMaximum(5));
+        cal.add(Calendar.MONTH, -1);
+        calforEndDate.add(Calendar.MONTH, -1);
+        cal.set(5, cal.getActualMinimum(Calendar.DATE));
+        calforEndDate.set(5, calforEndDate.getActualMaximum(Calendar.DATE));
         if (generateAllSalariesForm.getSalaryDate() == null) {
             generateAllSalariesForm.setSalaryDate(cal.getTime());
         }
@@ -221,6 +221,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
                 currSalaryEmpList.add(emp);
                 continue;
             } catch (Exception e) {
+                httpSession.setAttribute("errorEmployeeId"+httpSession.getId(),emp.getEmpId());
                 e.printStackTrace();
                 throw e;
             }
@@ -442,6 +443,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
             e.printStackTrace();
             logger.error((Object) ("Error: While Generating Employee ID:" + empId + "Please try again..!"));
             throw new Exception("Error: While Generating Employee ID:" + empId + "Please try again..!");
+
         }
     }
 

@@ -13,6 +13,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +38,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("salaryHistory")
 public class EmpSalaryHistoryController {
+    private static Logger LOGGER = LogManager.getLogger(EmpSalaryHistoryController.class);
 
     @Autowired
     private SalaryService salaryService;
@@ -40,12 +47,6 @@ public class EmpSalaryHistoryController {
     private SalaryHistoryService salHistoryService;
     @Autowired
     private ApplicationSession applicationSession;
-    private List<SalaryHistory> empSalaryHistory;
-    private InputStream inputStream;
-    private Map session;
-    private Long id;
-    HttpServletRequest servletRequest;
-    private static Logger LOGGER = LogManager.getLogger(EmpSalaryHistoryController.class);
 
     @PostConstruct
     public void loadData() {
@@ -91,139 +92,35 @@ public class EmpSalaryHistoryController {
         return "html/fragment/employeeSalaryHistoryResult";
     }
 
-
-    public boolean validateSalaryHistory() {
-        if ("".equals(salaryHistoryForm.getEmployeeId()))
-            //addActionError("Please select Employee ID");
-            return false;
-        if ("getActionErrors".isEmpty())
-            return false;
-        else
-            return true;
-
-    }
-
-
     @GetMapping("/mail")
-    public String sendPaySlip() {
+    @ResponseBody
+    public String sendPaySlip(@RequestParam Long id, HttpSession session) {
         LOGGER.warn("######### IN sendPaySlip()");
-        salHistoryService.sendPaySlip(id, SimpleUtils.getContextPath(servletRequest));
-        //addActionMessage("Mail send SuccessFully");
-        empSalaryHistory = (List<SalaryHistory>) session.get("History");
+        salHistoryService.sendPaySlip(id, "");
         LOGGER.warn("######### IN sendPaySlip() DONE..");
-        return "SUCCESS";
+        return "Payslip mail sent successfully";
     }
 
 
     @GetMapping("/print")
-    public String printPaySlip() {
-        inputStream = salHistoryService.printPaySlip(id, SimpleUtils.getContextPath(servletRequest));
-        return "SUCCESS";
+    @ResponseBody
+    public ResponseEntity<byte[]> printPaySlip(@RequestParam Long id) {
+        InputStream inputStream= salHistoryService.printPaySlip(id,"");
 
-    }
-
-
-    /**
-     * @param salaryService the salaryService to set
-     */
-    public void setSalaryService(SalaryService salaryService) {
-        this.salaryService = salaryService;
-    }
-
-
-    /**
-     * @param salHistoryService the salHistoryService to set
-     */
-    public void setSalHistoryService(SalaryHistoryService salHistoryService) {
-        this.salHistoryService = salHistoryService;
-    }
-
-    /**
-     * @return the salHistory
-     */
-    public SalaryHistoryForm getSalaryHistoryForm() {
-        return salaryHistoryForm;
-    }
-
-    /**
-     * @param salaryHistoryForm the salHistory to set
-     */
-    public void setSalaryHistoryForm(SalaryHistoryForm salaryHistoryForm) {
-        this.salaryHistoryForm = salaryHistoryForm;
-    }
-
-    /**
-     * @return the empSalaryHistory
-     */
-    public List<SalaryHistory> getEmpSalaryHistory() {
-        return empSalaryHistory;
-    }
-
-    /**
-     * @param empSalaryHistory the empSalaryHistory to set
-     */
-    public void setEmpSalaryHistory(List<SalaryHistory> empSalaryHistory) {
-        this.empSalaryHistory = empSalaryHistory;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the session
-     */
-    public Map getSession() {
-        return session;
-    }
-
-    /**
-     * @param session the session to set
-     */
-    public void setSession(Map session) {
-        this.session = session;
-    }
-
-    /**
-     * @return the inputStream
-     */
-    public InputStream getInputStream() {
-        return inputStream;
-    }
-
-    /**
-     * @param inputStream the inputStream to set
-     */
-    public void setInputStream(InputStream inputStream) {
-        this.inputStream = inputStream;
-    }
-
-    /**
-     * @return the applicationSession
-     */
-    public ApplicationSession getApplicationSession() {
-        return applicationSession;
-    }
-
-    /**
-     * @param applicationSession the applicationSession to set
-     */
-    public void setApplicationSession(ApplicationSession applicationSession) {
-        this.applicationSession = applicationSession;
-    }
-
-    public void setServletRequest(HttpServletRequest servletRequest) {
-        this.servletRequest = servletRequest;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        String filename = "Payslip.pdf";
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = null;
+        try {
+            System.out.println("###Stream >> "+inputStream.available());
+            byte[] bytes=new byte[inputStream.available()];
+            inputStream.read(bytes);
+            response = new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
 

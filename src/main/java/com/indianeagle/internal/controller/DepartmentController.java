@@ -33,10 +33,7 @@ public class DepartmentController {
     }
 
     @PostMapping("/save")
-    public String saveOrUpdate(ModelMap modelMap, @Valid Department department, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "html/departmentDetails";
-        }
+    public String saveOrUpdate(ModelMap modelMap, Department department, BindingResult bindingResult) {
         departmentService.saveOrUpdate(department);
         modelMap.addAttribute("success", "Save or Update department Successfull");
         modelMap.addAttribute("department", new Department());
