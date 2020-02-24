@@ -97,12 +97,4 @@ public class EmployeeRepositoryTest {
         employee.setOfficialEmail("praveen.k@indianeagle.com");
         employeeRepository.save(employee);
     }
-    @Test
-    public void getEmployeeListOrderedByEmpId(){
-        List<Employee> employees=employeeRepository.findAllByOrderByEmpId();
-        for (Employee e:employees
-             ) {
-            System.out.println(e.getEmpId());
-        }
-    }
 }

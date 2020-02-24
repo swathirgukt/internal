@@ -40,7 +40,6 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 	@Autowired
     private SalaryHistory salaryHistory;
 
-    private List<Employee> employees;
 	@Autowired
     private TemplateEngine templateEngine;
 
@@ -88,18 +87,18 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 
 	public SalaryHistory sendPaySlip(Long id,String contextPath) {
 		salaryHistory = salaryHistoryRepository.findById(id).get();
-		employees = salaryHistoryRepository.findEmployeeByEmpId(salaryHistory.getEmpId());
+		Employee employee = salaryHistoryRepository.findEmployeeByEmpId(salaryHistory.getEmpId());
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "/mail/IE_Payslip", contextPath, employees.get(0), salaryHistory);
-		mailingEngine.sendMail(employees.get(0), salaryHistory ,new ByteArrayResource(arrayOutputStream.toByteArray()),true);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "/mail/IE_Payslip", contextPath, employee, salaryHistory);
+		mailingEngine.sendMail(employee, salaryHistory ,new ByteArrayResource(arrayOutputStream.toByteArray()),true);
 		return salaryHistory;
 	}
 	
 	public InputStream printPaySlip(Long id , String contextPath) {
 		salaryHistory = salaryHistoryRepository.findById(id).get();
-		employees = salaryHistoryRepository.findEmployeeByEmpId(salaryHistory.getEmpId());
+		Employee employee = salaryHistoryRepository.findEmployeeByEmpId(salaryHistory.getEmpId());
 		ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "/mail/IE_Payslip", contextPath, employees.get(0), salaryHistory);
+        PaySlipPdfUtils.generatePaySlipPdf(templateEngine, arrayOutputStream, "/mail/IE_Payslip", contextPath, employee, salaryHistory);
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(arrayOutputStream.toByteArray());
 		return byteArrayInputStream;
 	}
