@@ -32,7 +32,7 @@ public class Leaves  extends BaseDto {
     private Double casualLeaves = 0d;
 
     @Column(name = "SICK_LEAVES")
-    private Double sinkLeaves = 0d;
+    private Double sickLeaves = 0d;
 
     @Column(name = "COMPENSATORY_LEAVES")
     private Double compensatoryLeaves = 0d;
@@ -61,12 +61,12 @@ public class Leaves  extends BaseDto {
         this.casualLeaves = casualLeaves;
     }
 
-    public Double getSinkLeaves() {
-        return sinkLeaves;
+    public Double getSickLeaves() {
+        return sickLeaves;
     }
 
-    public void setSinkLeaves(Double sinkLeaves) {
-        this.sinkLeaves = sinkLeaves;
+    public void setSickLeaves(Double sickLeaves) {
+        this.sickLeaves = sickLeaves;
     }
 
     public Double getCompensatoryLeaves() {

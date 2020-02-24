@@ -21,7 +21,7 @@ public class Leaves implements Serializable{
     private Long id;
 	private EmployeeVO employee;
 	private Double casualLeaves = new Double(0);
-	private Double sinkLeaves = new Double(0);
+	private Double sickLeaves = new Double(0);
 	private Double compensatoryLeaves = new Double(0);
 	private Double previousYearLeaves = new Double(0);
 	private Date currentLeaveYear;
@@ -50,12 +50,12 @@ public class Leaves implements Serializable{
         this.casualLeaves = casualLeaves;
     }
 
-    public Double getSinkLeaves() {
-        return sinkLeaves;
+    public Double getSickLeaves() {
+        return sickLeaves;
     }
 
-    public void setSinkLeaves(Double sinkLeaves) {
-        this.sinkLeaves = sinkLeaves;
+    public void setSickLeaves(Double sickLeaves) {
+        this.sickLeaves = sickLeaves;
     }
 
     public Double getCompensatoryLeaves() {

@@ -113,11 +113,14 @@ public class LeaveReportController {
         if (employee.getLeaves()==null){
             return "html/addEditLeave";
         }
+
+        System.out.println("##BeforeSickLeavs :: "+ leavesForm.getSickLeaves()+" >> "+employee.getLeaves().getSickLeaves());
         employee.getLeaves().setCasualLeaves(leavesForm.getCasualLeaves());
-        employee.getLeaves().setSinkLeaves(leavesForm.getSickLeaves());
+        employee.getLeaves().setSickLeaves(leavesForm.getSickLeaves());
         employee.getLeaves().setCompensatoryLeaves(leavesForm.getCompensatoryLeaves());
         employee.getLeaves().setPreviousYearLeaves(leavesForm.getPreviousYearLeaves());
         employeeService.updateEmployeeLeaves(employee);
+        System.out.println("##AfterSickLeavs :: "+ leavesForm.getSickLeaves()+" >> "+employee.getLeaves().getSickLeaves());
 
         modelMap.addAttribute("employeeIds", employeeIds);
         modelMap.addAttribute("leavesForm", new LeavesForm());
