@@ -61,6 +61,7 @@ public class LeaveReportController {
         return "html/employeeLeaveReport";
     }
 
+    //Todo : chnage return view for all employee report instead for one employee
     @PostMapping("/employeeLeaveReport")
     public String leaveReport(ModelMap modelMap, @RequestParam(required = false) String empId, @RequestParam(required = false) Date fromDate, @RequestParam(required = false) Date toDate) {
         if (StringUtils.isBlank(empId) || fromDate == null || toDate == null) {
@@ -77,10 +78,7 @@ public class LeaveReportController {
     }
 
     @PostMapping("/allEmployeeLeaveReport")
-    public String allEmpLeaveReport(ModelMap modelMap, @RequestParam(required = false) Date fromDate, @RequestParam(required = false) Date toDate) {
-        if (fromDate == null || toDate == null) {
-            return "html/fragment/leaveReportResult";
-        }
+    public String allEmpLeaveReport(ModelMap modelMap, @RequestParam Date fromDate, @RequestParam Date toDate) {
         List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves(fromDate, toDate);
         modelMap.addAttribute("leaveApproveFormList", leaveApproveFormList);
         return "html/fragment/leaveReportResult";
@@ -99,14 +97,15 @@ public class LeaveReportController {
         LeavesForm leavesForm = new LeavesForm();
         if (employee.getLeaves() != null) {
             BeanUtils.copyProperties(employee.getLeaves(), leavesForm);
-            modelMap.addAttribute("leavesForm", leavesForm);
         }
+        modelMap.addAttribute("leavesForm", leavesForm);
         return "html/fragment/leavesResult";
     }
 
 
     @PostMapping("/updateLeaves")
     public String updateLeaves(ModelMap modelMap, @RequestParam String employeeId, LeavesForm leavesForm) {
+        System.out.println("###LeaveForm >> "+leavesForm);
         if(SimpleUtils.isEmpty(employeeId)) {
             return "html/addEditLeave";
         }

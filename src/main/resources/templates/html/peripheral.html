@@ -28,38 +28,43 @@
                                             <td ><input th:field="*{peripheralName}" type="text"></td>
                                         </tr>
                                         <tr>
+                                            <td></td>
+                                            <td ><span id="peripheralNameError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
                                             <td>
-                                                Type<span style="color:red">*</span><span
-                                                    style="float: right;margin-right:10px">:</span>
+                                                Type<span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
                                             </td>
-
                                             <td><input th:field="*{type}" type="text"></td>
                                         </tr>
                                         <tr>
-                                            <td> <span>Model<span style=" color:red">*</span></span><span
-                                                    style="float: right;margin-right:10px">:</span></td>
-
+                                            <td></td>
+                                            <td ><span id="peripheralTypeError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td> <span>Model<span style=" color:red">*</span></span><span style="float: right;margin-right:10px">:</span></td>
                                             <td ><input th:field="*{model}" type="text"></td>
                                         </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td ><span id="peripheralModelError" style="color:red;"></span></td>
+                                        </tr>
                                         </tr>
                                         <tr>
                                             <td>
-                                                Year of Purchase<span style="color:red">*</span><span
-                                                    style="float: right;margin-right:10px">:</span>
+                                                Year of Purchase<span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
                                             </td>
-
                                             <td>
-                                                <input width="170px" name="yearOfPurchase"
-                                                       id="yearOfPurchase" th:field="*{yearOfPurchase}" style="border: 1px solid #ff9900;">
-                                                <script>
-														$('#yearOfPurchase').datepicker({ uiLibrary: 'bootstrap' });
-													</script>
+                                                <input width="170px" th:field="*{yearOfPurchase}" style="border: 1px solid #ff9900;">
+                                                <script>$('#yearOfPurchase').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><span>Employee Id</span><span
-                                                    style="float: right;margin-right:10px">:</span></td>
-
+                                            <td></td>
+                                            <td ><span id="purchaseDateError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>Employee Id</span><span style="float: right;margin-right:10px">:</span></td>
                                             <td><input th:field="*{users}" type="text"></td>
                                         </tr>
                                     </table>
@@ -69,41 +74,44 @@
                                 <div>
                                     <table  width="100%" class="table-condensed">
                                         <tr>
-                                            <td> <span>Brand<span style="color:red">*</span></span><span
-                                                    style="float: right;margin-right:10px">:</span></td>
-
+                                            <td> <span>Brand<span style="color:red">*</span></span><span style="float: right;margin-right:10px">:</span></td>
                                             <td><input th:field="*{brand}" type="text"></td>
                                         </tr>
                                         <tr>
-                                            <td>Serial Number <span style="color:red">*</span><span
-                                                    style="float: right;margin-right:10px">:</span></td>
-
+                                            <td></td>
+                                            <td ><span id="peripheralBrandError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Serial Number <span style="color:red">*</span><span style="float: right;margin-right:10px">:</span></td>
                                             <td><input th:field="*{serialNumber}" type="text"></td>
                                         </tr>
                                         <tr>
+                                            <td></td>
+                                            <td ><span id="serialNumberError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
                                             <td>
-                                                Warranty Date <span style="color:red">*</span><span
-                                                    style="float: right;margin-right:10px">:</span>
+                                                Warranty Date <span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
                                             </td>
-
                                             <td>
-                                                <input  width="170px"
-                                                        name="warrantyDate" id="warrantyDate"   th:field="*{warrantyDate}" style="border: 1px solid #ff9900;">
-                                                <script>
-															$('#warrantyDate').datepicker({ uiLibrary: 'bootstrap' });
-														</script>
+                                                <input  width="170px" th:field="*{warrantyDate}" style="border: 1px solid #ff9900;">
+                                                <script>$('#warrantyDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Status <span style="color:red">*</span><span
-                                                    style="float: right;margin-right:10px"s>:</span></td>
-
+                                            <td></td>
+                                            <td ><span id="warrantyDateError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status <span style="color:red">*</span><span style="float: right;margin-right:10px"s>:</span></td>
                                             <td><input th:field="*{status}" type="text"></td>
                                         </tr>
-
+                                        <tr>
+                                            <td></td>
+                                            <td ><span id="peripheralStatusError" style="color:red;"></span></td>
+                                        </tr>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                         <div class="row">

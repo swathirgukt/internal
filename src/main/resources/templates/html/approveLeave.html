@@ -2,46 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Approve Leave</title>
-    <script>
-        $(function() {
-            var dates = $("#fromDateId, #toDateId").datepicker({
-                changeMonth: true,
-                onSelect: function(selectedDate) {
-                    var option = this.id == "fromDateId" ? "minDate" : "maxDate",
-                            instance = $(this).data("datepicker"),
-                            date = $.datepicker.parseDate(
-                                    instance.settings.dateFormat ||
-                                            $.datepicker._defaults.dateFormat,
-                                    selectedDate, instance.settings);
-                    if (this.id == "fromDateId") {
-                        $(this).datepicker("option", "altField", "#alternate");
-                        $(this).datepicker("option", "altFormat", "DD, d MM, yy");// altFormat: "DD, d MM, yy" ,
-                    }
-                    if (this.id == "toDateId") {
-                        $(this).datepicker("option", "altField", "#alternate2");
-                        $(this).datepicker("option", "altFormat", "DD, d MM, yy");// altFormat: "DD, d MM, yy" ,
-                    }
-                    dates.not(this).datepicker("option", option, date);
-                    calculateLeaveDays();
-                }
-            });
-        });
-        function calculateLeaveDays() {
-            if ($("#fromDateId").val() != '' && $("#toDateId").val() != '') {
-                if ($("#leaveTypeId").val() == 'LOP 1/2 Day' || $("#leaveTypeId").val() == 'Half Day Leave' || $("#leaveTypeId").val() == 'Comp. Leave Half Day') {
-                    $('#leaveDaysId').val(0.5);
-                } else {
-                    var d1 = new Date($("#fromDateId").val());
-                    var d2 = new Date($("#toDateId").val());
-                    if ($("#leaveTypeId").val() == 'LOP inc Holidays' || $("#leaveTypeId").val() == 'Marriage Leave inc Holidays') {
-                        $('#leaveDaysId').val(getDatesDiff(d1, d2));
-                    } else {
-                        $('#leaveDaysId').val(calcBusinessDays(d1, d2));
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -57,11 +17,10 @@
                           method="post">
                         <div class="Heading">Approve Leave</div>
                         <div class="row">
-                            <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding: 50px"
-                                  th:if="${success}!=null" th:text="${success}"></span>
+                            <span style="color: #008000;font:  12pt arial;padding: 50px" th:text="${success}?:''"></span>
                             <div class="col-md-6 col-sm-12 col-xs-10" style="border-right: 2px dotted #bbba86; ">
                                 <div>
-                                    <table width="100%" class="table_text_style table-sm">
+                                    <table width="100%" class="table_text_style table-sm" id="approveLeaveTable">
                                         <tr>
                                             <td style="padding:5px">
                                                 Employee&nbsp;ID
@@ -97,28 +56,47 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                               <span style="color:red;" id="fromDateError"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td> Absent&nbsp;From</td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <input style=" border: 1px solid #ff9900;" id="fromDateId"
-                                                       width="180px" name="approveLeaveForm.fromDate" th:field="*{fromDate}"/>
-                                                <script>$('#fromDateId').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                                <input style=" border: 1px solid #ff9900;" width="180px" name="approveLeaveForm.fromDate" th:field="*{fromDate}"/>
+                                                <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <span style="color:red;" id="toDateError"></span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td> To</td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <input style="border: 1px solid #ff9900;" id="toDateId" width="180px"
-                                                       name="approveLeaveForm.toDate" th:field="*{toDate}"/>
-                                                <script>$('#toDateId').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                                <input style="border: 1px solid #ff9900;" width="180px" th:field="*{toDate}"/>
+                                                <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td> Leave&nbsp;Days</td>
                                             <td><b>:</b></td>
                                             <td>
-                                                <input type="text" name="approveLeaveForm.totalNumberOfAbsentDays" th:field="*{totalNumberOfAbsentDays}" id="leaveDaysId"/>
+                                                <input type="text" th:field="*{totalNumberOfAbsentDays}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <span style="color:red;" id="leaveDaysError"></span>
                                             </td>
                                         </tr>
                                     </table>
@@ -213,7 +191,7 @@
                                     </table>
                                     <div>
                                         <div style="float:right">
-                                            <button type="submit" class="submitButton" ><b>Submit</b></button>
+                                            <button type="button" class="submitButton" onclick="submitApproveLeaveForm()"><b>Submit</b></button>
                                         </div>
                                     </div>
                                 </div>

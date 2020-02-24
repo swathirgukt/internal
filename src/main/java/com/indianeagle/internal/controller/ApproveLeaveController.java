@@ -61,10 +61,7 @@ public class ApproveLeaveController {
     }
 
     @PostMapping("/approveLeave")
-    public String approveLeave(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "html/approveLeave";
-        }
+    public String approveLeave(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm) {
         leaveDetailsService.approveLeave(leaveApproveForm);
         modelMap.addAttribute("success", "Leave approved successfully for employee " + leaveApproveForm.getEmpId());
         modelMap.addAttribute("employeeIds", employeeIds);

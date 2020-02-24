@@ -19,14 +19,18 @@
                             <div class=" col-lg-4  col-md-12 col-sm-12 col-xs-12">
                                 <table>
                                     <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span style="color: red" id="fromDateError"></span></td>
+                                    </tr>
+                                    <tr>
                                         <td> From</td>
-                                        <td width="30px;">
-                                            <span style="color: red">*</span>
-                                        <td>
+                                        <td width="30px;"><span style="color: red">*</span></td>
                                         <td width="20px"><b>:</b></td>
                                         <td>
-                                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px" name="fromDate"/>
-                                            <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                            <input style=" float:left; border: 1px solid #ff9900;" id="fromDate" width="200px" name="fromDate"/>
+                                            <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
                                     </tr>
                                 </table>
@@ -34,15 +38,18 @@
                             <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <table>
                                     <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span style="color: red" id="toDateError"></span></td>
+                                    </tr>
+                                    <tr>
                                         <td width="20px"> To</td>
-                                        <td>
-                                            <span style="color: red">*</span>
-                                        <td>
+                                        <td><span style="color: red">*</span></td>
                                         <td width="20px"><b>:</b></td>
                                         <td>
-                                            <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1" width="200px" name="toDate"/>
-                                            <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' });
-                                            </script>
+                                            <input style=" float:left; border: 1px solid #ff9900;" id="toDate" width="200px" name="toDate"/>
+                                            <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
                                     </tr>
                                 </table>
