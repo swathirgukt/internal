@@ -30,6 +30,9 @@ import java.util.List;
 
 @Controller
 public class EmployeeSettlementController {
+    Employee employee;
+    Salary salary;
+    EmployeeSettlement employeeSettlement;
     @Autowired
     private UserRolesService userRolesService;
     private UserDetails userDetails;
@@ -37,9 +40,6 @@ public class EmployeeSettlementController {
     private EmployeeService employeeService;
     @Autowired
     private UsersService usersService;
-    Employee employee;
-    Salary salary;
-    EmployeeSettlement employeeSettlement;
     @Autowired
     private SalaryService salaryService;
 
@@ -56,18 +56,20 @@ public class EmployeeSettlementController {
         model.addAttribute("employeeForm", employeeForm);
         return "html/fSettlement";
     }
+
     @InitBinder
     public void initBinder(final WebDataBinder binder) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+
     @GetMapping("/employeeSettlement")
     public String employee() {
         return "html/fSettlement";
     }
 
     /**
-     *  Method to search employees
+     * Method to search employees
      */
     @PostMapping("/searchEmployeeSettlement")
     public String searchEmployee(@ModelAttribute("employeeForm") EmployeeForm employeeForm, ModelMap model) {
@@ -80,7 +82,7 @@ public class EmployeeSettlementController {
      * Method to view resigned employee settlement details
      */
     @GetMapping("/viewUrl")
-    public String viewResignedEmployeeSettlement(ModelMap modelMap,@RequestParam("employeeId") String employeeId,EmployeeSettlementForm employeeSettlementForm){
+    public String viewResignedEmployeeSettlement(ModelMap modelMap, @RequestParam("employeeId") String employeeId, EmployeeSettlementForm employeeSettlementForm) {
         employeeSettlement = salaryService.loadResignedEmployeeSettlement(employeeSettlementForm.getEmployeeId());
         employee = employeeSettlement.getEmployee();
         salary = employee.getSalary();
@@ -92,16 +94,15 @@ public class EmployeeSettlementController {
         employeeSettlementForm.setResignationDate(employee.getResignDate());
         employeeSettlementForm.setSettlementDate(employeeSettlement.getSettlementDate());
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
-        modelMap.addAttribute("employeeSettlement",employeeSettlement );
-        modelMap.addAttribute("employee",employee );
-        modelMap.addAttribute("salary",salary );
+        modelMap.addAttribute("employeeSettlement", employeeSettlement);
+        modelMap.addAttribute("employee", employee);
+        modelMap.addAttribute("salary", salary);
         return "html/viewEmployeeSettlement";
 
     }
 
     @GetMapping("/goUrl")
-    public String goEmployee(ModelMap modelMap, @RequestParam("employeeName") String employeeName, @RequestParam("employeeDesignation") String employeeDesignation, @RequestParam("employeeId") String employeeId){
-
+    public String goEmployee(ModelMap modelMap, @RequestParam("employeeName") String employeeName, @RequestParam("employeeDesignation") String employeeDesignation, @RequestParam("employeeId") String employeeId) {
         EmployeeSettlementForm employeeSettlementForm = new EmployeeSettlementForm();
         employeeSettlementForm.setEmployeeId(employeeId);
         employeeSettlementForm.setEmployeeName(employeeName);
@@ -109,6 +110,7 @@ public class EmployeeSettlementController {
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
         return "html/fSettlementDetails";
     }
+
     /**
      * Method to copy form properties
      *
@@ -127,78 +129,45 @@ public class EmployeeSettlementController {
      * Method to calculate employee settlement details
      */
     @PostMapping("/viewSettlement")
-    public String calculateEmployeeSettlement(ModelMap modelMap, EmployeeSettlementForm employeeSettlementForm){
+    public String calculateEmployeeSettlement(ModelMap modelMap, EmployeeSettlementForm employeeSettlementForm) {
         System.out.println("EmployeeSettlementController.calculateEmployeeSettlement");
         employee = employeeService.findEmployeeByEmpId(employeeSettlementForm.getEmployeeId());
-            salary = employee.getSalary();
-            copyEmployeeSettlementProperties(employeeSettlementForm);
+        salary = employee.getSalary();
+        copyEmployeeSettlementProperties(employeeSettlementForm);
         try {
             employeeSettlement = salaryService.generateSalarySettlement(employee, employeeSettlementForm);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        modelMap.addAttribute("employee",employee );
-        modelMap.addAttribute("salary",salary );
+        modelMap.addAttribute("employee", employee);
+        modelMap.addAttribute("salary", salary);
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
         modelMap.addAttribute("employeeSettlement", employeeSettlement);
-            return "html/viewEmployeeSettlement";
+        return "html/viewEmployeeSettlement";
+
 
     }
 
-
     /**
-     * This Method saves employee settlement details
+     * Method to saves employee settlement details
      *
      * @return
      */
     @PostMapping("/saveSettlement")
-    public String saveEmployeeSettlement(ModelMap modelMap,EmployeeSettlementForm employeeSettlementForm) {
-            employee = employeeService.findEmployeeByEmpId(employeeSettlementForm.getEmployeeId());
-            copyEmployeeSettlementProperties(employeeSettlementForm);
-            try {
-                salaryService.generateSalarySettlement(employee, employeeSettlementForm);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            salaryService.confirmEmployeeSettlement();
-            modelMap.addAttribute("save", "Employee Settlement is successfully saved");
-            return "html/fSettlementDetails";
-        }
+    public String saveEmployeeSettlement(ModelMap modelMap, EmployeeSettlementForm employeeSettlementForm) {
 
-   /* *//**
-     *  Method to validate form properties
-     * @param employeeSettlementForm
-     * @return
-     *//*
-    public boolean validate(ModelMap modelMap,EmployeeSettlementForm employeeSettlementForm ) {
-        boolean status = false;
-        if (SimpleUtils.isEmpty(employeeSettlementForm.getSettlementDate())) {
-            modelMap.addAttribute("settlement","Date of Settlement is Required");
+        employee = employeeService.findEmployeeByEmpId(employeeSettlementForm.getEmployeeId());
+        copyEmployeeSettlementProperties(employeeSettlementForm);
+        try {
+            salaryService.generateSalarySettlement(employee, employeeSettlementForm);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (employeeSettlementForm.getEmpStatus().equals("Resignation") && SimpleUtils.isEmpty(employeeSettlementForm.getResignationDate())) {
-            modelMap.addAttribute("resignation","Date of Resignation is Required ");
-        }
-        if (SimpleUtils.isEmpty(employeeSettlementForm.getRelievingDate())) {
-            modelMap.addAttribute("relieving","Date of Relieving is Required ");
-        }
-        else {
-            if (employeeSettlementForm.getEmpStatus().equals("Resigned")) {
-                if (employeeSettlementForm.getResignationDate().after(employeeSettlementForm.getRelievingDate())) {
-                    modelMap.addAttribute("resignationLess","Date of Resignation should be less than Relieving date");
-                    status = true;
-                }
-            }
-            if (employeeSettlementForm.getRelievingDate().after(employeeSettlementForm.getSettlementDate())) {
-                modelMap.addAttribute("relieveLess","Date of Relieving should be less than Settlement date");
-                status = true;
-            }
-        }
-        return Boolean.parseBoolean(String.valueOf(status));
+        salaryService.confirmEmployeeSettlement();
+        modelMap.addAttribute("save", "Employee Settlement is successfully saved");
+        return "html/fSettlementDetails";
     }
-*/
-
-
 }
 
 
