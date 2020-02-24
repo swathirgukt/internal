@@ -39,40 +39,39 @@
             calculateTotalIncomeEarnedByEmployee();
         });
 
-
-        function retrieveSalaryInfoForForm16(){
-            var overlay = new loadOverlay();
-            overlay.show("MenuWrapper");
-            $.ajax({url:"./retrieveSalaryInfoForForm16.action",
-                    type: 'POST',
-                    data: $('#form16GenerationData').serialize()
-            }).done(function(data){
-                $('#form16GenerationBody').html(data);
-                placeHolderLoad();
-                calculateTotalIncomeEarnedByEmployee();
-                saveEmpInfo();
-                overlay.hide();
-            });
-        }
-
+      function searchEmployeeByNameInForm16Generation(){
+       var response = makeAJAXCall("/searchEmployeeByNameInForm16Generation", 'form16GenerationData');
+          response.done(function (responseData) {
+              if (response) {
+                  $("#employeeSerachResultsForm16").html(responseData);
+              }
+          });
+      }
 
         function calculateTax(){
-            var overlay = new loadOverlay();
-            overlay.show("MenuWrapper");
-            $.ajax({url:"./calculateTax.action",
-                    type: 'POST',
-                    data: $('#form16GenerationData').serialize()
-            }).done(function(data){
-                $('#form16GenerationBody').html(data);
-                placeHolderLoad();
-                calculateTotalIncomeEarnedByEmployee();
-                saveEmpInfo();
-                saveIncome();
-                overlay.hide();
-            });
-        }
+          var taxableIncome= document.getElementById("earnedIncome").value;
+          console.log(taxableIncome);
+           var response = makeAJAXCall("/calculateTax", 'form16GenerationData');
+               response.done(function (responseData) {
+                   if (response) {
 
-        function saveEmployeeIncomeTax(){
+                       $("#calculateTax").html(responseData);
+
+                       console.log("in calculateTax success");
+                   }
+               });
+           }
+
+       function saveEmployeeIncomeTax(){
+                          console.log("in saveAsPdf java script method");
+                         var url="/saveEmployeeIncomeTax";
+                         var form=document.getElementById("form16GenerationData");
+                         form.action=url;
+                         form.setAttribute('target','_self');
+                         form.submit();
+                         }
+
+       /* function saveEmployeeIncomeTax(){
             var overlay = new loadOverlay();
             overlay.show("MenuWrapper");
             $.ajax({url:"./saveEmployeeIncomeTax.action",
@@ -85,9 +84,9 @@
                 saveIncome();
                 overlay.hide();
             });
-        }
+        }*/
 
-        function sendMailEmployeeIncomeTax(){
+       /* function sendMailEmployeeIncomeTax(){
             var overlay = new loadOverlay();
             overlay.show("MenuWrapper");
             $.ajax({url:"./sendMailEmployeeIncomeTax.action",
@@ -100,11 +99,98 @@
                 saveIncome();
                 overlay.hide();
             });
-        }
+        }*/
+       function form16sendMail(){
+       console.log("in send mail");
+       var response = makeAJAXCall("/sendMail","form16GenerationData");
+       response.done(function (responseData) {
+                          if (response) {
+
+                              $("#emailReport").replaceWith(responseData);
+
+                              console.log("in calculateTax success");
+                          }
+                      });
+       }
+
+     function setEmployeeId(empId){
+         console.log(empId);
+         document.getElementById('employeeId').value=empId;
+     }
+     function retrieveSalaryInfoForForm16(){
+         console.log("in retrieveSalaryInfo java script method");
+       var url="/retrieveEmployeeInfoInForm16";
+       var form=document.getElementById("form16GenerationData");
+       form.action=url;
+        form.setAttribute('target','_self');
+       form.submit();
+         }
+     function saveAsPdf(){
+                console.log("in saveAsPdf java script method");
+              var url="/saveAsPdf";
+              var form=document.getElementById("form16GenerationData");
+              form.action=url;
+          //  var w = window.open('', 'form-target', 'width=600', 'height=400');
+            //form.target = 'form-target';
+            form.setAttribute("target", "_blank");
+           form.submit();
+
+     }
+
+             function saveAsExcel(){
+                        console.log("in saveAsPdf java script method");
+                     var url="/saveAsExcel";
+                     var form=document.getElementById("form16GenerationData");
+                     form.action=url;
+                     form.setAttribute('target','_self');
+                      form.submit();;
+                       }
 
 
 
 
+
+
+
+
+//to edit retrieved employee details
+var fullName,designation,panNo,address;
+
+function editEmpInfo(){
+console.log("in edit empinfo");
+    fullName = $('input[name="employee.fullName"]').val();
+    designation = $('input[name="employee.designation"]').val();
+    panNo = $('input[name="employee.panNo"]').val();
+    address = $('input[name="employee.address"]').val();
+    $('#employeeInfo').children('input').prop('readonly',false).css('background-color','#FFFFFF');
+    $('#saveBtn').show();
+    $('#cancelBtn').show();
+    $('#editBtn').hide();
+}
+
+function saveEmpInfo(){
+console.log("in  save");
+    $('#employeeInfo').children('input').prop('readonly',true).css('background-color','#D3D3D3');
+    $('#saveBtn').hide();
+    $('#cancelBtn').hide();
+    $('#editBtn').show();
+}
+
+function cancelEmpInfo(){
+console.log("in  cancel")
+    $('input[name="employee.fullName"]').val(fullName);
+    $('input[name="employee.designation"]').val(designation);
+    $('input[name="employee.panNo"]').val(panNo);
+    $('input[name="employee.address"]').val(address);
+    $('#employeeInfo').children('input').prop('readonly',true).css('background-color','#D3D3D3');
+    $('#saveBtn').hide();
+    $('#cancelBtn').hide();
+    $('#editBtn').show();
+}
+
+$(document).on('click', '#appliedSections li label[name="showOrHideSections"]', function() {
+        $(this).parent().parent().children('ul').toggle();
+    });
 
 
 

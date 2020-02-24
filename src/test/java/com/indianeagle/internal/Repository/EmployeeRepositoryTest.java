@@ -91,4 +91,18 @@ public class EmployeeRepositoryTest {
         List<Employee> employees = employeeRepository.findByDob();
         System.out.println(employees.size());
     }
+    @Test
+    public void editEmployee(){
+        Employee employee=employeeRepository.findByEmpId("YSPL1034");
+        employee.setOfficialEmail("praveen.k@indianeagle.com");
+        employeeRepository.save(employee);
+    }
+    @Test
+    public void getEmployeeListOrderedByEmpId(){
+        List<Employee> employees=employeeRepository.findAllByOrderByEmpId();
+        for (Employee e:employees
+             ) {
+            System.out.println(e.getEmpId());
+        }
+    }
 }

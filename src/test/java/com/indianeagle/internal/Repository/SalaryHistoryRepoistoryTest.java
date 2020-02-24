@@ -61,7 +61,7 @@ public class SalaryHistoryRepoistoryTest {
 
     @Test
     public void findByEmpIdAndSalaryEndDateBetween() {
-        salaryHistoryRepository.findByEmpIdAndSalaryEndDateBetween("YSPL1006", date, date1);
+        salaryHistoryRepository.findSalaryHistoriesWithInFinancialYear("YSPL1006", date, date1);
     }
 
     @Test

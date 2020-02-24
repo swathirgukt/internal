@@ -24,5 +24,13 @@ public class EmployeeIncomeTaxRepositoryTest {
         List<EmployeeIncomeTax> employeeIncomeTaxes = employeeIncomeTaxRepository.findEmployeeIncomeTaxWithEmpIdAndFinancialYear("YSPL1034", "APR", "2017", "MAR", "2018");
         System.out.println(employeeIncomeTaxes.size());
     }
+    @Test
+    public void changeFinancialYearId(){
+       EmployeeIncomeTax employeeIncomeTax= employeeIncomeTaxRepository.findByEmpId("YSPL1034").get(0);
+       employeeIncomeTax.getFinancialYear().setId(1L);
+       employeeIncomeTaxRepository.save(employeeIncomeTax);
+        System.out.println(employeeIncomeTax.getFinancialYear().getId());
+
+    }
 }
 

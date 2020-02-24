@@ -31,8 +31,7 @@
                     </tr>
                     <tr>
                         <td align="center" height="130" valign="middle" width="22%">
-                            <img align="middle" alt="Indian Eagle.com" border="0" height="39"
-                                 hspace="25" src="$!{string}/Images/IE_Logo.png" style="padding-left:50px" width="100"/>
+                            -+
                         </td>
                         <td align="center" height="130" style="padding-left:10px" valign="middle" width="78%">
                             <p style="font-family:Calibri;font-size:18px;font-weight:bold;color:#000;text-decoration:none;text-align:center;	text-transform:uppercase; height:30px; ">
@@ -404,7 +403,7 @@
                             <tr>
                                 <td width="20%">[[${sectionDeclaration.subSectionName}]]</td>
                                 <td style="text-align:center;"
-                                    th:text="$!{sectionDeclaration.subSectionName} == 'HRA'?${calculatedHRA}:${sectionDeclaration.saveAmount}"
+                                    th:text="${sectionDeclaration.subSectionName} != 'HRA'?${calculatedHRA}:${sectionDeclaration.saveAmount}"
                                     width="20%"></td>
                             </tr>
                         </div>
