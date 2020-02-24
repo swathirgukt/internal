@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>F & F settlement</title>
 </head>
@@ -48,7 +48,7 @@
                                             <td> Department</td>
                                             <td width="15px"><b>:</b></td>
                                             <td><select th:field="${employeeForm.department}" class="selectOption">
-                                                <option value="">All</option>
+                                                <option value="">select</option>
                                                 <option th:each="branches : ${employeeForm.departments}" th:value="${branches.department}" th:text="${branches.department}"/>
                                             </select>
                                             </td>
@@ -76,6 +76,6 @@
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
-
+</html>
 </html>
 
