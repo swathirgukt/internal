@@ -142,10 +142,133 @@ function getFormtData() {
 }
 
 function searchEmployeeStatus() {
-    var response = makeAJAXCall("/searchEmployeeStatus", 'statusEmployeeForm');
-    response.done(function (responseData) {
-        if (responseData) {
-            $("#statusSearchResult").html(responseData);
-        }
-    });
-}
+     var response = makeAJAXCall("/searchEmployeeStatus", 'statusEmployeeForm');
+     response.done(function (responseData) {
+         if (responseData) {
+             $("#statusSearchResult").html(responseData);
+         }
+     });
+ }
+
+ function createEmployee()
+ {
+
+    var x = document.forms["createEmployeeForm"]["first_name"]
+    var y = document.forms["createEmployeeForm"]["lastName"]
+    var z = document.forms["createEmployeeForm"]["department"]
+    var a = document.forms["createEmployeeForm"]["temporaryAddress"]
+    var b = document.forms["createEmployeeForm"]["datepicker"]
+    var c = document.forms["createEmployeeForm"]["bank_Name"]
+    var d = document.forms["createEmployeeForm"]["bank_AC"]
+    var e = document.forms["createEmployeeForm"]["per_Address"]
+    var f = document.forms["createEmployeeForm"]["employee_Id"]
+    var g = document.forms["createEmployeeForm"]["designation"]
+    var h = document.forms["createEmployeeForm"]["official_email"]
+    var i = document.forms["createEmployeeForm"]["personal_email"]
+    var j = document.forms["createEmployeeForm"]["mobile_No"]
+    var k = document.forms["createEmployeeForm"]["emergency_Contact"]
+    var l = document.forms["createEmployeeForm"]["datepicker"]
+    var m = document.forms["createEmployeeForm"]["role_Auth"]
+
+    var error = false;
+    if(x.value == "") {
+        console.log("come in x");
+        document.getElementById("empFirstName").innerHTML="employee First Name Required";
+        error = true;
+    }
+    if(y.value == "") {
+        console.log("come in y");
+        document.getElementById("empLastName").innerHTML="employee last Name Required";
+        error = true;
+    }
+    if(z.value=="select") {
+        console.log("come in z");
+        document.getElementById("dept").innerHTML="select department field";
+        error = true;
+    }
+    if(a.value == "") {
+        console.log("come in a");
+        document.getElementById("tempAddress").innerHTML="temporary address required";
+        error = true;
+    }
+    if(b.value == "") {
+        console.log("come in b");
+        document.getElementById("dob").innerHTML="DOB required";
+        error = true;
+    }
+    if(c.value == "") {
+             console.log("come in c");
+             document.getElementById("bankName").innerHTML="Bank name required";
+             error = true;
+         }
+     if(d.value == "") {
+                  console.log("come in d");
+                  document.getElementById("bankAc").innerHTML="Bank account number required";
+                  error = true;
+              }
+     if(e.value == "") {
+                       console.log("come in e");
+                       document.getElementById("perAddress").innerHTML="Permanent address required";
+                       error = true;
+                   }
+     if(f.value == "") {
+                            console.log("come in f");
+                            document.getElementById("emp_Id").innerHTML="Employee ID required";
+                            error = true;
+                        }
+     if(g.value == "") {
+                                 console.log("come in g");
+                                 document.getElementById("role").innerHTML="Designation required";
+                                 error = true;
+                             }
+    if(h.value == "") {
+                                      console.log("come in h");
+                                      document.getElementById("officialemail").innerHTML="official email required";
+                                      error = true;
+                                  }
+     if(i.value == "") {
+                                           console.log("come in i");
+                                           document.getElementById("personalemail").innerHTML="personal email required";
+                                           error = true;
+                                       }
+     if(j.value == "") {
+                                               console.log("come in j");
+                                               document.getElementById("mobileNo").innerHTML="mobile Number  required";
+                                               error = true;
+                                           }
+     if(k.value == "") {
+                                               console.log("come in k");
+                                               document.getElementById("emergencyContact").innerHTML="emergency Contact required";
+                                               error = true;
+                                           }
+    if(l.value == "") {
+                                                   console.log("come in l");
+                                                   document.getElementById("joinDate").innerHTML="join date required";
+                                                   error = true;
+                                               }
+    if(m.value == "select") {
+                                                   console.log("come in m");
+                                                   document.getElementById("roleAuth").innerHTML="Role required";
+                                                   error = true;
+                                               }
+
+
+    if(error){return;}
+
+    document.createEmployeeForm.action="/updateEmployeeController";
+    document.createEmployeeForm.submit();
+
+ }
+
+ function monthlySalaryReport()
+ {
+ var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+     response.done(function (responseData) {
+         if (responseData) {
+             $("#monthlySalaryResult").html(responseData);
+         }
+
+     });
+ }
+
+
