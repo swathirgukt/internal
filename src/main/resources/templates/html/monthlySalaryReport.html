@@ -12,7 +12,7 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container-fluid">
-                    <form th:action="@{/monthlySalaryReport}" method="post">
+                    <form th:action="@{/monthlySalaryReport}" method="post" id="monthlySalaryForm" name="monthlySalaryForm">
                         <div class="Heading">Monthly Salary Report</div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
                                 <div style="float: right">
-                                    <button type="submit" class="submitButton"><b>Search</b>
+                                    <button type="button" class="submitButton" onclick="monthlySalaryReport()" ><b>Search</b>
                                     </button>
                                 </div>
                             </div>
@@ -52,6 +52,14 @@
 
 
                     </form>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-10 col-xs-5">
+                            <div id="monthlySalaryResult" class="tableScrollbar">
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
 

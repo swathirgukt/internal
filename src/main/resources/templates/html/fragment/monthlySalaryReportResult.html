@@ -1,0 +1,78 @@
+<div th:fragment="monthlySalaryResult" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${monthlySalaryList} != null AND ${monthlySalaryList.size()}>0">
+
+        <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+
+            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                <th>S.NO</th>
+                <th>EMP.CODE</th>
+                <th>NAME</th>
+                <th>DEPT</th>
+                <th>DOJ</th>
+                <th>WD</th>
+                <th>BASIC</th>
+                <th>HRA</th>
+                <th>CON</th>
+                <th>MED</th>
+                <th>SPL</th>
+                <th>PER</th>
+                <th>OTH</th>
+                <th>GROSS</th>
+                <th>PF</th>
+                <th>ESI</th>
+                <th>PT</th>
+                <th>IT</th>
+                <th>MED INC</th>
+                <th>LOAN</th>
+                <th>MISC</th>
+                <th>SAL.ADV</th>
+                <th>TOT.D</th>
+                <th>NET</th>
+                <th>A/C NUMBER	</th>
+                <th>ARR</th>
+                <th>LOP</th>
+
+            </tr>
+            <tr style="background-color:#FFFFFF;color: #000000;padding: 50px" th:each="monthlySalary, stat :${monthlySalaryList}">
+
+                <td th:text="${#lists.size(monthlySalaryList) == stat.index+1}?'Total':${stat.index+1}"></td>
+                <td th:text="${monthlySalary.employeeId}"></td>
+                <td th:text="${monthlySalary.employeeName}"></td>
+                <td th:text="${monthlySalary.department}"></td>
+                <td th:text="${monthlySalary.doj}"></td>
+                <td th:text="${monthlySalary.totalDays}"></td>
+                <td th:text="${monthlySalary.basic}"></td>
+                <td th:text="${monthlySalary.hra}"></td>
+                <td th:text="${monthlySalary.conveyence}"></td>
+                <td th:text="${monthlySalary.medicalAllowance}"></td>
+                <td th:text="${monthlySalary.specialAllowance}"></td>
+                <td th:text="${monthlySalary.performanceIncentives}"></td>
+                <td th:text="${monthlySalary.otherAllowance}"></td>
+                <td th:text="${monthlySalary.grossSalary}"></td>
+                <td th:text="${monthlySalary.pfEmp}"></td>
+                <td th:text="${monthlySalary.esi}"></td>
+                <td th:text="${monthlySalary.PTax}"></td>
+                <td th:text="${monthlySalary.incomeTax}"></td>
+                <td th:text="${monthlySalary.medicalInsurance}"></td>
+                <td th:text="${monthlySalary.loanAmount}"></td>
+                <td th:text="${monthlySalary.miscDeductions}"></td>
+                <td th:text="${monthlySalary.salaryInAdvance}"></td>
+                <td th:text="${monthlySalary.totalDeductions}"></td>
+                <td th:text="${monthlySalary.netSalary}"></td>
+                <td th:text="${monthlySalary.bankAc}"></td>
+                <td th:text="${monthlySalary.arrearsDays}"></td>
+                <td th:text="${monthlySalary.lopDays}"></td>
+
+
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+         th:if="${monthlySalaryList}!=null  AND ${monthlySalaryList.size()}==0">
+        Nothing found to display
+    </div>
+</div>
