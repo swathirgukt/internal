@@ -83,22 +83,26 @@ public class EmployeeSettlementController {
      */
     @GetMapping("/viewUrl")
     public String viewResignedEmployeeSettlement(ModelMap modelMap, @RequestParam("employeeId") String employeeId, EmployeeSettlementForm employeeSettlementForm) {
+       try{
         employeeSettlement = salaryService.loadResignedEmployeeSettlement(employeeSettlementForm.getEmployeeId());
         employee = employeeSettlement.getEmployee();
         salary = employee.getSalary();
-        employeeSettlementForm = new EmployeeSettlementForm();
+       // employeeSettlementForm = new EmployeeSettlementForm();
         employeeSettlementForm.setEmployeeId(employeeId);
         employeeSettlementForm.setEmployeeName(employee.getFullName());
         employeeSettlementForm.setEmployeeDesignation(employee.getDesignation());
         employeeSettlementForm.setRelievingDate(employee.getRelieveDate());
         employeeSettlementForm.setResignationDate(employee.getResignDate());
         employeeSettlementForm.setSettlementDate(employeeSettlement.getSettlementDate());
+        employeeSettlementForm.setEmpStatus(employee.getEmpStatus());
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
         modelMap.addAttribute("employeeSettlement", employeeSettlement);
         modelMap.addAttribute("employee", employee);
         modelMap.addAttribute("salary", salary);
         return "html/viewEmployeeSettlement";
+       }catch (Exception e){}
 
+        return "html/viewEmployeeSettlement";
     }
 
     @GetMapping("/goUrl")
@@ -130,7 +134,6 @@ public class EmployeeSettlementController {
      */
     @PostMapping("/viewSettlement")
     public String calculateEmployeeSettlement(ModelMap modelMap, EmployeeSettlementForm employeeSettlementForm) {
-        System.out.println("EmployeeSettlementController.calculateEmployeeSettlement");
         employee = employeeService.findEmployeeByEmpId(employeeSettlementForm.getEmployeeId());
         salary = employee.getSalary();
         copyEmployeeSettlementProperties(employeeSettlementForm);
@@ -150,7 +153,7 @@ public class EmployeeSettlementController {
     }
 
     /**
-     * Method to saves employee settlement details
+     * Method to save employee settlement details
      *
      * @return
      */

@@ -12,7 +12,7 @@
     </style>
     <script>
         function printReport() {
-                document.getElementById("print").style.visibility = 'hidden';
+                <!--document.getElementById("print").style.visibility = 'hidden';-->
                 window.print();
             }
     </script>
@@ -59,15 +59,15 @@
                 <tr>
                     <td align="center">Basic</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${salary.basic}"/></b></td>
+                    <td><b><span th:text="${salary}?${salary.basic}:'nill'"/></b></td>
                     <td>Date of Joining</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${#dates.format(employee.joinDate, 'dd-MMM-yyyy')}"/></b></td>
+                    <td><b><span th:text="${employee}?${#dates.format(employee.joinDate, 'dd-MMM-yyyy')}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td align="center">HRA</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${salary.hra}"/></b></td>
+                    <td><b><span th:text="${salary}?${salary.hra}:'nill'"/></b></td>
                     <td>Date of
                         <span th:if="${employeeSettlementForm.empStatus} == 'Terminated'">Termination</span>
                         <span th:unless="${employeeSettlementForm.empStatus} == 'Terminated'">Resignation</span>
@@ -101,16 +101,16 @@
                 <tr>
                     <td align="center">Med.</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${salary.medicalAllowance}"/></b></td>
+                    <td><b><span th:text="${salary}?${salary.medicalAllowance}:'nill'"/></b></td>
                     <td>Last&nbsp;working&nbsp;day</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}"/></b>
+                    <td><b><span th:text="${employeeSettlementForm}?${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}:'nill'"/></b>
                     </td>
                 </tr>
                 <tr>
                     <td align="center">Spl.</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${salary.specialAllowance}"/></b></td>
+                    <td><b><span th:text="${salary}?${salary.specialAllowance}:'nill'"/></b></td>
                     <td>Cheque No</td>
                     <td><b>:</b></td>
                     <td></td>
@@ -118,32 +118,32 @@
                 <tr>
                     <td align="center">Others</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${salary.otherAllowance}"/></b></td>
+                    <td><b><span th:text="${salary}?${salary.otherAllowance}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td align="center" style="padding:10px">GROSS</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${salary.getGrossSal()}"/></b></td>
+                    <td><b><span th:text="${salary}?${salary.getGrossSal()}:'nill'"/></b></td>
                 </tr>
                 <tr>
-                    <td colspan="4">1.<b><span th:text="${employeeSettlement.totalDays}"/></b>
+                    <td colspan="4">1.<b><span th:text="${employeeSettlement}?${employeeSettlement.totalDays}:'nill'"/></b>
                         days Salary payable for the month of
-                        <b><span th:text="${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}"/></b>
+                        <b><span th:text="${employeeSettlementForm}?${#dates.format(employeeSettlementForm.settlementDate, 'dd-MMM-yyyy')}:'nill'"/></b>
                     </td>
                     <td><b>:</b></td>
                     <td colspan="1" style="padding:10px"><b>
-                        <span th:text="${T(com.indianeagle.internal.util.SimpleUtils).calculateEmployeeSettlementPayableSalary(employeeSettlement.basic, employeeSettlement.hra, employeeSettlement.conveyence, employeeSettlement.medicalAllowance, employeeSettlement.specialAllowance, employeeSettlement.otherAllowance)}"/></b>
+                        <span th:text="${employeeSettlement}?${T(com.indianeagle.internal.util.SimpleUtils).calculateEmployeeSettlementPayableSalary(employeeSettlement.basic, employeeSettlement.hra, employeeSettlement.conveyence, employeeSettlement.medicalAllowance, employeeSettlement.specialAllowance, employeeSettlement.otherAllowance)}:'nill'"/></b>
                     </td>
                 </tr>
                 <tr>
                     <td>2. Other Earnings</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.previousArrears + employeeSettlement.otherEarnings}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.previousArrears + employeeSettlement.otherEarnings}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>3. Gross Earnings</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.grossSalary}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.grossSalary}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td colspan="6" style="padding:10px"><b>DEDUCTIONS:</b></td>
@@ -151,45 +151,45 @@
                 <tr>
                     <td>4. PF on Salary</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.pfEmp}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.pfEmp}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>5. ESI</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.esi}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.esi}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>6. Professional Tax</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.PTax}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.PTax}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>7. Due in the HR Department (ID Card)</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.adminCharges}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.adminCharges}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>8. Medical Insurance</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.medicalInsurance}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.medicalInsurance}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>9. Other Deductions</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.otherDeductions + employeeSettlement.incomeTax}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.otherDeductions + employeeSettlement.incomeTax}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>10. Total Deductions</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.totalDeductions}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.totalDeductions}:'nill'"/></b></td>
                 </tr>
                 <tr>
                     <td>11. Net Amount Payable</td>
                     <td><b>:</b></td>
-                    <td><b><span th:text="${employeeSettlement.netSalary}"/></b></td>
+                    <td><b><span th:text="${employeeSettlement}?${employeeSettlement.netSalary}:'nill'"/></b></td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="padding:10px;font-size:15px"><b>(<span th:text="${T(com.indianeagle.internal.util.SimpleUtils).numberToWord(employeeSettlement.netSalary.intValue())}"/>
+                    <td colspan="6" style="padding:10px;font-size:15px"><b>(<span th:text="${employeeSettlement}?${T(com.indianeagle.internal.util.SimpleUtils).numberToWord(employeeSettlement.netSalary.intValue())}:'nill'"/>
                         Only)</b></td>
                 </tr>
                 <tr>
@@ -202,7 +202,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" align="center" style="padding:8px">
-                        <a th:href="@{javascript:void(0)}" onclick="printReport()" style="color:blue">Print</a>
+                        <a id="print" th:href="@{javascript:void(0)}" onclick="printReport();" style="color:blue">Print</a>
                     </td>
                 </tr>
             </table>
@@ -210,4 +210,5 @@
     </tr>
 </table>
 </body>
+</html>
 </html>
