@@ -3,24 +3,23 @@ package com.indianeagle.internal.controller;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.Incentives;
 import com.indianeagle.internal.form.IncentiveForm;
+import com.indianeagle.internal.form.vo.EmployeeVO;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.IncentiveService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.validation.Valid;
+import javax.jws.WebParam;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Action class for adding incentives for employees
@@ -28,56 +27,63 @@ import java.util.stream.Collectors;
  * @author kiran.paluvadi
  */
 @Controller
-@RequestMapping("/addIncentive")
+@RequestMapping("/incentive")
 public class IncentivesController {
-    Map<String, Employee> employeeMap;
-
+    private IncentiveForm incentiveForm;
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
     @Autowired
     private IncentiveService incentiveService;
 
     @PostConstruct
-    public void prepare() {
-        employeeMap = new HashMap<>();
+    public void loadData() {
+        List<EmployeeVO> employeeVOList = new ArrayList<>();
         for (Employee employee : employeeService.getEmployeeList()) {
-            employeeMap.put(employee.getEmpId(), employee);
+            EmployeeVO employeeVO = new EmployeeVO();
+            BeanUtils.copyProperties(employee,employeeVO);
+            employeeVOList.add(employeeVO);
         }
+        incentiveForm = new IncentiveForm();
+        incentiveForm.setEmployeeVOList(employeeVOList);
+
+    }
+
+    @InitBinder
+    public void initBinder(final WebDataBinder binder) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
     @GetMapping
     public String addIncentiveView(Model model) {
-        IncentiveForm incentiveForm = new IncentiveForm();
-        incentiveForm.setEmployeeList(new ArrayList(employeeMap.values()));
         model.addAttribute("incentiveForm", incentiveForm);
         return "html/addIncentive";
     }
 
     @PostMapping("/save")
-    public String saveIncentives(ModelMap modelMap, @Valid IncentiveForm incentiveForm, BindingResult bindingResult) {
-        System.out.println("##Incetive: " + incentiveForm.getIncentiveDate());
-        System.out.println("##Incetive: " + incentiveForm.getIncentivesList().get(0).getEmployee().getEmpId());
-        System.out.println("##Incetive: " + incentiveForm.getIncentivesList().get(0).getIncentiveAmount());
-        if (bindingResult.hasErrors()) {
-            return "html/addIncentive";
-        }
-        System.out.println("##save incentive");
-        for (Incentives incentives:incentiveForm.getIncentivesList()){
-            incentives.setEmployee(employeeMap.get(incentives.getEmployee().getEmpId()));
-        }
+    public String saveIncentives(ModelMap modelMap,@ModelAttribute IncentiveForm incentiveForm) {
         incentiveService.saveIncentives(incentiveForm);
         modelMap.addAttribute("success", "Save incentive Successfull");
-        modelMap.addAttribute("incentiveForm", new IncentiveForm());
+        modelMap.addAttribute("incentiveForm", this.incentiveForm);
         return "html/addIncentive";
 
     }
 
-    @RequestMapping("/search")
-    public String searchIncentives(ModelMap modelMap, @ModelAttribute IncentiveForm incentiveForm) {
-        List<Incentives> incentivesList = incentiveService.searchIncentives(incentiveForm.getIncentiveDate());
-        modelMap.addAttribute("incentiveForm", incentiveForm);
+    @GetMapping("/report")
+    public String searchIncentiveView(Model model){
+        incentiveForm.setIncentiveDate(new Date());
+        model.addAttribute("incentiveForm",incentiveForm);
+        return "html/incentiveReports";
+    }
+
+    @PostMapping("/search")
+    public String searchIncentives(ModelMap modelMap, @RequestParam Date incentiveDate) {
+        System.out.println("##date "+incentiveDate);
+        List<Incentives> incentivesList = incentiveService.searchIncentives(incentiveDate);
+
         modelMap.addAttribute("incentivesList", incentivesList);
-        return "html/addIncentive";
+        modelMap.addAttribute("incentiveForm",incentiveForm);
+        return "html/fragment/incentiveResult";
     }
 
 

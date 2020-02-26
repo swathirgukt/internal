@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add/Edit Leave</title>
 </head>
@@ -14,12 +14,12 @@
                 <div class="container">
                     <form action="/updateLeaves" id="employeeLeavesForm" name="employeeLeavesForm" method="post" th:action="@{/updateLeaves}">
                         <div class="Heading">Add/Edit Leave</div>
-                        <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:if="${success}!=null" th:text="${success}"></span>
+                        <span style="color: #008000;" th:text="${success}?:''" id="success"></span>
                         <div class="row">
                             <div class="col-md-12">
                                 Employee ID <span style="color:red">*</span> <b>:</b>
-                                <select  style="width: 200px;height: 23px;border-radius:5px" onchange="findEmployeeLeaves()" name="employeeId" id="employeeId">
-                                    <option th:each="empId : ${employeeIds}" th:value="${empId}">[[${empId}]]</option>
+                                <select  style="width: 200px;height: 23px;border-radius:5px" onchange="findEmployeeLeaves()"  name="employeeId" id="employeeId">
+                                    <option th:each="empId : ${employeeIds}" th:value="${empId}" th:text="${empId}"></option>
                                 </select>
                                 <div id="leavesResult" th:include="html/fragment/leavesResult :: leavesResult"></div>
                                 <button type="submit" class="submitButton" ><b>Submit</b>

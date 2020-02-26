@@ -4,6 +4,7 @@ import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
 import com.indianeagle.internal.form.GenerateAllSalariesForm;
 import com.indianeagle.internal.form.SalaryForm;
+import com.indianeagle.internal.form.SalaryRule;
 import com.indianeagle.internal.form.vo.DepartmentVO;
 import com.indianeagle.internal.form.vo.EmployeeVO;
 import com.indianeagle.internal.form.vo.SalaryHistoryVO;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -87,6 +89,18 @@ public class SalaryController {
 
     @GetMapping("/salaryByIndividual")
     public String salaryByIndividual(ModelMap modelMap) throws Exception {
+        Calendar fromDate = Calendar.getInstance();
+        Calendar toDate = Calendar.getInstance();
+
+        fromDate.add(Calendar.MONTH,-1);
+        toDate.add(Calendar.MONTH,-1);
+        fromDate.set(Calendar.DATE,fromDate.getActualMinimum(Calendar.DATE));
+        toDate.set(Calendar.DATE,toDate.getActualMaximum(Calendar.DATE));
+
+        salaryForm.setSalaryRule(new SalaryRule());
+        salaryForm.getSalaryRule().setSalaryDate(fromDate.getTime());
+        salaryForm.getSalaryRule().setSalaryEndDate(toDate.getTime());
+
         modelMap.addAttribute("salaryForm", salaryForm);
         return "html/salaryByIndividual";
     }
@@ -186,7 +200,12 @@ public class SalaryController {
             currentSalaryList = salaryService.produceAllSalaries(generateAllSalariesForm, httpSession);
             modelMap.addAttribute("currentSalaryList", currentSalaryList);
         } catch (Exception e) {
-            modelMap.addAttribute("error", "error occured due to technical problem");
+            String employeeId = (String)httpSession.getAttribute("errorEmployeeId"+httpSession.getId());
+            if (employeeId!=null) {
+                modelMap.addAttribute("error", "Error occured while generating salary for Employee ID :: "+employeeId);
+            }else{
+                modelMap.addAttribute("error", "Error occured due to technical problem");
+            }
             e.printStackTrace();
             return "html/eSalary";
         }
@@ -199,7 +218,7 @@ public class SalaryController {
    public String saveSalaries(ModelMap modelMap,HttpSession httpSession){
        try {
            this.salaryService.saveSalaries(httpSession);
-           return "Saved salaries for later modification success.";
+           return "Salaries saved for later modification successfully";
        } catch (Exception e) {
            e.printStackTrace();
            return "Error occured due to technical error.";

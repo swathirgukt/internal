@@ -1,0 +1,63 @@
+<div  xmlns:th="http://www.thymeleaf.org">
+<div class="row">
+    <div class="col-md-8 col-sm-12 col-xs-10">
+        <div th:if="${valuesError}!=null">
+            <b> <span style="color:red" th:text="${valuesError}"></span></b>
+        </div>
+        <table width="100%">
+            <tr>
+                <td>GROSS&nbsp;SALARY</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.grossSalary}:''" readonly="true"></td>
+            </tr>
+            <tr>
+                <td>Net Taxable Income</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.taxableIncome}:''" readonly="true"></td>
+            </tr>
+            <tr>
+                <td>Tax on Income</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text"th:value="${form16GenerationForm}!=null?${form16GenerationForm.taxOnIncome}:''"  readonly="true"></td>
+            </tr>
+            <div th:if="${form16GenerationForm}!=null">
+            <tr th:each="rebateData:${form16GenerationForm.rebates}">
+                <div th:if="${form16GenerationForm.taxableIncome <= rebateData.rebateApplySalary}">
+                <td th:text="${rebateData.rebateName}"></td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text"th:value="${rebateData.rebateAmount}"  readonly="true"></td>
+                </div>
+            </tr>
+            </div>
+            <tr>
+                <td>EDU cess(3%)</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.eduCess}:''"  readonly="true"></td>
+            </tr>
+            <tr>
+                <td>Total Tax on Income</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.totalTaxOnIncome}:''"  readonly="true"></td>
+            </tr>
+            <tr>
+                <td>Less : TDS Deducted</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding;5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.tdsDeducted}:''"  readonly="true"></td>
+            </tr>
+            <tr>
+                <td>Tax to be Deducted</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.taxTobeDeducted}:''"  readonly="true"></td>
+            </tr>
+            <tr>
+                <td>Per Month Tax</td>
+                <td width="10px"><b>:</b></td>
+                <td style="padding:5px"><input name="" type="text" th:value="${form16GenerationForm}!=null?${form16GenerationForm.perMonthTax}:''"  readonly="true">
+                </td>
+                <td style="padding:20px">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>

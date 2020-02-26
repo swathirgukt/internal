@@ -1,6 +1,6 @@
 package com.indianeagle.internal.form;
 
-import com.indianeagle.internal.dto.TaxSectionDeclaration;
+import com.indianeagle.internal.form.vo.TaxSectionDeclarationVO;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ public class TaxSectionForm {
     private Long id;
     private String sectionName;
     private BigDecimal sectionLimit;
-    private List<TaxSectionDeclaration> taxSectionDeclarations;
+    private List<TaxSectionDeclarationVO> taxSectionDeclarationVOS;
     private boolean active = true;
 
     public Long getId() {
@@ -44,12 +44,12 @@ public class TaxSectionForm {
         this.sectionLimit = sectionLimit;
     }
 
-    public List<TaxSectionDeclaration> getTaxSectionDeclarations() {
-        return taxSectionDeclarations;
+    public List<TaxSectionDeclarationVO> getTaxSectionDeclarationVOS() {
+        return taxSectionDeclarationVOS;
     }
 
-    public void setTaxSectionDeclarations(List<TaxSectionDeclaration> taxSectionDeclarations) {
-        this.taxSectionDeclarations = taxSectionDeclarations;
+    public void setTaxSectionDeclarationVOS(List<TaxSectionDeclarationVO> taxSectionDeclarationVOS) {
+        this.taxSectionDeclarationVOS = taxSectionDeclarationVOS;
     }
 
     public boolean isActive() {
@@ -58,5 +58,16 @@ public class TaxSectionForm {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "TaxSectionForm{" +
+                "id=" + id +
+                ", sectionName='" + sectionName + '\'' +
+                ", sectionLimit=" + sectionLimit +
+                ", taxSectionDeclarationVOS=" + taxSectionDeclarationVOS +
+                ", active=" + active +
+                '}';
     }
 }

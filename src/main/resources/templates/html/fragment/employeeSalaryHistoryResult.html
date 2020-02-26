@@ -15,8 +15,8 @@
                 <td th:text="${#dates.format(salary.salaryDate,'MM/dd/yyyy')}"></td>
                 <td th:text="${salary.grossSalary}"></td>
                 <td th:text="${salary.netSalary}"></td>
-                <td><a th:href="@{/salaryHistory/print/{id}(id=${salary.id})}">Print</a></td>
-                <td><a th:href="@{/salaryHistory/mail/{id}(id=${salary.id})}">Mail</a></td>
+                <td><a href="javascript: void(0);" th:onclick="|PopupCenter('/salaryHistory/print?id=${salary.id}','',1000,1000);|">Print</a></td>
+                <td th:id="|sendMail${salary.id}|"><a href="javascript: void(0);" th:onclick="|sendPayslipMail('/salaryHistory/mail?id=${salary.id}','${salary.id}');|">Mail</a></td>
             </tr>
         </table>
     </div>

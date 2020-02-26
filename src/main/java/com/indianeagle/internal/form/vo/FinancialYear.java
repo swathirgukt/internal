@@ -15,8 +15,8 @@ public class FinancialYear {
     private String fromYear;
     private String toMonth;
     private String toYear;
-    private Set<IncomeTaxSlab> incomeTaxSlabs;
-    private Set<Rebate> rebates;
+    private Set<IncomeTaxSlabVO> incomeTaxSlabVOS;
+    private Set<RebateVO> rebateVOS;
     private Set<TaxSection> taxSections;
 
     public Long getId() {
@@ -59,20 +59,20 @@ public class FinancialYear {
         this.toYear = toYear;
     }
 
-    public Set<IncomeTaxSlab> getIncomeTaxSlabs() {
-        return incomeTaxSlabs;
+    public Set<IncomeTaxSlabVO> getIncomeTaxSlabVOS() {
+        return incomeTaxSlabVOS;
     }
 
-    public void setIncomeTaxSlabs(Set<IncomeTaxSlab> incomeTaxSlabs) {
-        this.incomeTaxSlabs = incomeTaxSlabs;
+    public void setIncomeTaxSlabVOS(Set<IncomeTaxSlabVO> incomeTaxSlabVOS) {
+        this.incomeTaxSlabVOS = incomeTaxSlabVOS;
     }
 
-    public Set<Rebate> getRebates() {
-        return rebates;
+    public Set<RebateVO> getRebateVOS() {
+        return rebateVOS;
     }
 
-    public void setRebates(Set<Rebate> rebates) {
-        this.rebates = rebates;
+    public void setRebateVOS(Set<RebateVO> rebateVOS) {
+        this.rebateVOS = rebateVOS;
     }
 
     public Set<TaxSection> getTaxSections() {

@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
     @Autowired
     private UsersRepository usersRepository;
-    @Autowired
+
     private List<Employee> bufferedEmployees;
     @Autowired
     private MailingEngine mailingEngine;

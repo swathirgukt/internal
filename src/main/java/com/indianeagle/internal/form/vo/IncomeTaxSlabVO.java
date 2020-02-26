@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * User: kalesha
  * Date: 7/31/2017
  */
-public class IncomeTaxSlab implements Comparable<IncomeTaxSlab> {
+public class IncomeTaxSlabVO implements Comparable<IncomeTaxSlabVO> {
 
     private Long id;
     private BigDecimal minIncome;
@@ -57,7 +57,7 @@ public class IncomeTaxSlab implements Comparable<IncomeTaxSlab> {
     }
 
     @Override
-    public int compareTo(IncomeTaxSlab incomeTaxSlab) {
-        return this.minIncome.compareTo(incomeTaxSlab.getMinIncome());
+    public int compareTo(IncomeTaxSlabVO incomeTaxSlabVO) {
+        return this.minIncome.compareTo(incomeTaxSlabVO.getMinIncome());
     }
 }

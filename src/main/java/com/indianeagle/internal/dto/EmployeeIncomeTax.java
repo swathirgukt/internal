@@ -19,7 +19,7 @@ public class EmployeeIncomeTax extends BaseDto{
 
     @Column(name = "EMP_ID")
     private String empId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "FINANCIAL_YEAR_ID", nullable = false)
     private FinancialYear financialYear;
     @Column(name = "GROSS_SALARY")

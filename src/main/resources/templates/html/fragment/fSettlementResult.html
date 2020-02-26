@@ -1,0 +1,34 @@
+<div th:fragment="settlementResult" xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${employeeList} != null AND ${employeeList.size()}>0">
+
+        <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
+            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Designation</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+            <tr style="background-color:#FFFFFF;color: #000000;padding: 50px" th:each="employee :${employeeList}">
+                <td th:text="${employee.empId}"></td>
+                <td th:text="${employee.fullName}"></td>
+                <td th:text="${employee.designation}"></td>
+                <td th:text="${employee.department.department}"></td>
+                <td>
+                    <span th:if="${employee.empStatus=='working'} OR ${employee.relieveDate}==null">
+                        <a th:href="@{/goUrl(employeeName=${employee.fullName},employeeDesignation=${employee.designation},employeeId=${employee.empId})}">Go</a>
+                   </span>
+                    <span th:unless="${employee.empStatus=='working'} OR ${employee.relieveDate}==null">
+                       <a target="_blank" th:href="@{/viewUrl(employeeId=${employee.empId})}">View</a>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div style="font: 15pt 'Arial Black';color: #ff0000;"
+         th:if="${employeeList}!=null  AND ${employeeList.size()}==0">
+        Sorry! No Results found
+    </div>
+</div>

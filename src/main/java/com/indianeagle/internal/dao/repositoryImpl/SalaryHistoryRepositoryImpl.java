@@ -1,6 +1,7 @@
 package com.indianeagle.internal.dao.repositoryImpl;
 
 import com.indianeagle.internal.dao.repository.SalaryHistoryRepositoryCustom;
+import com.indianeagle.internal.dto.SalaryHistory;
 import com.indianeagle.internal.util.CalculationRules;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,4 +97,23 @@ public class SalaryHistoryRepositoryImpl implements SalaryHistoryRepositoryCusto
         }
         return totalList;
     }
+    public List<SalaryHistory> findSalaryHistoryByEmpId(String empId, Date salaryDate, Date salaryEndDate) {
+        Query query = entityManager.createNativeQuery("select * from SALARY_HISTORY s where EMP_ID =? AND MONTH(SALARY_DATE) =  MONTH(?) AND YEAR(SALARY_DATE) = YEAR(?)AND MONTH(SALARY_DATE) =  MONTH(?) AND YEAR(SALARY_DATE) = YEAR(?)",SalaryHistory.class);
+        query.setParameter(1, empId);
+        query.setParameter(2, salaryDate);
+        query.setParameter(3, salaryDate);
+        query.setParameter(4, salaryDate);
+        query.setParameter(5, salaryDate);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<SalaryHistory> findSalaryHistoriesWithInFinancialYear(String empId, Date fromDate, Date toDate) {
+       Query query=entityManager.createNativeQuery("select * from SALARY_HISTORY sh where EMP_ID=? and SALARY_END_DATE between DATE(?) and DATE(?)",SalaryHistory.class);
+         query.setParameter(1,empId);
+         query.setParameter(2,fromDate);
+         query.setParameter(3,toDate);
+       return query.getResultList();
+    }
 }
+

@@ -154,24 +154,8 @@ public class EmployeeSavingsController {
     @PostMapping("/saveOrUpdateEmployeeFinancialYear")
     public String saveOrUpdateEmployeeFinancialYear(@ModelAttribute EmployeeFinancialYearForm employeeFinancialYearForm,@ModelAttribute EmployeeVO employeeVO,ModelMap modelMap) {
         financialYearForm = new FinancialYearForm();
-        /*if (validation(employeeFinancialYearForm)) {
-            return INPUT;
-        }*/
-
-       System.out.println("======employeeVOemployeeVO========="+employeeVO);
-        System.out.println("============employeeForm============"+employeeFinancialYearForm.getEmployeeTaxSectionForms().get(0).getEmployeeTaxSectionDeclarations().get(0).getSaveAmount());
-
-        System.out.println("==============================");
-        System.out.println("============employeeForm============"+employeeFinancialYearForm);
-        System.out.println("==============================");
-        System.out.println("============employeeForm============"+employeeFinancialYearForm.getEmployeeTaxSectionForms());
-        System.out.println("==============================");
-        System.out.println("============employeeForm============"+employeeFinancialYearForm.getEmployeeTaxSectionForms().get(0).getEmployeeTaxSectionDeclarations().get(0).getSubSectionName());
-
-
         saveEmployee(employeeVO,employeeFinancialYearForm);
        departmentService.saveOrUpdateEmployeeFinancialYear( prepareEmployeeFinancialYear(employeeFinancialYearForm));
-               // prepareEmployeeFinancialYear(employeeFinancialYearForm);
         successfulSubmission = true;
         employeeFinancialYearForm = null;
         employeeVO = null;

@@ -20,13 +20,13 @@
                 <td><input style="border:0px none;width:220px" readonly="true" type="text"
                            th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].fullName}"/>
                 </td>
-                <td style="text-align: center;"><input type="text" style="width:55%;border-radius:5px" id="lopDays"
+                <td style="text-align: center;"><input type="text" style="width:60%;border-radius:5px" id="lopDays"
                            th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].lopDays}" onkeypress="return allowOnlyMonthlyDigits(event,'lopDays')" />
                 </td>
                 <td style="text-align: center;"><input type="text"  style="width:60%;border-radius:5px" id="arrDays"
                            th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].arrearsDays}" onkeypress="return allowOnlyMonthlyDigits(event,'arrDays')" />
                 </td>
-                <td style="text-align: center;"><input type="text" style="width:90%;border-radius:5px"
+                <td style="text-align: center;"><input type="text" style="width:80%;border-radius:5px"
                            th:field="${generateAllSalariesForm.empSalaryDeciderVOList[__${status.index}__].salaryInAdvance}" onkeypress="return allowRealNo(event,this.value)"/>
                 </td>
                 <td><input type="text" style="border-radius:5px"

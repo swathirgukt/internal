@@ -1,0 +1,18 @@
+[EmployeeTaxSection{sectionName='U/s 10', sectionLimit=1000000.00, active=true,
+employeeTaxSectionDeclarations=[com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration@d30dee5]},
+EmployeeTaxSection{sectionName='U/s 80D', sectionLimit=25000.00, active=true,
+ employeeTaxSectionDeclarations=[com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration@76010941]},
+ EmployeeTaxSection{sectionName='U/s 80C', sectionLimit=150000.00, active=true,
+  employeeTaxSectionDeclarations=[com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration@353a4976]}]
+salaryHISTORIES:  [SalaryHistory{id='3660'empId='YSPL1330', salaryDate=2017-04-19 19:00:00.0, performanceIncentives=0.00, salaryInAdvance=0.00, arrearsDays=3, lopDays=12, salaryEndDate=2017-05-18 19:00:00.0, mailSent=true}, SalaryHistory{id='3690'empId='YSPL1330', salaryDate=2017-05-31 19:00:00.0, performanceIncentives=0.00, salaryInAdvance=0.00, arrearsDays=0, lopDays=12, salaryEndDate=2017-06-29 19:00:00.0, mailSent=true}, SalaryHistory{id='3723'empId='YSPL1330', salaryDate=2017-06-30 19:00:00.0, performanceIncentives=0.00, salaryInAdvance=0.00, arrearsDays=0, lopDays=12, salaryEndDate=2017-07-30 19:00:00.0, mailSent=true}]
+salaryHistories size:  3
+financialYear:  FinancialYear{fromMonth='APR', fromYear='2017', toMonth='MAR', toYear='2018', incomeTaxSlabs=null,
+rebates=null, taxSections=null}
+income earned by employee:  null
+Sun Apr 30 00:00:00 CDT 2017
+Sat Mar 31 00:00:00 CDT 2018
+totalSalaryHistoryForm:    com.indianeagle.internal.form.TotalSalaryHistoryForm@5369c3df
+com.indianeagle.internal.form.TotalSalaryHistoryForm@5369c3df
+in retrieve methodnull
+employee taxSectionForms:        [EmployeeTaxSectionForm{id=15, sectionName='U/s 10', sectionLimit=0, active=true, employeeTaxSectionDeclarations=[com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration@d30dee5]}, EmployeeTaxSectionForm{id=14, sectionName='U/s 80C', sectionLimit=0, active=true, employeeTaxSectionDeclarations=[com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration@353a4976]}, EmployeeTaxSectionForm{id=13, sectionName='U/s 80D', sectionLimit=0, active=true, employeeTaxSectionDeclarations=[com.indianeagle.internal.dto.EmployeeTaxSectionDeclaration@76010941]}]
+in next month form16 utils

@@ -56,7 +56,7 @@ public interface SalaryHistoryRepository extends JpaRepository<SalaryHistory, Lo
 
 
     @Query("select e from Employee e where e.empId =:empId")
-    List<Employee> findEmployeeByEmpId(@Param("empId") String empId);
+   Employee findEmployeeByEmpId(@Param("empId") String empId);
 
 
     /**
@@ -86,8 +86,7 @@ public interface SalaryHistoryRepository extends JpaRepository<SalaryHistory, Lo
      * @param salaryDate,salaryEndDate
      * @return
      */
-    @Query(" from SalaryHistory s where s.empId =:empId AND MONTH(s.salaryDate) =  MONTH(salaryDate) AND YEAR(s.salaryDate) = YEAR(:salaryDate)AND MONTH(s.salaryDate) =  MONTH(:salaryEndDate) AND YEAR(s.salaryDate) = YEAR(:salaryEndDate)")
-    List<SalaryHistory> findSalaryHistoryByEmpId(@Param("empId") String empId, @Param("salaryDate") Date salaryDate, @Param("salaryEndDate") Date salaryEndDate);
+
 
     /**
      * To find the salary history of an employee within two dates
@@ -101,5 +100,7 @@ public interface SalaryHistoryRepository extends JpaRepository<SalaryHistory, Lo
 
     //List<SalaryHistory> findSalaryHistoriesWithInFinancialYear(String empId, Date fromDate, Date toDate);
     // @Query("SELECT sh from SalaryHistory sh where sh.empId=:empId and sh.salaryEndDate between DATE(:startDate) and DATE(:endDate)")
+   // List<SalaryHistory> findByEmpIdAndSalaryEndDateBetween(@Param("empId") String empId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
     List<SalaryHistory> findByEmpIdAndSalaryEndDateBetween(@Param("empId") String empId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 }

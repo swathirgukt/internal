@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Department</title>
 </head>
@@ -16,7 +16,7 @@
                     <form action="department/save" id="departmentForm" name="departmentForm" method="post" th:action="@{department/save}" th:object="${department}">
                         <div class="Heading">Department Details</div>
                         <div class="row">
-                            <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:if="${success}!=null" th:text="${success}"></span>
+                            <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" th:text="${success}?:''"></span>
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                 <div>
                                     <table width="100%">
@@ -30,8 +30,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td><span style="color:#ff0000;" th:errors="*{deptNo}"
-                                                      th:if="${#fields.hasErrors('deptNo')}">DeptNo Erro</span></td>
+                                            <td><span style="color:#ff0000;" id="deptNoError"></span></td>
                                         </tr>
                                         <tr>
                                             <td>Manager No <span style="color: #ff0000">*</span></td>
@@ -43,8 +42,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td><span style="color:#ff0000;" th:errors="*{mngrNo}"
-                                                      th:if="${#fields.hasErrors('mngrNo')}">MngrNo Error</span></td>
+                                            <td><span style="color:#ff0000;" id="managerNoError"></span></td>
                                         </tr>
                                         <tr>
                                             <td>Phone No <span style="color: #ff0000">*</span></td>
@@ -56,8 +54,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td><span style="color:#ff0000;" th:errors="*{phoneNo}"
-                                                      th:if="${#fields.hasErrors('phoneNo')}">PhoneNo Error</span></td>
+                                            <td><span style="color:#ff0000;" id="phoneNoError"></span></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -75,8 +72,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td><span style="color:#ff0000;" th:errors="*{department}"
-                                                      th:if="${#fields.hasErrors('department')}">DeptName Error</span>
+                                            <td><span style="color:#ff0000;" id="deptNameError"></span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -90,11 +86,13 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td><span style="color:#ff0000;" th:errors="*{location}"
-                                                      th:if="${#fields.hasErrors('location')}">Location Error</span>
+                                            <td><span style="color:#ff0000;" id="locationError"></span>
                                             </td>
                                         </tr>
                                     </table>
+                                </div>
+                                <div style="float:left;margin-top:25px;">
+                                    <span style="color:#252525;">Note <b>:</b> You can search department by name.</span>
                                 </div>
                                 <div style="margin-top:50px;">
                                     <div style="float: left;">
