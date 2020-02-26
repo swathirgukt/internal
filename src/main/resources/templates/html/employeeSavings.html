@@ -127,9 +127,8 @@
                             <div class="col-md-12 col-sm-12 col-xs-10">
                                 <ul>
                                     <li id="employeeInfo">
-                                        <input th:name="${employeeVO.fullName}" th:value="${employeeVO.fullName}=='null null'?'':${employeeVO.fullName}" id="fullname" placeholder="Full Name" type="text"
+                                        <input th:field="${employeeVO.fullName}" placeholder="FullName" type="text"
                                                 readonly="true">
-
                                         <input th:field="${employeeVO.designation}" placeholder="Designation" type="text"
                                                readonly="true">
                                         <input th:field="${employeeVO.panNo}" placeholder="PAN Card No" type="text"
