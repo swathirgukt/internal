@@ -48,8 +48,17 @@
                                             <td> Department</td>
                                             <td width="15px"><b>:</b></td>
                                             <td><select th:field="${employeeForm.department}" class="selectOption">
-                                                <option value="">select</option>
+                                                <option value="">All</option>
                                                 <option th:each="branches : ${employeeForm.departments}" th:value="${branches.department}" th:text="${branches.department}"/>
+                                               <!-- <option th:value="Admin">Admin</option>
+                                                <option th:value="IT">IT</option>
+                                                <option th:value="CC-IE">CC-IE</option>
+                                                <option th:value="CC-TTS">CC-TTS</option>
+                                                <option th:value="Operations">Operations</option>
+                                                <option th:value="Accounts">Accounts</option>
+                                                <option th:value="HR">HR</option>
+-->
+
                                             </select>
                                             </td>
                                         </tr>
