@@ -185,7 +185,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.joinDate}"/>
+                                                       width="179px" name="datepicker" th:field="${employeeForm.employeeVO.joinDate}"/>
                                                 <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                             <td><span id="joinDate" style="color:red"></span></td>
@@ -212,8 +212,8 @@
                                             <td>Department<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select id="department" name="department" th:field="${employeeForm.department}">
-                                                    <option value="select">select </option>
+                                                <select class="selectOption" id="department" name="department" th:field="${employeeForm.department}">
+                                                    <option value="select">select</option>
                                                     <option th:each="branches : ${employeeForm.departments}"
                                                             th:value="${branches.department}"
                                                             th:text="${branches.department}"/>
@@ -237,7 +237,7 @@
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
-                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.dob}"/>
+                                                       width="179px" name="datepicker" th:field="${employeeForm.employeeVO.dob}"/>
                                                 <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                             <td><span id="dob" style="color:red"></span></td>
@@ -331,7 +331,7 @@
                                             </td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
-                                                       width="200px" name="datepicker" th:field="${employeeForm.employeeVO.nomineeVO.dateOfBirth}"/>
+                                                       width="179px" name="datepicker" th:field="${employeeForm.employeeVO.nomineeVO.dateOfBirth}"/>
                                                 <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                             </td>
                                         </tr>
@@ -353,7 +353,7 @@
                                             <td>Relation<span style="float:right; margin-right:10px;">:</span></td>
                                             <td>
                                                 <select class="selectOption" th:field="${employeeForm.employeeVO.nomineeVO.relation}">
-                                                    <option value="">--Select--</option>
+                                                    <option value="">select</option>
                                                     <option value="Father">Father</option>
                                                     <option value="Mother">Mother</option>
                                                     <option value="Husband">Husband</option>
@@ -379,7 +379,7 @@
                                             <td>Role<span style="color:red">*</span><span
                                                     style="float:right; margin-right:10px;">:</span></td>
                                             <td>
-                                                <select id="role_Auth" name="role_Auth" th:field="${employeeForm.roleName}">
+                                                <select class="selectOption" id="role_Auth" name="role_Auth" th:field="${employeeForm.roleName}">
                                                     <option value="select">select </option>
                                                     <option th:each="roles : ${employeeForm.rolesList}"
                                                             th:value="${roles.roleName}"
