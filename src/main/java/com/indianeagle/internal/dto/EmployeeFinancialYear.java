@@ -21,7 +21,7 @@ public class EmployeeFinancialYear extends BaseDto {
 
     @Column(name = "EMP_ID")
     private String empId;
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "FINANCIAL_YEAR_ID", nullable = false)
     private FinancialYear financialYear;
 

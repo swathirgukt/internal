@@ -103,13 +103,13 @@ public class SalaryHistoryServiceImpl implements SalaryHistoryService, MessageSo
 		return byteArrayInputStream;
 	}
 
-    @PostConstruct
+    /*@PostConstruct
     public void registerFonts() {
-    	/* iText register fonts from Operating System default font folder */
+    	*//* iText register fonts from Operating System default font folder *//*
     	factoryImp = new FontFactoryImp();
 		factoryImp.registerDirectories();
 		FontFactory.setFontImp(factoryImp);
-    }
+    }*/
 
 	/**
 	 * @param salaryHistoryDAO the salaryHistoryDAO to set

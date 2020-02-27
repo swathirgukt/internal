@@ -23,9 +23,7 @@
                                         <tr>
                                             <td>Department No <span style="color: #ff0000">*</span></td>
                                             <td width="15px"><b>:</b></td>
-                                            <td style="padding: 5px"><input maxlength="20" th:field="*{deptNo}"
-                                                                            type="text">
-                                            </td>
+                                            <td style="padding: 5px"><input maxlength="20" th:field="*{deptNo}" type="text" style="border-radius:5px"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -36,7 +34,7 @@
                                             <td>Manager No <span style="color: #ff0000">*</span></td>
                                             <td width="15px"><b>:</b></td>
                                             <td style="padding: 5px"><input onkeypress="return allowPositiveInt(event)" maxlength="20" th:field="*{mngrNo}"
-                                                                            type="text">
+                                                                            type="text" style="border-radius:5px">
                                             </td>
                                         </tr>
                                         <tr>
@@ -48,7 +46,7 @@
                                             <td>Phone No <span style="color: #ff0000">*</span></td>
                                             <td width="15px"><b>:</b></td>
                                             <td style="padding: 5px"><input onkeypress="return allowPositiveInt(event)" maxlength="11" th:field="*{phoneNo}"
-                                                                            type="text">
+                                                                            type="text" style="border-radius:5px">
                                             </td>
                                         </tr>
                                         <tr>
@@ -59,14 +57,13 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <div>
+                            <div class="col-md-6 col-sm-12 col-xs-10" style="margin-top:-25px">
                                     <table width="100%">
                                         <tr>
                                             <td>Department Name <span style="color: #ff0000">*</span></td>
                                             <td width="15px"><b>:</b></td>
                                             <td style="padding: 5px"><input maxlength="25" th:field="*{department}"
-                                                                            type="text">
+                                                                            type="text" style="border-radius:5px">
                                             </td>
                                         </tr>
                                         <tr>
@@ -80,7 +77,7 @@
                                             </td>
                                             <td width="15px"><b>:</b></td>
                                             <td style="padding: 5px"><input maxlength="150" th:field="*{location}"
-                                                                            type="text">
+                                                                            type="text" style="border-radius:5px">
                                             </td>
                                         </tr>
                                         <tr>
@@ -90,8 +87,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </div>
-                                <div style="float:left;margin-top:25px;">
+                                <div style="float:left;margin-top:24px;">
                                     <span style="color:#252525;">Note <b>:</b> You can search department by name.</span>
                                 </div>
                                 <div style="margin-top:50px;">

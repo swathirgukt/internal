@@ -41,7 +41,7 @@
                                             <td>Amount</td>
                                             <td><b>:</b></td>
                                             <td><input th:field="*{chequeDetails.amount}"
-                                                       type="text"/></td>
+                                                       type="text" onkeypress="return allowPositiveInt(event)"/></td>
                                         </tr>
                                         <tr>
                                             <td>Status</td>
@@ -122,7 +122,7 @@
                                        type="text"/>
 
 								<span style="margin-left: 10px;">
-									<button class="searchButton" onclick="searchChequeDetails()" type="button">Search</button>
+									<button class="submitButton" onclick="searchChequeDetails()" type="button">Search</button>
 								</span>
 							</span>
                             </div>

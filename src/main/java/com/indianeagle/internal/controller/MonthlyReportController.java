@@ -56,13 +56,15 @@ public class MonthlyReportController {
                 model.addAttribute("selectDate", "please select date");
                 return "html/monthlySalaryReport";
             }
-            List<MonthlySalaryReport> monthlySalaryList = new ArrayList<>();/* monthlyReportService.getMonthlySalaryReport(salaryDate);*/
+
+            List<MonthlySalaryReport>   monthlySalaryList = monthlyReportService.getMonthlySalaryReport(salaryDate);
+
             if (monthlySalaryList.isEmpty()) {
                 model.addAttribute("recordMessage", "No Records Found");
                 return "html/monthlySalaryReport";
             }
             model.addAttribute("monthlySalaryList", monthlySalaryList);
-            return "html/monthlySalaryReport";
+            return "html/fragment/monthlySalaryReportResult";
         } catch (Exception e) {
             model.addAttribute("Problem occured due to technical problem");
             LOG.error("Problem occured due to technical problem", e);

@@ -18,12 +18,8 @@
                         <div th:if="${save}!=null">
                             <span th:text="${save}" style="color:green;font-size:17px;"></span>
                         </div>
-                        <span id="demo" style="color:red;font-size:17px;"></span>
-                        <span id="demo6" style="color:red;font-size:17px;"></span>
-                        <span id="demo9" style="color:red;font-size:17px;"></span>
-                        <div>
-                            <span id='error' style="color:green;font-size:17px;"></span>
-                        </div>
+                        <p id="demo6" style="color:red;font-size:17px;"></p>
+                        <p id="demo9" style="color:red;font-size:17px;"></p>
                         <div class="row" style="border-bottom:1px solid #adad85">
                             <div class="col-md-6 col-sm-12 col-xs-10">
                                 <table width="100%">
@@ -41,19 +37,20 @@
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-12 col-xs-10">
+                                <p id="demo" style="color:red;font-size:20px;"></p>
                                 <table width="80%">
                                     <tr>
                                         <td>Type<span style="color: #ff0000">*</span></td>
                                         <td><b>:</b></td>
                                         <td style="padding:10px">
-                                            <select class="selectOption" th:field="*{empStatus}"
+                                            <select class="selectOption" th:field="*{empStatus}" id="selec"
                                                     onchange="updateDatesRow(this.value)">
                                                 <option th:value="Resigned">Resigned</option>
                                                 <option th:value="Terminated">Terminated</option>
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr id="resignationDateId" style="display:block;">
+                                    <tr id="resignationDateId">
                                         <td style="padding: 5px">Date&nbsp;of&nbsp;Resignation<span style="color: #ff0000">*</span></td>
                                         <td style="padding: 5px"><b>:</b></td>
                                         <td style="padding: 5px"><input style="border: 1px solid #ff9900;" id="datepicker"
@@ -61,8 +58,6 @@
                                                    required/>
                                             <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
-                                        <td><span id="demo1" style="color:red"></span></td>
-
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px"> Date&nbsp;of&nbsp;<span id="RelevingDate">Relieving</span><span
@@ -73,7 +68,6 @@
                                             <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
 
                                         </td>
-                                        <td><span id="demo2" style="color:red"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px"> Date&nbsp;of&nbsp;Settlement<span style="color: #ff0000">*</span></td>
@@ -83,16 +77,15 @@
                                             <script>$('#datepicker3').datepicker({ uiLibrary: 'bootstrap' }); </script>
 
                                         </td>
-                                        <td><span id="demo3" style="color:red"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px">Reason&nbsp;For&nbsp;Leaving</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}"></textarea></td>
+                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}" spellcheck="true" /></td>
                                     </tr>
                                 </table>
                             </div>
-                        </div><hr>
+                        </div><hr class="new1">
                         <div class="row">
                             <div class="col-md-6 col-sm-10 col-xs-5">
                                 <table>
@@ -103,12 +96,12 @@
                                         <td  style="padding: 5px">Previous&nbsp;ARR</td>
                                         <td  style="padding: 5px"><b>:</b></td>
                                         <td style="padding:5px"><input type="text"
-                                                                        th:field="*{previousArrearsEarnings}"></td>
+                                                                        th:field="*{previousArrearsEarnings}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px">Other&nbsp;Earnings</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementEarnings}"></td>
+                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementEarnings}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -120,12 +113,12 @@
                                     <tr>
                                         <td style="padding: 5px">Admin&nbsp;Charges</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding:5px"><input type="text" th:field="*{adminCharges}"></td>
+                                        <td style="padding:5px"><input type="text" th:field="*{adminCharges}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px">Other&nbsp;Deductions</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementDeductions}"></td>
+                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementDeductions}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -135,13 +128,13 @@
                                 <table width="100%">
                                     <tr>
                                         <td>
-                                            <button class="submitButton" onclick="submitCalculate()" type="button">
+                                            <button class="submitButton" onclick="submitCalculate()" type="button" id="calculatebtn">
                                                 <b>Calculate</b>
                                             </button>
                                         </td>
                                         <td>
                                             <button class="submitButton" onclick="saveEmployeeSettlement()"
-                                                    type="button">
+                                                    type="button" id="savebtn">
                                                 <b>Save</b>
                                             </button>
                                         </td>

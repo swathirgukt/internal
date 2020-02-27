@@ -15,11 +15,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-
     <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/validation.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/form16.js}" type="text/javascript"></script>
-    <script src="../static/js/custom.js" th:src="@{js/itSection.js}" type="text/javascript"></script>
+    <script src="../static/js/custom.js" th:src="@{js/employeeSavings.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/employeeSettlement.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/organisation.js}" type="text/javascript"></script>
 
@@ -94,14 +93,14 @@
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Incentives
                                         <i class="fa fa-caret-right"></i></a>
                                         <div class="dropdown-menu-2">
-                                            <a th:href="@{/incentive}">Add Incentives</a>
-                                            <a th:href="@{/incentive/report}">Reports</a>
+                                            <a th:href="@{/addIncentive}">Add Incentives</a>
+                                            <a th:href="@{reports}">Reports</a>
                                         </div>
                                     </div>
                                     <div class="dropdown-2"><a class="dropdown-toggle-2" data-toggle="dropdown" href="#">Form16
                                         <i class="fa fa-caret-right"></i></a>
                                         <div class="dropdown-menu-2">
-                                            <a th:href="@{/incomeTaxSections}">IT Sections</a>
+                                            <a th:href="@{itSections}">IT Sections</a>
                                             <a th:href="@{employeeSavings}">Employee Savings</a>
                                             <a th:href="@{/form16Generation}">Form16 Generation</a>
                                             <a th:href="@{savedForms}">Saved Forms</a>
@@ -122,7 +121,7 @@
                                             <a th:href="@{/approveLeave}">Approve Leaves</a>
                                             <a th:href="@{/employeeLeaveReport}">Employee Leave Reports</a>
                                             <a th:href="@{/allEmployeeLeaveReport}">All Employee Leave Reports</a>
-                                            <a th:href="@{/addEditLeaves}">Add/Edit Leaves</a>
+                                            <a th:href="@{addEdit}">Add/Edit Leaves</a>
                                         </div>
                                     </div>
                                     <div><a href="#">Holiday List</a></div>
@@ -137,7 +136,7 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                            <li><a th:href="@{sign}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                         </ul>
                     </div>
                 </div>

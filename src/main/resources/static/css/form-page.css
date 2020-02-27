@@ -128,5 +128,14 @@
      padding-left: 1px;
 
 }
-
+hr.new1 {
+  border-top: 1px solid gray;
+}
+ .sticky th{
+ background-color:#333333;
+ color: #FFFFFF;
+ padding: 50px;
+position: sticky;
+  top: 0;
+}
 
