@@ -41,7 +41,7 @@
                                             <td>Amount</td>
                                             <td><b>:</b></td>
                                             <td><input th:field="*{chequeDetails.amount}"
-                                                       type="text"/></td>
+                                                       type="text" onkeypress="return allowPositiveInt(event)"/></td>
                                         </tr>
                                         <tr>
                                             <td>Status</td>
