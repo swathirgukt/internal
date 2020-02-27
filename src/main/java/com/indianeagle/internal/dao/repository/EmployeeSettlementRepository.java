@@ -1,6 +1,9 @@
 package com.indianeagle.internal.dao.repository;
 
 import com.indianeagle.internal.dto.EmployeeSettlement;
+
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,10 +38,10 @@ public interface EmployeeSettlementRepository extends JpaRepository<EmployeeSett
      * @return
      */
     @Query("select empSettlement from EmployeeSettlement as  empSettlement join fetch empSettlement.employee as employee where employee.empId=:empId")
-    EmployeeSettlement findResignedEmployeeSettlementByEmployeeId(@Param("empId") String empId);
+    List<EmployeeSettlement> findResignedEmployeeSettlementByEmployeeId(@Param("empId") String empId);
 
     /**
-     * MEthod to find monthly employee settlement
+     * Method to find monthly employee settlement
      *
      * @param date the monthly date
      * @return employee settlement list for the given month
