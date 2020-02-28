@@ -261,14 +261,35 @@ function searchEmployeeStatus() {
  }
 
  function monthlySalaryReport()
- {
- var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
-     response.done(function (responseData) {
-         if (responseData) {
-             $("#monthlySalaryResult").html(responseData);
-         }
+  {
+      var x = document.forms["monthlySalaryForm"]["salaryDate"]
+  var error = false;
+     if(x.value == "") {
+         console.log("come in x");
+         document.getElementById("salDate").innerHTML="please select date";
+         error = true;
+     }
 
-     });
- }
+     if(error){return;}
+
+  var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+      response.done(function (responseData) {
+          if (responseData) {
+              $("#monthlySalaryResult").html(responseData);
+          }
+
+      });
+  }
+
+  function basicSalarySearch()
+    {
+    var response = makeAJAXCall("/basicSalaryDetailsReport", 'basicSalary');
+        response.done(function (responseData) {
+            if (responseData) {
+                $("#basicSearchResult").html(responseData);
+            }
+
+        });
+    }
 
 

@@ -61,7 +61,7 @@ public class BasicSalaryDetailsController {
             model.addAttribute("exceptionMessage", "service problem");
             return "html/basicSalaryDetails";
         }
-        return "html/basicSalaryDetails";
+        return "html/fragment/basicSalaryResult";
     }
 
 }
