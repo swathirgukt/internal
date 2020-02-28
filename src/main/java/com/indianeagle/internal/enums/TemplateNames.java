@@ -20,7 +20,7 @@ package com.indianeagle.internal.enums;
  */
 public enum TemplateNames {
 
-    MAIL_TEMPLATE_PATH("/mail-templates/"),
+    MAIL_TEMPLATE_PATH("mail/"),
 
     IE_Payslip,
     form16Pdf;

@@ -19,12 +19,11 @@
                         <a th:href="@{/goUrl(employeeName=${employee.fullName},employeeDesignation=${employee.designation},employeeId=${employee.empId})}">Go</a>
                    </span>
                     <span th:unless="${employee.empStatus=='working'} OR ${employee.relieveDate}==null">
-                       <a th:href="@{/viewUrl(employeeId=${employee.empId})}">View</a>
+                       <a target="_blank" th:href="@{/viewUrl(employeeId=${employee.empId})}">View</a>
                     </span>
                 </td>
             </tr>
         </table>
-
     </div>
 
     <div style="font: 15pt 'Arial Black';color: #ff0000;"

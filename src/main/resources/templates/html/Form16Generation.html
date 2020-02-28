@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Form16Generation</title>
+    <style>
+         a
+ {
+    cursor: pointer;
+}
+ul {
+  list-style-type: none;
+}
 
+    </style>
 </head>
 <script>
-function searchEmployeeByNameInForm16Generation(){
-    console.log("in searchemployee java script method");
-  var url="/searchEmployeeByNameInForm16Generation";
-  var form=document.getElementById("form16GenerationData");
-  form.action=url;
-  form.submit();
-    }
-    function setEmployeeId(empId){
-    console.log(empId);
-    document.getElementById('empId').value=empId;
-}
+
+
 </script>
-<body>
+<body onload="calculateTotalIncomeEarnedByEmployee()">
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
     <div class="row content">
@@ -25,39 +25,61 @@ function searchEmployeeByNameInForm16Generation(){
         </div>
         <div class="col-lg-8 text-left">
             <div class="jumbotron">
-                <form  id="form16GenerationData" method="post" th:action="saveEmployee" name="form16Generation" th:object="${employeeFinancialYearForm}" theme="simple">
+
+                <div class="container" style="margin-left:10px">
+                <form id="form16GenerationData" method="post" th:action="@{/saveForm}" name="form16Generation"
+                      >
+                    <div th:if="${data}!=null">
+                       <b> <span style="color:red" th:text="${data}">pdf technical error</span></b>
+                    </div>
+                    <b> <span style="color:red" th:if="${technicalError}!=null" th:text="${technicalError}"></span></b>
                     <div class="Heading">Income Tax Sections</div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-10">
                             <div>
+                                <div th:if ="${employeeFinancialYearForm}!=null">
+                                <input type="hidden" th:if ="${employeeFinancialYearForm.financialYear}!= null">
+                                <input type="hidden" th:if ="${employeeFinancialYearForm.financialYear}!= null"
+                                     th:field ="${employeeFinancialYearForm.financialYear.id}" />
+                                </div>
+                                <!--<input type="hidden" th:if ="${form16GenerationForm.id != null}"
+                                    th:field ="${form16GenerationForm.id}" />-->
+
+
+                                <!-- <div th:if test="%{form16GenerationForm.id }!= null">
+                                     <input type="hidden" name="form16GenerationForm.id" th:value="${form16GenerationForm}" th:field="${form16GenerationForm}"/>
+                                 </div>-->
                                 <table width="100%">
                                     <tr>
                                         <td>
                                             Employee&nbsp;Name
                                         </td>
                                         <td><b>:</b></td>
-                                        <td><input  type="text" name="empName"/></td>
+                                        <td><input type="text" name="empName" id="empName"
+                                                   th:value="${employee}!=null?${employee.fullName}:''" ></td>
                                         <td>
-                                            <button class="submitButton" onclick="searchEmployeeByNameInForm16Generation()"> Search Employee By Name
+                                            <!-- <a onclick="searchEmployeeByNameInForm16Generation()"> Search Employee By Name </a>-->
+                                            <button class="submitButton"
+                                                    onClick="searchEmployeeByNameInForm16Generation()" type="button">
+                                                searchEmployeeByName
                                             </button>
+
                                         </td>
 
                                         <td style="padding:20px">
                                         </td>
                                     </tr>
                                 </table>
-                                <span style="color;red" th:if="${retrieveNameError}!=null" th:text="${retrieveNameError}"></span>
-                                <div th:if="${employsList}!=null">
-                                    <ul>
-                                    <li style="padding:10px 0px;" th:each="employeeData :${employsList}">
-                                        <label style="color:blue;"><a onclick="setEmployeeId(\'' + ${employeeData.empId} + '\')"><span th:text="${employeeData.empId}"/></a></label>
-                                        &nbsp; &nbsp;<label style="color:blue;"><a onclick="setEmployeeId(\'' + ${employeeData.empId} + '\')"><span th:text="${employeeData.fullName}"/></a></label>
-                                    </li>
-                                    </ul>
-                                </div>
+
                             </div>
+
                         </div>
                     </div>
+
+                    <div id="employeeSerachResultsForm16">
+
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-10">
                             <div>
@@ -68,59 +90,406 @@ function searchEmployeeByNameInForm16Generation(){
                                         </td>
                                         <td><b>:</b></td>
 
-                                        <td><input  th:field="${employeeFinancialYearForm.empId}" id="empId" type="text"onblur="retrieveEmployeeInfoInForm16()"/></td>
+                                        <td><input th:if="${employeeFinancialYearForm}!=null" th:field="${employeeFinancialYearForm.empId}" id="employeeId"
+                                                   type="text"/></td>
                                         <td>
                                             Financial&nbsp;Year
                                         </td>
                                         <td>From</td>
                                         <td>
-                                            <select th:field="${employeeFinancialYearForm.financialYear.fromMonth}">
-                                                <option th:each="months : ${financialYearForm.months}" th:value="${months}" th:text="${months}">
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromMonth}"/>
+                                                <option th:each="months : ${financialYearForm.months}"
+                                                        th:value="${months}" th:text="${months}" th:selected="${months=='APR'}">
                                                 </option>
                                             </select>
                                         </td>
                                         <td>
                                             <select th:field="${employeeFinancialYearForm.financialYear.fromYear}">
-                                                <option th:each="years : ${financialYearForm.years}" th:value="${years}" th:text="${years}">
+                                                <option th:each="years : ${financialYearForm.years}" th:value="${years}"
+                                                        th:text="${years}">
                                                 </option>
                                             </select>
 
                                         </td>
                                         <td>To</td>
                                         <td>
-                                            <select th:field="${employeeFinancialYearForm.financialYear.fromMonth}">
-                                                <option th:each="months : ${financialYearForm.months}" th:value="${months}" th:text="${months}">
+                                            <select th:field="${employeeFinancialYearForm.financialYear.toMonth}"/>
+                                                <option th:each="months : ${financialYearForm.months}"
+                                                        th:value="${months}" th:text="${months}" th:selected="${months=='MAR'}">
                                                 </option>
                                             </select>
 
                                         </td>
                                         <td>
-                                            <select th:field="${employeeFinancialYearForm.financialYear.fromYear}">
-                                                <option th:each="years : ${financialYearForm.years}" th:value="${years}" th:text="${years}">
+                                            <select th:field="${employeeFinancialYearForm.financialYear.ToYear}">
+                                                <option th:each="years : ${financialYearForm.years}" th:value="${years}"
+                                                        th:text="${years}">
                                                 </option>
                                             </select>
                                         </td>
                                         <td>
-                                            <button class="submitButton">Retrieve&nbsp;Salary&nbsp;Info</button>
+                                            <!-- <a  onclick="retrieveSalaryInfoForForm16()">Retrieve&nbsp;Salary&nbsp;Info</a>-->
+                                            <button class="submitButton" onClick="retrieveSalaryInfoForForm16()"
+                                                    type="button">retrieveSalaryInfo
+                                            </button>
                                         </td>
                                         <td style="padding:20px">
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                                </table>
+                               <b> <span style="color:red" th:if="${employeeId}!=null" th:text="${employeeId}"></span></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Heading">Employee Details</div>
+                    <div id="retrieveSalaryInfo">
+                        <div id="employeeDetails" class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <ul>
+                                    <li id="employeeInfo">
+                                        <input name="employee.fullName" id="fullname" placeholder="Full Name" type=""
+                                               th:value="${employee}!=null?${employee.fullName}:''" readonly="true">
+                                        <input name="employee.designation" placeholder="Designation" type=""
+                                               th:value="${employee}!=null?${employee.designation}:''" readonly="true">
+                                        <input name="employee.panNo" placeholder="PAN Card No" type=""
+                                               th:value="${employee}!=null?${employee.panNo}:''" readonly="true">
+                                        <input name="employee.address" placeholder="ADDRESS" type=""
+                                               th:value="${employee}!=null?${employee.perAddress}:''" readonly="true">
+                                        <br>
+                                        <br>
+
+
+                                        <button id="saveBtn" class="submitButton" onClick="saveEmpInfo()" type="button"
+                                                style="display:none;">Save
+                                        </button> &nbsp;&nbsp;
+                                        <button id="editBtn" class="submitButton" onClick="editEmpInfo()" type="button">
+                                            Edit
+                                        </button>&nbsp;&nbsp;
+                                        <button id="cancelBtn" class="submitButton" onClick="cancelEmpInfo()"
+                                                type="button" style="display:none;">Cancel
+                                        </button>&nbsp;&nbsp;
+
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                       <b><span style="color:red" th:if="${employeeDetails}!=null" th:text="${employeeDetails}">provide Employee details</span></b>
+                        <b><span style="color:red" th:if="${employeeerror}!=null" th:text="${employeeerror}">no employee Found</span></b>
+                        <b> <span style="color:red" th:text="${financialerror}">Financial Error</span></b>
+                        <b> <span style="color:red" th:if="${noSalary}!=null" th:text="${noSalary}">Financial Error</span></b>
+                        <div th:if="${salaryHistories }!= null AND ${!salaryHistories.isEmpty()}">
+                            <div class="Heading text-center bold">
+                            Total Salary for the financial year  <span th:text="${employeeFinancialYearForm.financialYear.fromYear}"> </span> - <span th:text="${employeeFinancialYearForm.financialYear.toYear}"> </span>
+                            </div>
+                            <div id="salaryHistoryTable" style="overflow-x:auto;">
+                                <table id="salaryHist" width="98%" align="center" cellpadding="0" cellspacing="0"
+                                       border="1px solid black">
+
+                                    <thead>
+                                    <tr>
+                                        <td><strong>MONTH</strong></td>
+                                        <td><strong>BASIC</strong></td>
+                                        <td><strong>HRA</strong></td>
+                                        <td><strong>CON</strong></td>
+                                        <td><strong>MED</strong></td>
+                                        <td><strong>SPL</strong></td>
+                                        <td><strong>GRA</strong></td>
+                                        <td><strong>BONUS</strong></td>
+                                        <td><strong>PER</strong></td>
+                                        <td><strong>N.A</strong></td>
+                                        <td><strong>T.A</strong></td>
+                                        <td><strong>GROSS SALARY</strong></td>
+                                        <td><strong>PF</strong></td>
+                                        <td><strong>ESI</strong></td>
+                                        <td><strong>PT</strong></td>
+                                        <td><strong>MED.INS</strong></td>
+                                        <td><strong>SAL.ADV</strong></td>
+                                        <td><strong>TDS</strong></td>
+                                        <td><strong>TOT.D</strong></td>
+                                        <td><strong>NET SALARY</strong></td>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr th:each="salaryHistory :${salaryHistories}">
+                                        <!--  change this to date format-->
+                                        <td th:text="${#dates.monthName(salaryHistory.salaryDate)}"></td>
+                                        <td th:text="${salaryHistory.basic}"></td>
+                                        <td th:text="${salaryHistory.hra}"></td>
+                                        <td th:text="${salaryHistory.conveyence}"></td>
+                                        <td th:text="${salaryHistory.medicalAllowance}"></td>
+                                        <td th:text="${salaryHistory.specialAllowance}"></td>
+                                        <td th:text="${salaryHistory.telephoneAllowance}"></td>
+                                        <td th:text="${salaryHistory.bonus}"></td>
+                                        <td th:text="${salaryHistory.performanceLinkedPay}"></td>
+                                        <td th:text="${salaryHistory.internetAllowance}"></td>
+                                        <td th:text="${salaryHistory.uniformAllowance}"></td>
+                                        <td th:text="${salaryHistory.grossSalary}"></td>
+                                        <td th:text="${salaryHistory.pfEmp}"></td>
+                                        <td th:text="${salaryHistory.esi}"></td>
+                                        <td th:text="${salaryHistory.PTax}"></td>
+                                        <td th:text="${salaryHistory.medicalInsurance}"></td>
+                                        <td th:text="${salaryHistory.salaryInAdvance}"></td>
+                                        <td th:text="${salaryHistory.incomeTax}"></td>
+                                        <td th:text="${salaryHistory.totalDeductions}"></td>
+                                        <td th:text="${salaryHistory.netSalary}"></td>
+
+                                    </tr>
+
+
+                                    <tr th:each="months:${remainedMonths}">
+
+                                        <td th:text="${T(com.indianeagle.internal.util.Form16Utils).nextMonth(lastSalary.salaryDate, months)}"></td>
+                                        <td th:text="${lastSalary.actlBasic}"></td>
+                                        <td th:text="${lastSalary.actlHra}"></td>
+                                        <td th:text="${lastSalary.actlConveyence}"></td>
+                                        <td th:text="${lastSalary.actlMedicalAllowance}"></td>
+                                        <td th:text="${lastSalary.actlSpecialAllowance}"></td>
+                                        <td th:text="${lastSalary.telephoneAllowance}"></td>
+                                        <td th:text="${lastSalary.bonus}"></td>
+                                        <td th:text="${lastSalary.performanceLinkedPay}"></td>
+                                        <td th:text="${lastSalary.internetAllowance}"></td>
+                                        <td th:text="${lastSalary.uniformAllowance}"></td>
+                                        <td th:text="${lastSalary.actlGross}"></td>
+                                        <td th:text="${lastSalary.pfEmp}"></td>
+                                        <td th:text="${lastSalary.esi}"></td>
+                                        <td th:text="${lastSalary.PTax}"></td>
+                                        <td th:text="${lastSalary.medicalInsurance}"></td>
+                                        <td th:text="${lastSalary.salaryInAdvance}"></td>
+                                        <td th:text="${lastSalary.incomeTax}"></td>
+                                        <td th:text="${lastSalary.totalDeductions}"></td>
+                                        <td th:text="${lastSalary.netSalary}">/td>
+                                    </tr>
+
+                                    <tr th:if="${totalSalaryHistoryForm}!=null">
+
+                                        <td><strong>TOTAL</strong></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalBasic}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalHRA}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalConveyence}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalMedicalAllowance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalSpecialAllowance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalTelephoneAllowance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalBonus}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalPerformanceLinkedPay}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalInternetAllowance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalUniformAllowance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalGrossSalary}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalPfEmp}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalEsi}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalPtax}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalMedicalInsurance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalSalaryInAdvance}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalTdsDeducted}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalDeductions}"></td>
+                                        <td th:text="${totalSalaryHistoryForm.totalNetSalary}"></td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="Heading">Income</div>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 col-xs-10">
+                                <table width="100%" id="incomeTable" align="center">
+
+
+                                    <tr>
+                                        <td>GROSS&nbsp;SALARY</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input name="grossSalary" readonly="true"
+                                                                       style="background-color:orange"
+                                                                       th:value="${grossSalary}!=null?${grossSalary}:''">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Incentives</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input name="incentives"
+                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.incentives}:''" >
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PLB</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input name="plb"
+                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.plb}:''">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reimbursement</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input name="reimbursement"
+                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.reimbursement}:''">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bonus</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input name="bonus"
+                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.bonus}:''">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Others</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input  name="others"
+                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.others}:''">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Previous&nbsp;Company&nbsp;Income</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input name="previousCompanyIncome"
+                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.previousCompanyIncome}:''">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Income&nbsp;Earned&nbsp;by&nbsp;Employee</td>
+                                        <td width="10px"><b>:</b></td>
+                                        <td style="padding:5px"><input id="earnedIncome" name="incomeEarnedByEmployee"
+                                                                       type="text"
+                                                                       th:value="${grossSalary}!=null?${grossSalary}:''"
+                                                                       readonly="true" style="background-color:orange">
+                                            <button class="submitButton" onClick="saveIncome()" type="button">Save
+                                            </button>
+                                            <button class="submitButton" onclick="editIncome()" type="button">Edit
+                                            </button>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
+
+
+                        <div class="Heading">HRA Calculation</div>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 col-xs-10">
+                                <table width="100%">
+                                    <tr>
+                                        <td>Actual&nbsp;HRA&nbsp;PER&nbsp;ANNUM</td>
+                                        <td><b>:</b></td>
+                                        <td style="padding:5px"><input
+                                                th:value="${form16GenerationForm}!=null?${form16GenerationForm.totalActualHRA}:''"
+                                                readonly="true"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>40%&nbsp;of&nbsp;Salary&nbsp;(basic)</td>
+                                        <td><b>:</b></td>
+                                        <td style="padding:5px"><input
+                                                th:value="${form16GenerationForm}!=null?${form16GenerationForm.basic40per}:''"
+                                                readonly="true"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employee&nbsp;given&nbsp;-&nbsp;10%&nbsp;of&nbsp;Basic</td>
+                                        <td><b>:</b></td>
+                                        <td style="padding:5px"><input
+                                                th:value="${form16GenerationForm}!=null?${form16GenerationForm.hraWithBasic10per}:''"
+                                                readonly="true"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>HRA Exempted</td>
+                                        <td><b>:</b></td>
+                                        <td style="padding:5px"><input
+                                                th:value="${form16GenerationForm}!=null?${form16GenerationForm.hra}:''"
+                                                readonly="true">
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="Heading">Sections</div>
+                        <div>
+                        <div th:if="${employeeFinancialYearForm.employeeTaxSectionForms != null && employeeFinancialYearForm.employeeTaxSectionForms.size() &gt; 0}">
+                            <ul id="appliedSections" class="sectionStyle">
+
+                                <li th:each ="sectionData: ${employeeFinancialYearForm.employeeTaxSectionForms}">
+                                    <div th:if="${sectionData.sectionLimit}!=0">
+                                    <input type="hidden" name="form16GenerationForm.taxSectionForms.sectionName" value="${sectionData.sectionName}" />
+                                    <div ><label name="showOrHideSections" style="color: #1b75bb;"><strong><a th:text="${sectionData.sectionName}"/></a></strong></label>
+                                        <input   th:name ="${sectionData.sectionLimit}" th:value ="${sectionData.sectionLimit}" readonly="true"/></div>
+                                    <ul class="childSection" style="display:none;" >
+                                        <li th:each ="declarationData :${sectionData.employeeTaxSectionDeclarations}">
+
+                                            <div style="width:30%; float:left;">
+                                                <input type="hidden"  name="form16GenerationForm.taxSectionForms.taxSectionDeclarations.subSectionName" th:value="${declarationData.subSectionName}" />
+                                                <label th:text="${declarationData.subSectionName}"></label>
+                                            </div>
+                                            <div style="width:70%; float:left;">
+                                                <input name="form16GenerationForm.taxSectionForms.taxSectionDeclarations.saveAmount" th:value="${declarationData.saveAmount}" readonly="true"/>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
                     </div>
-                    <div class="Heading">Employee Details</div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-10">
+                    </div>
+                    <br>
+                    <hr/>
+                   <!-- onclick="calculateTax()"-->
+                        <button onclick="calculateTax()"  type="button">Calculate Tax</button>
+
+
+                    <div class="row" id="calculateTax">
+                        <div class="col-md-8 col-sm-12 col-xs-10">
                             <table width="100%">
                                 <tr>
-                                    <td style="padding:10px"><input name="" placeholder="Full Name" type=""></td>
-                                    <td><input name="" placeholder="Designation" type=""></td>
-                                    <td style="padding:10px"><input name="" placeholder="PAN Card No" type=""></td>
-                                    <td><input name="" placeholder="ADDRESS" type=""></td>
-                                    <td>
-                                        <button class="submitButton">Edit</button>
+                                    <td>GROSS&nbsp;SALARY</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>Net Taxable Income</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>Tax on Income</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>EDU cess(3%)</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Tax on Income</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>Less : TDS Deducted</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding;5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>Tax to be Deducted</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                </tr>
+                                <tr>
+                                    <td>Per Month Tax</td>
+                                    <td width="10px"><b>:</b></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true">
                                     </td>
                                     <td style="padding:20px">
                                     </td>
@@ -128,153 +497,40 @@ function searchEmployeeByNameInForm16Generation(){
                             </table>
                         </div>
                     </div>
-                    <div class="Heading">Income</div>
-                    <div class="row">
-                        <div class="col-md-8 col-sm-12 col-xs-10">
-                            <table width="100%" id="incomeTable" align="center">
-                                <tr>
-                                    <td>GROSS&nbsp;SALARY</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="grossSalary"  readonly="true" style="background-color:orange"></td>
-                                </tr>
-                                <tr>
-                                    <td>Incentives</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="form16GenerationForm.incentives" ></td>
-                                </tr>
-                                <tr>
-                                    <td>PLB</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="form16GenerationForm.plb"></td>
-                                </tr>
-                                <tr>
-                                    <td>Reimbursement</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="form16GenerationForm.reimbursement" ></td>
-                                </tr>
-                                <tr>
-                                    <td>Bonus</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="form16GenerationForm.bonus" ></td>
-                                </tr>
-                                <tr>
-                                    <td>Others</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="form16GenerationForm.others" ></td>
-                                </tr>
-                                <tr>
-                                    <td>Previous&nbsp;Company&nbsp;Income</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="form16GenerationForm.previousCompanyIncome" ></td>
-                                </tr>
-                                <tr>
-                                    <td>Income&nbsp;Earned&nbsp;by&nbsp;Employee</td>
-                                    <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input id="earnedIncome" name="form16GenerationForm.incomeEarnedByEmployee" type="text" readonly="true" style="background-color:orange">
-                                        <button class="submitButton" onClick="saveIncome()" type="button">Save</button>
-                                        <button class="submitButton" onclick="editIncome()" type="button">Edit</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="Heading">HRA Calculation</div>
-                    <div class="row">
-                        <div class="col-md-8 col-sm-12 col-xs-10">
-                            <table width="100%">
-                                <tr>
-                                    <td>Actual&nbsp;HRA&nbsp;PER&nbsp;ANNUM</td>
-                                    <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                </tr>
-                                <tr>
-                                    <td>40%&nbsp;of&nbsp;Salary&nbsp;(basic)</td>
-                                    <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                </tr>
-                                <tr>
-                                    <td>Employee&nbsp;given&nbsp;-&nbsp;10%&nbsp;of&nbsp;Basic</td>
-                                    <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                </tr>
-                                <tr>
-                                    <td>HRA Exempted</td>
-                                    <td><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="Heading">Sections</div>
-                        <div>
-                            <button class="claTask" onclick="alert('calculate task')">Calculate Task</button>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-8 col-sm-12 col-xs-10">
-                                <table width="100%">
-                                    <tr>
-                                        <td>GROSS&nbsp;SALARY</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Net Taxable Income</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tax on Income</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>EDU cess(3%)</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total Tax on Income</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Less : TDS Deducted</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding;5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tax to be Deducted</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Per Month Tax</td>
-                                        <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="" type="text" readonly="true">
-                                        </td>
-                                        <td style="padding:20px">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
 
                     <div class="row">
+                        <div id="emailReport"></div>
                         <div class="col-md-12 col-sm-12 col-xs-10">
 
-					<button class="retrivesalaryInfoButton" onclick="alert('Generate Form 16')">Generate Form 16</button>
-					<button class="retrivesalaryInfoButton" onclick="alert('Add Email')">Email</button>
-					<button class="retrivesalaryInfoButton" onclick="alert('Save as pdf')">Save as PDF</button>
-					<button class="retrivesalaryInfoButton" onclick="alert('Save as excel')">Save as Excel</button>
-					<button class="retrivesalaryInfoButton" onclick="alert('Save')">Save</button>
+                            <button class="retrivesalaryInfoButton" onclick="alert('Generate Form 16')">Generate Form
+                                16
+                            </button>
+
+                            <button class="submitButton"
+                                    onClick="form16sendMail()" type="button">
+                                Email
+                            </button>
+                            <button class="submitButton" onclick="saveAsPdf()">Save as PDF</button>
+                            <button class="submitButton" onclick="saveAsExcel()">Save as Excel</button>
+                            <button class="submitButton" onclick="saveEmployeeIncomeTax()" type="button">Save</button>
+                        </div>
+                        <div id="form16SaveResult">
+
                         </div>
                     </div>
+                       <b><span style="color:red" th:if="${valuesError}" th:text="${valuesError}"></span></b>
+                    <b> <span style="color:green" th:if="${employeeSaved}" th:text="${employeeSaved}"></span></b>
+                    <div id="pdfResults">
+
+                    </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>
+
+</div>
+</form>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>

@@ -1,0 +1,13 @@
+<div  xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${employeeFinancialYearForm.empId}!=null">
+        <b><span style="color;red" th:if="${retrieveNameError}!=null" th:text="${retrieveNameError}"></span></b>
+<div th:if="${employsList}!=null">
+    <ul>
+        <li style="padding:10px 0px;" th:each="employeeData :${employsList}">
+            <label style="color:blue;"><a th:data-parameter1="${employeeData.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employeeData.empId}"/></a></label>
+            &nbsp; &nbsp;<label style="color:blue;"><a th:data-parameter1="${employeeData.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employeeData.fullName}"/></a></label>
+        </li>
+    </ul>
+</div>
+</div>
+</div>

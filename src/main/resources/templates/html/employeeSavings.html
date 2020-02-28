@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Savings</title>
+</head>
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <form action="saveOrUpdateEmployeeFinancialYear" id="employeeSavingForm" name="employeeSavingForm"
+                          method="post"
+                          th:action="@{saveOrUpdateEmployeeFinancialYear}" th:object="${employeeFinancialYearForm}">
+                        <span th:if="${success}!=null" th:text="${success}" style="color:green"></span>
+                        <div class="Heading">Employee Savings</div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>Employee Name</td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <input class="input_style" id="empName" name="empName" th:field="${employeeVO.firstName}"
+                                                   th:value="${employeeVO}?${employeeVO.firstName}:''"
+                                                   type="text"/>
+                                        </td>
+
+                                        <td><span id="employeeName" style="color:red"></span></td>
+
+                                        <td style="padding:20px">
+                                            <button class="submitButton" onclick="employeeSearch()" type="button">
+                                                <b>Search Employee By Name</b>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-10 col-xs-5">
+                                    <div id="employeeSavingsSearchResult" class="tableScrollbar">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table_text_style table-sm">
+                                    <tr>
+                                        <td>Employee&nbsp;Id</td>
+                                        <td><b>:</b></td>
+                                        <td><input id="employeeId" name="employeeId"
+                                                   th:field="${employeeFinancialYearForm.empId}"
+                                                   th:value="${employeeVO}?${employeeVO.empId}:''" type="text"></td>
+                                        <td><span id="empId" style="color:red"></span></td>
+                                        <td>Financial&nbsp;Year</td>
+                                        <td>From</td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromMonth}"
+                                                    th:value="${financialYearForm}?${financialYearForm.fromMonth}:''">
+                                                <option value="APR">APR</option>
+                                                <option th:each="month : ${financialYearForm.months}"
+                                                        th:value="${month}"
+                                                        th:text="${month}"/>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select th:field="${employeeFinancialYearForm.financialYear.fromYear}"
+                                                    th:value="${financialYearForm}?${financialYearForm.fromYear}:''">
+                                                <option value="2016">2016</option>
+                                                <option th:each="year : ${financialYearForm.years}"
+                                                        th:value="${year}"
+                                                        th:text="${year}"/>
+                                            </select>
+                                        </td>
+
+
+                                        <td>To</td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <select th:field="${employeeFinancialYearForm.financialYear.toMonth}"
+                                                    th:value="${financialYearForm}?${financialYearForm.toMonth}:''">
+                                                <option value="MAR">MAR</option>
+                                                <option th:each="month : ${financialYearForm.months}"
+                                                        th:value="${month}"
+                                                        th:text="${month}"/>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select th:field="${employeeFinancialYearForm.financialYear.toYear}"
+                                                    th:value="${financialYearForm}?${financialYearForm.toYear}:''">
+                                                <option value="2017">2017</option>
+                                                <option th:each="year : ${financialYearForm.years}"
+                                                        th:value="${year}"
+                                                        th:text="${year}"/>
+                                            </select>
+                                        </td>
+                                        <td style="padding:20px">
+                                            <button class="submitButton" onclick="retrieveFinancialYearDataToEmployee()"
+                                                    type="button">
+                                                <b>Retrieve</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <span th:if="${noFinancialYear}!=null" th:text="${noFinancialYear}" style="color:green"></span>
+
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-10 col-xs-5">
+                                    <div id="retrieveFinancialYearDataToEmployeeResult" class="tableScrollbar">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <div class="Heading">Employee Details</div>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <ul>
+                                    <li id="employeeInfo">
+                                        <input th:field="${employeeVO.fullName}" placeholder="FullName" type="text"
+                                                readonly="true">
+                                        <input th:field="${employeeVO.designation}" placeholder="Designation" type="text"
+                                               readonly="true">
+                                        <input th:field="${employeeVO.panNo}" placeholder="PAN Card No" type="text"
+                                                readonly="true">
+                                        <input th:field="${employeeVO.perAddress}" placeholder="ADDRESS" type="text"
+                                                readonly="true">
+                                        <br>
+                                        <br>
+
+
+                                        <button id="saveBtn" class="submitButton" onClick="saveEmpInfo()" type="button"
+                                                style="display:none;">Save
+                                        </button> &nbsp;&nbsp;
+                                        <button id="editBtn" class="submitButton" onClick="editEmpInfo()" type="button">
+                                            Edit
+                                        </button>&nbsp;&nbsp;
+                                        <button id="cancelBtn" class="submitButton" onClick="cancelEmpInfo()"
+                                                type="button" style="display:none;">Cancel
+                                        </button>&nbsp;&nbsp;
+
+
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div>
+                            <div class="Heading">Sections</div>
+                            <div class="form16sections">
+                                <ul id="sectionList" class="sectionStyle">
+                                    <div th:if="${employeeFinancialYearForm.financialYear.id}!=null">
+                                        <input type="hidden" th:field="${employeeFinancialYearForm.Id}" >
+
+
+                                        <li style="padding:10px 0px;"
+                                            th:each="sectionData, stat : ${employeeFinancialYearForm.employeeTaxSectionForms}">
+                                            <span th:text="${sectionData.sectionName}"></span>
+                                            <input th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].sectionLimit}"
+                                                   type="text"
+                                                   readonly="true">
+                                            <input type="hidden"
+                                                   th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].sectionName}"
+                                            />
+                                            <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].id}" >
+
+                                            <div th:id="${__stat.index__}" name='addDeclaration' >
+                                                <button class="submitButton" type="button"><b>Add</b></button></div>
+                                            <div th:id="${__childStat.index__}" style="padding:10px 0px;"
+                                                 th:each="sectionDeclarationData, childStat :${sectionData.employeeTaxSectionDeclarations}">
+                                                <select id="subSectionName" name="subSectionName" th:name="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].subSectionName}" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].subSectionName}">
+
+                                                    <option  value="">select</option>
+                                                    <div th:each="taxSectionForm : ${financialYearForm.taxSectionForms}" >
+                                                        <option th:with="names=${sectionDeclarationData.subSectionName}" th:each="subSection: ${taxSectionForm.taxSectionDeclarations}"
+                                                                th:value="${subSection.subSectionName}"
+                                                        th:text="${subSection.subSectionName}" th:selected="${subSection.subSectionName==names}">
+
+
+                                                        </option>
+                                                    </div>
+                                                </select>
+                                                <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].id}" >
+
+                                                <input type="text" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].saveAmount}"/>
+                                                <div name='saveExemptionRule' class='button btnOrange'>
+                                                    <a>Save</a>
+                                                </div>
+                                                <div name='editExemptionRule' class='button btnGray'>
+                                                    <a>Edit</a>
+                                                </div>
+
+                                            </div>
+                                        </li>
+
+                                    </div>
+                                    <div th:if="${financialYearForm.id}!=null AND ${employeeFinancialYearForm.financialYear.id}==null">
+                                        <input type="hidden" th:field="${financialYearForm.Id}" >
+
+
+
+                                        <li th:each="sectionData, status : ${financialYearForm.taxSectionForms}">
+                                            <span th:text="${sectionData.sectionName}"></span>
+                                            <input th:name="|employeeFinancialYearForm.employeeTaxSectionForms[${status.index}].sectionLimit|" th:value="${sectionData.sectionLimit}"
+                                                   type="text" readonly="true">
+                                            <input type="hidden"
+                                                   th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].sectionName}"
+                                            />
+                                            <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].id}" >
+
+
+
+                                            <div th:id="${__status.index__}" name='addDeclaration'><button class="submitButton" type="button"><b>Add</b></button></div>
+
+                                            <select id="subSectionNameTax" name="subSectionName" th:name="|employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName|" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName}">
+                                                <option value="">select</option>
+
+                                                <option th:each="taxSectionDeclaration : ${sectionData.taxSectionDeclarations}"
+                                                        th:value="${taxSectionDeclaration.subSectionName}"
+                                                        th:text="${taxSectionDeclaration.subSectionName}"/>
+                                            </select>
+                                            <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].id}" >
+
+                                            <input th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].saveAmount}"
+                                                   readonly="true" type="text"/>
+
+                                            <div name='saveExemptionRule' class='button btnOrange'>
+                                                <a>Save</a>
+                                            </div>
+                                            <div name='editExemptionRule' class='button btnGray'>
+                                                <a>Edit</a>
+                                            </div>
+                                            <div name='removeDeclaration' class='button btnGray'>
+                                                <a>Remove</a>
+                                            </div>
+                                        </li>
+                                    </div>
+
+                                    <li>
+                                        <div class="midBtns right">
+                                            <div>
+                                                <Button class="submitButton" type="submit">Submit</Button>
+                                            </div>
+                                            <div class="button btnOrange">
+                                                <a href="@{EmployeeSavings}" type="button">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<footer th:insert="html/fragment/footer :: footer"></footer>
+</body>
+</html>

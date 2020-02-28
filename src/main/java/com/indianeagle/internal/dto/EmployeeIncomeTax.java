@@ -19,7 +19,7 @@ public class EmployeeIncomeTax extends BaseDto{
 
     @Column(name = "EMP_ID")
     private String empId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "FINANCIAL_YEAR_ID", nullable = false)
     private FinancialYear financialYear;
     @Column(name = "GROSS_SALARY")
@@ -197,5 +197,29 @@ public class EmployeeIncomeTax extends BaseDto{
 
     public void setHra(BigDecimal hra) {
         this.hra = hra;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeIncomeTax{" +
+                "empId='" + empId + '\'' +
+                ", financialYear=" + financialYear +
+                ", grossSalary=" + grossSalary +
+                ", incentives=" + incentives +
+                ", plb=" + plb +
+                ", reimbursement=" + reimbursement +
+                ", bonus=" + bonus +
+                ", others=" + others +
+                ", previousCompanyIncome=" + previousCompanyIncome +
+                ", incomeEarnedByEmployee=" + incomeEarnedByEmployee +
+                ", taxableIncome=" + taxableIncome +
+                ", hra=" + hra +
+                ", taxOnIncome=" + taxOnIncome +
+                ", eduCess=" + eduCess +
+                ", totalTaxOnIncome=" + totalTaxOnIncome +
+                ", tdsDeducted=" + tdsDeducted +
+                ", taxTobeDeducted=" + taxTobeDeducted +
+                ", perMonthTax=" + perMonthTax +
+                '}';
     }
 }

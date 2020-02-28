@@ -35,6 +35,9 @@ public class EmployeeTaxSectionDeclaration extends BaseDto {
     }
 
     public BigDecimal getSaveAmount() {
+        if(saveAmount==null){
+            saveAmount = BigDecimal.ZERO;
+        }
         return saveAmount;
     }
 

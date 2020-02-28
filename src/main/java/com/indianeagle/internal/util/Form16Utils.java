@@ -1,5 +1,6 @@
 package com.indianeagle.internal.util;
 
+import com.indianeagle.internal.dao.repository.FinancialYearRepository;
 import com.indianeagle.internal.dto.*;
 import com.indianeagle.internal.form.*;
 import com.indianeagle.internal.form.vo.IncomeTaxSlabVO;
@@ -8,6 +9,7 @@ import com.indianeagle.internal.form.vo.TaxSectionDeclarationVO;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -22,6 +24,8 @@ public class Form16Utils {
 
     private static final BigDecimal HUNDRED = new BigDecimal(100);
     private static List<String> SALARY_COLUMNS = Arrays.asList("MONTH", "BASIC", "HRA", "CON", "MED", "SPL", "GRA", "BONUS", "PER", "N.A", "T.A", "GROSS SALARY", "PF", "ESI", "PT", "MED.IND", "SAL.ADV", "TDS", "TOT.D", "NET SALERY");
+    @Autowired
+    FinancialYearRepository financialYearRepository;
 
     /**
      * To prepare a FinancialYear DTO object
@@ -334,12 +338,20 @@ public class Form16Utils {
     public static EmployeeIncomeTax prepareEmployeeIncomeTax(Form16GenerationForm form16GenerationForm, FinancialYear financialYear, String empId) {
         EmployeeIncomeTax employeeIncomeTax = new EmployeeIncomeTax();
 
-        BeanUtils.copyProperties(employeeIncomeTax, form16GenerationForm);
+
 
         employeeIncomeTax.setEmpId(empId);
         employeeIncomeTax.setFinancialYear(financialYear);
-        if (employeeIncomeTax.getId() == 0L) {
-            employeeIncomeTax.setId(null);
+
+        System.out.println("foRM16Hra"+ form16GenerationForm.getHra());
+        System.out.println("empTx16Hra"+ employeeIncomeTax.getHra());
+        BeanUtils.copyProperties(employeeIncomeTax, form16GenerationForm);
+        System.out.println("financial year id"+financialYear.getId());
+        System.out.println("Emp_tx_financial year id"+employeeIncomeTax.getFinancialYear().getId());
+        if(employeeIncomeTax.getId()!=null) {
+            if (employeeIncomeTax.getId() == 0L) {
+                employeeIncomeTax.setId(null);
+            }
         }
         return employeeIncomeTax;
     }
@@ -353,7 +365,15 @@ public class Form16Utils {
     public static Form16GenerationForm prepareForm16GenerationForm(EmployeeIncomeTax employeeIncomeTax) {
         Form16GenerationForm form16GenerationForm = new Form16GenerationForm();
 
-        BeanUtils.copyProperties(form16GenerationForm, employeeIncomeTax);
+        form16GenerationForm.setId(employeeIncomeTax.getId());
+        form16GenerationForm.setGrossSalary(employeeIncomeTax.getGrossSalary());
+        form16GenerationForm.setBonus(employeeIncomeTax.getBonus());
+        form16GenerationForm.setReimbursement(employeeIncomeTax.getReimbursement());
+        form16GenerationForm.setIncentives(employeeIncomeTax.getIncentives());
+        form16GenerationForm.setPreviousCompanyIncome(employeeIncomeTax.getPreviousCompanyIncome());
+        form16GenerationForm.setPlb(employeeIncomeTax.getPlb());
+        form16GenerationForm.setIncomeEarnedByEmployee(employeeIncomeTax.getIncomeEarnedByEmployee());
+        form16GenerationForm.setOthers(employeeIncomeTax.getOthers());
 
         return form16GenerationForm;
     }
@@ -647,4 +667,6 @@ public class Form16Utils {
         row.createCell(++cellReference).setCellValue(salaryHistory.getTotalDeductions().doubleValue());
         row.createCell(++cellReference).setCellValue(salaryHistory.getNetSalary().doubleValue());
     }
+
+
 }

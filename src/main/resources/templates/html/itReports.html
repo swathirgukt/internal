@@ -26,9 +26,9 @@
                                         <script>$('#salaryDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                     </div>
                                 </div>
-                                <span th:if="${Date}!=null" th:text="${Date}"></span>
-                                <span th:if="${monthName}!=null" th:text="${monthName}"></span>
-                                <span th:if="${noRecords}!=null" th:text="${noRecords}"></span>
+                                <span th:if="${Date}!=null" th:text="${Date}" style="color:red"></span>
+                                <span th:if="${monthName}!=null" th:text="${monthName}" style="color:red"></span>
+                                <span th:if="${noRecords}!=null" th:text="${noRecords}" style="color:red"></span>
                                 <span th:if="${technicalError}!=null" th:text="${technicalError}" style="color:red"></span>
                             </div>
                             <div class="col-xs-6 col-md-4">

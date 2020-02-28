@@ -185,4 +185,29 @@ public class TotalSalaryHistoryForm {
     public void setTotalNetSalary(BigDecimal totalNetSalary) {
         this.totalNetSalary = totalNetSalary;
     }
+
+    @Override
+    public String toString() {
+        return "TotalSalaryHistoryForm{" +
+                "totalBasic=" + totalBasic +
+                ", totalHRA=" + totalHRA +
+                ", totalConveyence=" + totalConveyence +
+                ", totalMedicalAllowance=" + totalMedicalAllowance +
+                ", totalSpecialAllowance=" + totalSpecialAllowance +
+                ", totalTelephoneAllowance=" + totalTelephoneAllowance +
+                ", totalBonus=" + totalBonus +
+                ", totalPerformanceLinkedPay=" + totalPerformanceLinkedPay +
+                ", totalInternetAllowance=" + totalInternetAllowance +
+                ", totalUniformAllowance=" + totalUniformAllowance +
+                ", totalGrossSalary=" + totalGrossSalary +
+                ", totalPfEmp=" + totalPfEmp +
+                ", totalEsi=" + totalEsi +
+                ", totalPtax=" + totalPtax +
+                ", totalMedicalInsurance=" + totalMedicalInsurance +
+                ", totalSalaryInAdvance=" + totalSalaryInAdvance +
+                ", totalTdsDeducted=" + totalTdsDeducted +
+                ", totalDeductions=" + totalDeductions +
+                ", totalNetSalary=" + totalNetSalary +
+                '}';
+    }
 }

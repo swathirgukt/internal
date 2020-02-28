@@ -31,12 +31,12 @@ public class Form16GenerationForm {
     private BigDecimal totalActualHRA = BigDecimal.ZERO;
     private BigDecimal hra;
     private List<Rebate> rebates;
-    private BigDecimal taxOnIncome;
-    private BigDecimal eduCess;
-    private BigDecimal totalTaxOnIncome;
-    private BigDecimal tdsDeducted;
-    private BigDecimal taxTobeDeducted;
-    private BigDecimal perMonthTax;
+    private BigDecimal taxOnIncome=BigDecimal.ZERO;
+    private BigDecimal eduCess=BigDecimal.ZERO;
+    private BigDecimal totalTaxOnIncome=BigDecimal.ZERO;
+    private BigDecimal tdsDeducted=BigDecimal.ZERO;
+    private BigDecimal taxTobeDeducted=BigDecimal.ZERO;
+    private BigDecimal perMonthTax=BigDecimal.ZERO;
     private List<TaxSectionForm> taxSectionForms;
 
     public Long getId() {
@@ -213,5 +213,33 @@ public class Form16GenerationForm {
 
     public void setTotalActualHRA(BigDecimal totalActualHRA) {
         this.totalActualHRA = totalActualHRA;
+    }
+
+    @Override
+    public String toString() {
+        return "Form16GenerationForm{" +
+                "id=" + id +
+                ", grossSalary=" + grossSalary +
+                ", incentives=" + incentives +
+                ", plb=" + plb +
+                ", reimbursement=" + reimbursement +
+                ", bonus=" + bonus +
+                ", others=" + others +
+                ", previousCompanyIncome=" + previousCompanyIncome +
+                ", incomeEarnedByEmployee=" + incomeEarnedByEmployee +
+                ", taxableIncome=" + taxableIncome +
+                ", basic40per=" + basic40per +
+                ", hraWithBasic10per=" + hraWithBasic10per +
+                ", totalActualHRA=" + totalActualHRA +
+                ", hra=" + hra +
+                ", rebates=" + rebates +
+                ", taxOnIncome=" + taxOnIncome +
+                ", eduCess=" + eduCess +
+                ", totalTaxOnIncome=" + totalTaxOnIncome +
+                ", tdsDeducted=" + tdsDeducted +
+                ", taxTobeDeducted=" + taxTobeDeducted +
+                ", perMonthTax=" + perMonthTax +
+                ", taxSectionForms=" + taxSectionForms +
+                '}';
     }
 }
