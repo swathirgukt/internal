@@ -46,6 +46,6 @@ public interface EmployeeIncomeTaxRepository extends JpaRepository<EmployeeIncom
      */
 
     @Query("select et from EmployeeIncomeTax et left join fetch et.financialYear where et.empId=:empId")
-    List<EmployeeIncomeTax> findByEmpId(String empId);
+    List<EmployeeIncomeTax> findByEmpId(@Param("empId") String empId);
 }
 
