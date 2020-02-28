@@ -4,9 +4,9 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../static/js/table2excel.js" th:src="@{js/table2excel.js}" type="text/javascript"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <link href="../../../static/css/header.css" rel="stylesheet" th:href="@{css/header.css}" type="text/css">
     <link href="../../../static/css/button.css" rel="stylesheet" th:href="@{css/button.css}">
     <link href="../../../static/css/form-page.css" rel="stylesheet" th:href="@{css/form-page.css}">
@@ -15,10 +15,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-    <script src="../static/js/custom.js" th:src="@{js/custom.js}" type="text/javascript"></script>
-    <script src="../static/js/custom.js" th:src="@{js/validation.js}" type="text/javascript"></script>
-    <script src="../static/js/custom.js" th:src="@{js/form16.js}" type="text/javascript"></script>
-    <script src="../static/js/custom.js" th:src="@{js/itSection.js}" type="text/javascript"></script>
+    <script th:src="@{js/custom.js}" type="text/javascript"></script>
+    <script th:src="@{js/validation.js}" type="text/javascript"></script>
+    <script th:src="@{js/form16.js}" type="text/javascript"></script>
+    <script th:src="@{js/itSection.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/employeeSavings.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/employeeSettlement.js}" type="text/javascript"></script>
     <script src="../static/js/custom.js" th:src="@{js/savedForms.js}" type="text/javascript"></script>
@@ -122,7 +122,7 @@
                                             <a th:href="@{/approveLeave}">Approve Leaves</a>
                                             <a th:href="@{/employeeLeaveReport}">Employee Leave Reports</a>
                                             <a th:href="@{/allEmployeeLeaveReport}">All Employee Leave Reports</a>
-                                            <a th:href="@{addEdit}">Add/Edit Leaves</a>
+                                            <a th:href="@{/addEditLeaves}">Add/Edit Leaves</a>
                                         </div>
                                     </div>
                                     <div><a href="#">Holiday List</a></div>
@@ -137,7 +137,7 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a th:href="@{sign}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                         </ul>
                     </div>
                 </div>
