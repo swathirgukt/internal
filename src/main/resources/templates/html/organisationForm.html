@@ -6,89 +6,69 @@
 </head>
 <body>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-<script>
-		function PopupCenter(pageURL, title,w,h) {
-		 console.log("in method");
-		 console.log(document.getElementsByName("salaryDate")[0].value);
-	         var url =pageURL+'?salaryDate='+document.getElementsByName("salaryDate")[0].value;
-		     console.log(url);
-		    var left = (screen.width/2)-(w/2);
-			var top = (screen.height/2)-(h/2);
-			window.open (url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-		}
 
-  function banksalaries(){
-  console.log("in banksalaries");
-  var url="/bankSalariesReport";
-  var form=document.getElementById("froms");
-  form.action=url+'?salaryDate='+document.getElementsByName("salaryDate")[0].value;
-  form.submit();
-   }
-</script>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
         </div>
         <form action="/forms" method="get" id="froms">
-        <div class="col-sm-8 text-left">
-            <div class="jumbotron">
-                <div class="container-fluid">
+            <div class="col-sm-8 text-left">
+                <div class="jumbotron">
+                    <div class="container-fluid">
 
-                    <div class="Heading">
-                        <div th:switch="${param.form[0]}">
-                            <h2 th:case="PT">PT Form</h2>
-                            <h2 th:case="ESI">ESI</h2>
-                            <h2 th:case="PF">PF</h2>
-                            <h2 th:case="banksstatement">PF</h2>
+                        <div class="Heading">
+                            <div th:switch="${param.form[0]}">
+                                <h2 th:case="PT">Form V</h2>
+                                <h2 th:case="ESI">ESI</h2>
+                                <h2 th:case="PF">PF</h2>
+                                <h2 th:case="banksstatement">PF</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td> DATE</td>
-                                        <td width="20px"><span style="color:red"> *</span></td>
-                                        <td width="20px"><b>:</b></td>
-                                        <td>
-                                            <input style=" float:left; border: 1px solid #ff9900;"
-                                                   id="datepicker" width="200px" name="salaryDate"/>
-                                            <script>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12  col-md-12 col-lg-6 ">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td> DATE</td>
+                                            <td width="20px"><span style="color:red"> *</span></td>
+                                            <td width="20px"><b>:</b></td>
+                                            <td>
+                                                <input style=" float:left; border: 1px solid #ff9900;"
+                                                       id="datepicker" width="200px" name="salaryDate"/>
+                                                <script>
                                                         $('#datepicker').datepicker({ uiLibrary: 'bootstrap' });
 
                                            </script>
-                                        </td>
-                                    </tr>
-                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
-                            <div style="float: right">
-                                <div th:switch="${param.form[0]}">
-                                    <div th:case="PT">
-                                        <button type="button" class="submitButton"
-                                                onclick="PopupCenter('/formV', '',700,500);"><b>Generate
-                                            PT</b>
-                                        </button>
-                                    </div>
-                                    <div th:case="ESI">
-                                        <button type="button" class="submitButton"
-                                                onclick="PopupCenter('/esiReport', '',700,500);"><b>Generate
-                                            ESI</b>
-                                        </button>
-                                    </div>
-                                    <div th:case="PF">
-                                        <button type="button" class="submitButton"
-                                                onclick="PopupCenter('/pfForm', '',700,500);"><b>Generate
-                                            PF</b>
-                                        </button>
-                                    </div>
-                                    <div th:case="bankstatement">
-                                        <button type="button" class="submitButton"
-                                                onclick="PopupCenter('/bankSalariesReport', '',700,500);"><b>Generate
-                                            Bank Salaries</b>
-                                        </button>
+                            <div class="col-xs-10 col-sm-10  col-md-10 col-lg-5">
+                                <div style="float: right">
+                                    <div th:switch="${param.form[0]}">
+                                        <div th:case="PT">
+                                            <button type="button" class="submitButton" onclick="popupCenter('/formV','',700,500)">Generate PT</button>
+                                        </div>
+                                        <div th:case="ESI">
+                                            <button type="button" class="submitButton"
+                                                    onclick="popupCenter('/esiReport','',700,500);"><b>Generate
+                                                ESI</b>
+                                            </button>
+                                        </div>
+                                        <div th:case="PF">
+                                            <button type="button" class="submitButton"
+                                                    onclick="popupCenter('/pfForm','',700,500);"><b>Generate
+                                                PF</b>
+                                            </button>
+                                        </div>
+                                        <div th:case="bankstatement">
+                                            <button type="button" class="submitButton"
+                                                    onclick="popupCenter('/bankSalariesReport','',700,500);"><b>Generate
+                                                Bank Salaries</b>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +76,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </form>
     </div>
 
