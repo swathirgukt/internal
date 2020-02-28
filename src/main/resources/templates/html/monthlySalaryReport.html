@@ -24,9 +24,10 @@
                                             <td width="20px"><b>:</b></td>
                                             <td>
                                                 <input style=" float:left; border: 1px solid #ff9900;" id="datepicker" width="200px" name="salaryDate"/>
-                                                <span th:if="${selectDate}!=null" th:text="${selectDate}" style="color:red"></span>
                                                 <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
+                                            <td><span id="salDate" style="color:red"></span></td>
+
                                         </tr>
                                     </table>
                                 </div>

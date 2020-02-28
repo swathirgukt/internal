@@ -52,10 +52,6 @@ public class MonthlyReportController {
     @PostMapping("/monthlySalaryReport")
     public String getmonthlySalaryReport(ModelMap model, @RequestParam @DateTimeFormat(pattern = "YYYY-MM-dd") Date salaryDate) {
         try {
-            if (salaryDate == null) {
-                model.addAttribute("selectDate", "please select date");
-                return "html/monthlySalaryReport";
-            }
 
             List<MonthlySalaryReport>   monthlySalaryList = monthlyReportService.getMonthlySalaryReport(salaryDate);
 
