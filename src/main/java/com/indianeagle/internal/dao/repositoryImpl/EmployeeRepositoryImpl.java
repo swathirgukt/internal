@@ -130,7 +130,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
         StringBuilder queryString = new StringBuilder("select e from Employee e where ");
 
         if (!SimpleUtils.isEmpty(employeeForm.getEmpId())) {
-            return "select e from Employee e right join fetch Department d  where EMP_ID = '".concat(employeeForm.getEmpId()).concat("'");
+            return "select e from Employee e left join fetch e.department d where e.empId ='"+employeeForm.getEmpId()+"'";
         }
         if (EmployeeStatusEnum.WORKING.name().equalsIgnoreCase(employeeForm.getStatus())) {
             queryString.append(" RELIEVE_DATE is null");
