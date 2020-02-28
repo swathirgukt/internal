@@ -1,32 +1,20 @@
 <html>
+<html xmlns:th="http://www.thymeleaf.org">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <head>
     <title>saved forms</title>
-    <script>
-		function getFormtData() {
-			var ele1 = document.getElementById("empdata").elements[0].value;
-			var ele2 = document.getElementById("empdata").elements[1].value;
-			if (ele1 == "" && ele2 == "") {
-				alert("value is required"); 
-				document.getElementById("employeeid").focus();
-				document.getElementById("errorMsg").innerHTML = "Id is required..!";
-			} else {
-				
-				document.getElementById("errorMsg").innerHTML = "";
+    <!-- <script>
+     function searchIncentive() {
+     var response = makeAJAXCall('/searchEmployeeDetails','empdata');
+         response.done(function (responseData) {
+             if (responseData) {
+                 $("#empNameData").html(responseData);
+             }
+         });
+ }
 
-document.getElementById("fullname").setAttribute("value","DurgaMahadev parida");
-				document.getElementById("designation").setAttribute("value","Software Devloper");
-				document.getElementById("pancardno").setAttribute("value","13543313");
-				document.getElementById("address").setAttribute("value","Odisha");
-
-			}
-		}
-
-
-
-    </script>
+     </script>-->
 </head>
-
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">
@@ -35,45 +23,115 @@ document.getElementById("fullname").setAttribute("value","DurgaMahadev parida");
         </div>
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
+                <div class="container">
+                    <form th:action="@{searchEmployeeDetails}" id="empdata" name="empdata" method="post">
+                        <div class="Heading"><b>Income Tax Sections</b></div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <table width="100%">
+                                    <tr>
+                                        <td>EmployeeId</td>
+                                        <td><b>:</b></td>
+                                        <td style="padding:15px;"><input id="employeeId" name="employeeId" type="text">
+                                        </td>
+                                        <td>(or)&nbsp;&nbsp;EmployeeName</td>
+                                        <td><b>:</b></td>
+                                        <div>
+                                            <span th:if="${noRecords}!=null" th:text="${noRecords}"
+                                                  style="color:red"></span>
+                                        </div>
+                                        <td><input id="employeeName" name="employeeName" type="text">
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" type="button" onclick="searchSaveEmployees()">
+                                                <b>Search </b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-10 col-xs-5">
+                                <div id="searchSaveEmployeeResult" class="tableScrollbar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Heading"><b>Employee Details</b></div>
 
-                <div class="Heading">Income Text Sections</div>
-
-                <div style="margin-top:20px;">
-                    <span id="errorMsg" style="color: red;font-size: 15px;"></span>
-                    <form action="#" id="empdata" method="POST">
-                        <span>Employee ID </span>
-                        <input id="employeeid" name="employeeid" style="margin-left: 20px;" type="text" value="">
-
-                        <span>(or) Employee Name </span>
-                        <input id="employeename" name="employeename" style="margin-left: 20px;" type="text" value="">
-                        <span style="margin-left:50px;"><button class="submitButton" href="#"
-                                                           onclick="getFormtData()"><b>Search</b></button></span>
-
-
-                        <div class="Heading">Employee Details</div>
-
-
-                        <div style="margin-top: 20px;">
+                        <div style="margin-top: 20px;" id="employeeDetails">
 							<span>
-								<input id="fullname" name="fullname" placeholder="fullname" readonly
+								<input id="fullname" name="fullname" placeholder="Fullname" readonly
                                        style="margin-left: 20px;"
-                                       type="text" value="">
-								<input id="designation" name="designation" placeholder="designation" readonly
-                                       style="margin-left: 20px;" type="text" value="">
+                                       type="text">
+								<input id="designation" name="designation" placeholder="Designation" readonly
+                                       style="margin-left: 20px;" type="text"
+                                >
 								<input id="pancardno" name="pancardno" placeholder="PAN CARD NO"
                                        style="margin-left: 20px;" type="text"
-                                       value="">
+                                >
 								<input id="address" name="address" placeholder="ADDRESS" readonly
-                                       style="margin-left: 20px;"
-                                       type="text" value="">
+                                       style="margin-left: 20px; "
+                                       type="text">
 							</span>
                         </div>
-                        <div class="Heading">Form 16</div>
+                        <div class="Heading" style="padding-top:10px"><b>Form 16</b></div>
+
+                        <table width="98%" align="center" cellpadding="0" cellspacing="0" class="form16income">
+                            <div th:each="income:${employeeIncome}" status="stat" id="form16Pdfs"
+                                 value="employeeIncomeTaxes"/>
+                            <tr>
+                                <td class="pad20">
+                                    <div>
+
+                                        <textfield cssClass="bg-orange"
+                                                   value="%{#form16Pdfs.financialYear.fromYear} - %{#form16Pdfs.financialYear.toYear}"/>
+                                        <div class="button btnLink">
+                                            <span value='previewForm16.action' id='previewForm16'>
+                                                <span name="empId" value="%{employee.empId}"/>
+                                                <span name="financialYearForm.id"
+                                                      value="%{#form16Pdfs.financialYear.id}"/>
+                                                <span name="financialYearForm.fromMonth"
+                                                      value="%{#form16Pdfs.financialYear.fromMonth}"/>
+                                                <span name="financialYearForm.fromYear"
+                                                      value="%{#form16Pdfs.financialYear.fromYear}"/>
+                                                <span name="financialYearForm.toMonth"
+                                                      value="%{#form16Pdfs.financialYear.toMonth}"/>
+                                                <span name="financialYearForm.toYear"
+                                                      value="%{#form16Pdfs.financialYear.toYear}"/>
+                                            </span>
+
+                                        </div>
+                                        <div class="button btnLink">
+
+                                        </div>
+                                        <div class="button btnLink">
+                                            <span value='saveGeneratedForm16.action' id='saveForm16'>
+                                                <span name="empId" value="%{EmployeeId.empId}"/>
+                                                <span name="financialYearForm.id"
+                                                      value="%{#form16Pdfs.financialYear.id}"/>
+                                                <span name="financialYearForm.fromMonth"
+                                                      value="%{#form16Pdfs.financialYear.fromMonth}"/>
+                                                <span name="financialYearForm.fromYear"
+                                                      value="%{#form16Pdfs.financialYear.fromYear}"/>
+                                                <span name="financialYearForm.toMonth"
+                                                      value="%{#form16Pdfs.financialYear.toMonth}"/>
+                                                <span name="financialYearForm.toYear"
+                                                      value="%{#form16Pdfs.financialYear.toYear}"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>

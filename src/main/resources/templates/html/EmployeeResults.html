@@ -1,0 +1,18 @@
+<div th:fragment="searchSaveEmployeeResult" xmlns:th="http://www.thymeleaf.org">
+
+        <b><span style="color;red" th:if="${error}!=null" th:text="${error}"></span></b>
+    <div th:if="${EmployeeName}!=null" >
+            <ul>
+                <div th:if="${EmployeeName}!=null" >
+                    <ul>
+                        <li style="padding:10px 0px;" th:each="employeeData :${EmployeeName}">
+                            <label style="color:blue;">
+                                <a th:data-parameter1="${employeeData.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employeeData.empId}"/></a></label>
+                            &nbsp; &nbsp;
+                            <label style="color:blue;"><a th:data-parameter1="${employeeData.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employeeData.fullName}"/></a></label>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
