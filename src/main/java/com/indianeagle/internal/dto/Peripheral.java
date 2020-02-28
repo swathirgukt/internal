@@ -18,41 +18,33 @@ import java.util.Date;
 @Component
 @Entity
 @Table(name = "PERIPHERAL")
-public class Peripheral  extends BaseDto{
+public class   Peripheral  extends BaseDto{
 
     @Column(name = "PERIPHERAL")
-    @NotBlank(message = "Please provide peripheral name")
     private String peripheralName;
 
     @Column(name = "TYPE")
-    @NotBlank(message = "Please provide peripheral type")
     private String type;
 
     @Column(name = "BRAND")
-    @NotBlank(message = "Please provide peripheral brand")
     private String brand;
 
     @Column(name = "MODEL")
-    @NotBlank(message = "Please provide peripheral model")
     private String model;
 
     @Column(name = "SERIAL_NUMBER")
-    @NotBlank(message = "Please provide serial number")
     private String serialNumber;
 
     @Column(name = "PURCHASE_DATE")
-    @NotNull(message = "Please provide purchase date")
     private Date yearOfPurchase;
 
     @Column(name = "WARRANTY_DATE")
-    @NotNull(message = "Please provide warranty date")
     private Date warrantyDate;
 
     @Column(name = "USERS")
     private String users;
 
     @Column(name = "STATUS")
-    @NotBlank(message = "Please provide peripheral status")
     private String status;
 
     public String getType() {
