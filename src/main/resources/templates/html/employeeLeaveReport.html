@@ -19,7 +19,7 @@
                                 <table>
                                     <tr>
                                         <td>Employee&nbsp;ID<span style="color: red">*</span></td>
-                                        <td><b>:</b></td>
+                                        <td width="15px"><b>:</b></td>
                                         <td>
                                             <select class="selectOption" id="empId" name="empId">
                                                 <option th:each="empId : ${employeeIds}" th:value="${empId}">[[${empId}]]</option>
@@ -33,7 +33,7 @@
                                     <table>
                                         <tr>
                                             <td>From<span style="color: red">*</span></td>
-                                            <td><b>:</b></td>
+                                            <td width="15px"><b>:</b></td>
                                             <td>
                                                 <input id="fromDate" width="150px" name="fromDate" style="border: 1px solid #ff9900;"/>
                                                 <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
@@ -47,7 +47,7 @@
                                 <table>
                                     <tr>
                                         <td>To<span style="color: red">*</span></td>
-                                        <td><b>:</b></td>
+                                        <td width="15px"><b>:</b></td>
                                         <td>
                                             <input id="toDate" width="150px" name="toDate" style="border: 1px solid #ff9900;"/>
                                             <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class=" col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                            <div style="float:right;margin-right:100px;padding:10px">
                                 <button type="button" class="submitButton" onclick="searchEmployeeLeaveReport()"><b>Search</b></button>
                             </div>
                         </div>
