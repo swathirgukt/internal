@@ -1,30 +1,27 @@
 package com.indianeagle.internal.controller;
 
 
-import com.indianeagle.internal.dto.Department;
 import com.indianeagle.internal.form.FormESIC;
 import com.indianeagle.internal.form.FormsResultData;
-import com.indianeagle.internal.form.ITForm;
 import com.indianeagle.internal.service.FormsService;
 import com.indianeagle.internal.service.MonthlyReportService;
-import com.indianeagle.internal.util.SimpleUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.persistence.ManyToOne;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class FormsActionController {

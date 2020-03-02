@@ -25,6 +25,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 
@@ -505,7 +506,8 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
     }
 
     public EmployeeSettlement loadResignedEmployeeSettlement(String empId) {
-        return this.employeeSettlementRepository.findResignedEmployeeSettlementByEmployeeId(empId);
+           List<EmployeeSettlement> employeeSettlements=     this.employeeSettlementRepository.findResignedEmployeeSettlementByEmployeeId(empId );
+          return employeeSettlements.isEmpty()?null:employeeSettlements.get(0);
     }
 
     public Employee loadEmployee(String empID) {

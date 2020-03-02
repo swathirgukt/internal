@@ -128,5 +128,42 @@
      padding-left: 1px;
 
 }
+hr.new1 {
+  border-top: 1px solid gray;
+}
+ .sticky th{
+   background-color:#333333;
+   color: #FFFFFF;
+   padding: 50px;
+   position: sticky;
+   top: 0;
+}
 
+.black_overlay {
+    display: block;
+    position: fixed !important;
+    top: 0%;
+    left: 0%;
+    width: 100% !important;
+    height: 100% !important;
+    background: none repeat scroll 0 0 #808082;
+    z-index: 1111111111111111111;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=80);
+}
+.loading {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 16px;
+    z-index: 11111111111111111111;
+    overflow: auto;
+    background-image: url(../Images/DoubleRing.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+     padding:50px;
+}
 

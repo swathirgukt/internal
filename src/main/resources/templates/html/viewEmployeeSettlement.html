@@ -18,6 +18,10 @@
     </script>
 </head>
 <body>
+<div th:if="${employeeSettlement}==null">
+    <span style="color:red"> No settlement records found</span>
+</div>
+<div th:if="${employeeSettlement}!=null">
 <table align="center" border="2px solid black">
     <tr>
         <td align="center" colspan="6" style="font-size:120%">
@@ -209,6 +213,7 @@
         </td>
     </tr>
 </table>
+</div>
 </body>
 </html>
 </html>

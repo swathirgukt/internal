@@ -39,6 +39,7 @@ public class ITFinancialYearController {
     public String ITSections(ModelMap modelMap) {
         FinancialYearForm financialYearForm = new FinancialYearForm();
         List<FinancialYear> financialYears = departmentService.findAllFinancialYearSections();
+        System.out.println("##YEARS :: "+financialYears);
         if (!financialYears.isEmpty()) {
             int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -53,6 +54,10 @@ public class ITFinancialYearController {
 
             financialYear = financialYear == null ? financialYears.get(financialYears.size() - 1) : financialYear;
             financialYearForm = prepareFinancialYearForm(financialYear);
+        }else {
+            financialYearForm.setIncomeTaxSlabVOS(Collections.EMPTY_LIST);
+            financialYearForm.setRebateVOS(Collections.EMPTY_LIST);
+            financialYearForm.setTaxSectionForms(Collections.EMPTY_LIST);
         }
 
         modelMap.addAttribute("financialYearForm", financialYearForm);

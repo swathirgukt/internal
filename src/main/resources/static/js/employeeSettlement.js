@@ -1,7 +1,20 @@
+$( document ).ready(function() {
+    $("#loading").hide();
+    $("#itp_overlay").hide();
+});
+
  function searchFEmployee() {
-     var response = makeAJAXCall("/searchEmployeeSettlement", 'searchFEmployeeForm');
+    $("#loading,#itp_overlay").show();
+    var response = makeAJAXCall("/searchEmployeeSettlement", 'searchFEmployeeForm');
+     $(document).ajaxStart(function(){
+         $("#loading").css("display", "block");
+       });
+       $(document).ajaxComplete(function(){
+         $("#loading").css("display", "none");
+       });
      response.done(function (responseData) {
          if (responseData) {
+          $("#loading,#itp_overlay").hide();
              $("#settlementResult").html(responseData);
          }
      });

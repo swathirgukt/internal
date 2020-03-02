@@ -3,10 +3,12 @@
 <head>
     <title>F & F settlement</title>
 </head>
-
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
+
+<div class="container-fluid text-center" id="MenuWrapper">
     <div class="row content">
         <div class="col-sm-2 sidenav">
         </div>
@@ -18,11 +20,11 @@
                         <div class="Heading">F & F settlement</div>
                         <div class="row">
                             <div class="col-md-6 col-sm-12 col-xs-10">
-                                    <table width="100%">
-                                        <tr>
-                                            <td>First Name</td>
-                                            <td width="15px"><b>:</b></td>
-                                            <td style="padding: 5px"><input th:field="${employeeForm.firstName}" type="text" style="border-radius:5px" onkeypress=" return allowCharactersAndSpaces(event);">
+                                <table width="100%">
+                                    <tr>
+                                        <td>First Name</td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td style="padding: 5px"><input th:field="${employeeForm.firstName}" type="text" style="border-radius:5px" onkeypress=" return allowCharactersAndSpaces(event);">
                                             </td>
                                         </tr>
                                         <tr>
@@ -48,14 +50,21 @@
                                             <td> Department</td>
                                             <td width="15px"><b>:</b></td>
                                             <td><select th:field="${employeeForm.department}" class="selectOption">
-                                                <option value="">select</option>
+                                                <option value="">All</option>
                                                 <option th:each="branches : ${employeeForm.departments}" th:value="${branches.department}" th:text="${branches.department}"/>
+                                                <!--<option th:value="Admin">Admin</option>
+                                                <option th:value="IT">IT</option>
+                                                <option th:value="CC-IE">CC-IE</option>
+                                                <option th:value="CC-TTS">CC-TTS</option>
+                                                <option th:value="Operations">Operations</option>
+                                                <option th:value="Accounts">Accounts</option>
+                                                <option th:value="HR">HR</option>-->
                                             </select>
                                             </td>
                                         </tr>
                                     </table>
                                 <div style="float:right">
-                                    <button class="submitButton" onclick="searchFEmployee()" type="button">
+                                    <button id="Login" class="submitButton" onclick="searchFEmployee()" type="button">
                                         <b>Search</b>
                                     </button>
                                 </div>
@@ -74,6 +83,7 @@
         </div>
     </div>
 </div>
+
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 </html>

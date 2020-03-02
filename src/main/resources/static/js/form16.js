@@ -1,25 +1,25 @@
 //Form16 Generation
 
-    function calculateTotalIncomeEarnedByEmployee() {
-        var grossSalary = $('#incomeTable tr td input[name="grossSalary"]').val();
-        grossSalary = grossSalary == '' ? 0 : parseFloat(grossSalary);
-        var incentive = $('#incomeTable tr td input[name="form16GenerationForm.incentives"]').val();
-        incentive = incentive == '' ? 0 : parseFloat(incentive);
-        var plb = $('#incomeTable tr td input[name="form16GenerationForm.plb"]').val();
-        plb = plb == '' ? 0 : parseFloat(plb);
-        var reimbursement = $('#incomeTable tr td input[name="form16GenerationForm.reimbursement"]').val();
-        reimbursement = reimbursement == '' ? 0 : parseFloat(reimbursement);
-        var bonus = $('#incomeTable tr td input[name="form16GenerationForm.bonus"]').val();
-        bonus = bonus == '' ? 0 : parseFloat(bonus);
-        var others = $('#incomeTable tr td input[name="form16GenerationForm.others"]').val();
-        others = others == '' ? 0 : parseFloat(others);
-        var previousCompanyIncome = $('#incomeTable tr td input[name="form16GenerationForm.previousCompanyIncome"]').val();
-        previousCompanyIncome = previousCompanyIncome == '' ? 0 : parseFloat(previousCompanyIncome);
-        totIncome = parseFloat(grossSalary) + incentive + plb + reimbursement + bonus + others + previousCompanyIncome;
-        if(grossSalary != null){
-            $('#earnedIncome').val(parseFloat(totIncome));
-        }
-    }
+   function calculateTotalIncomeEarnedByEmployee() {
+           var grossSalary = $('#incomeTable tr td input[name="grossSalary"]').val();
+           grossSalary = grossSalary == '' ? 0 : parseFloat(grossSalary);
+           var incentive = $('#incomeTable tr td input[name="incentives"]').val();
+           incentive = incentive == '' ? 0 : parseFloat(incentive);
+           var plb = $('#incomeTable tr td input[name="plb"]').val();
+           plb = plb == '' ? 0 : parseFloat(plb);
+           var reimbursement = $('#incomeTable tr td input[name="reimbursement"]').val();
+           reimbursement = reimbursement == '' ? 0 : parseFloat(reimbursement);
+           var bonus = $('#incomeTable tr td input[name="bonus"]').val();
+           bonus = bonus == '' ? 0 : parseFloat(bonus);
+           var others = $('#incomeTable tr td input[name="others"]').val();
+           others = others == '' ? 0 : parseFloat(others);
+           var previousCompanyIncome = $('#incomeTable tr td input[name="previousCompanyIncome"]').val();
+           previousCompanyIncome = previousCompanyIncome == '' ? 0 : parseFloat(previousCompanyIncome);
+           totIncome = parseFloat(grossSalary) + incentive + plb + reimbursement + bonus + others + previousCompanyIncome;
+           if(grossSalary != null){
+               $('#earnedIncome').val(parseFloat(totIncome));
+           }
+       }
 
 
     /*Form 16 Generation*/
@@ -40,6 +40,7 @@
         });
 
       function searchEmployeeByNameInForm16Generation(){
+
        var response = makeAJAXCall("/searchEmployeeByNameInForm16Generation", 'form16GenerationData');
           response.done(function (responseData) {
               if (response) {
@@ -59,32 +60,41 @@
 
                        console.log("in calculateTax success");
                    }
+
                });
            }
+          /* function calculateTax(){
+                    console.log("in calculate java script method");
+                  var url="/calculateTax";
+                  var form=document.getElementById("form16GenerationData");
+                  form.action=url;
+                   form.setAttribute('target','_self');
+                  form.submit();
+                    }*/
 
-       function saveEmployeeIncomeTax(){
+
+       /*function saveEmployeeIncomeTax(){
                           console.log("in saveAsPdf java script method");
                          var url="/saveEmployeeIncomeTax";
                          var form=document.getElementById("form16GenerationData");
                          form.action=url;
                          form.setAttribute('target','_self');
                          form.submit();
-                         }
+                         }*/
 
-       /* function saveEmployeeIncomeTax(){
-            var overlay = new loadOverlay();
-            overlay.show("MenuWrapper");
-            $.ajax({url:"./saveEmployeeIncomeTax.action",
-                    type: 'POST',
-                    data: $('#form16GenerationData').serialize()
-            }).done(function(data){
-                $('#form16GenerationBody').html(data);
-                placeHolderLoad();
-                saveEmpInfo();
-                saveIncome();
-                overlay.hide();
-            });
-        }*/
+       function saveEmployeeIncomeTax(){
+                 var taxableIncome= document.getElementById("earnedIncome").value;
+                 console.log(taxableIncome);
+                  var response = makeAJAXCall("/saveEmployeeIncomeTax", 'form16GenerationData');
+                      response.done(function (responseData) {
+                          if (response) {
+
+                              $("#form16SaveResult").html(responseData);
+
+                              console.log("in calculateTax success");
+                          }
+                      });
+                  }
 
        /* function sendMailEmployeeIncomeTax(){
             var overlay = new loadOverlay();

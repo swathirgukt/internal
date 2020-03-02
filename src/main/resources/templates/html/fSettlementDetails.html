@@ -34,6 +34,7 @@
                                     </tr>
                                 </table>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-10 col-sm-12 col-xs-10">
@@ -50,7 +51,7 @@
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr id="resignationDateId" style="display:block;">
+                                    <tr id="resignationDateId">
                                         <td style="padding: 5px">Date&nbsp;of&nbsp;Resignation<span style="color: #ff0000">*</span></td>
                                         <td style="padding: 5px"><b>:</b></td>
                                         <td style="padding: 5px"><input style="border: 1px solid #ff9900;" id="datepicker"
@@ -81,11 +82,11 @@
                                     <tr>
                                         <td style="padding: 5px">Reason&nbsp;For&nbsp;Leaving</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}"></textarea></td>
+                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}" spellcheck="true" /></td>
                                     </tr>
                                 </table>
                             </div>
-                        </div><hr>
+                        </div><hr class="new1">
                         <div class="row">
                             <div class="col-md-6 col-sm-10 col-xs-5">
                                 <table>
@@ -96,12 +97,12 @@
                                         <td  style="padding: 5px">Previous&nbsp;ARR</td>
                                         <td  style="padding: 5px"><b>:</b></td>
                                         <td style="padding:5px"><input type="text"
-                                                                        th:field="*{previousArrearsEarnings}"></td>
+                                                                        th:field="*{previousArrearsEarnings}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px">Other&nbsp;Earnings</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementEarnings}"></td>
+                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementEarnings}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -113,12 +114,12 @@
                                     <tr>
                                         <td style="padding: 5px">Admin&nbsp;Charges</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding:5px"><input type="text" th:field="*{adminCharges}"></td>
+                                        <td style="padding:5px"><input type="text" th:field="*{adminCharges}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px">Other&nbsp;Deductions</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementDeductions}"></td>
+                                        <td style="padding: 5px"><input type="text" th:field="*{otherSettlementDeductions}" onkeypress="return allowPositiveInt(event)"></td>
                                     </tr>
                                 </table>
                             </div>

@@ -33,7 +33,7 @@
                                                 </td>
                                                 <td>
                                                     <input class="input_style"  th:field="${employeeForm.empId}"
-                                                           type="text"/>
+                                                           type="text" style="border-radius:5px" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -62,7 +62,7 @@
 
                                                 <td>
                                                     <input class="input_style" name="first_name" id="first_name" th:field="${employeeForm.firstName}"
-                                                           type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150"/>
+                                                           type="text" onkeypress=" return allowCharactersAndSpaces(event);" maxlength="150" style="border-radius:5px"/>
 
                                                 </td>
                                             </tr>
@@ -72,8 +72,8 @@
                                                 </td>
 
                                                 <td>
-                                                    <select th:field="${employeeForm.department}">
-                                                        <option value="">select </option>
+                                                    <select th:field="${employeeForm.department}" class="selectOption">
+                                                        <option value="">select</option>
                                                         <option th:each="branches : ${employeeForm.departments}"
                                                                 th:value="${branches.department}"
                                                                 th:text="${branches.department}"/>
@@ -83,7 +83,7 @@
 
                                         </table>
                                         <div style="float: right;">
-                                            <button class="searchButton" onclick="getFormtData()" type="button"><b>Search</b>
+                                            <button class="submitButton" onclick="getFormtData()" type="button"><b>Search</b>
                                             </button>
                                         </div>
                                     </div>

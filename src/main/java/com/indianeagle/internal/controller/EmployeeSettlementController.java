@@ -100,9 +100,11 @@ public class EmployeeSettlementController {
         modelMap.addAttribute("employee", employee);
         modelMap.addAttribute("salary", salary);
         return "html/viewEmployeeSettlement";
-       }catch (Exception e){}
+       }catch (Exception e) {
+           e.printStackTrace();
+           return "html/viewEmployeeSettlement";
+       }
 
-        return "html/viewEmployeeSettlement";
     }
 
     @GetMapping("/goUrl")
