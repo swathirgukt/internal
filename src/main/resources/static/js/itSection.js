@@ -6,7 +6,7 @@ $(document).on('click', "button[name='addTaxSlabButton']", function() {
                          console.log('####Index >> '+rowIndex);
 
                          var newTaxSlabRow = $("<tr>");
-                         newTaxSlabRow.append("<td>From</td><td> <input name='incomeTaxSlabVOS["+rowIndex+"].minIncome' type='text'></td>");
+                         newTaxSlabRow.append("<td style='padding:10px'>From</td><td> <input name='incomeTaxSlabVOS["+rowIndex+"].minIncome' type='text'></td>");
                          newTaxSlabRow.append("<td>To</td><td><input name='incomeTaxSlabVOS["+rowIndex+"].maxIncome' type='text'></td>");
                          newTaxSlabRow.append("<td>Tax Rate</td> <td><input name='incomeTaxSlabVOS["+rowIndex+"].taxRate' type='text'></td>");
                          newTaxSlabRow.append("<td><button class='glyphicon glyphicon-remove' name='taxSlabRemoveButton'></button></td></tr>");
@@ -23,10 +23,10 @@ function addRebate() {
     var rowsCount = $('#rebateTable tr').length;
 
     var newRebateRow = $('<tr>');
-    newRebateRow.append("<td>Name</td><td><b>:</b></td><td><input class='inputfield' name='rebateVOS["+rowsCount+"].rebateName' type='text'></td>");
-    newRebateRow.append("<td>Income&nbsp;Limit</td><td><b>:</b></td><td><input class='inputfield' name='rebateVOS["+rowsCount+"].rebateApplySalary' type='text'></td>");
-    newRebateRow.append("<td>Amount</td><td><b>:</b></td><td><input class='inputfield' name='rebateVOS["+rowsCount+"].rebateAmount' type='text'></td>");
-    newRebateRow.append("<td><button type='button' class='submitButton' name='rebateRemoveButton'><b>Remove</b></button></td>");
+    newRebateRow.append("<td style='padding:10px'>Name</td><td><b>:</b></td><td><input class='inputfield' name='rebateVOS["+rowsCount+"].rebateName' type='text' style='width:70px'></td>");
+    newRebateRow.append("<td>Income&nbsp;Limit</td><td><b>:</b></td><td><input class='inputfield' name='rebateVOS["+rowsCount+"].rebateApplySalary' type='text' style='width:70px'></td>");
+    newRebateRow.append("<td>Amount</td><td><b>:</b></td><td><input class='inputfield' name='rebateVOS["+rowsCount+"].rebateAmount' type='text' style='width:70px'></td>");
+    newRebateRow.append("<td style='padding:10px'><button type='button' class='submitButton' name='rebateRemoveButton'><b>Remove</b></button></td>");
 
     $("#rebateTable").append(newRebateRow);
 }
@@ -53,10 +53,10 @@ function addSection(){
             var row3 = $('<tr>');
             var span = $('<span name="sectionError">');
 
-            row1.append('<td><input type="text" style="border:0px none;" value="'+sectionName+'" readonly="true" name="taxSectionForms['+sectionCount+'].sectionName" ></td><td><b><button type="button" onclick="addSectionDeclaration($(this))">Add</button></b></td>');
-            row2.append('<td>Section&nbsp;Limit</td>]<td><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].sectionLimit"></td>');
+            row1.append('<td><b><input type="text" style="border:0px none;" value="'+sectionName+'" readonly="true" name="taxSectionForms['+sectionCount+'].sectionName" ></b></td><td style="padding:10px"><b><button type="button" onclick="addSectionDeclaration($(this))">Add</button></b></td>');
+            row2.append('<td style="padding:10px">Section&nbsp;Limit</td>]<td><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].sectionLimit"></td>');
             row2.append('<td><button style="float: right; padding-right: 10px; margin-right: 30px;" class="submitButton" name="sectionRemoveButton" type="button">Remove&nbsp;Section</button></td>');
-            row3.append('<td><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].taxSectionDeclarations[0].subSectionName"></td>');
+            row3.append('<td style="padding:10px"><b><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].taxSectionDeclarations[0].subSectionName"></b></td>');
             row3.append('<td><button class="submitButton" type="button" name="subSectionRemoveButton"><b>Remove</b></button></td>');
 
             sectionTable.append(span);
@@ -83,7 +83,7 @@ function addSectionDeclaration(addButton){
            var sectionCount = addButton.closest('table').index()-1;
            var sectionDeclarationCount = addButton.closest('table').find('tr').length-2;
            var sectionDeclareRow = $('<tr>');
-           sectionDeclareRow.append('<td><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].taxSectionDeclarationVOS['+sectionDeclarationCount+'].subSectionName"></td>');
+           sectionDeclareRow.append('<td style="padding:10px"><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].taxSectionDeclarationVOS['+sectionDeclarationCount+'].subSectionName"></td>');
            sectionDeclareRow.append('<td><button class="submitButton" type="button" name="subSectionRemoveButton"><b>Remove</b></button></td>');
            addButton.closest('table').append(sectionDeclareRow);
 }
