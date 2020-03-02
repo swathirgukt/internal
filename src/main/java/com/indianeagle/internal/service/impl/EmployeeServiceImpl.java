@@ -123,7 +123,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     public List<Employee> getEmployeeList() {
-        return this.employeeRepository.findAll();
+        return this.employeeRepository.findAllByOrderByEmpId();
     }
 
     public List<Employee> getBufferedEmployees() {

@@ -1,30 +1,37 @@
-<div th:fragment="departmentResult" xmlns:th="http://www.thymeleaf.org">
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="departmentResult">
     <div th:if="${departmentList} != null AND ${departmentList.size()}>0">
-
-            <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
-
-                    <tr class="sticky">
-                        <th>Department No</th>
-                        <th>Department Name</th>
-                        <th>Manager No</th>
-                        <th>Location</th>
-                        <th>Phone No</th>
-                        <th>Edit</th>
-                    </tr>
-                    <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
-                        th:each="department :${departmentList}">
-                        <td th:text="${department.deptNo}"></td>
-                        <td th:text="${department.department}"></td>
-                        <td th:text="${department.mngrNo}"></td>
-                        <td th:text="${department.location}"></td>
-                        <td th:text="${department.phoneNo}"></td>
-                        <td><a th:href="@{/department/edit/{id}(id=${department.id})}">Edit</a></td>
-                    </tr>
-
+        <div class="tableScrollbar">
+            <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover"
+                   id="departmentsTable">
+                <thead>
+                <tr class="sticky">
+                    <th>Department No</th>
+                    <th>Department Name</th>
+                    <th>Manager No</th>
+                    <th>Location</th>
+                    <th>Phone No</th>
+                    <th class="excludeInExcel">Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
+                    th:each="department :${departmentList}">
+                    <td th:text="${department.deptNo}"></td>
+                    <td th:text="${department.department}"></td>
+                    <td th:text="${department.mngrNo}"></td>
+                    <td th:text="${department.location}"></td>
+                    <td th:text="${department.phoneNo}"></td>
+                    <td><a th:href="@{/department/edit/{id}(id=${department.id})}" class="excludeInExcel">Edit</a></td>
+                </tr>
+                </tbody>
             </table>
-
+        </div>
+        <div>
+            <b>Export&nbsp;:&nbsp;</b>
+            <button onclick="exportToExcel('departmentsTable','Departments_Details')">Excel</button>
+            <button onclick="exportToPDF('departmentsTable','Departments_Details')">PDF</button>
+        </div>
     </div>
-
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
          th:if="${departmentList}!=null  AND ${departmentList.size()}==0">
         Nothing found to display

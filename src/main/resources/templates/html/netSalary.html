@@ -12,7 +12,7 @@
         <div class="col-sm-8 text-left">
             <div class="jumbotron">
                 <div class="container">
-                    <form action="" th:object="${salaryForm.currentSalary}">
+                    <form  th:object="${salaryForm.currentSalary}">
                         <div class="Heading">Net Salary</div>
                                 <table width="100%" cellpadding="0" cellspacing="0" class="table table-bordered table-responsive-lg table-hover">
                                     <tr>
@@ -127,10 +127,10 @@
                                             <td colspan="4">
                                                 <table align="right" width="25%" cellpadding="0" cellspacing="0">
                                                     <td align="center" height="21px" width="128">
-                                                        <a style="text-decoration:none" href="javascript: window.history.go(-1);"><button class="submitButton">Re-&nbsp;Generate</button></a>
+                                                        <a style="text-decoration:none" href="javascript: window.history.go(-1);"><button class="submitButton" type="button">Re-&nbsp;Generate</button></a>
                                                     </td>
                                                     <td style="border:none;" height="21px" align="center" class="button btnDefault" width="100">
-                                                        <a th:href="@{/confirmAndSendMail(empId=${salaryForm.employee.empId})}"><button class="submitButton">Confirm</button></a>
+                                                        <a th:href="@{/confirmAndSendMail(empId=${salaryForm.employee.empId})}"><button class="submitButton" type="button">Confirm</button></a>
                                                     </td>
                                                 </table>
                                             </td>
