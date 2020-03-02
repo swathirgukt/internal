@@ -14,7 +14,7 @@
                 <div class="container">
                     <form action="saveOrUpdateEmployeeFinancialYear" id="employeeSavingForm" name="employeeSavingForm"
                           method="post"
-                          th:action="@{saveOrUpdateEmployeeFinancialYear}" th:object="${employeeFinancialYearForm}">
+                          th:action="@{saveOrUpdateEmployeeFinancialYear}">
                         <span th:if="${success}!=null" th:text="${success}" style="color:green"></span>
                         <div class="Heading">Employee Savings</div>
                         <div>
@@ -73,7 +73,7 @@
                                         <td>
                                             <select th:field="${employeeFinancialYearForm.financialYear.fromYear}"
                                                     th:value="${financialYearForm}?${financialYearForm.fromYear}:''">
-                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
                                                 <option th:each="year : ${financialYearForm.years}"
                                                         th:value="${year}"
                                                         th:text="${year}"/>
@@ -96,7 +96,7 @@
                                         <td>
                                             <select th:field="${employeeFinancialYearForm.financialYear.toYear}"
                                                     th:value="${financialYearForm}?${financialYearForm.toYear}:''">
-                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
                                                 <option th:each="year : ${financialYearForm.years}"
                                                         th:value="${year}"
                                                         th:text="${year}"/>
@@ -127,7 +127,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-10">
                                 <ul>
                                     <li id="employeeInfo">
-                                        <input th:field="${employeeVO.fullName}" placeholder="FullName" type="text"
+                                        <input th:name="${employeeVO.fullName}" th:value="${employeeVO.fullName}!='null null'?${employeeVO.fullName}:''" placeholder="FullName" type="text"
                                                 readonly="true">
                                         <input th:field="${employeeVO.designation}" placeholder="Designation" type="text"
                                                readonly="true">
@@ -182,7 +182,7 @@
 
                                                     <option  value="">select</option>
                                                     <div th:each="taxSectionForm : ${financialYearForm.taxSectionForms}" >
-                                                        <option th:with="names=${sectionDeclarationData.subSectionName}" th:each="subSection: ${taxSectionForm.taxSectionDeclarations}"
+                                                        <option th:with="names=${sectionDeclarationData.subSectionName}"  th:each="subSection: ${taxSectionForm.taxSectionDeclarationVOS}"
                                                                 th:value="${subSection.subSectionName}"
                                                         th:text="${subSection.subSectionName}" th:selected="${subSection.subSectionName==names}">
 
@@ -225,13 +225,13 @@
                                             <select id="subSectionNameTax" name="subSectionName" th:name="|employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName|" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName}">
                                                 <option value="">select</option>
 
-                                                <option th:each="taxSectionDeclaration : ${sectionData.taxSectionDeclarations}"
+                                                <option th:each="taxSectionDeclaration : ${sectionData.taxSectionDeclarationVOS}"
                                                         th:value="${taxSectionDeclaration.subSectionName}"
                                                         th:text="${taxSectionDeclaration.subSectionName}"/>
                                             </select>
                                             <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].id}" >
 
-                                            <input th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].saveAmount}"
+                                            <input th:name="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].saveAmount}"
                                                    readonly="true" type="text"/>
 
                                             <div name='saveExemptionRule' class='button btnOrange'>
@@ -246,7 +246,8 @@
                                         </li>
                                     </div>
 
-                                    <li>
+                                    <li th:if="${financialYearForm.id}!=null">
+
                                         <div class="midBtns right">
                                             <div>
                                                 <Button class="submitButton" type="submit">Submit</Button>
@@ -254,6 +255,7 @@
                                             <div class="button btnOrange">
                                                 <a href="@{EmployeeSavings}" type="button">Cancel</a>
                                             </div>
+
                                         </div>
                                     </li>
                                 </ul>

@@ -30,6 +30,13 @@ public class ChequeDetailsServiceImpl implements ChequeDetailsService {
 	 */
 
 	public void saveOrUpdateCheque(ChequeDetails chequeDetails) {
+		ChequeDetails chequeDetailsFromDb=null;
+		if(chequeDetails.getId()!=null) {
+			 chequeDetailsFromDb = chequeDetailsRepository.findById(chequeDetails.getId()).get();
+		}
+		if(chequeDetailsFromDb!=null){
+			chequeDetails.setId(chequeDetailsFromDb.getId());
+		}
         chequeDetailsRepository.save(chequeDetails);
 		
 	}

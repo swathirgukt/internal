@@ -66,9 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public void updateEmployee(EmployeeForm employeeForm) {
         Employee employee = this.employeeRepository.findByEmpId(employeeForm.getEmployeeVO().getEmpId());
-        System.out.println("###Emp: "+employee);
         User user = this.usersRepository.findByUserName(employeeForm.getEmployeeVO().getEmpId());
-        System.out.println("###User: "+user);
         if(user!=null) {
             user.setFirstName(employeeForm.getEmployeeVO().getFirstName());
             user.setLastName(employeeForm.getEmployeeVO().getLastName());
@@ -82,22 +80,19 @@ public class EmployeeServiceImpl implements EmployeeService {
             this.usersRepository.save(user);
         }
         if (employee.getSalary() != null) {
-            System.out.println("==salry==="+employee.getSalary());
             employeeForm.getEmployeeVO().getSalaryVO().setId(employee.getSalary().getId());
         }
         employeeForm.getEmployeeVO().setId(employee.getId());
         if (employee.getNominee() != null) {
-            System.out.println("==nominee==="+employee.getNominee());
             employeeForm.getEmployeeVO().getNomineeVO().setId(employee.getNominee().getId());
         }
         BeanUtils.copyProperties( employeeForm.getEmployeeVO(),  employee);
-        System.out.println("==employee="+employee.getSalary());
         employee.getNominee().setEmployee(employee);
         Salary salary=new Salary();
         BeanUtils.copyProperties(employeeForm.getEmployeeVO().getSalaryVO(),salary);
         employee.setSalary(salary);
         this.employeeRepository.save(employee);
-        // this.mailingEngine.mailAccountDetails(employee.getEmpId(), employee.getOfficialEmail());
+        this.mailingEngine.mailAccountDetails(employee.getEmpId(), employee.getOfficialEmail());
     }
 
     public void updateEmployeeLeaves(Employee employee) {

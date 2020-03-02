@@ -45,7 +45,7 @@ public class EmployeeSavingsController {
             financialYearForm = prepareFinancialYearForm(financialYear);
             //  return "html/employeeSavings";
         }
-        modelMap.addAttribute("financialYearForm",financialYearForm);
+       modelMap.addAttribute("financialYearForm",financialYearForm);
         modelMap.addAttribute("employeeFinancialYearForm",employeeFinancialYearForm);
         modelMap.addAttribute("employeeVO",employeeVO);
 
@@ -55,14 +55,13 @@ public class EmployeeSavingsController {
 
 
     @GetMapping("/employeeSavings")
-    public String employeeSavings(ModelMap modelMap) {
+    public String employeeSavings(ModelMap modelMap, EmployeeFinancialYearForm employeeFinancialYearForm)
+    {
         return "html/employeeSavings";
     }
 
     @PostMapping("/searchEmployeeByName")
     public String searchEmployeeByName(ModelMap modelMap, @ModelAttribute EmployeeVO employeeVO) {
-       // System.out.println("=========employeeFinancialYearForm=========="+employeeFinancialYearForm.getFinancialYear());
-      // FinancialYearForm financialYearForm = prepareFinancialYearForm(employeeFinancialYearForm.getFinancialYear());
         if (employeeVO.getFirstName() != null && !employeeVO.getFirstName().trim().equals("") && employeeVO.getFirstName().length() >= 3) {
             Employee employee=new Employee();
             BeanUtils.copyProperties(employeeVO,employee);
@@ -89,13 +88,10 @@ public class EmployeeSavingsController {
     public String retrieveFinancialYearDataToEmployee(ModelMap modelMap,@ModelAttribute EmployeeFinancialYearForm employeeFinancialYearForm) {
         FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
         String empId = employeeFinancialYearForm.getEmpId();
-        employeeFinancialYearForm = null;
         List<EmployeeFinancialYear> employeeFinancialYears = null;
-        List<FinancialYear> financialYears = null;
         if (empId != null && !empId.equals("")) {
           Employee  employee = departmentService.findEmployeeByEmployeeId(empId);
             if (employee != null) {
-                System.out.println("==employee======="+employee);
                 EmployeeVO employeeVO=new EmployeeVO();
                 BeanUtils.copyProperties(employee,employeeVO);
                 modelMap.addAttribute("employeeVO",employeeVO);
@@ -105,12 +101,11 @@ public class EmployeeSavingsController {
         if (employeeFinancialYears != null && !employeeFinancialYears.isEmpty()) {
             employeeFinancialYearForm = prepareEmployeeFinancialYearForm(employeeFinancialYears.get(0));
             this.employeeFinancialYearForm=employeeFinancialYearForm;
-            System.out.println("======employeeFinancialYearForm===="+employeeFinancialYearForm);
             modelMap.addAttribute("employeeFinancialYearForm",employeeFinancialYearForm);
             financialYearForm = new FinancialYearForm();
             modelMap.addAttribute("financialYearForm",financialYearForm);
         }
-        financialYears = departmentService.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
+    List<FinancialYear>  financialYears = departmentService.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         if (financialYears != null && !financialYears.isEmpty()) {
             financialYearForm = prepareFinancialYearForm(financialYears.get(0));
             modelMap.addAttribute("financialYearForm",financialYearForm);
@@ -131,31 +126,32 @@ public class EmployeeSavingsController {
         }
 
 
-    if (employeeFinancialYearForm == null && financialYearForm == null) {
-            financialYearForm = new FinancialYearForm();
-            financialYearForm.setFromMonth(financialYear.getFromMonth());
+    if (financialYears == null||financialYears.isEmpty()) {
+           // financialYearForm = new FinancialYearForm();
+           /* financialYearForm.setFromMonth(financialYear.getFromMonth());
             financialYearForm.setFromYear(financialYear.getFromYear());
             financialYearForm.setToMonth(financialYear.getToMonth());
-            financialYearForm.setToYear(financialYear.getToYear());
-            modelMap.addAttribute("financialYearForm",financialYearForm);
-            modelMap.addAttribute("employeeFinancialYearForm",employeeFinancialYearForm);
-        System.out.println("=======employeeFinan="+employeeFinancialYearForm);
+            financialYearForm.setToYear(financialYear.getToYear());*/
+      /*      modelMap.addAttribute("financialYearForm",financialYearForm);
+            modelMap.addAttribute("employeeFinancialYearForm",employeeFinancialYearForm);*/
+      modelMap.addAttribute("financialYearForm",new FinancialYearForm());
             //retrieveError = true;
         modelMap.addAttribute("noFinancialYear","There is no data with this financial year");
             return "html/employeeSavings";
         }
-    System.out.println("=======employeeFinan2="+employeeFinancialYearForm);
-    System.out.println("++++++++++empid+"+employeeFinancialYearForm.getId());
-    System.out.println("=======taxformid===="+employeeFinancialYearForm.getEmployeeTaxSectionForms().get(0).getId());
-    System.out.println("=======taxdecid===="+employeeFinancialYearForm.getEmployeeTaxSectionForms().get(0).getEmployeeTaxSectionDeclarations().get(0).getId());
     return "html/employeeSavings";
     }
 
     @PostMapping("/saveOrUpdateEmployeeFinancialYear")
     public String saveOrUpdateEmployeeFinancialYear(@ModelAttribute EmployeeFinancialYearForm employeeFinancialYearForm,@ModelAttribute EmployeeVO employeeVO,ModelMap modelMap) {
         financialYearForm = new FinancialYearForm();
+        /*if (validation(employeeFinancialYearForm)) {
+            return INPUT;
+        }*/
+
         saveEmployee(employeeVO,employeeFinancialYearForm);
        departmentService.saveOrUpdateEmployeeFinancialYear( prepareEmployeeFinancialYear(employeeFinancialYearForm));
+               // prepareEmployeeFinancialYear(employeeFinancialYearForm);
         successfulSubmission = true;
         employeeFinancialYearForm = null;
         employeeVO = null;

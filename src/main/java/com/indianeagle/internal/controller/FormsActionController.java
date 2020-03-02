@@ -55,18 +55,15 @@ public class FormsActionController {
     @GetMapping("/formV")
     public String fromV(ModelMap model, @RequestParam Date salaryDate) {
         if (salaryDate == null) {
-            System.out.println("in form date null");
             model.addAttribute("error", "Please Choose Date ");
             return "html/reportError";
         }
         FormsResultData formsResultData = new FormsResultData();
         formsResultData.setPtForm(formsService.getMonthlyRtReport(salaryDate));
         if (formsResultData.getPtForm() == null) {
-            System.out.println("in form result null");
             model.addAttribute("error", "No Record Found");
             return "html/reportError";
         }
-        System.out.println(formsResultData);
         model.addAttribute("formsResultData", formsResultData);
         return "html/formv";
     }
@@ -152,7 +149,6 @@ public class FormsActionController {
         FormsResultData formsResultData = new FormsResultData();
         try {
             if (salaryDate == null) {
-                System.out.println("error");
                 modelMap.addAttribute("error", "Please Enter Date");
                 return "html/reportError";
             }
@@ -163,7 +159,6 @@ public class FormsActionController {
                 return "html/reportError";
             }
             modelMap.addAttribute("formsResultData",formsResultData);
-            System.out.println(formsResultData.getBankSalariesForm().getBankSalariesInfoList());
         } catch (Exception e) {
             e.printStackTrace();
         }

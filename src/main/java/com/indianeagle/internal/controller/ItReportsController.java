@@ -53,40 +53,29 @@ public class ItReportsController {
     @PostMapping("/getITReports")
     public String getITReport(ModelMap modelMap, @RequestParam Date salaryDate) {
        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("@@Date :: "+salaryDate);
         try {
             if (salaryDate == null) {
-                System.out.println("salary data is null");
                 modelMap.addAttribute( "Date", "Please select  date." );
                 return "html/itReports";
-            }
-
-            //System.out.println("##month: "+salaryDate.getMonth());
-             else if (salaryDate.getMonth() != Calendar.APRIL) {
-                System.out.println("##Inside if");
+            } else if (salaryDate.getMonth() != Calendar.APRIL) {
                 modelMap.addAttribute( "monthName", "Please select financial Month(April)" );
                 return "html/itReports";
             }
 
             List<ITForm> itList = monthlyReportService.getITReport( salaryDate );
-            System.out.println("##List >> "+itList);
            int i= itList.size();
-            System.out.println(i);
            if (itList == null) {
                 modelMap.addAttribute( "noRecords","No Records Exist" );
                 return "html/itReports";
             }
 
 
-            System.out.println(itList.get(0).getMonthlyIT().size());
             int listSize=itList.get(0).getMonthlyIT().size();
 
            modelMap.addAttribute( "employeeId",userDetails.getUsername() );
            for(int j=0;j<12-listSize;j++){
-               System.out.println(j);
                itList. get(0).getMonthlyIT().add(null );
            }
-            System.out.println("new Size:  "+itList.get(0).getMonthlyIT().size());
            double total=0;
             for (BigDecimal b:itList. get(0).getMonthlyIT()) {
                 if(b==null){
@@ -98,7 +87,6 @@ public class ItReportsController {
             }
             modelMap.addAttribute( "itList", itList.get(0).getMonthlyIT() );
             for(BigDecimal B:itList.get(0).getMonthlyIT()){
-                System.out.println(B);
 
             }
             BigDecimal totalInBigDecimal=new BigDecimal( total );
