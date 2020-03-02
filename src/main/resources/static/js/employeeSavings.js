@@ -76,27 +76,27 @@ if(y.value == ""){
       document.employeeSavingForm.submit();
   }
 
-   $(document).on('click', '#sectionList div[name="addDeclaration"]', function(){
-   console.log("in onClick");
-          var sectionIndex = $(this).attr('id');
-          console.log("sectionIndex:   "+ sectionIndex);
-          var lastDiv = $(this).parent().children('div').last();
-          var selectFieldLength = lastDiv.children('select').first().children().length;
-          var currentDivIndex = parseInt(lastDiv.attr('id'));
-          console.log(currentDivIndex+1);
-           console.log("currentDivIndex:   "+ currentDivIndex);
-          if(currentDivIndex < (selectFieldLength-1)){
-          console.log("=in=====");
-              var cloneDiv = $(this).parent().children('div').last().clone();
-              cloneDiv.attr('id', currentDivIndex+1);
-              cloneDiv.children('select').first().attr('name', 'employeeFinancialYearForm.employeeTaxSectionForms['+sectionIndex+'].employeeTaxSectionDeclarations['+(currentDivIndex+1)+'].subSectionName');
-              cloneDiv.children('input').last().attr('name', 'employeeFinancialYearForm.employeeTaxSectionForms['+sectionIndex+'].employeeTaxSectionDeclarations['+(currentDivIndex+1)+'].saveAmount').val("");
-              if(cloneDiv.children('div').last().attr('name').trim() != "removeDeclaration"){
-                  cloneDiv.append('<div name="removeDeclaration" class="button btnGray"><a>Remove</a></div>');
-              }
-              $(this).parent().append(cloneDiv);
-         }
-      });
+  $(document).on('click', '#sectionList div[name="addDeclaration"]', function(){
+    console.log("in onClick");
+           var sectionIndex = $(this).attr('id');
+           console.log("sectionIndex:   "+ sectionIndex);
+           var lastDiv = $(this).parent().children('div').last();
+           var selectFieldLength = lastDiv.children('select').first().children().length;
+           var currentDivIndex = parseInt(lastDiv.attr('id'));
+           console.log(currentDivIndex+1);
+            console.log("currentDivIndex:   "+ currentDivIndex);
+           if(currentDivIndex < (selectFieldLength-1)){
+           console.log("=in=====");
+               var cloneDiv = $(this).parent().children('div').last().clone();
+               cloneDiv.attr('id', currentDivIndex+1);
+               cloneDiv.children('select').first().attr('name', 'employeeFinancialYearForm.employeeTaxSectionForms['+sectionIndex+'].employeeTaxSectionDeclarations['+(currentDivIndex+1)+'].subSectionName');
+               cloneDiv.children('input').last().attr('name', 'employeeFinancialYearForm.employeeTaxSectionForms['+sectionIndex+'].employeeTaxSectionDeclarations['+(currentDivIndex+1)+'].saveAmount').val("");
+               if(cloneDiv.children('div').last().attr('name').trim() != "removeDeclaration"){
+                   cloneDiv.append('<div name="removeDeclaration" class="button btnGray"><a>Remove</a></div>');
+               }
+               $(this).parent().append(cloneDiv);
+          }
+       });
 
 
 

@@ -568,7 +568,6 @@ public class SimpleUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(settlementDate);
         BigDecimal payableSalary = BigDecimal.ZERO;
-        System.out.println(new BigDecimal(calendar.getActualMaximum(Calendar.DAY_OF_MONTH)));
         return grossSalary.multiply(new BigDecimal(noOfDays)).divide(new BigDecimal(calendar.getActualMaximum(Calendar.DAY_OF_MONTH)), 2, RoundingMode.HALF_UP).setScale(0, RoundingMode.HALF_UP).setScale(2);
     }
 

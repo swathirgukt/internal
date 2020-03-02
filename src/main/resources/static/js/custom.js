@@ -421,11 +421,76 @@ function findEmployeeLeaves(){
     });
 }
 function saveCheque()
-{	document.chequeForm.action="/saveChequeDetails";
+{
+ var x = document.forms["chequeForm"]["datepicker"]
+ var y = document.forms["chequeForm"]["chequeAmount"]
+ var z = document.forms["chequeForm"]["chequeStatus"]
+ var a = document.forms["chequeForm"]["name_Of_Pay"]
+ var b = document.forms["chequeForm"]["cheque_Number"]
+ var c = document.forms["chequeForm"]["bank_Name"]
+ var error = false;
+    if(x.value == "") {
+        console.log("come in x");
+        document.getElementById("chequeDate").innerHTML="cheque date required";
+        error = true;
+    }
+ if(y.value == "") {
+               console.log("come in x");
+               document.getElementById("amount").innerHTML="cheque amount required";
+               error = true;
+           }
+if(z.value == "select") {
+         console.log("come in x");
+         document.getElementById("status").innerHTML="please select cheque status";
+         error = true;
+     }
+if(a.value == "") {
+              console.log("come in x");
+              document.getElementById("nameOfPay").innerHTML=" name required";
+              error = true;
+          }
+if(b.value == "") {
+              console.log("come in x");
+              document.getElementById("chequeNumber").innerHTML=" cheque number required";
+              error = true;
+          }
+if(c.value == "") {
+              console.log("come in x");
+              document.getElementById("bankName").innerHTML="bank name required";
+              error = true;
+          }
+
+    if(error){return;}
+
+document.chequeForm.action="/saveChequeDetails";
 	document.chequeForm.submit();
 }
+
 function searchChequeDetails()
 {
+ var x = document.forms["chequeForm"]["datepicker1"]
+ var y = document.forms["chequeForm"]["datepicker2"]
+ var z = document.forms["chequeForm"]["cheque_Amount"]
+var error = false;
+    if(x.value == "") {
+        console.log("come in x");
+        document.getElementById("fromDate").innerHTML="please select fromDate";
+        error = true;
+    }
+ if(y.value == "") {
+               console.log("come in x");
+               document.getElementById("toDate").innerHTML="please select toDate";
+               error = true;
+           }
+if(z.value == "") {
+         console.log("come in x");
+         document.getElementById("cheque-Amount").innerHTML="amount required";
+         error = true;
+     }
+
+         if(error){return;}
+
+
 var response = makeAJAXCall("/searchCheques", 'chequeForm');
     response.done(function (responseData) {
         if (responseData) {
@@ -569,23 +634,23 @@ function searchEmployeeStatus() {
  }
 
  function monthlySalaryReport()
-  {
-      var x = document.forms["monthlySalaryForm"]["salaryDate"]
-  var error = false;
-     if(x.value == "") {
-         console.log("come in x");
-         document.getElementById("salDate").innerHTML="please select date";
-         error = true;
-     }
+ {
+     var x = document.forms["monthlySalaryForm"]["salaryDate"]
+     var error = false;
+        if(x.value == "") {
+            console.log("come in x");
+            document.getElementById("salDate").innerHTML="please select date";
+            error = true;
+        }
 
-     if(error){return;}
+        if(error){return;}
 
-  var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
-      response.done(function (responseData) {
-          if (responseData) {
-              $("#monthlySalaryResult").html(responseData);
-          }
 
+ var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+     response.done(function (responseData) {
+         if (responseData) {
+             $("#monthlySalaryResult").html(responseData);
+         }
       });
   }
 

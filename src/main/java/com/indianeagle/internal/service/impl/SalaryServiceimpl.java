@@ -239,9 +239,7 @@ public class SalaryServiceimpl implements SalaryService, MessageSourceAware {
 
         List<EmpSalaryDecider> deciderList = salaryDeciderRepository.findAllBetween(currentSalaryList.get(0).getSalaryDate(), currentSalaryList.get(0).getSalaryEndDate());
         for (EmpSalaryDecider salaryDecider: deciderList){
-            System.out.println("@@@@Decider:: "+salaryDecider.getEmpId());
             if (checkIfPresent(salaryDecider.getEmpId(),currentSalaryList)) {
-                System.out.println("@@@FoundToDelete >> "+salaryDecider.getEmpId());
                 salaryDeciderRepository.delete(salaryDecider);
             }
         }

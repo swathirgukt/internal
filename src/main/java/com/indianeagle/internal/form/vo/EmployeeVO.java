@@ -279,8 +279,6 @@ public class EmployeeVO {
         if (StringUtils.isNotBlank(getMiddleName()))
             name.append(" ").append(getMiddleName());
         String fullName=name.append(" ").append(StringUtils.capitalize(getLastName())).toString();
-		System.out.println("==fullname"+fullName);
-
 		return fullName;
 	}
 

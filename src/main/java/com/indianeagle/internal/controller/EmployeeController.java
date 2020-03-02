@@ -120,14 +120,7 @@ public class EmployeeController {
      * To update the employee details
      */
     @PostMapping("/updateEmployeeController")
-    public String updateEmployee(ModelMap model, @ModelAttribute("employeeForm") EmployeeForm employeeForm/*, BindingResult bindingResult*/) {
-        System.out.println("============UpdateBeforeCondition==================");
-       /* if (bindingResult.hasErrors()) {
-            // model.addAttribute("message", "Validate error");
-            //bindingResult.reject("Validate error");
-            System.out.println("errors");
-            return "html/createEmployee";
-        }*/
+    public String updateEmployee(ModelMap model, @ModelAttribute("employeeForm") EmployeeForm employeeForm) {
         if (StringUtils.isEmpty(employeeForm.getUser().getPassword())) {
             model.addAttribute("passwordRequired", "Password is required");
             return "html/createEmployee";
@@ -267,24 +260,15 @@ public class EmployeeController {
         user.setFirstName(employeeForm.getEmployeeVO().getFirstName());
         user.setLastName(employeeForm.getEmployeeVO().getLastName());
 
-        System.out.println("password " + employeeForm.getUser());
-        System.out.println("=============================");
-        // System.out.println("password= "+employeeForm.getUser().getPassword());
-        //System.out.println("password= "+CryptoUtil.encryptPassWord(employeeForm.getUser().getPassword()));
-        System.out.println("=============================");
-       /* if((employeeForm.getUser().getPassword())==null){
-            System.out.println("password= "+CryptoUtil.encryptPassWord(employeeForm.getUser().getPassword()));
-        }
+       /*
        user.setPassword((employeeForm.getUser().getPassword()));
         user.setEmail(employeeForm.getEmployeeVO().getOfficialEmail());*/
-        System.out.println(employeeForm.getUser().getUserName());
-        System.out.println(employeeForm.getUser().getPassword());
         user.setStatus(true);
         List<Role> roleList = userRolesService.findRolesByRoleName(employeeForm.getRoleName());
         Set<Role> roles = new HashSet<Role>(roleList);
         user.setRoles(roles);
         usersService.save(user);
-        // mailingEngine.mailAccountInfo(user, employeeForm.getUser().getPassword());
+        mailingEngine.mailAccountInfo(user, employeeForm.getUser().getPassword());
     }
 
 
