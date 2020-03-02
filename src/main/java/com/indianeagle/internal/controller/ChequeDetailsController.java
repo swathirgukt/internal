@@ -53,10 +53,8 @@ public class ChequeDetailsController {
     }
 
     @PostMapping("/saveChequeDetails")
-    public String saveOrUpdate(ModelMap model, @ModelAttribute("chequeDetailsForm") ChequeDetailsForm chequeDetailsForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "html/chequeDetails";
-        }
+    public String saveOrUpdate(ModelMap model, @ModelAttribute("chequeDetailsForm") ChequeDetailsForm chequeDetailsForm) {
+
         if (chequeDetailsForm.getChequeDetails().getId() == null) {
             model.addAttribute("saveMessage", "Saved Successfully");
         } else {

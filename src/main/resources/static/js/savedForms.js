@@ -12,13 +12,27 @@ function setEmployeeId(empId){
          });
 
  }
+ $( document ).ready(function() {
+     $("#loading").hide();
+     $("#itp_overlay").hide();
+ });
+
  function searchSaveEmployees(){
+ $("#loading,#itp_overlay").show();
   $('#employeeDetails').html("");
+
 if(document.getElementById('employeeName').value!=""){
     console.log("====");
  var response = makeAJAXCall('/searchEmployeeDetails','empdata');
+ $(document).ajaxStart(function(){
+          $("#loading").css("display", "block");
+        });
+        $(document).ajaxComplete(function(){
+          $("#loading").css("display", "none");
+        });
      response.done(function(responseData){
          if(responseData){
+         $("#loading,#itp_overlay").hide();
              $("#searchSaveEmployeeResult").html(responseData);
          }
      });

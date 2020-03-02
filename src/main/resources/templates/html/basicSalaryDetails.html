@@ -4,7 +4,34 @@
 <html>
 <head>
     <title>Basic Salary Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 </head>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+<script src="src/main/resources/static/js/tableHTMLExport.js"></script>
+
+<script type="text/javascript">
+
+        $("#btnExport").click(function () {
+            $("#tblCustomers").table2excel({
+                filename: "Table.xls"
+            });
+        });
+
+          function exportHTMLTableToPDF(tableID, file){
+      $("#"+tableID).tableHTMLExport({
+	   type:'pdf',
+        orientation:'p'
+	  });
+}
+    </script>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
 <div class="container-fluid text-center">

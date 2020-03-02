@@ -23,11 +23,12 @@
                                 <div>
                                     <table width="100%" class="table-sm table_text_style">
                                         <tr>
-                                            <td width="146px">Cheque Date</td>
+                                            <td width="143px">Cheque Date</td>
                                             <td><b>:</b></td>
                                             <td><input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
-                                                       width="173px" name="datepicker" th:field="*{chequeDetails.chequeDate}"/>
+                                                       width="175px" name="datepicker" th:field="*{chequeDetails.chequeDate}"/>
                                                 <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script></td>
+                                            <td><span id="chequeDate" style="color:red"></span></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -40,24 +41,31 @@
                                         <tr>
                                             <td>Amount</td>
                                             <td><b>:</b></td>
-                                            <td><input th:field="*{chequeDetails.amount}"
-                                                       type="text" onkeypress="return allowPositiveInt(event)"/></td>
+                                            <td><input id="chequeAmount" name="chequeAmount" th:field="*{chequeDetails.amount}"
+                                                       type="text" style="border-radius:5px"/></td>
+                                            <td><span id="amount" style="color:red"></span></td>
+
                                         </tr>
                                         <tr>
                                             <td>Status</td>
                                             <td><b>:</b></td>
-                                            <td><select th:field="*{chequeDetails.status}" name="id" class="selectOption">
+                                            <td><select th:field="*{chequeDetails.status}" name="chequeStatus" id="chequeStatus" class="selectOption">
                                                 <option label="select" value="select">select</option>
                                                 <option th:value="'Issued'" th:text="issued">issued</option>
-                                                <option th:value="'Issued'" th:text="cancel">cancel</option>
+                                                <option th:value="'cancel'" th:text="cancel">cancel</option>
                                             </select></td>
+                                            <td><span id="status" style="color:red"></span></td>
+
                                         </tr>
                                         <tr>
                                             <td>Name&nbsp;Of&nbsp;Pay<span style="color:red">*</span></td>
                                             <td><b>:</b></td>
-                                            <td><input th:field="*{ChequeDetails.nameOfPay}"
-                                                       type="text"></td>
+                                            <td><input name="name_Of_Pay" id="name_Of_Pay" th:field="*{ChequeDetails.nameOfPay}"
+                                                       type="text" style="border-radius:5px"></td>
+                                            <td><span id="nameOfPay" style="color:red"></span></td>
+
                                         </tr>
+                                        <input type="hidden" th:field="*{ChequeDetails.id}"/>
                                     </table>
                                 </div>
                             </div>
@@ -67,19 +75,23 @@
                                         <tr>
                                             <td>Cheque&nbsp;No<span style="color:red">*</span></td>
                                             <td><b>:</b></td>
-                                            <td><input th:field="*{chequeDetails.chequeNo}"
-                                                       type="text"/></td>
+                                            <td><input id="cheque_Number" name="cheque_Number" th:field="*{chequeDetails.chequeNo}"
+                                                       type="text" style="border-radius:5px"/></td>
+                                            <td><span id="chequeNumber" style="color:red"></span></td>
+
                                         </tr>
                                         <tr>
                                             <td>Bank<span style="color:red">*</span></td>
                                             <td><b>:</b></td>
-                                            <td><input th:field="*{ChequeDetails.bank}"
-                                                       type="text"></td>
+                                            <td><input id="bank_Name" name="bank_Name" th:field="*{ChequeDetails.bank}"
+                                                       type="text" style="border-radius:5px"></td>
+                                            <td><span id="bankName" style="color:red"></span></td>
+
                                         </tr>
                                         <tr>
                                             <td>Comments</td>
                                             <td><b>:</b></td>
-                                            <td><input th:field="*{ChequeDetails.comments}" type="text"></td>
+                                            <td><input th:field="*{ChequeDetails.comments}" type="text" style="border-radius:5px"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -96,36 +108,41 @@
                         <div class="Heading"> Search Cheque Details</div>
                         <div class="row"></div>
 
-                            <div class="col-md-3">
-                                <span>From </span>
-                                <span style="color: red">*:</span>
-                                <div class="input-group">
-                                    <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
-                                           width="200px" name="datepicker" th:field="*{fromDate}"/>
-                                    <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
-                                </div>
+                        <div class="col-md-3">
+                            <span>From </span>
+                            <span style="color: red">*:</span>
+                            <div class="input-group">
+                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
+                                       width="200px" name="datepicker1" th:field="*{fromDate}"/>
+                                <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
                             </div>
-                            <div class="col-md-3">
-                                <span>To </span>
-                                <span style="color: red">*:</span>
-                                <div class="input-group">
-                                    <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
-                                           width="200px" name="datepicker" th:field="*{toDate}"/>
-                                    <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
+                            <span id="fromDate" style="color:red"></span>
 
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <span>To </span>
+                            <span style="color: red">*:</span>
+                            <div class="input-group">
+                                <input style=" float:left; border: 1px solid #ff9900;" id="datepicker2"
+                                       width="200px" name="datepicker2" th:field="*{toDate}"/>
+                                <script>$('#datepicker2').datepicker({ uiLibrary: 'bootstrap' }); </script>
+
                             </div>
-                            <div style="margin-top: 20px">
-                                <span style="margin-left: 60px;">Amount :</span>
-                                <span style="margin-left: 10px;">
-								<input th:field="*{amount}" onkeypress="return allowRealNo(event,this.value)"
+                            <span id="toDate" style="color:red"></span>
+
+                        </div>
+                        <div style="margin-top: 20px">
+                            <span style="margin-left: 60px;">Amount :</span>
+                            <span style="margin-left: 10px;">
+								<input th:field="*{amount}" id="cheque_Amount" name="cheque_Amount" onkeypress="return allowRealNo(event,this.value)"
                                        type="text"/>
+                                <span id="cheque-Amount" style="color:red"></span>
 
 								<span style="margin-left: 10px;">
 									<button class="submitButton" onclick="searchChequeDetails()" type="button">Search</button>
 								</span>
 							</span>
-                            </div>
+                        </div>
                     </form>
                     <div class="row">
                         <div class="col-md-12 col-sm-10 col-xs-5">
