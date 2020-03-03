@@ -152,7 +152,18 @@ function searchDepartment() {
 }
 
 function searchPeripheral() {
-     $("#loading,#itp_overlay").show();
+    $("#loading,#itp_overlay").show();
+
+    $("#success").text("");
+    $("#peripheralNameError").text("");
+    $("#peripheralTypeError").text("");
+    $("#peripheralModelError").text("");
+    $("#purchaseDateError").text("");
+    $("#peripheralBrandError").text("");
+    $("#serialNumberError").text("");
+    $("#warrantyDateError").text("");
+    $("#peripheralStatusError").text("");
+
     var response = makeAJAXCall("/peripheral/search", 'peripheralForm');
        $(document).ajaxStart(function(){$("#loading").css("display", "block");});
        $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
@@ -191,7 +202,7 @@ function searchEmployeeLeaveReport() {
             return;
         }
 
-        $("#loading,#itp_overlay").show();
+    $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/employeeLeaveReport", 'employeeLeaveReportForm');
        $(document).ajaxStart(function(){$("#loading").css("display", "block");});
        $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
@@ -369,6 +380,7 @@ function saveDepartment() {
 }
 function savePeripheral() {
 
+    $("#success").text("");
     $("#peripheralNameError").text("");
     $("#peripheralTypeError").text("");
     $("#peripheralModelError").text("");

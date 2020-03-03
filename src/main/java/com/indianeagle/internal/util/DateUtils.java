@@ -11,10 +11,7 @@ package com.indianeagle.internal.util;
 import com.indianeagle.internal.constants.StringConstants;
 
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Utility class for Dates
@@ -114,4 +111,28 @@ public class DateUtils {
         }
         return (((int)Math.ceil((double)(endDate.getTime() - startDate.getTime()) / 86400000)) + 1);
     }
+
+    /**
+     * Method to convert given date from CST to IST
+     *
+     * @param date : hold the log date in CST
+     * @return : Given Date in IST timeZone
+     */
+    public static Date convertDateInCstToIst(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        TimeZone fromTimeZone = calendar.getTimeZone();
+        TimeZone toTimeZone = TimeZone.getTimeZone("IST");
+        calendar.setTimeZone(fromTimeZone);
+        calendar.add(Calendar.MILLISECOND, fromTimeZone.getRawOffset() * -1);
+        if (fromTimeZone.inDaylightTime(calendar.getTime())) {
+            calendar.add(Calendar.MILLISECOND, calendar.getTimeZone().getDSTSavings() * -1);
+        }
+        calendar.add(Calendar.MILLISECOND, toTimeZone.getRawOffset());
+        if (toTimeZone.inDaylightTime(calendar.getTime())) {
+            calendar.add(Calendar.MILLISECOND, toTimeZone.getDSTSavings());
+        }
+        return calendar.getTime();
+    }
+
 }

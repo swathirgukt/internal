@@ -43,7 +43,7 @@ public class ApproveLeaveController {
 
     @InitBinder
     public void initBinder(final WebDataBinder binder) {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
