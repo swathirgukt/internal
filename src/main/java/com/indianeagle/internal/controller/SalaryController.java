@@ -9,6 +9,7 @@ import com.indianeagle.internal.form.vo.DepartmentVO;
 import com.indianeagle.internal.form.vo.EmployeeVO;
 import com.indianeagle.internal.form.vo.SalaryHistoryVO;
 import com.indianeagle.internal.service.DepartmentService;
+import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.service.SalaryService;
 import com.indianeagle.internal.util.DateUtils;
@@ -47,6 +48,8 @@ public class SalaryController {
     private SalaryService salaryService;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private EmployeeService employeeService;
 
     private SalaryForm salaryForm;
 
@@ -57,15 +60,15 @@ public class SalaryController {
 
         List departmentList = departmentService.loadAllDepartments();
         List<DepartmentVO> departmentVOList = new ArrayList<>();
-        departmentList.stream().forEach(employee -> {
+        departmentList.forEach(employee -> {
             DepartmentVO departmentVO = new DepartmentVO();
             BeanUtils.copyProperties(employee, departmentVO);
             departmentVOList.add(departmentVO);
         });
 
-        List<Employee> employeeList = salaryService.loadActiveEmployees();
+        List<Employee> employeeList = employeeService.loadActiveEmployees();
         List<EmployeeVO> employeeVOList = new ArrayList<>();
-        employeeList.stream().forEach(employee -> {
+        employeeList.forEach(employee -> {
             EmployeeVO employeeVO = new EmployeeVO();
             BeanUtils.copyProperties(employee, employeeVO);
             employeeVOList.add(employeeVO);

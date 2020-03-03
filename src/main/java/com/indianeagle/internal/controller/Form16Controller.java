@@ -42,30 +42,12 @@ public class Form16Controller {
     SalaryHistoryRepository salaryHistoryRepository;
     @Autowired
     private MonthlyReportService monthlyReportService;
-
-    private BigDecimal grossSalary;
-    private Form16GenerationForm form16GenerationForm;
-    private List<EmployeeFinancialYear> employeeFinancialYears;
-
-
-
     private static final BigDecimal EDU_CESS = new BigDecimal(3);
     private static final BigDecimal HUNDRED = new BigDecimal(100);
-    private Employee employee;
 
-    private BigDecimal totalSavings = BigDecimal.ZERO;
-
-
-   /* @ModelAttribute
-    public String prepare(ModelMap modelMap) {
-        EmployeeFinancialYearForm employeeFinancialYearForm = new EmployeeFinancialYearForm();
-        modelMap.addAttribute("employeeFinancialYearForm", employeeFinancialYearForm);
-        return "html/employeeSavings";
-    }*/
 
     /**
-     * FinancialYear Form is created and sent to front end and
-     * available for every request
+     * FinancialYear Form is created and sent to front end
      *
      * @param modelMap
      * @return
@@ -73,10 +55,7 @@ public class Form16Controller {
     @ModelAttribute
     public String prepareForm16(ModelMap modelMap) {
         FinancialYearForm financialYearForm = new FinancialYearForm();
-        //Employee employee= new Employee();
         modelMap.addAttribute("financialYearForm", financialYearForm);
-        //  modelMap.addAttribute("employee",employee);
-
         return "html/form16Generation";
     }
 
@@ -92,8 +71,6 @@ public class Form16Controller {
         FinancialYearForm financialYearForm = new FinancialYearForm();
         EmployeeFinancialYearForm employeeFinancialYearForm = new EmployeeFinancialYearForm();
         modelMap.addAttribute("employeeFinancialYearForm", employeeFinancialYearForm);
-        //modelMap.addAttribute("financialYearForm", financialYearForm);
-
         return "html/Form16Generation";
     }
 
@@ -109,25 +86,15 @@ public class Form16Controller {
     @RequestMapping("/searchEmployeeByNameInForm16Generation")
     public String searchEmployeeByNameInForm16Generation(ModelMap modelMap, @ModelAttribute EmployeeFinancialYearForm employeeFinancialYearForm, @RequestParam String empName) {
         List<Employee> employees = null;
-
-        //if(employeeFinancialYearForm.getFinancialYear()!=null
-        // FinancialYearForm financialYearForm=Form16Utils.prepareFinancialYearForm(employeeFinancialYearForm.getFinancialYear());
         if (empName != null && (!empName.equals("")) && empName.length() >= 3) {
-
             employees = departmentService.findEmployeeByName(empName);
-
         } else {
             modelMap.addAttribute("retrieveNameError", "Please enter at least three letters to search or there is no employee with the entered name");
-
-
             return "html/searchEmployeeForm16Results";
         }
         if (employees == null || employees.isEmpty()) {
             modelMap.addAttribute("nameError", "enter a valid name");
-
-
         }
-
         modelMap.addAttribute("employsList", employees);
 
         return "html/searchEmployeeForm16Results";
@@ -148,57 +115,41 @@ public class Form16Controller {
 
         TotalSalaryHistoryForm totalSalaryHistoryForm = new TotalSalaryHistoryForm();
         List<SalaryHistory> salaryHistories = null;
-        List<EmployeeIncomeTax> employeeIncomeTaxes=null;
-        Employee employee=null;
-        List<Integer> remainedMonths=new ArrayList();
+        List<EmployeeIncomeTax> employeeIncomeTaxes = null;
+        Employee employee = null;
+        List<Integer> remainedMonths = new ArrayList();
         Form16GenerationForm form16GenerationForm = new Form16GenerationForm();
-        BigDecimal grossSalary=BigDecimal.ZERO;
-        BigDecimal totalSavings=BigDecimal.ZERO;
+        BigDecimal grossSalary = BigDecimal.ZERO;
+        BigDecimal totalSavings = BigDecimal.ZERO;
 
         if (employeeFinancialYearForm.getEmpId() != null && !employeeFinancialYearForm.getEmpId().equals("")) {
             FinancialYearForm financialYearForm = new FinancialYearForm();
             FinancialYear financialYear;
-
-
             String empId = employeeFinancialYearForm.getEmpId();
             employee = departmentService.findEmployeeByEmployeeId(empId);
             financialYear = employeeFinancialYearForm.getFinancialYear();
-
-
             Date fromDate = Form16Utils.prepareDateWithMonthAndYear(financialYear.getFromMonth(), financialYear.getFromYear());
             Date toDate = Form16Utils.prepareDateWithMonthAndYear(financialYear.getToMonth(), financialYear.getToYear());
 
-            //this.employeeIncomeTaxes = employeeIncomeTaxes;
-           // salaryHistories = salaryHistoryRepository.findByEmpIdAndSalaryEndDateBetween(empId, fromDate, toDate);
-           // this.salaryHistories = salaryHistories;
-            List list=loadRequiredData(employeeFinancialYearForm);
-            remainedMonths= (List<Integer>) list.get(0);
-            totalSalaryHistoryForm= (TotalSalaryHistoryForm) list.get(1);
-            salaryHistories= (List<SalaryHistory>) list.get(2);
+            List list = loadRequiredData(employeeFinancialYearForm);
+            remainedMonths = (List<Integer>) list.get(0);
+            totalSalaryHistoryForm = (TotalSalaryHistoryForm) list.get(1);
+            salaryHistories = (List<SalaryHistory>) list.get(2);
             if (salaryHistories == null || salaryHistories.size() == 0) {
                 modelMap.addAttribute("noSalary", "No Salary Records Found");
                 modelMap.addAttribute("employee", employee);
-                // System.out.println(form16GenerationForm.getId());
-                // System.out.println("#####employeeIncomeTaxId:  "+employeeIncomeTaxes.get(0).getId());
                 return "html/Form16Generation";
             }
-
-
             modelMap.addAttribute("remainedMonths", remainedMonths);
-            System.out.println("remained months size"+remainedMonths.size());
             modelMap.addAttribute("salaryHistories", salaryHistories);
             modelMap.addAttribute("totalSalaryHistoryForm", totalSalaryHistoryForm);
-            System.out.println("###totalSalaryHistryform"+totalSalaryHistoryForm.toString());
             modelMap.addAttribute("lastSalary", salaryHistories.get(salaryHistories.size() - 1));
-
 
         } else {
             modelMap.addAttribute("employeeId", "Please Provide Employee Id");
             return "html/Form16Generation";
 
         }
-
-
         FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
         String empId = employeeFinancialYearForm.getEmpId();
         employee = departmentService.findEmployeeByEmployeeId(empId);
@@ -209,29 +160,21 @@ public class Form16Controller {
         }
 
         List<FinancialYear> financialYears = financialYearRepository.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
-        if (financialYears.size() > 0) {
+        grossSalary = setGrossSalary(totalSalaryHistoryForm);
+        modelMap.addAttribute("grossSalary", grossSalary);
 
-        }
-         //TODO:CHANGE TO ONE METHOD
-            grossSalary=setGrossSalary(totalSalaryHistoryForm);
-            modelMap.addAttribute("grossSalary", grossSalary);
 
-        //todo:change to one method
         List<EmployeeFinancialYear> employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
-       /* if (employeeFinancialYears != null && !employeeFinancialYears.isEmpty()) {
-            employeeFinancialYearForm = Form16Utils.prepareEmployeeFinancialYearForm(employeeFinancialYears.get(0));
-        }
-*/
         try {
-            employeeFinancialYearForm = generateEmployeeFinancialYearForm(empId,financialYear,employeeFinancialYearForm);
-            totalSavings=updateSectionLimit(employeeFinancialYearForm);
+            employeeFinancialYearForm = generateEmployeeFinancialYearForm(empId, financialYear, employeeFinancialYearForm);
+            totalSavings = updateSectionLimit(employeeFinancialYearForm);
         } catch (Exception e) {
             e.printStackTrace();
             modelMap.addAttribute("financialerror", "No Records Found");
             return "html/Form16Generation";
         }
 
-        form16GenerationForm=updateHraForm16(empId,salaryHistories, financialYear, employeeFinancialYears,financialYears);
+        form16GenerationForm = updateHraForm16(empId, salaryHistories, financialYear, employeeFinancialYears, financialYears);
         modelMap.addAttribute("salaryHistories", salaryHistories);
         modelMap.addAttribute("totalSalaryHistoryForm", totalSalaryHistoryForm);
 
@@ -239,22 +182,26 @@ public class Form16Controller {
 
         modelMap.addAttribute("form16GenerationForm", form16GenerationForm);
         modelMap.addAttribute("employeeFinancialYearForm", employeeFinancialYearForm);
-       // System.out.println(employeeFinancialYearForm.getEmployeeTaxSectionForms().get(0).getEmployeeTaxSectionDeclarations().get(0).getSubSectionName());
-      //  System.out.println(totalSavings);
         return "html/Form16Generation";
     }
 
     /**
      * sets gross salary
+     *
      * @param totalSalaryHistoryForm
      * @return
      */
     private BigDecimal setGrossSalary(TotalSalaryHistoryForm totalSalaryHistoryForm) {
-        return totalSalaryHistoryForm!=null?totalSalaryHistoryForm.getTotalGrossSalary():BigDecimal.ZERO;
+        return totalSalaryHistoryForm != null ? totalSalaryHistoryForm.getTotalGrossSalary() : BigDecimal.ZERO;
 
     }
 
-
+    /**
+     * Updates the section limit and section values in EmployeeFinancialYear From
+     *
+     * @param employeeFinancialYearForm
+     * @return
+     */
     private BigDecimal updateSectionLimit(EmployeeFinancialYearForm employeeFinancialYearForm) {
         BigDecimal toatalSaveAmountFromTaxSections = BigDecimal.ZERO;
         if (employeeFinancialYearForm.getEmployeeTaxSectionForms() != null) {
@@ -279,7 +226,6 @@ public class Form16Controller {
                 }
             }
 
-
         }
         return toatalSaveAmountFromTaxSections;
     }
@@ -299,41 +245,41 @@ public class Form16Controller {
     public String calculateTax(ModelMap modelMap, HttpSession httpSession, @ModelAttribute EmployeeFinancialYearForm employeeFinancialYearForm, @RequestParam(name = "incomeEarnedByEmployee") String incomeEarnedByEmployee,
                                @RequestParam(name = "incentives") String incentives, @RequestParam String plb, @RequestParam String reimbursement, @RequestParam String bonus, @RequestParam String others, @RequestParam String previousCompanyIncome) {
 
-        String empId=employeeFinancialYearForm.getEmpId();
-        FinancialYear financialYear=employeeFinancialYearForm.getFinancialYear();
-        TotalSalaryHistoryForm totalSalaryHistoryForm=null;
-        List<SalaryHistory> salaryHistories=null;
-        Form16GenerationForm form16GenerationForm=null;
-        List<Integer> remainedMonths=new ArrayList<>();
-        List<EmployeeFinancialYear> employeeFinancialYears=null;
-        BigDecimal grossSalary=BigDecimal.ZERO;
-        BigDecimal totalSavings=BigDecimal.ZERO;
-        BigDecimal totalTdcDeducted=BigDecimal.ZERO;
-        Date lastSalaryDate=null;
+        String empId = employeeFinancialYearForm.getEmpId();
+        FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
+        TotalSalaryHistoryForm totalSalaryHistoryForm = null;
+        List<SalaryHistory> salaryHistories = null;
+        Form16GenerationForm form16GenerationForm = null;
+        List<Integer> remainedMonths = new ArrayList<>();
+        List<EmployeeFinancialYear> employeeFinancialYears = null;
+        BigDecimal grossSalary = BigDecimal.ZERO;
+        BigDecimal totalSavings = BigDecimal.ZERO;
+        BigDecimal totalTdcDeducted = BigDecimal.ZERO;
+        Date lastSalaryDate = null;
 
-        List list=loadRequiredData(employeeFinancialYearForm);
+        List list = loadRequiredData(employeeFinancialYearForm);
 
-        remainedMonths= (List<Integer>) list.get(0);
-        totalSalaryHistoryForm= (TotalSalaryHistoryForm) list.get(1);
-        salaryHistories= (List<SalaryHistory>) list.get(2);
-        grossSalary=setGrossSalary(totalSalaryHistoryForm);
+        remainedMonths = (List<Integer>) list.get(0);
+        totalSalaryHistoryForm = (TotalSalaryHistoryForm) list.get(1);
+        salaryHistories = (List<SalaryHistory>) list.get(2);
+        grossSalary = setGrossSalary(totalSalaryHistoryForm);
 
         if (totalSalaryHistoryForm == null || employeeFinancialYearForm == null || salaryHistories == null || employeeFinancialYearForm.getEmpId().equals("")) {
             modelMap.addAttribute("valuesError", "InSufficient Data So Tax can't be calculated");
             return "html/calculateTaxResults";
         }
-        totalTdcDeducted=totalSalaryHistoryForm.getTotalTdsDeducted();
-        lastSalaryDate=salaryHistories.get(salaryHistories.size()-1).getSalaryDate();
-        employeeFinancialYears=departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
+        totalTdcDeducted = totalSalaryHistoryForm.getTotalTdsDeducted();
+        lastSalaryDate = salaryHistories.get(salaryHistories.size() - 1).getSalaryDate();
+        employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         List<FinancialYear> financialYears = financialYearRepository.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
-        form16GenerationForm=updateHraForm16(empId,salaryHistories,financialYear,employeeFinancialYears,financialYears);
-        employeeFinancialYearForm= generateEmployeeFinancialYearForm(empId,financialYear,employeeFinancialYearForm);
-        totalSavings=updateSectionLimit(employeeFinancialYearForm);
+        form16GenerationForm = updateHraForm16(empId, salaryHistories, financialYear, employeeFinancialYears, financialYears);
+        employeeFinancialYearForm = generateEmployeeFinancialYearForm(empId, financialYear, employeeFinancialYearForm);
+        totalSavings = updateSectionLimit(employeeFinancialYearForm);
         setPropertiesToForm16(form16GenerationForm, incentives, plb, bonus, reimbursement, previousCompanyIncome, others);
-        form16GenerationForm=form16CalculateTax(form16GenerationForm,incomeEarnedByEmployee, employeeFinancialYearForm,grossSalary,totalSavings,financialYears,lastSalaryDate,totalTdcDeducted);
+        form16GenerationForm = form16CalculateTax(form16GenerationForm, incomeEarnedByEmployee, employeeFinancialYearForm, grossSalary, totalSavings, financialYears, lastSalaryDate, totalTdcDeducted);
 
         modelMap.addAttribute("form16GenerationForm", form16GenerationForm);
-        System.out.println(this.form16GenerationForm);
+
         return "html/calculateTaxResults";
     }
 
@@ -348,36 +294,26 @@ public class Form16Controller {
         FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
         Date fromDate = prepareDateWithMonthAndYear(financialYear.getFromMonth(), financialYear.getFromYear());
         Date toDate = prepareDateWithMonthAndYear(financialYear.getToMonth(), financialYear.getToYear());
+        String empId = employeeFinancialYearForm.getEmpId();
         List<SalaryHistory> salaryHistories;
         salaryHistories = departmentService.findSalaryHistoriesWithInFinancialYear(employeeFinancialYearForm.getEmpId(), fromDate, toDate);
         List<FinancialYear> financialYears = departmentService.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         List<EmployeeIncomeTax> employeeIncomeTaxes = departmentService.findEmployeeIncomeTaxWithEmpIdAndFinancialYear(employeeFinancialYearForm.getEmpId(), financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
-
+        List<EmployeeFinancialYear> employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
 
         try {
-
             inputStream = departmentService.saveForm16PDF(employeeFinancialYearForm.getEmpId(), financialYears.get(0), salaryHistories, employeeIncomeTaxes.get(0), employeeFinancialYears.get(0), SimpleUtils.getContextPath(httpServletRequest));
-
             fileName = employeeFinancialYearForm.getEmpId().concat("-(").concat(employeeFinancialYearForm.getFinancialYear().getFromYear()).concat("-").concat(employeeFinancialYearForm.getFinancialYear().getToYear()).concat(")");
             response.setContentType(MediaType.APPLICATION_PDF);
             response.add("Content-Disposition", "inline; filename=" + fileName + ".pdf");
             bytes = new byte[inputStream.available()];
             inputStream.read(bytes);
-
-
         } catch (Exception ex) {
-            try {
-                fileName = employeeFinancialYearForm.getEmpId().concat("-(").concat(employeeFinancialYearForm.getFinancialYear().getFromYear()).concat("-").concat(employeeFinancialYearForm.getFinancialYear().getToYear()).concat(")");
-                response.setContentType(MediaType.APPLICATION_PDF);
-                response.add("Content-Disposition", "inline; filename=" + fileName + ".pdf");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
+            fileName = employeeFinancialYearForm.getEmpId().concat("-(").concat(employeeFinancialYearForm.getFinancialYear().getFromYear()).concat("-").concat(employeeFinancialYearForm.getFinancialYear().getToYear()).concat(")");
+            response.setContentType(MediaType.APPLICATION_PDF);
+            response.add("Content-Disposition", "inline; filename=" + fileName + ".pdf");
+            ex.printStackTrace();
         }
-
         ResponseEntity<byte[]> responseEntity = new ResponseEntity(bytes, response, HttpStatus.OK);
         return responseEntity;
     }
@@ -393,10 +329,10 @@ public class Form16Controller {
         List<SalaryHistory> salaryHistories;
         List<Integer> remainedMonths;
         TotalSalaryHistoryForm totalSalaryHistoryForm;
-        List list=loadRequiredData(employeeFinancialYearForm);
-        remainedMonths= (List<Integer>) list.get(0);
-        totalSalaryHistoryForm= (TotalSalaryHistoryForm) list.get(1);
-        salaryHistories= (List<SalaryHistory>) list.get(2);
+        List list = loadRequiredData(employeeFinancialYearForm);
+        remainedMonths = (List<Integer>) list.get(0);
+        totalSalaryHistoryForm = (TotalSalaryHistoryForm) list.get(1);
+        salaryHistories = (List<SalaryHistory>) list.get(2);
 
         FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
         Date fromDate = prepareDateWithMonthAndYear(financialYear.getFromMonth(), financialYear.getFromYear());
@@ -411,8 +347,6 @@ public class Form16Controller {
                     remainedMonths.add(i);
                 }
             }
-
-
             HSSFWorkbook hssfWorkbook = genarateForm16Excel(salaryHistories, totalSalaryHistoryForm, remainedMonths);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             hssfWorkbook.write(byteArrayOutputStream);
@@ -420,10 +354,6 @@ public class Form16Controller {
             fileName = employeeFinancialYearForm.getEmpId().concat("-(").concat(employeeFinancialYearForm.getFinancialYear().getFromYear()).concat("-").concat(employeeFinancialYearForm.getFinancialYear().getToYear()).concat(")");
             bytes = new byte[inputStream.available()];
             inputStream.read(bytes);
-
-
-            //  response.setContentType("application/vnd.ms-excel");
-            //httpHeaders.setContentType(new MediaType("application", "vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
             httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             httpHeaders.add("Content-Disposition", "inline; filename=" + fileName + ".xls");
             // org.apache.commons.io.IOUtils.copy(inputStream, response.getOutputStream());
@@ -458,12 +388,12 @@ public class Form16Controller {
         List<FinancialYear> financialYears = departmentService.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         List<EmployeeIncomeTax> employeeIncomeTaxes = departmentService.findEmployeeIncomeTaxWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         if (employeeIncomeTaxes == null || employeeIncomeTaxes.isEmpty()) {
-            modelMap.addAttribute("employeeTax", "employeTax is Emplty");
+            modelMap.addAttribute("emailFail", "Email Not Sent");
             return "html/form16EmailResult";
         }
         List<EmployeeFinancialYear> employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         if (employeeFinancialYears == null || employeeFinancialYears.isEmpty()) {
-            modelMap.addAttribute("employeeFinanciaalYear", "employeeFinanciaalYear is Emplty");
+            modelMap.addAttribute("emailFail", "Email Not Sent");
             return "html/form16EmailResult";
         }
         departmentService.sendMailEmployeeIncomeTax(empId, financialYears.get(0), salaryHistories, employeeIncomeTaxes.get(0), employeeFinancialYears.get(0), SimpleUtils.getContextPath(httpServletRequest));
@@ -479,63 +409,49 @@ public class Form16Controller {
     public String saveEmployeeIncomeTax(ModelMap modelMap, @ModelAttribute EmployeeFinancialYearForm employeeFinancialYearForm, @RequestParam("employee.designation") String designation, @RequestParam("employee.panNo") String panNo, @RequestParam("employee.address") String address,
                                         @RequestParam String incentives, @RequestParam String plb, @RequestParam String reimbursement, @RequestParam String bonus, @RequestParam String others, @RequestParam String previousCompanyIncome, @RequestParam("incomeEarnedByEmployee") String incomeEarnedByEmployee) {
         try {
-        EmployeeIncomeTax employeeIncomeTax = new EmployeeIncomeTax();
-        EmployeeVO employeeVO = new EmployeeVO();
-        FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
-        List<SalaryHistory> salaryHistories = null;
-        TotalSalaryHistoryForm totalSalaryHistoryForm = null;
-        List<Integer> remainedMonths = new ArrayList<>();
-        BigDecimal grossSalary = BigDecimal.ZERO;
-        Form16GenerationForm form16GenerationForm = null;
-        String empId = employeeFinancialYearForm.getEmpId();
-        List<EmployeeFinancialYear> employeeFinancialYears;
-        BigDecimal totalSavings = BigDecimal.ZERO;
-        Employee employee = null;
-        Date lastSalaryDate = null;
-        BigDecimal totalTdcDeducted = BigDecimal.ZERO;
+            EmployeeIncomeTax employeeIncomeTax = new EmployeeIncomeTax();
+            EmployeeVO employeeVO = new EmployeeVO();
+            FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
+            List<SalaryHistory> salaryHistories = null;
+            TotalSalaryHistoryForm totalSalaryHistoryForm = null;
+            List<Integer> remainedMonths = new ArrayList<>();
+            BigDecimal grossSalary = BigDecimal.ZERO;
+            Form16GenerationForm form16GenerationForm = null;
+            String empId = employeeFinancialYearForm.getEmpId();
+            List<EmployeeFinancialYear> employeeFinancialYears;
+            BigDecimal totalSavings = BigDecimal.ZERO;
+            Employee employee = null;
+            Date lastSalaryDate = null;
+            BigDecimal totalTdcDeducted = BigDecimal.ZERO;
 
 
-           List list = loadRequiredData(employeeFinancialYearForm);
-           remainedMonths = (List<Integer>) list.get(0);
-           totalSalaryHistoryForm = (TotalSalaryHistoryForm) list.get(1);
-           salaryHistories = (List<SalaryHistory>) list.get(2);
-           grossSalary = setGrossSalary(totalSalaryHistoryForm);
-           employee = departmentService.findEmployeeByEmployeeId(empId);
-           if (salaryHistories != null && !salaryHistories.isEmpty()) {
-               lastSalaryDate = salaryHistories.get(salaryHistories.size() - 1).getSalaryDate();
-           }
-           if (totalSalaryHistoryForm != null) {
-               totalSavings = totalSalaryHistoryForm.getTotalTdsDeducted();
-           }
+            List list = loadRequiredData(employeeFinancialYearForm);
+            remainedMonths = (List<Integer>) list.get(0);
+            totalSalaryHistoryForm = (TotalSalaryHistoryForm) list.get(1);
+            salaryHistories = (List<SalaryHistory>) list.get(2);
+            grossSalary = setGrossSalary(totalSalaryHistoryForm);
+            employee = departmentService.findEmployeeByEmployeeId(empId);
+            if (salaryHistories != null && !salaryHistories.isEmpty()) {
+                lastSalaryDate = salaryHistories.get(salaryHistories.size() - 1).getSalaryDate();
+            }
+            if (totalSalaryHistoryForm != null) {
+                totalSavings = totalSalaryHistoryForm.getTotalTdsDeducted();
+            }
+            employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
+            List<FinancialYear> financialYears = financialYearRepository.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
+            form16GenerationForm = updateHraForm16(empId, salaryHistories, financialYear, employeeFinancialYears, financialYears);
+            employeeFinancialYearForm = generateEmployeeFinancialYearForm(empId, financialYear, employeeFinancialYearForm);
+            totalSavings = updateSectionLimit(employeeFinancialYearForm);
+            if (form16GenerationForm != null) {
+                setPropertiesToForm16(form16GenerationForm, incentives, plb, bonus, reimbursement, previousCompanyIncome, others);
+                form16GenerationForm = form16CalculateTax(form16GenerationForm, incomeEarnedByEmployee, employeeFinancialYearForm, grossSalary, totalSavings, financialYears, lastSalaryDate, totalTdcDeducted);
 
-           employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
-           List<FinancialYear> financialYears = financialYearRepository.findFinancialYearSectionsByFinancialYear(financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
-           form16GenerationForm = updateHraForm16(empId, salaryHistories, financialYear, employeeFinancialYears, financialYears);
-           employeeFinancialYearForm = generateEmployeeFinancialYearForm(empId, financialYear, employeeFinancialYearForm);
-           totalSavings = updateSectionLimit(employeeFinancialYearForm);
-           if (form16GenerationForm != null) {
-               setPropertiesToForm16(form16GenerationForm, incentives, plb, bonus, reimbursement, previousCompanyIncome, others);
-               form16GenerationForm = form16CalculateTax(form16GenerationForm, incomeEarnedByEmployee, employeeFinancialYearForm, grossSalary, totalSavings, financialYears, lastSalaryDate, totalTdcDeducted);
-
-       }
-
-         if (totalSalaryHistoryForm == null || form16GenerationForm == null || salaryHistories == null || employeeFinancialYearForm.getEmpId().equals("")) {
-               // System.out.println(form16GenerationForm);
+            }
+            if (totalSalaryHistoryForm == null || form16GenerationForm == null || salaryHistories == null || employeeFinancialYearForm.getEmpId().equals("")) {
+                // System.out.println(form16GenerationForm);
                 System.out.println(totalSalaryHistoryForm);
                 System.out.println(salaryHistories);
-                /*modelMap.addAttribute("form16GenerationForm",form16GenerationForm);
-                modelMap.addAttribute("employeeFinancialYearForm", employeeFinancialYearForm);
-                modelMap.addAttribute("totalSalaryHistoryForm", totalSalaryHistoryForm);
-                if (salaryHistories != null && !salaryHistories.isEmpty()) {
-                    modelMap.addAttribute("salaryHistories", salaryHistories);
-                    modelMap.addAttribute("grossSalary", grossSalary);
-                    modelMap.addAttribute("remainedMonths", remainedMonths);
-                    modelMap.addAttribute("lastSalary", salaryHistories.get(salaryHistories.size() - 1));
-                }
-                modelMap.addAttribute("technicalError", "Unable to save Employee Details");
-                modelMap.addAttribute("employee", employee);*/
-                //  modelMap.addAttribute("valuesError", "Please Provide  Required values");
-             modelMap.addAttribute("employeSaveError","unable to save Employee");
+                modelMap.addAttribute("employeSaveError", "unable to save Employee");
                 return "html/form16SaveResults";
             }
             //set values to EmployeeVo object
@@ -543,50 +459,22 @@ public class Form16Controller {
             employeeVO.setPanNo(panNo);
             employeeVO.setDesignation(designation);
             //save employee to data base with modified values
-            saveEmployee(employeeVO,employeeFinancialYearForm);
+            saveEmployee(employeeVO, employeeFinancialYearForm);
             System.out.println("etax" + employeeIncomeTax);
             System.out.println("form16" + form16GenerationForm);
-            //System.out.println("before" + employeeIncomeTax.getFinancialYear().getId());
             //saves employeeIncomeTax to DataBase
-            copyPropertiesToEmployeeIncomeTax(form16GenerationForm,employeeIncomeTax,employeeFinancialYearForm.getFinancialYear(),empId);
+            copyPropertiesToEmployeeIncomeTax(form16GenerationForm, employeeIncomeTax, employeeFinancialYearForm.getFinancialYear(), empId);
             departmentService.saveOrUpdateEmployeeIncomeTax(employeeIncomeTax);
             System.out.println(employeeIncomeTax);
-           // System.out.println("after" + employeeIncomeTax.getFinancialYear().getId());
-            System.out.println("=====================================");
-            //executes if any exception raises
+
         } catch (Exception e) {
             System.out.println("exception");
             e.printStackTrace();
-            /*modelMap.addAttribute("technicalError", "Unable to save Employee Details");
-            modelMap.addAttribute("employeeFinancialYearForm", employeeFinancialYearForm);
-            modelMap.addAttribute("form16GenerationForm", form16GenerationForm);
-            modelMap.addAttribute("totalSalaryHistoryForm", totalSalaryHistoryForm);
-            if (salaryHistories != null && !salaryHistories.isEmpty()) {
-                modelMap.addAttribute("salaryHistories", salaryHistories);
-                modelMap.addAttribute("grossSalary", grossSalary);
-                modelMap.addAttribute("remainedMonths", remainedMonths);
-                modelMap.addAttribute("lastSalary", salaryHistories.get(salaryHistories.size() - 1));
-            }
-
-            modelMap.addAttribute("technicalError", "Unable to save Employee Details");
-            modelMap.addAttribute("employee", employee);
-            modelMap.addAttribute("employeSaveError","unable to save Employee");*/
-            modelMap.addAttribute("employeSaveError","unable to save Employee");
+            modelMap.addAttribute("employeSaveError", "unable to save Employee");
             return "html/form16SaveResults";
         }
         System.out.println("saved");
         modelMap.addAttribute("employeeSaveSuccess", "Saved Successfully");
-        /*modelMap.addAttribute("employeeFinancialYearForm", employeeFinancialYearForm);
-        modelMap.addAttribute("form16GenerationForm", form16GenerationForm);
-        modelMap.addAttribute("totalSalaryHistoryForm", totalSalaryHistoryForm);
-        if (salaryHistories != null && !salaryHistories.isEmpty()) {
-            modelMap.addAttribute("salaryHistories", salaryHistories);
-            modelMap.addAttribute("grossSalary", grossSalary);
-            modelMap.addAttribute("remainedMonths", remainedMonths);
-            modelMap.addAttribute("lastSalary", salaryHistories.get(salaryHistories.size() - 1));
-        }
-*/
-        //modelMap.addAttribute("employee", employee);
         return "html/form16SaveResults";
     }
 
@@ -638,16 +526,16 @@ public class Form16Controller {
     /**
      * Creates form16GenerationForm
      *
-     *
      * @param salaryHistories
      * @param financialYear
      * @param employeeFinancialYears
+     * @return Form16GenerationForm
      */
-    Form16GenerationForm updateHraForm16(String empId, List<SalaryHistory> salaryHistories, FinancialYear financialYear, List<EmployeeFinancialYear> employeeFinancialYears,List<FinancialYear> financialYears) {
-        Form16GenerationForm form16GenerationForm=new Form16GenerationForm();
+    Form16GenerationForm updateHraForm16(String empId, List<SalaryHistory> salaryHistories, FinancialYear financialYear, List<EmployeeFinancialYear> employeeFinancialYears, List<FinancialYear> financialYears) {
+        Form16GenerationForm form16GenerationForm = new Form16GenerationForm();
 
-        List<EmployeeIncomeTax> employeeIncomeTaxes=null;
-        employeeIncomeTaxes=employeeIncomeTaxes = departmentService.findEmployeeIncomeTaxWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
+        List<EmployeeIncomeTax> employeeIncomeTaxes = null;
+        employeeIncomeTaxes = employeeIncomeTaxes = departmentService.findEmployeeIncomeTaxWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         if (employeeIncomeTaxes != null && !employeeIncomeTaxes.isEmpty()) {
             form16GenerationForm = prepareForm16GenerationForm(employeeIncomeTaxes.get(0));
             System.out.println("employeeIncomeTaxes.get(0)   " + employeeIncomeTaxes.get(0));
@@ -669,13 +557,11 @@ public class Form16Controller {
         return form16GenerationForm;
     }
 
-    /**
-     * calculate taxes and set taxes to form16GenerationForm
-     *
-     * @param incomeEarnedByEmployee
-     * @param employeeFinancialYearForm
-     */
-    Form16GenerationForm form16CalculateTax(Form16GenerationForm form16GenerationForm,String incomeEarnedByEmployee, EmployeeFinancialYearForm employeeFinancialYearForm,BigDecimal grossSalary,BigDecimal totalSavings,List<FinancialYear> financialYears,Date lastSalaryDate,BigDecimal totalTdsDeducted) {
+
+
+
+
+    Form16GenerationForm form16CalculateTax(Form16GenerationForm form16GenerationForm, String incomeEarnedByEmployee, EmployeeFinancialYearForm employeeFinancialYearForm, BigDecimal grossSalary, BigDecimal totalSavings, List<FinancialYear> financialYears, Date lastSalaryDate, BigDecimal totalTdsDeducted) {
 
         form16GenerationForm.setIncomeEarnedByEmployee(new BigDecimal(incomeEarnedByEmployee));
         form16GenerationForm.setGrossSalary(grossSalary);
@@ -693,7 +579,7 @@ public class Form16Controller {
         if (form16GenerationForm.getHra() != null) {
             saveAmount = saveAmount.add(form16GenerationForm.getHra());
         }
-       form16GenerationForm.setTaxableIncome(form16GenerationForm.getIncomeEarnedByEmployee().subtract(saveAmount).setScale(0, BigDecimal.ROUND_CEILING));
+        form16GenerationForm.setTaxableIncome(form16GenerationForm.getIncomeEarnedByEmployee().subtract(saveAmount).setScale(0, BigDecimal.ROUND_CEILING));
         BigDecimal taxableIncome = form16GenerationForm.getTaxableIncome();
         BigDecimal taxOnIncome = BigDecimal.ZERO;
         if (financialYears != null && !financialYears.isEmpty()) {
@@ -773,10 +659,11 @@ public class Form16Controller {
      *
      * @param empId
      * @param financialYear
-     * @return
+     * @param employeeFinancialYearForm
+     * @return EmployeeFinancialYearFrom
      */
-    EmployeeFinancialYearForm generateEmployeeFinancialYearForm(String empId, FinancialYear financialYear,EmployeeFinancialYearForm employeeFinancialYearForm) {
-        BigDecimal totalSavings=BigDecimal.ZERO;
+    EmployeeFinancialYearForm generateEmployeeFinancialYearForm(String empId, FinancialYear financialYear, EmployeeFinancialYearForm employeeFinancialYearForm) {
+        BigDecimal totalSavings = BigDecimal.ZERO;
         List<EmployeeFinancialYear> employeeFinancialYears = departmentService.findEmployeeFinancialYearWithEmpIdAndFinancialYear(empId, financialYear.getFromMonth(), financialYear.getFromYear(), financialYear.getToMonth(), financialYear.getToYear());
         if (employeeFinancialYears != null && !employeeFinancialYears.isEmpty()) {
             employeeFinancialYearForm = prepareEmployeeFinancialYearForm(employeeFinancialYears.get(0));
@@ -789,7 +676,7 @@ public class Form16Controller {
         return SimpleUtils.isEmpty(designation) || SimpleUtils.isEmpty(panNo) || SimpleUtils.isEmpty(address);
     }
 
-    private void saveEmployee(EmployeeVO employeeVo,EmployeeFinancialYearForm employeeFinancialYearForm) throws Exception {
+    private void saveEmployee(EmployeeVO employeeVo, EmployeeFinancialYearForm employeeFinancialYearForm) throws Exception {
         Employee employeeFromDB = departmentService.findEmployeeByEmployeeId(employeeFinancialYearForm.getEmpId());
         employeeFromDB.setDesignation(employeeVo.getDesignation());
         employeeFromDB.setPanNo(employeeVo.getPanNo());
@@ -864,10 +751,14 @@ public class Form16Controller {
         System.out.println("PREVIOUS" + form16GenerationForm.getPreviousCompanyIncome());
     }
 
+    /**
+     * @param employeeFinancialYearForm
+     * @return List containing remainedMonth at '0'th index,totalSalaryHistoryForm at '1'st index,salaryHistories at '2'nd index
+     */
     private List loadRequiredData(EmployeeFinancialYearForm employeeFinancialYearForm) {
-        List<SalaryHistory> salaryHistories=null;
-        TotalSalaryHistoryForm totalSalaryHistoryForm=null;
-        List<Integer> remainedMonths=new ArrayList<>();
+        List<SalaryHistory> salaryHistories = null;
+        TotalSalaryHistoryForm totalSalaryHistoryForm = null;
+        List<Integer> remainedMonths = new ArrayList<>();
         FinancialYearForm financialYearForm = new FinancialYearForm();
         String empId = employeeFinancialYearForm.getEmpId();
         FinancialYear financialYear = employeeFinancialYearForm.getFinancialYear();
@@ -885,13 +776,12 @@ public class Form16Controller {
                 remainedMonths.add(i);
             }
         }
-        List list=new ArrayList();
+        List list = new ArrayList();
         list.add(remainedMonths);
         list.add(totalSalaryHistoryForm);
         list.add(salaryHistories);
         return list;
     }
-
 
 
 }
