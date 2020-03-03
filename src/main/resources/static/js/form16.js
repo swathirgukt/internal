@@ -101,9 +101,17 @@
        function form16sendMail(){
        removeMessages();
        console.log("in send mail");
+       $("#loading,#itp_overlay").show();
        var response = makeAJAXCall("/sendMail","form16GenerationData");
+        $(document).ajaxStart(function(){
+                $("#loading").css("display", "block");
+              });
+              $(document).ajaxComplete(function(){
+                $("#loading").css("display", "none");
+              });
        response.done(function (responseData) {
                           if (response) {
+                             $("#loading,#itp_overlay").hide();
                              $("#emailReport").replaceWith(responseData);
                               console.log("in calculateTax success");
                           }

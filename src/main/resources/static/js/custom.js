@@ -5,7 +5,8 @@ function makeAJAXCall(requestUrl,formId) {
         type: "POST",
         error: function(msg,err,exc){
             console.log("#error: "+err);
-        }
+         $("#loading,#itp_overlay").hide();
+    }
     });
 }
 $( document ).ready(function() {
