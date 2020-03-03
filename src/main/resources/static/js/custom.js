@@ -8,6 +8,10 @@ function makeAJAXCall(requestUrl,formId) {
         }
     });
 }
+$( document ).ready(function() {
+      $("#loading").hide();
+      $("#itp_overlay").hide();
+});
 
 function exportToExcel(tableID, file){
       $("#"+tableID).table2excel({
@@ -54,7 +58,6 @@ function sendPayslipMail(requestUrl,id){
 }
 
 function submitIncentive(){
-
     var error = false;
     var incentiveDate = new Date($("#incentiveDate").val());
 
@@ -85,12 +88,10 @@ function submitIncentive(){
 }
 
 function submitApproveLeaveForm(){
-
     var fromDate = new Date($("#fromDate").val());
     var toDate = new Date($("#toDate").val());
     var totalLeaves = parseFloat($("#totalNumberOfAbsentDays").val());
     var selectedLeaves = parseFloat($("#casualLeave").val())+parseFloat($("#sickLeave").val())+parseFloat($("#compensatoryLeave").val())+parseFloat($("#lop").val());
-
 
     $("#fromDateError").text("");
     $("#toDateError").text("");
@@ -136,12 +137,8 @@ function submitApproveLeaveForm(){
 function searchDepartment() {
     $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/department/search", 'departmentForm');
-           $(document).ajaxStart(function(){
-             $("#loading").css("display", "block");
-           });
-           $(document).ajaxComplete(function(){
-             $("#loading").css("display", "none");
-           });
+           $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+           $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
             $("#loading,#itp_overlay").hide();
@@ -153,12 +150,8 @@ function searchDepartment() {
 function searchPeripheral() {
      $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/peripheral/search", 'peripheralForm');
-       $(document).ajaxStart(function(){
-                    $("#loading").css("display", "block");
-                  });
-                  $(document).ajaxComplete(function(){
-                    $("#loading").css("display", "none");
-                  });
+       $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+       $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
             $("#loading,#itp_overlay").hide();
@@ -194,10 +187,13 @@ function searchEmployeeLeaveReport() {
             return;
         }
 
-
+        $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/employeeLeaveReport", 'employeeLeaveReportForm');
+       $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+       $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
+            $("#loading,#itp_overlay").hide();
             $("#employeeLeaveReportResult").html(responseData);
         }
     });
@@ -445,12 +441,8 @@ function getLeaveBalance(){
     $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
     response.done(function(responseData){
-             $(document).ajaxStart(function(){
-               $("#loading").css("display", "block");
-             });
-             $(document).ajaxComplete(function(){
-               $("#loading").css("display", "none");
-             });
+        $(document).ajaxStart(function(){ $("#loading").css("display", "block");});
+        $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
         if(responseData){
             $("#loading,#itp_overlay").hide();
             $("#leaveBalanceResult").html(responseData);
@@ -460,10 +452,13 @@ function getLeaveBalance(){
 
 function findEmployeeLeaves(){
     $("#success").text("");
-
+    $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/findEmployeeLeaves",'employeeLeavesForm');
+    $(document).ajaxStart(function(){ $("#loading").css("display", "block");});
+    $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function(responseData){
         if(responseData){
+            $("#loading,#itp_overlay").hide();
             $("#leavesResult").html(responseData);
         }
     });
@@ -538,10 +533,13 @@ if(z.value == "") {
 
          if(error){return;}
 
-
+    $("#loading,#itp_overlay").show();
 var response = makeAJAXCall("/searchCheques", 'chequeForm');
+   $(document).ajaxStart(function(){ $("#loading").css("display", "block");});
+   $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
+            $("#loading,#itp_overlay").hide();
             $("#chequeSearchResult").html(responseData);
         }
 
@@ -556,12 +554,8 @@ function updateMyDetails()
 function getFormtData() {
     $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/searchEmployee", 'searchEmployeeForm');
-       $(document).ajaxStart(function(){
-                $("#loading").css("display", "block");
-              });
-              $(document).ajaxComplete(function(){
-                $("#loading").css("display", "none");
-              });
+       $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+       $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
             $("#loading,#itp_overlay").hide();
@@ -571,14 +565,23 @@ function getFormtData() {
 }
 
 function searchEmployeeStatus() {
+     var x = document.forms["statusEmployeeForm"]["datepicker"]
+     var y = document.forms["statusEmployeeForm"]["datepicker1"]
+     var error = false;
+     if(x.value == "") {
+             document.getElementById("fromDate").innerHTML="please select fromDate";
+             error = true;
+         }
+     if(y.value == "") {
+             document.getElementById("toDate").innerHTML="please select toDate";
+             error = true;
+         }
+             if(error){return;}
+
      $("#loading,#itp_overlay").show();
      var response = makeAJAXCall("/searchEmployeeStatus", 'statusEmployeeForm');
-         $(document).ajaxStart(function(){
-                         $("#loading").css("display", "block");
-                       });
-                       $(document).ajaxComplete(function(){
-                         $("#loading").css("display", "none");
-                       });
+               $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+               $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
      response.done(function (responseData) {
          if (responseData) {
              $("#loading,#itp_overlay").hide();
@@ -589,7 +592,6 @@ function searchEmployeeStatus() {
 
  function createEmployee()
  {
-
     var x = document.forms["createEmployeeForm"]["first_name"]
     var y = document.forms["createEmployeeForm"]["lastName"]
     var z = document.forms["createEmployeeForm"]["department"]
@@ -717,10 +719,7 @@ function searchEmployeeStatus() {
          }
       });
   }
-  $( document ).ready(function() {
-      $("#loading").hide();
-      $("#itp_overlay").hide();
-  });
+
   function basicSalarySearch()
     {
     $("#loading,#itp_overlay").show();
@@ -757,7 +756,7 @@ function removeRow(){
 }
 
 function searchIncentive() {
-    $("#loading,#itp_overlay").show();
+
     var incentiveDate = new Date($("#incentiveDate").val());
     if($("#incentiveDate").val()==""){
         $("#incentiveDateError").text("Please select date");
@@ -768,7 +767,7 @@ function searchIncentive() {
         $("#incentiveDate").focus();
         return;
     }
-
+    $("#loading,#itp_overlay").show();
     var response = makeAJAXCall('/incentive/search','incentiveForm');
         $(document).ajaxStart(function(){
                  $("#loading").css("display", "block");
