@@ -17,7 +17,7 @@
                           method="post">
                         <div class="Heading">Approve Leave</div>
                         <div class="row">
-                            <span style="color: #008000;font:  12pt arial;padding: 50px" th:text="${success}?:''"></span>
+                            <span style="color:green;font:  12pt arial;padding: 50px;" th:text="${success}?:''" id="result"></span>
                             <div class="col-md-6 col-sm-12 col-xs-10" style="border-right: 2px dotted #bbba86; ">
                                 <div>
                                     <table width="100%" class="table_text_style table-sm" id="approveLeaveTable">
@@ -96,7 +96,7 @@
                                             <td></td>
                                             <td></td>
                                             <td>
-                                                <span style="color:red;" id="leaveDaysError"></span>
+                                                <span style="color:red;" id="leaveDaysError" th:text="${error}?:''"></span>
                                             </td>
                                         </tr>
                                     </table>

@@ -101,7 +101,7 @@ function submitApproveLeaveForm(){
     $("#fromDateError").text("");
     $("#toDateError").text("");
     $("#leaveDaysError").text("");
-    $("#success").text("");
+    $("#result").text("");
     if($("#fromDate").val()==""){
         console.log("###Blank from Date");
         $("#fromDateError").text("Please select date");
@@ -463,6 +463,11 @@ function saveSalaryDecider(){
 }
 
 function getLeaveBalance(){
+    $("#fromDateError").text("");
+    $("#toDateError").text("");
+    $("#leaveDaysError").text("");
+    $("#result").text("");
+
     var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
     response.done(function(responseData){
         if(responseData){
