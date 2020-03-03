@@ -1,11 +1,13 @@
 package com.indianeagle.internal.controller;
 
+import com.indianeagle.internal.dao.repository.EmployeeRepository;
 import com.indianeagle.internal.dto.Employee;
 import com.indianeagle.internal.dto.SalaryHistory;
 import com.indianeagle.internal.form.SalaryHistoryForm;
 import com.indianeagle.internal.form.vo.EmployeeVO;
 import com.indianeagle.internal.form.vo.SalaryHistoryVO;
 import com.indianeagle.internal.service.ApplicationSession;
+import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.service.SalaryService;
 import com.indianeagle.internal.util.SimpleUtils;
@@ -47,7 +49,8 @@ public class EmpSalaryHistoryController {
     private SalaryHistoryService salHistoryService;
     @Autowired
     private ApplicationSession applicationSession;
-
+    @Autowired
+    private EmployeeService employeeService;
     @PostConstruct
     public void loadData() {
         salaryHistoryForm = new SalaryHistoryForm();
@@ -61,7 +64,7 @@ public class EmpSalaryHistoryController {
             employeeVOList.add(employeeVO);
         }*/
 
-        for (Employee employee : salaryService.loadAllEmployees()) {
+        for (Employee employee : employeeService.getEmployeeList()) {
             EmployeeVO employeeVO = new EmployeeVO();
             BeanUtils.copyProperties(employee, employeeVO);
             employeeVOList.add(employeeVO);

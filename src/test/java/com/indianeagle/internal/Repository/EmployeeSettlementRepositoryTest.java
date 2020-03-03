@@ -27,7 +27,7 @@ public class EmployeeSettlementRepositoryTest {
 
     @Test
     public void findResignedEmployeeSettlementByEmployeeId() {
-        EmployeeSettlement e = employeeSettlementRepository.findResignedEmployeeSettlementByEmployeeId("YSPL1014");
+        EmployeeSettlement e = employeeSettlementRepository.findResignedEmployeeSettlementByEmployeeId("YSPL1014").get(0);
         // System.out.println(e.toString());
     }
 
