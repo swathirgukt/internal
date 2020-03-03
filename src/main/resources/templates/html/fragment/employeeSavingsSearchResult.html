@@ -1,18 +1,18 @@
 <div th:fragment="employeeSavingsSearchResult" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${employees} != null AND ${employees.size()}>0">
 
-                    <ul>
-                        <li style="padding:10px 0px;" th:each="employee :${employees}">
-                            <label style="color:blue;"><a th:data-parameter1="${employee.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employee.empId}"/></a></label>
-                            &nbsp; &nbsp;<label style="color:blue;"><a th:data-parameter1="${employee.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employee.fullName}"/></a></label>
-                        </li>
-                    </ul>
-                </div>
+        <ul>
+            <li style="padding:10px 0px;" th:each="employee :${employees}">
+                <label style="color:blue;"><a th:data-parameter1="${employee.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employee.empId}"/></a></label>
+                &nbsp; &nbsp;<label style="color:blue;"><a th:data-parameter1="${employee.empId}" onclick="setEmployeeId(this.getAttribute('data-parameter1'));"><span th:text="${employee.fullName}"/></a></label>
+            </li>
+        </ul>
+    </div>
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
          th:if="${employees}!=null  AND ${employees.size()}==0">
         Nothing found to display
     </div>
-            </div>
+</div>
 
 
 

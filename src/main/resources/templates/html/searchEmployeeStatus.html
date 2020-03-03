@@ -10,6 +10,8 @@
 
 <body>
 <header th:insert="html/fragment/header :: header"></header>
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-lg-2 sidenav">
@@ -22,10 +24,8 @@
 
                     <div class="Heading">Employee Status Search</div>
                     <div class="row">
-                        <!--new-->
-                        <div class="col-lg-4 col-sm-12 col-md-4">
-                            <div>
-                                <table width="100%" class="table_text_style">
+                        <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table-condensed">
                                     <tr>
                                         <td>Type</td>
                                         <td><b>:</b></td>
@@ -35,32 +35,14 @@
                                                 <option value="relieved">Relieved</option>
                                             </select>
                                         </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-lg-4  col-sm-6 col-xs-12  col-md-4">
-                            <div>
-                                <table width="100%" class="table_text_style table-sm">
-                                    <tr>
-                                        <td>From&nbsp;Date<span style="color:red"/></td>
+                                        <td>From&nbsp;Date<span style="color:red">*</span></td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input style=" float:left; border: 1px solid #ff9900;" id="datepicker"
                                                    width="200px" name="datepicker" th:field="${employeeForm.fromDate}"/>
                                             <script>$('#datepicker').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-4 col-sm-6 col-xs-12 col-md-4">
-                            <div>
-                                <table width="100%" class="table_text_style  table-sm">
-                                    <tr>
-                                        <td>To&nbsp;Date</td>
+                                        <td>To&nbsp;Date<span style="color:red">*</span></td>
                                         <td><b>:</b></td>
                                         <td>
                                             <input style=" float:left; border: 1px solid #ff9900;" id="datepicker1"
@@ -68,17 +50,23 @@
                                             <script>$('#datepicker1').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td colspan="2"><span id="fromDate" style="color:red"></span></td>
+                                        <td></td>
+                                        <td colspan="2"><span id="toDate" style="color:red"></span></td>
+                                    </tr>
                                 </table>
-                            </div>
                         </div>
-                        <!--new-->
                     </div>
                     <div class="row">
-                        <div class="col-lg-12 col-sm-12 col-md-12">
-                            <div style="float: right;margin-top:10px">
+                            <div style="float: right;margin-right:35px">
                                 <button class="submitButton" type="button" onclick="searchEmployeeStatus()">Search</button>
                             </div>
-                        </div>
                     </div>
                     </form>
                     <!--Row -->
