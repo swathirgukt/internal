@@ -42,7 +42,7 @@ public class PeripheralController {
     }
 
     @PostMapping("/save")
-    public String savePeripheral(ModelMap modelMap, @ModelAttribute @Valid Peripheral peripheral) {
+    public String savePeripheral(ModelMap modelMap, @ModelAttribute Peripheral peripheral) {
         peripheralService.saveOrUpdate(peripheral);
         modelMap.addAttribute("success", "Save or Update peripheral was successful.");
         modelMap.addAttribute("peripheral", new Peripheral());

@@ -9,10 +9,34 @@ function makeAJAXCall(requestUrl,formId) {
     });
 }
 
+function exportToExcel(tableID, file){
+      $("#"+tableID).table2excel({
+	    exclude: ".excludeInExcel",
+	    filename: file,
+	    fileext: ".xls",
+	    preserveColors: true
+	  });
+}
+
+function exportToPDF(tableID,file){
+            html2canvas($('#'+tableID)[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download(file+".pdf");
+                }
+            });
+}
+
 function PopupCenter(pageURL, title,w,h) {
 		var left = (screen.width/2)-(w/2);
 		var top = (screen.height/2)-(h/2);
-		var targetWin = window.open (pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+		var targetWin = window.open(pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 }
 
 function sendPayslipMail(requestUrl,id){

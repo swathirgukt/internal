@@ -1,38 +1,39 @@
 <div th:fragment="peripheralResult" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${peripheralList} != null AND ${peripheralList.size()}>0">
-
-            <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover" >
-
-                    <tr style="background-color:#333333;color: #FFFFFF;padding: 30px">
-                        <th>Peripheral&nbsp;Name</th>
-                        <th>Type</th>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Serial No</th>
-                        <th>Year Of Purchase</th>
-                        <th>Warranty Date</th>
-                        <th>Users</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                    </tr>
-                    <tr style="background-color:#FFFFFF;color: #000000;padding: 30px"
-                        th:each="peripheral :${peripheralList}">
-                        <td th:text="${peripheral.peripheralName}"></td>
-                        <td th:text="${peripheral.type}"></td>
-                        <td th:text="${peripheral.brand}"></td>
-                        <td th:text="${peripheral.model}"></td>
-                        <td th:text="${peripheral.serialNumber}"></td>
-                        <td th:text="${peripheral.yearOfPurchase}"></td>
-                        <td th:text="${peripheral.warrantyDate}"></td>
-                        <td th:text="${peripheral.users}"></td>
-                        <td th:text="${peripheral.status}"></td>
-                        <td><a th:href="@{/peripheral/edit/{id}(id=${peripheral.id})}">Edit</a></td>
-                    </tr>
-
+        <div class="tableScrollbar">
+            <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover" id="peripheralTable">
+                <tr style="background-color:#333333;color: #FFFFFF;padding: 30px" class="sticky">
+                    <th>Peripheral&nbsp;Name</th>
+                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Serial No</th>
+                    <th>Year Of Purchase</th>
+                    <th>Warranty Date</th>
+                    <th>Users</th>
+                    <th>Status</th>
+                    <th class="excludeInExcel">Edit</th>
+                </tr>
+                <tr style="background-color:#FFFFFF;color: #000000;padding: 30px"
+                    th:each="peripheral :${peripheralList}">
+                    <td th:text="${peripheral.peripheralName}"></td>
+                    <td th:text="${peripheral.type}"></td>
+                    <td th:text="${peripheral.brand}"></td>
+                    <td th:text="${peripheral.model}"></td>
+                    <td th:text="${peripheral.serialNumber}"></td>
+                    <td th:text="${peripheral.yearOfPurchase}"></td>
+                    <td th:text="${peripheral.warrantyDate}"></td>
+                    <td th:text="${peripheral.users}"></td>
+                    <td th:text="${peripheral.status}"></td>
+                    <td class="excludeInExcel"><a th:href="@{/peripheral/edit/{id}(id=${peripheral.id})}">Edit</a></td>
+                </tr>
             </table>
         </div>
-
-
+        <div>
+            <b>Export&nbsp;:&nbsp;</b>
+            <button onclick="exportToExcel('peripheralTable','Peripherals')">Excel</button>
+        </div>
+    </div>
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
          th:if="${departmentList}!=null  AND ${departmentList.size()}==0">
         Nothing found to display

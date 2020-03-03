@@ -3,7 +3,6 @@
 $(document).on('click', "button[name='addTaxSlabButton']", function() {
                          removeMessages();
                          var rowIndex = $('#taxSlabTable tr').length-1;
-                         console.log('####Index >> '+rowIndex);
 
                          var newTaxSlabRow = $("<tr>");
                          newTaxSlabRow.append("<td style='padding:10px'>From</td><td> <input name='incomeTaxSlabVOS["+rowIndex+"].minIncome' type='text'></td>");
