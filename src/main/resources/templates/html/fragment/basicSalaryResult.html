@@ -46,26 +46,26 @@
 </head>
 <body>
 <div th:fragment="basicSearchResult" xmlns:th="http://www.thymeleaf.org">
-    <div th:if="${employeesList} != null AND ${employeesList.size()}>0">
-        <table cellpadding="1" cellspacing="1"
-               class="table table-bordered table-responsive-lg table-hover" id="tblCustomers">
-            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
-                <th>S. No.</th>
+    <div th:if="${employeesList} != null AND ${employeesList.size()}>0" id="tableScrollbar">
+        <table cellpadding="1" cellspacing="1" style="font-size:12px;"
+               class="table table-bordered table-hover" id="tblCustomers">
+            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px" class="sticky">
+                <th>S.No.</th>
                 <th>EmpId</th>
                 <th>Employee Name</th>
-                <th>Desgination</th>
+                <th>Designation</th>
                 <th>Department</th>
-                <th>DOJ</th>
+                <th>DateOfJoin</th>
                 <th>Basic</th>
                 <th>HRA</th>
                 <th>CON</th>
                 <th>MED</th>
                 <th>SPL</th>
-                <th>OTHR</th>
+                <th>OTHER</th>
                 <th>TEL</th>
                 <th>INT</th>
                 <th>UNI</th>
-                <th>Gross</th>
+                <th>GROSS</th>
             </tr>
             <tr style="background-color:#FFFFFF;color: #000000;padding: 50px"
                 th:each="employee, status :${employeesList}">
@@ -89,9 +89,10 @@
                 </th:block>
             </tr>
         </table>
-        <button onclick="exportHTMLTableToExcel('tblCustomers','table.xls')" >Excel</button>
-        <button id="btnExport" value="Export" onclick="ExportToPDF()" >PDF</button>
     </div>
+    <button onclick="exportHTMLTableToExcel('tblCustomers','table.xls')" class="submitButton">Excel</button>
+    <button id="btnExport" value="Export" onclick="ExportToPDF()" class="submitButton">PDF</button>
+
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
          th:if="${employeesList}!=null  AND ${employeesList.size()}==0">
         Nothing found to display
