@@ -254,10 +254,13 @@ function searchAllESalaryEmployee() {
     if(hasErrorsInDates()){
         return;
     }
-
+      $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/searchAllESalaryEmployee", 'generateAllSalariesForm');
+      $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+      $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
+            $("#loading,#itp_overlay").hide();
             $("#eSalaryResult").html(responseData);
         }
     });
@@ -710,11 +713,13 @@ function searchEmployeeStatus() {
         }
 
         if(error){return;}
-
-
- var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+      $("#loading,#itp_overlay").show();
+  var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+    $(document).ajaxStart(function(){ $("#loading").css("display", "block"); });
+    $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
      response.done(function (responseData) {
          if (responseData) {
+             $("#loading,#itp_overlay").hide();
              $("#monthlySalaryResult").html(responseData);
          }
       });
