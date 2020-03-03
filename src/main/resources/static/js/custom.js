@@ -143,6 +143,16 @@ function searchDepartment() {
 }
 
 function searchPeripheral() {
+    $("#success").text("");
+    $("#peripheralNameError").text("");
+    $("#peripheralTypeError").text("");
+    $("#peripheralModelError").text("");
+    $("#purchaseDateError").text("");
+    $("#peripheralBrandError").text("");
+    $("#serialNumberError").text("");
+    $("#warrantyDateError").text("");
+    $("#peripheralStatusError").text("");
+
     var response = makeAJAXCall("/peripheral/search", 'peripheralForm');
     response.done(function (responseData) {
         if (responseData) {
@@ -345,6 +355,7 @@ function saveDepartment() {
 }
 function savePeripheral() {
 
+    $("#success").text("");
     $("#peripheralNameError").text("");
     $("#peripheralTypeError").text("");
     $("#peripheralModelError").text("");

@@ -21,8 +21,8 @@
                     <td th:text="${peripheral.brand}"></td>
                     <td th:text="${peripheral.model}"></td>
                     <td th:text="${peripheral.serialNumber}"></td>
-                    <td th:text="${peripheral.yearOfPurchase}"></td>
-                    <td th:text="${peripheral.warrantyDate}"></td>
+                    <td th:text="${#dates.format(peripheral.yearOfPurchase,'MM/dd/yyyy')}"></td>
+                    <td th:text="${#dates.format(peripheral.warrantyDate,'MM/dd/yyyy')}"></td>
                     <td th:text="${peripheral.users}"></td>
                     <td th:text="${peripheral.status}"></td>
                     <td class="excludeInExcel"><a th:href="@{/peripheral/edit/{id}(id=${peripheral.id})}">Edit</a></td>

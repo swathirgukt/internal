@@ -8,7 +8,6 @@ import com.indianeagle.internal.service.ApprovedLeaveService;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.LeaveDetailsService;
 import com.indianeagle.internal.util.SimpleUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -50,7 +49,7 @@ public class LeaveReportController {
 
     @InitBinder
     public void initBinder(final WebDataBinder binder) {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
@@ -61,12 +60,9 @@ public class LeaveReportController {
         return "html/employeeLeaveReport";
     }
 
-    //Todo : chnage return view for all employee report instead for one employee
+
     @PostMapping("/employeeLeaveReport")
-    public String leaveReport(ModelMap modelMap, @RequestParam(required = false) String empId, @RequestParam(required = false) Date fromDate, @RequestParam(required = false) Date toDate) {
-        if (StringUtils.isBlank(empId) || fromDate == null || toDate == null) {
-            return "html/fragment/LeaveReportResult";
-        }
+    public String leaveReport(ModelMap modelMap, @RequestParam String empId, @RequestParam Date fromDate, @RequestParam Date toDate){
         List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves(empId, fromDate, toDate);
         modelMap.addAttribute("leaveApproveFormList", leaveApproveFormList);
         return "html/fragment/LeaveReportResult";
@@ -77,6 +73,7 @@ public class LeaveReportController {
         return "html/allEmployeesLeaveReport";
     }
 
+    //Todo : chnage return view for all employee report instead for one employee
     @PostMapping("/allEmployeeLeaveReport")
     public String allEmpLeaveReport(ModelMap modelMap, @RequestParam Date fromDate, @RequestParam Date toDate) {
         List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves(fromDate, toDate);
