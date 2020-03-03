@@ -48,30 +48,53 @@ public class ApproveLeaveController {
     }
 
     @PostConstruct
-    public void loadData(){
+    public void loadData() {
         employeeIds = leaveDetailsService.findAllEmployeeIds();
     }
 
     @GetMapping("/approveLeave")
     public String approveLeaveView(ModelMap modelMap) {
         modelMap.addAttribute("employeeIds", employeeIds);
-        modelMap.addAttribute("leaveApproveForm", new LeaveApproveForm());
+
+        Leaves leaves = leavesService.findLeaveByEmployeeId(employeeIds.get(0));
+        LeaveApproveForm leaveApproveForm = new LeaveApproveForm();
+        if (leaves != null) {
+            leaveApproveForm.setRemainingCL(leaves.getCasualLeaves() + leaves.getPreviousYearLeaves());
+            leaveApproveForm.setRemainingCompOff(leaves.getCompensatoryLeaves());
+            leaveApproveForm.setRemainingSL(leaves.getSickLeaves());
+        }
+
+        modelMap.addAttribute("leaveApproveForm", leaveApproveForm);
         return "html/approveLeave";
     }
 
     @PostMapping("/approveLeave")
     public String approveLeave(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm) {
+        modelMap.addAttribute("employeeIds", employeeIds);
+        modelMap.addAttribute("leaveApproveForm", leaveApproveForm);
+
+        Leaves leaves = leavesService.findLeaveByEmployeeId(leaveApproveForm.getEmpId());
+        if (leaves.getCasualLeaves() + leaves.getPreviousYearLeaves() < leaveApproveForm.getCasualLeave()){
+            modelMap.addAttribute("error","Cannot select CL grater than leave balance");
+            return "html/approveLeave";
+        }else if (leaves.getSickLeaves() < leaveApproveForm.getSickLeave()){
+            modelMap.addAttribute("error","Cannot select SL grater than leave balance");
+            return "html/approveLeave";
+        }else if (leaves.getCompensatoryLeaves() < leaveApproveForm.getCompensatoryLeave()){
+            modelMap.addAttribute("error","Cannot select Comp. leaves grater than leave balance");
+            return "html/approveLeave";
+        }
+
         leaveDetailsService.approveLeave(leaveApproveForm);
         modelMap.addAttribute("success", "Leave approved successfully for employee " + leaveApproveForm.getEmpId());
-        modelMap.addAttribute("employeeIds", employeeIds);
-        modelMap.addAttribute("leaveApproveForm", new LeaveApproveForm());
+
         return "html/approveLeave";
     }
 
     @PostMapping("/findLeaveBalance")
-    public String findBalanceLeaves(ModelMap modelMap,@ModelAttribute LeaveApproveForm leaveApproveForm) {
+    public String findBalanceLeaves(ModelMap modelMap, @ModelAttribute LeaveApproveForm leaveApproveForm) {
         Leaves leaves = leavesService.findLeaveByEmployeeId(leaveApproveForm.getEmpId());
-        if (leaves!=null) {
+        if (leaves != null) {
             leaveApproveForm = new LeaveApproveForm();
             leaveApproveForm.setRemainingCL(leaves.getCasualLeaves() + leaves.getPreviousYearLeaves());
             leaveApproveForm.setRemainingCompOff(leaves.getCompensatoryLeaves());

@@ -16,9 +16,11 @@
                 <div class="container">
                     <form action="/updateLeaves" id="employeeLeavesForm" name="employeeLeavesForm" method="post" th:action="@{/updateLeaves}">
                         <div class="Heading">Add/Edit Leave</div>
-                        <span style="color: #008000;" th:text="${success}?:''" id="success"></span>
                         <div class="row">
                             <div>
+                                <div align="center">
+                                    <span style="color: #008000;" th:text="${success}?:''" id="success"></span>
+                                </div>
                                 <table width="50%" align="center">
                                     <tr>
                                         <td style="padding:15px">Employee&nbsp;ID<span style="color:red">*</span></td>
@@ -31,7 +33,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3"  style="padding:18px">
-                                            <span id="leavesResult" th:include="html/fragment/leavesResult :: leavesResult"></span>
+                                            <div id="leavesResult" th:include="html/fragment/leavesResult :: leavesResult"></div>
                                         </td>
                                     </tr>
                                     <tr>

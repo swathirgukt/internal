@@ -65,6 +65,7 @@ public class LeaveReportController {
     public String leaveReport(ModelMap modelMap, @RequestParam String empId, @RequestParam Date fromDate, @RequestParam Date toDate){
         List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves(empId, fromDate, toDate);
         modelMap.addAttribute("leaveApproveFormList", leaveApproveFormList);
+        modelMap.addAttribute("isAllEmployeeReport", false);
         return "html/fragment/LeaveReportResult";
     }
 
@@ -78,13 +79,19 @@ public class LeaveReportController {
     public String allEmpLeaveReport(ModelMap modelMap, @RequestParam Date fromDate, @RequestParam Date toDate) {
         List<LeaveApproveForm> leaveApproveFormList = approvedLeaveService.getApprovedLeaves(fromDate, toDate);
         modelMap.addAttribute("leaveApproveFormList", leaveApproveFormList);
+        modelMap.addAttribute("isAllEmployeeReport", true);
         return "html/fragment/leaveReportResult";
     }
 
     @GetMapping("/addEditLeaves")
     public String addEditleaveView(ModelMap modelMap) {
         modelMap.addAttribute("employeeIds", employeeIds);
-        modelMap.addAttribute("leavesForm", new LeavesForm());
+        Employee employee = employeeService.findEmployeeByEmpId(employeeIds.get(0));
+        LeavesForm leavesForm = new LeavesForm();
+        if (employee.getLeaves() != null) {
+            BeanUtils.copyProperties(employee.getLeaves(), leavesForm);
+        }
+        modelMap.addAttribute("leavesForm", leavesForm);
         return "html/addEditLeave";
     }
 

@@ -32,10 +32,11 @@
         <div>
             <b>Export&nbsp;:&nbsp;</b>
             <button onclick="exportToExcel('peripheralTable','Peripherals')">Excel</button>
+            <button onclick="exportToPDF('peripheralTable','Peripherals')">PDF</button>
         </div>
     </div>
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
-         th:if="${departmentList}!=null  AND ${departmentList.size()}==0">
+         th:if="${peripheralList}!=null  AND ${peripheralList.size()}==0">
         Nothing found to display
     </div>
 </div>

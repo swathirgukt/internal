@@ -54,7 +54,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>, Emplo
      *
      * @return list of employee id's
      */
-    @Query("select employee.empId from Employee employee")
+    @Query("select employee.empId from Employee employee order by employee.empId")
     List<String> findAllEmpIds();
 
     /**
