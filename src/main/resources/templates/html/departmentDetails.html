@@ -6,6 +6,8 @@
 
 <body>
 <header th:insert="html/fragment/header :: header"></header>
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
@@ -113,7 +115,7 @@
                     <div class="Heading">Department Details</div>
                     <div class="row">
                         <div class="col-md-12 col-sm-10 col-xs-5">
-                            <div id="departmentResult" class="tableScrollbar">
+                            <div id="departmentResult" >
                             </div>
                         </div>
 

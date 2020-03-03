@@ -10,7 +10,6 @@ import com.indianeagle.internal.service.ApplicationSession;
 import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.SalaryHistoryService;
 import com.indianeagle.internal.service.SalaryService;
-import com.indianeagle.internal.util.SimpleUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -25,13 +24,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Satya.Neelam
@@ -116,7 +113,6 @@ public class EmpSalaryHistoryController {
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         ResponseEntity<byte[]> response = null;
         try {
-            System.out.println("###Stream >> "+inputStream.available());
             byte[] bytes=new byte[inputStream.available()];
             inputStream.read(bytes);
             response = new ResponseEntity<>(bytes, headers, HttpStatus.OK);

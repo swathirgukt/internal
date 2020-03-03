@@ -105,7 +105,6 @@ public class LeaveReportController {
 
     @PostMapping("/updateLeaves")
     public String updateLeaves(ModelMap modelMap, @RequestParam String employeeId, LeavesForm leavesForm) {
-        System.out.println("###LeaveForm >> "+leavesForm);
         if(SimpleUtils.isEmpty(employeeId)) {
             return "html/addEditLeave";
         }
@@ -114,13 +113,11 @@ public class LeaveReportController {
             return "html/addEditLeave";
         }
 
-        System.out.println("##BeforeSickLeavs :: "+ leavesForm.getSickLeaves()+" >> "+employee.getLeaves().getSickLeaves());
         employee.getLeaves().setCasualLeaves(leavesForm.getCasualLeaves());
         employee.getLeaves().setSickLeaves(leavesForm.getSickLeaves());
         employee.getLeaves().setCompensatoryLeaves(leavesForm.getCompensatoryLeaves());
         employee.getLeaves().setPreviousYearLeaves(leavesForm.getPreviousYearLeaves());
         employeeService.updateEmployeeLeaves(employee);
-        System.out.println("##AfterSickLeavs :: "+ leavesForm.getSickLeaves()+" >> "+employee.getLeaves().getSickLeaves());
 
         modelMap.addAttribute("employeeIds", employeeIds);
         modelMap.addAttribute("leavesForm", new LeavesForm());

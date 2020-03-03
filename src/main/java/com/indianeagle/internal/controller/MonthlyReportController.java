@@ -52,10 +52,6 @@ public class MonthlyReportController {
     @PostMapping("/monthlySalaryReport")
     public String getmonthlySalaryReport(ModelMap model, @RequestParam @DateTimeFormat(pattern = "YYYY-MM-dd") Date salaryDate) {
         try {
-            if (salaryDate == null) {
-                model.addAttribute("selectDate", "please select date");
-                return "html/monthlySalaryReport";
-            }
 
             List<MonthlySalaryReport>   monthlySalaryList = monthlyReportService.getMonthlySalaryReport(salaryDate);
 
@@ -65,6 +61,7 @@ public class MonthlyReportController {
             }
             model.addAttribute("monthlySalaryList", monthlySalaryList);
             return "html/fragment/monthlySalaryReportResult";
+           // return "html/exceltest";
         } catch (Exception e) {
             model.addAttribute("Problem occured due to technical problem");
             LOG.error("Problem occured due to technical problem", e);

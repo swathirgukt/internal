@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Peripherals</title>
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
@@ -51,6 +53,10 @@
                                         </tr>
                                         </tr>
                                         <tr>
+                                            <td></td>
+                                            <td ><span id="purchaseDateError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 Year of Purchase<span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
                                             </td>
@@ -58,10 +64,6 @@
                                                 <input width="170px" th:field="*{yearOfPurchase}" style="border: 1px solid #ff9900;">
                                                 <script>$('#yearOfPurchase').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td ><span id="purchaseDateError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
                                             <td><span>Employee Id</span><span style="float: right;margin-right:10px">:</span></td>
@@ -90,6 +92,10 @@
                                             <td ><span id="serialNumberError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
+                                            <td></td>
+                                            <td ><span id="warrantyDateError" style="color:red;"></span></td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 Warranty Date <span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
                                             </td>
@@ -97,10 +103,6 @@
                                                 <input  width="170px" th:field="*{warrantyDate}" style="border: 1px solid #ff9900;">
                                                 <script>$('#warrantyDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td ><span id="warrantyDateError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
                                             <td>Status <span style="color:red">*</span><span style="float: right;margin-right:10px"s>:</span></td>
@@ -137,7 +139,7 @@
                     <div class="Heading">Search Result</div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div id="peripheralResult" class="tableScrollbar"></div>
+                            <div id="peripheralResult"></div>
                         </div>
 
                     </div>

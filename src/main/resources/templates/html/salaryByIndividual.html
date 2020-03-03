@@ -18,11 +18,11 @@
                         <span style="color: #008000;" th:if="${mailSent}!=null" th:text="${mailSent}"></span>
                         <span style="color:#ff0000;" th:if="${error}!=null" th:text="${error}"></span>
                         <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <table class="table-condensed">
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table-condensed">
                                     <tr>
                                         <td>
-                                            Employee ID<span style="color: red">*</span>
+                                            Employee&nbsp;ID<span style="color: red">*</span>
                                         </td>
                                         <td><b>:</b></td>
                                         <td>
@@ -30,40 +30,35 @@
                                                 <option th:each="employee : *{employeeList}" th:value="${employee.empId}">[[${employee.empId}]]</option>
                                             </select>
                                         </td>
+                                        <td>From <span style="color: red">*</span></td>
+                                        <td width="20px"><b>:</b></td>
+                                        <td>
+                                            <input id="fromDate" width="150px" name="fromDate" th:field="*{salaryRule.salaryDate}" style="border: 1px solid #ff9900" >
+                                            <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </td>
+                                        <td>To <span style="color: red">*</span></td>
+                                        <td width="20px"><b>:</b></td>
+                                        <td>
+                                            <input id="toDate" width="150px" name="toDate" th:field="*{salaryRule.salaryEndDate}" style="border: 1px solid #ff9900">
+                                            <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span id="fromDateError"></span>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <span id="toDateError"></span>
+                                        </td>
                                     </tr>
                                 </table>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <span id="fromDateError"></span>
-                                            </td>
-                                            <td></td>
-                                            <td ></td>
-                                            <td>
-                                                <span id="toDateError"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>From <span style="color: red">*</span></td>
-                                            <td width="20px"><b>:</b></td>
-                                            <td>
-                                                <input id="fromDate" width="150px" name="fromDate" th:field="*{salaryRule.salaryDate}" style="border: 1px solid #ff9900" >
-                                                <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
-                                            </td>
-                                            <td>To <span style="color: red">*</span></td>
-                                            <td width="20px"><b>:</b></td>
-                                            <td>
-                                                <input id="toDate" width="150px" name="toDate" th:field="*{salaryRule.salaryEndDate}" style="border: 1px solid #ff9900">
-                                                <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                         <div class="Heading">Attendance Details</div>

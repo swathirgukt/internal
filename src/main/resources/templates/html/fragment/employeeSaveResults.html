@@ -1,0 +1,111 @@
+<html>
+<body>
+<header th:insert="html/fragment/header :: header"></header>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2 sidenav">
+        </div>
+        <div class="col-sm-8 text-left">
+            <div class="jumbotron">
+                <div class="container">
+                    <div>
+                        <div th:fragment="searchSaveEmployeeResult" xmlns:th="http://www.thymeleaf.org">
+
+
+                            <b><span style="color;red" th:if="${error}!=null" th:text="${error}"></span></b>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="Heading"><b>Income Tax Sections</b></div>
+                                <!--<div style="margin-top: 20px;" id="Income Tax Sections">-->
+
+                                <table cellpadding="1" cellspacing="1"
+                                       class="table table-bordered table-responsive-lg table-hover">
+
+                                    <tr>
+                                        <td style="padding:6px">EmployeeId</td>
+                                        <td><b>:</b></td>
+                                        <td><input id="employeeId" name="employeeId" type="text"
+                                                   th:value="${employee}!=null?${employee.empId}:''"></td>
+                                        <td>(or)&nbsp;&nbsp;EmployeeName</td>
+                                        <td><b>:</b></td>
+                                        <div>
+                                            <span th:if="${noRecords}!=null" th:text="${noRecords}"
+                                                  style="color:red"></span>
+                                        </div>
+                                        <td><input id="employeeName" name="employeeName" type="text"
+                                                   th:value="${employee}!=null? ${employee.fullName}:''">
+                                        </td>
+                                        <td>
+                                            <button class="submitButton" type="button" onclick="searchSaveEmployees()">
+                                                <b>Search</b>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-10 col-xs-5">
+                                    <div id="searchSaveEmployeeResult" class="tableScrollbar">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="Heading"><b>Employee Details</b></div>
+
+                            <div style="margin-top: 20px;" id="employeeDetails">
+							<span>
+								<input id="fullname" name="fullname"
+                                       th:value="${employee}!=null?${employee.fullName}:''" placeholder="Fullname"
+                                       readonly
+                                       style="margin-left: 20px;"
+                                       type="text">
+								<input id="designation" name="designation" placeholder="Designation" readonly
+                                       style="margin-left: 20px;" type="text"
+                                       th:value="${employee}!=null? ${employee.designation}:''">
+								<input id="pancardno" name="pancardno" placeholder="PAN CARD NO"
+                                       style="margin-left: 20px;" type="text"
+                                       th:value="${employee}!=null? ${employee.panNo}:''">
+								<input id="address" name="address" placeholder="ADDRESS" readonly
+                                       style="margin-left: 20px; "
+                                       type="text" th:value="${employee}!=null? ${employee.perAddress}:''">
+							</span>
+                            </div>
+                            <div style="padding:15px;">
+                                <div class="Heading"><b>Form 16</b></div>
+                                <div th:if="${employeeIncomeTaxes} != null AND ${employeeIncomeTaxes.size()}>0">
+                                    <table cellpadding="1" cellspacing="1"
+                                           class="table table-bordered table-responsive-lg table-hover">
+                                        <tr style="background-color:#FFFAF5;color: #000000;padding: 40px;"
+                                            th:each="taxes :${employeeIncomeTaxes}">
+                                            <td>Financial Year</td>
+                                            <td style="padding:15px;"><input type="text" th:value="${taxes.financialYear.fromYear+'-'+taxes.financialYear.toYear}"/>
+                                            </td>
+                                            <td style="padding:15px"><a
+                                                    th:href="@{/previewForm16/{id}(id=${taxes.id})}">Preview</a>
+                                            </td>
+                                            <td style="padding:15px"><a
+                                                    th:href="@{/saveGeneratedForm16/{id}(id=${taxes.id})}">Email</a>
+                                            </td>
+                                            <td><a th:href="@{/saveGeneratedForm16/{id}(id=${taxes.id})}">Save as
+                                                PDF</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div style="font: 10pt 'Arial Black';color: #ff0000;"
+                                     th:if="${employeeIncomeTaxes}!=null AND ${employeeIncomeTaxes.size()}==0">
+                                    Nothing found to display
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

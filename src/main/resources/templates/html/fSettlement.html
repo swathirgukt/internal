@@ -5,7 +5,10 @@
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
-<div class="container-fluid text-center">
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
+
+<div class="container-fluid text-center" id="MenuWrapper">
     <div class="row content">
         <div class="col-sm-2 sidenav">
         </div>
@@ -80,6 +83,7 @@
         </div>
     </div>
 </div>
+
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>
 </html>

@@ -14,12 +14,12 @@
                 <div class="container">
                     <form action="saveOrUpdateEmployeeFinancialYear" id="employeeSavingForm" name="employeeSavingForm"
                           method="post"
-                          th:action="@{saveOrUpdateEmployeeFinancialYear}" th:object="${employeeFinancialYearForm}">
+                          th:action="@{saveOrUpdateEmployeeFinancialYear}">
                         <span th:if="${success}!=null" th:text="${success}" style="color:green"></span>
                         <div class="Heading">Employee Savings</div>
                         <div>
                             <div class="col-md-12 col-sm-12 col-xs-10">
-                                <table width="100%" class="table_text_style table-sm">
+                                <table class="table_text_style table-sm">
                                     <tr>
                                         <td>Employee Name</td>
                                         <td><b>:</b></td>
@@ -31,7 +31,7 @@
 
                                         <td><span id="employeeName" style="color:red"></span></td>
 
-                                        <td style="padding:20px">
+                                        <td>
                                             <button class="submitButton" onclick="employeeSearch()" type="button">
                                                 <b>Search Employee By Name</b>
                                             </button>
@@ -73,7 +73,7 @@
                                         <td>
                                             <select th:field="${employeeFinancialYearForm.financialYear.fromYear}"
                                                     th:value="${financialYearForm}?${financialYearForm.fromYear}:''">
-                                                <option value="2016">2016</option>
+                                                <option value="2017">2017</option>
                                                 <option th:each="year : ${financialYearForm.years}"
                                                         th:value="${year}"
                                                         th:text="${year}"/>
@@ -96,7 +96,7 @@
                                         <td>
                                             <select th:field="${employeeFinancialYearForm.financialYear.toYear}"
                                                     th:value="${financialYearForm}?${financialYearForm.toYear}:''">
-                                                <option value="2017">2017</option>
+                                                <option value="2018">2018</option>
                                                 <option th:each="year : ${financialYearForm.years}"
                                                         th:value="${year}"
                                                         th:text="${year}"/>
@@ -127,18 +127,14 @@
                             <div class="col-md-12 col-sm-12 col-xs-10">
                                 <ul>
                                     <li id="employeeInfo">
-                                        <input th:field="${employeeVO.fullName}" placeholder="FullName" type="text"
-                                                readonly="true">
+                                        <input th:name="${employeeVO.fullName}" th:value="${employeeVO.fullName}!='null null'?${employeeVO.fullName}:''" placeholder="FullName" type="text"
+                                               readonly="true">
                                         <input th:field="${employeeVO.designation}" placeholder="Designation" type="text"
                                                readonly="true">
                                         <input th:field="${employeeVO.panNo}" placeholder="PAN Card No" type="text"
-                                                readonly="true">
+                                               readonly="true">
                                         <input th:field="${employeeVO.perAddress}" placeholder="ADDRESS" type="text"
-                                                readonly="true">
-                                        <br>
-                                        <br>
-
-
+                                               readonly="true">
                                         <button id="saveBtn" class="submitButton" onClick="saveEmpInfo()" type="button"
                                                 style="display:none;">Save
                                         </button> &nbsp;&nbsp;
@@ -148,8 +144,6 @@
                                         <button id="cancelBtn" class="submitButton" onClick="cancelEmpInfo()"
                                                 type="button" style="display:none;">Cancel
                                         </button>&nbsp;&nbsp;
-
-
                                     </li>
                                 </ul>
 
@@ -157,41 +151,31 @@
                         </div>
                         <div>
                             <div class="Heading">Sections</div>
-                            <div class="form16sections">
+                            <div class="form16sections" style="padding:200px">
                                 <ul id="sectionList" class="sectionStyle">
                                     <div th:if="${employeeFinancialYearForm.financialYear.id}!=null">
                                         <input type="hidden" th:field="${employeeFinancialYearForm.Id}" >
-
-
-                                        <li style="padding:10px 0px;"
-                                            th:each="sectionData, stat : ${employeeFinancialYearForm.employeeTaxSectionForms}">
+                                        <li th:each="sectionData, stat : ${employeeFinancialYearForm.employeeTaxSectionForms}">
                                             <span th:text="${sectionData.sectionName}"></span>
                                             <input th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].sectionLimit}"
-                                                   type="text"
-                                                   readonly="true">
-                                            <input type="hidden"
-                                                   th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].sectionName}"
-                                            />
+                                                   type="text" readonly="true">
+                                            <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].sectionName}">
                                             <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].id}" >
 
-                                            <div th:id="${__stat.index__}" name='addDeclaration' >
-                                                <button class="submitButton" type="button"><b>Add</b></button></div>
-                                            <div th:id="${__childStat.index__}" style="padding:10px 0px;"
-                                                 th:each="sectionDeclarationData, childStat :${sectionData.employeeTaxSectionDeclarations}">
-                                                <select id="subSectionName" name="subSectionName" th:name="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].subSectionName}" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].subSectionName}">
-
+                                            <div th:id="${__stat.index__}" name='addDeclaration'>
+                                                <button class="submitButton" type="button"><b>Add</b></button>
+                                            </div>
+                                            <div th:id="${__childStat.index__}" th:each="sectionDeclarationData, childStat :${sectionData.employeeTaxSectionDeclarations}">
+                                                <select class="selectOption" id="subSectionName" name="subSectionName" th:name="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].subSectionName}" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].subSectionName}">
                                                     <option  value="">select</option>
                                                     <div th:each="taxSectionForm : ${financialYearForm.taxSectionForms}" >
-                                                        <option th:with="names=${sectionDeclarationData.subSectionName}" th:each="subSection: ${taxSectionForm.taxSectionDeclarations}"
+                                                        <option th:with="names=${sectionDeclarationData.subSectionName}"  th:each="subSection: ${taxSectionForm.taxSectionDeclarationVOS}"
                                                                 th:value="${subSection.subSectionName}"
-                                                        th:text="${subSection.subSectionName}" th:selected="${subSection.subSectionName==names}">
-
-
+                                                                th:text="${subSection.subSectionName}" th:selected="${subSection.subSectionName==names}">
                                                         </option>
                                                     </div>
                                                 </select>
                                                 <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].id}" >
-
                                                 <input type="text" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${stat.index}__].employeeTaxSectionDeclarations[__${childStat.index}__].saveAmount}"/>
                                                 <div name='saveExemptionRule' class='button btnOrange'>
                                                     <a>Save</a>
@@ -222,38 +206,38 @@
 
                                             <div th:id="${__status.index__}" name='addDeclaration'><button class="submitButton" type="button"><b>Add</b></button></div>
 
-                                            <select id="subSectionNameTax" name="subSectionName" th:name="|employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName|" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName}">
+                                            <select class="selectOption" id="subSectionNameTax" name="subSectionName" th:name="|employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName|" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].subSectionName}">
                                                 <option value="">select</option>
 
-                                                <option th:each="taxSectionDeclaration : ${sectionData.taxSectionDeclarations}"
+                                                <option th:each="taxSectionDeclaration : ${sectionData.taxSectionDeclarationVOS}"
                                                         th:value="${taxSectionDeclaration.subSectionName}"
                                                         th:text="${taxSectionDeclaration.subSectionName}"/>
                                             </select>
                                             <input type="hidden" th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].id}" >
 
-                                            <input th:field="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].saveAmount}"
+                                            <input th:name="${employeeFinancialYearForm.employeeTaxSectionForms[__${status.index}__].employeeTaxSectionDeclarations[0].saveAmount}"
                                                    readonly="true" type="text"/>
 
-                                            <div name='saveExemptionRule' class='button btnOrange'>
-                                                <a>Save</a>
+                                            <div name='saveExemptionRule' style="padding:10px;margin-left:350px;margin-top:-35px;">
+                                                <a class="submitButton">Save</a>
                                             </div>
-                                            <div name='editExemptionRule' class='button btnGray'>
-                                                <a>Edit</a>
+                                            <div name='editExemptionRule' style="margin-left:440px;margin-top:-40px;padding:10px">
+                                                <a class="submitButton">Edit</a>
                                             </div>
-                                            <div name='removeDeclaration' class='button btnGray'>
-                                                <a>Remove</a>
+                                            <div name='removeDeclaration' style="margin-left:500px;margin-top:-40px;padding:10px">
+                                                <a class="submitButton">Remove</a>
                                             </div>
                                         </li>
                                     </div>
 
-                                    <li>
-                                        <div class="midBtns right">
+                                    <li th:if="${financialYearForm.id}!=null" style="float:right">
+
+                                        <div>
                                             <div>
-                                                <Button class="submitButton" type="submit">Submit</Button>
+                                                <button class="submitButton" type="submit">Submit</button>
+                                                <a href="@{EmployeeSavings}" type="button" class="submitButton">Cancel</a>
                                             </div>
-                                            <div class="button btnOrange">
-                                                <a href="@{EmployeeSavings}" type="button">Cancel</a>
-                                            </div>
+
                                         </div>
                                     </li>
                                 </ul>

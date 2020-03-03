@@ -5,6 +5,8 @@
 </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
@@ -16,14 +18,26 @@
                         <div class="Heading">Add/Edit Leave</div>
                         <span style="color: #008000;" th:text="${success}?:''" id="success"></span>
                         <div class="row">
-                            <div class="col-md-12">
-                                Employee ID <span style="color:red">*</span> <b>:</b>
-                                <select  style="width: 200px;height: 23px;border-radius:5px" onchange="findEmployeeLeaves()"  name="employeeId" id="employeeId">
-                                    <option th:each="empId : ${employeeIds}" th:value="${empId}" th:text="${empId}"></option>
-                                </select>
-                                <div id="leavesResult" th:include="html/fragment/leavesResult :: leavesResult"></div>
-                                <button type="submit" class="submitButton" ><b>Submit</b>
-                                </button>
+                            <div>
+                                <table width="50%" align="center">
+                                    <tr>
+                                        <td style="padding:15px">Employee&nbsp;ID<span style="color:red">*</span></td>
+                                        <td><b>:</b></td>
+                                        <td>
+                                            <select  style="width: 200px;height: 23px;border-radius:5px" onchange="findEmployeeLeaves()"  name="employeeId" id="employeeId">
+                                            <option th:each="empId : ${employeeIds}" th:value="${empId}" th:text="${empId}"></option>
+                                           </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"  style="padding:18px">
+                                            <span id="leavesResult" th:include="html/fragment/leavesResult :: leavesResult"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="center"><button type="submit" class="submitButton" ><b>Submit</b></button></td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </form>

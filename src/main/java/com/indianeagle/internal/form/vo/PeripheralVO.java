@@ -6,7 +6,7 @@ import java.util.Date;
  * Peripheral entity.
  * @author SVK
  */
-public class Peripheral {
+public class PeripheralVO {
 
 	private Long id;
 	private String peripheralName;
@@ -85,5 +85,20 @@ public class Peripheral {
 	public void setPeripheralName(String peripheralName) {
 		this.peripheralName = peripheralName;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "PeripheralVO{" +
+				"id=" + id +
+				", peripheralName='" + peripheralName + '\'' +
+				", type='" + type + '\'' +
+				", brand='" + brand + '\'' +
+				", model='" + model + '\'' +
+				", serialNumber='" + serialNumber + '\'' +
+				", yearOfPurchase=" + yearOfPurchase +
+				", warrantyDate=" + warrantyDate +
+				", users='" + users + '\'' +
+				", status='" + status + '\'' +
+				'}';
+	}
 }
