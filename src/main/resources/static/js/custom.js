@@ -5,7 +5,8 @@ function makeAJAXCall(requestUrl,formId) {
         type: "POST",
         error: function(msg,err,exc){
             console.log("#error: "+err);
-        }
+         $("#loading,#itp_overlay").hide();
+    }
     });
 }
 $( document ).ready(function() {
@@ -45,16 +46,20 @@ function PopupCenter(pageURL, title,w,h) {
 
 function sendPayslipMail(requestUrl,id){
     $("#sendMail"+id).html("");
+    $("#loading,#itp_overlay").show();
     jQuery.ajax({
             url: requestUrl,
             type: "GET",
             success: function(){
+            $("#loading,#itp_overlay").hide();
             $("#sendMail"+id).html("&#10004;").css("color","green").css("font-size","15px").css("font-weight","bold");
             },
             error: function(msg,err,exc){
                 console.log("#error: "+err);
             }
     });
+     $(document).ajaxStart(function(){ $("#loading").css("display", "block");});
+     $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
 }
 
 function submitIncentive(){
@@ -248,15 +253,20 @@ function searchAllEmployeeLeaveReport() {
 
 
 function submitGenerateSalaryForm(){
+//$("#loading,#itp_overlay").show();
     if(hasErrorsInDates()){
         return;
     }
+    $("#loading,#itp_overlay").show();
 
     if($("#SalaryForm").prop("id")=="SalaryForm")
         $("#SalaryForm").submit();
 
     if($("#generateAllSalariesForm").prop("id")=="generateAllSalariesForm")
+         $(document).click(function(){$("#loading").css("display", "block");});
+             $(document).click(function(){$("#loading").css("display", "none");});
         $("#generateAllSalariesForm").submit();
+        $("#loading,#itp_overlay").hide();
 }
 
 
@@ -265,10 +275,13 @@ function searchAllESalaryEmployee() {
     if(hasErrorsInDates()){
         return;
     }
-
+      $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/searchAllESalaryEmployee", 'generateAllSalariesForm');
+      $(document).ajaxStart(function(){$("#loading").css("display", "block");});
+      $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
+            $("#loading,#itp_overlay").hide();
             $("#eSalaryResult").html(responseData);
         }
     });
@@ -450,13 +463,9 @@ function saveSalaryDecider(){
 }
 
 function getLeaveBalance(){
-    $("#loading,#itp_overlay").show();
     var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
     response.done(function(responseData){
-        $(document).ajaxStart(function(){ $("#loading").css("display", "block");});
-        $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
         if(responseData){
-            $("#loading,#itp_overlay").hide();
             $("#leaveBalanceResult").html(responseData);
         }
     });
@@ -722,11 +731,13 @@ function searchEmployeeStatus() {
         }
 
         if(error){return;}
-
-
- var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+      $("#loading,#itp_overlay").show();
+  var response = makeAJAXCall("/monthlySalaryReport", 'monthlySalaryForm');
+    $(document).ajaxStart(function(){ $("#loading").css("display", "block"); });
+    $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
      response.done(function (responseData) {
          if (responseData) {
+             $("#loading,#itp_overlay").hide();
              $("#monthlySalaryResult").html(responseData);
          }
       });

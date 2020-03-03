@@ -49,9 +49,9 @@ public class Employee extends BaseDto{
     private String designation;
     @Column(name = "PERSONAL_EMAIL")
     private String personalEmail;
-    //@Column(name = "ID")
+
     private String fullName;
-    //@Column(name = "ID")
+
     private String empInfo;
     @Column(name = "LEVEL")
     private String level;

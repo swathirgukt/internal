@@ -38,8 +38,9 @@
      $(document).on('blur', '#incomeTable tr td input', function(){
             calculateTotalIncomeEarnedByEmployee();
         });
+
       function searchEmployeeByNameInForm16Generation(){
-      removeMessages()
+         removeMessages();
        var response = makeAJAXCall("/searchEmployeeByNameInForm16Generation", 'form16GenerationData');
           response.done(function (responseData) {
               if (response) {
@@ -98,11 +99,19 @@
 
 
        function form16sendMail(){
-       removeMessages()
+       removeMessages();
        console.log("in send mail");
+       $("#loading,#itp_overlay").show();
        var response = makeAJAXCall("/sendMail","form16GenerationData");
+        $(document).ajaxStart(function(){
+                $("#loading").css("display", "block");
+              });
+              $(document).ajaxComplete(function(){
+                $("#loading").css("display", "none");
+              });
        response.done(function (responseData) {
                           if (response) {
+                             $("#loading,#itp_overlay").hide();
                              $("#emailReport").replaceWith(responseData);
                               console.log("in calculateTax success");
                           }
@@ -110,12 +119,12 @@
        }
 
      function setEmployeeId(empId){
-     removeMessages()
+     removeMessages();
          console.log(empId);
          document.getElementById('employeeId').value=empId;
      }
      function retrieveSalaryInfoForForm16(){
-     removeMessages()
+     removeMessages();
        var url="/retrieveEmployeeInfoInForm16";
        var form=document.getElementById("form16GenerationData");
        form.action=url;
@@ -123,7 +132,7 @@
        form.submit();
          }
      function saveAsPdf(){
-     removeMessages()
+     removeMessages();
               var url="/saveAsPdf";
               var form=document.getElementById("form16GenerationData");
               form.action=url;
@@ -132,7 +141,7 @@
 
      }
      function saveAsExcel(){
-     removeMessages()
+     removeMessages();
        var url="/saveAsExcel";
        var form=document.getElementById("form16GenerationData");
        form.action=url;

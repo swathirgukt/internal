@@ -90,9 +90,13 @@ function addSectionDeclaration(addButton){
 
 function retrieveFinancialYear(){
     removeMessages();
+    $("#loading,#itp_overlay").show();
     var response = makeAJAXCall('/incomeTaxSections/retrieveFinancialYear', 'financialYearForm');
+    $(document).ajaxStart(function(){$("#loading").css("display", "block"); });
+    $(document).ajaxComplete(function(){$("#loading").css("display", "none");});
     response.done(function (responseData) {
         if (responseData) {
+            $("#loading,#itp_overlay").hide();
             $("#iTSectionsBody").html(responseData);
         }
     });
