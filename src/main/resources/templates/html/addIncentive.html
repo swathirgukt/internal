@@ -17,19 +17,15 @@
                         <div class="Heading">Add Incentives</div>
                         <div class="row">
                             <span style="color: #008000;margin-left: 40%;font:  12pt arial;padding-top: 30px" id="success" th:text="${success}?:''"></span>
-                            <div class="col-md-6 col-sm-12 col-xs-10">
-                                <table width="100%">
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td><span id="incentiveDateError" style="color:red;"></span></td>
-                                    </tr>
+                            <div class="col-md-8 col-sm-12 col-xs-10">
+                                <table>
                                     <tr>
                                         <td>Date <span style="color: #ff0000">*</span></td>
                                         <td><b>:</b></td>
-                                        <td style="padding:5px"><input style=" float:left; border: 1px solid #ff9900;" id="incentiveDate" name="incentiveDate" width="200px" th:field="*{incentiveDate}"/>
+                                        <td style="padding:10px"><input style=" float:left; border: 1px solid #ff9900;" id="incentiveDate" name="incentiveDate" width="200px" th:field="*{incentiveDate}"/>
                                             <script>$('#incentiveDate').datepicker({ uiLibrary: 'bootstrap' }); </script>
                                         </td>
+                                        <td><span id="incentiveDateError" style="color:red;"></span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -40,11 +36,26 @@
                                     <div id="addTable">
                                         <table width="100%" id="incentiveTable">
                                             <tr>
-                                                <td>Employee Id <span style="color: #ff0000">*</span></td>
-                                                <td colspan="2" style="padding:10px">Incentive Amount <span style="color: #ff0000">*</span></td>
+                                                <td style="padding:5px">Employee Id <span style="color: #ff0000">*</span></td>
+                                                <td>Incentive Amount <span style="color: #ff0000">*</span></td>
+                                                <td>
+                                                    <button class="submitButton" onclick="addRow()" type="button">
+                                                        <b>Add</b>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="submitButton" onclick="removeRow()" type="button">
+                                                        <b>Remove</b>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="submitButton" type="button" onclick="submitIncentive();">
+                                                        <b>Submit</b>
+                                                    </button>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:5px">
+                                                <td>
                                                     <select style="width: 200px;height: 23px;border-radius:5px" th:field="*{incentivesVOList[0].employeeVO.Id}" id="employeeId">
                                                         <option th:each="employeeVO : *{employeeVOList}" th:value="${employeeVO.Id}" th:text="${employeeVO.empId}" value="a">1</option>
                                                     </select>
@@ -57,32 +68,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8 col-sm-12 col-xs-10">
-                                <div style="float:right">
-                                    <table width="100%">
-                                        <tr>
-                                            <td style="padding:10px">
-                                                <button class="submitButton" onclick="addRow()" type="button">
-                                                    <b>Add</b>
-                                                </button>
-                                            </td>
-                                            <td style="padding:10px">
-                                                <button class="submitButton" onclick="removeRow()" type="button">
-                                                    <b>Remove</b>
-                                                </button>
-                                            </td>
-                                            <td style="padding:10px">
-                                                <button class="submitButton" type="button" onclick="submitIncentive();">
-                                                    <b>Submit</b>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
                     </form>
 
                 </div>

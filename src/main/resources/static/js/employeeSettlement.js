@@ -67,6 +67,10 @@ $( document ).ready(function() {
  function goBack() {
     window.history.back();
   }
+  /*function goBacKk(){
+               document.employeeSettlementForm.action="/goBack";
+                document.employeeSettlementForm.submit();
+           }*/
   function updateDatesRow(selectedValue){
         if(selectedValue == 'Resigned')
         {

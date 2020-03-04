@@ -82,7 +82,7 @@
                                     <tr>
                                         <td style="padding: 5px">Reason&nbsp;For&nbsp;Leaving</td>
                                         <td style="padding: 5px"><b>:</b></td>
-                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}" spellcheck="true" /></td>
+                                        <td style="padding: 5px"><textarea rows="2" cols="22" th:field="*{reasonRelieving}" spellcheck="true"/></td>
                                     </tr>
                                 </table>
                             </div>
@@ -140,6 +140,9 @@
                                             </button>
                                         </td>
                                         <td>
+                                            <!--<a th:href="@{/goBack(status=${employeeForm.status='working'})}">Back</a>-->
+                                            <!--<button class="submitButton" onclick="goBacKk()" type="button">
+                                                <b>Back</b></button>-->
                                             <button class="submitButton" onclick="goBack()" type="button">
                                                 <b>Back</b>
                                             </button>
@@ -149,6 +152,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

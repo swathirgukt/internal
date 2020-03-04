@@ -57,9 +57,9 @@ ul {
                                             Employee&nbsp;Name
                                         </td>
                                         <td><b>:</b></td>
-                                        <td><input type="text" name="empName" id="empName"
+                                        <td><input style="border-radius:5px" type="text" name="empName" id="empName"
                                                    th:value="${employee}!=null?${employee.fullName}:''" ></td>
-                                        <td>
+                                        <td style="padding:10px">
                                             <!-- <a onclick="searchEmployeeByNameInForm16Generation()"> Search Employee By Name </a>-->
                                             <b><button class="submitButton"
                                                     onClick="searchEmployeeByNameInForm16Generation()" type="button">
@@ -68,8 +68,6 @@ ul {
 
                                         </td>
 
-                                        <td style="padding:20px">
-                                        </td>
                                     </tr>
                                 </table>
 
@@ -87,13 +85,13 @@ ul {
                             <div>
                                 <table width="100%">
                                     <tr>
-                                        <td style="padding:5px">
+                                        <td>
                                             Employee&nbsp;ID
                                         </td>
                                         <td><b>:</b></td>
 
                                         <td><input th:if="${employeeFinancialYearForm}!=null" th:field="${employeeFinancialYearForm.empId}" id="employeeId"
-                                                   type="text"/></td>
+                                                   type="text" style="border-radius:5px"/></td>
                                         <td>
                                             Financial&nbsp;Year
                                         </td>
@@ -135,14 +133,7 @@ ul {
                                                     type="button">retrieveSalaryInfo
                                             </button></b>
                                         </td>
-                                        <td style="padding:20px">
-                                        </td>
                                     </tr>
-
-
-
-
-
                                 </table>
                                <b> <span style="color:red" id="employeeId1" th:if="${employeeId}!=null" th:text="${employeeId}"></span></b>
                             </div>
@@ -154,18 +145,15 @@ ul {
                             <div class="col-md-12 col-sm-12 col-xs-10">
                                 <ul>
                                     <li id="employeeInfo">
-                                        <input name="employee.fullName" id="fullname" placeholder="Full Name" type=""
-                                               th:value="${employee}!=null?${employee.fullName}:''" readonly="true">
-                                        <input name="employee.designation" placeholder="Designation" type=""
-                                               th:value="${employee}!=null?${employee.designation}:''" readonly="true">
-                                        <input name="employee.panNo" placeholder="PAN Card No" type=""
-                                               th:value="${employee}!=null?${employee.panNo}:''" readonly="true">
-                                        <input name="employee.address" placeholder="ADDRESS" type=""
+                                        <input name="employee.fullName" id="fullname" placeholder="Full Name" style="border-radius:5px"
+                                               th:value="${employee}!=null?${employee.fullName}:''" readonly="true">&nbsp;&nbsp;&nbsp;
+                                        <input name="employee.designation" placeholder="Designation" style="border-radius:5px"
+                                               th:value="${employee}!=null?${employee.designation}:''" readonly="true">&nbsp;&nbsp;&nbsp;
+                                        <input name="employee.panNo" placeholder="PAN Card No" style="border-radius:5px"
+                                               th:value="${employee}!=null?${employee.panNo}:''" readonly="true">&nbsp;&nbsp;&nbsp;
+                                        <input name="employee.address" placeholder="ADDRESS" style="border-radius:5px"
                                                th:value="${employee}!=null?${employee.perAddress}:''" readonly="true">
-                                        <br>
-                                        <br>
-
-
+                                        <br><br>
                                         <button id="saveBtn" class="submitButton" onClick="saveEmpInfo()" type="button"
                                                 style="display:none;">Save
                                         </button> &nbsp;&nbsp;
@@ -311,59 +299,58 @@ ul {
                                         <td>GROSS&nbsp;SALARY</td>
                                         <td width="10px"><b>:</b></td>
                                         <td style="padding:5px"><input name="grossSalary" readonly="true"
-                                                                       style="background-color:orange"
+                                                                       style="background-color:orange;border-radius:5px"
                                                                        th:value="${grossSalary}!=null?${grossSalary}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Incentives</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="incentives" id="incentives"
+                                        <td style="padding:5px;"><input name="incentives" id="incentives" style="border-radius:5px"
                                                                        readonly="true"           th:value="${form16GenerationForm}!=null?${form16GenerationForm.incentives}:''" >
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>PLB</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="plb" id="plb"
+                                        <td style="padding:5px"><input name="plb" id="plb" style="border-radius:5px"
                                                                        readonly="true"           th:value="${form16GenerationForm}!=null?${form16GenerationForm.plb}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Reimbursement</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="reimbursement" id="reimbursement"
+                                        <td style="padding:5px"><input name="reimbursement" id="reimbursement" style="border-radius:5px"
                                                                        readonly="true"        th:value="${form16GenerationForm}!=null?${form16GenerationForm.reimbursement}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Bonus</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="bonus" id="bonus"
+                                        <td style="padding:5px"><input name="bonus" id="bonus" style="border-radius:5px"
                                                                        th:value="${form16GenerationForm}!=null?${form16GenerationForm.bonus}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Others</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input  name="others" id="others"
+                                        <td style="padding:5px"><input  name="others" id="others" style="border-radius:5px"
                                                                         readonly="true"         th:value="${form16GenerationForm}!=null?${form16GenerationForm.others}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Previous&nbsp;Company&nbsp;Income</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="previousCompanyIncome" id="previousCompanyIncome"
+                                        <td style="padding:5px"><input name="previousCompanyIncome" id="previousCompanyIncome" style="border-radius:5px"
                                                                        readonly="true"        th:value="${form16GenerationForm}!=null?${form16GenerationForm.previousCompanyIncome}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Income&nbsp;Earned&nbsp;by&nbsp;Employee</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input id="earnedIncome" name="incomeEarnedByEmployee"
-                                                                       type="text"
+                                        <td style="padding:5px"><input id="earnedIncome" name="incomeEarnedByEmployee" type="text"
                                                                        th:value="${grossSalary}!=null?${grossSalary}:''"
-                                                                       readonly="true" style="background-color:orange">
+                                                                       readonly="true" style="background-color:orange;border-radius:5px">
                                             <button class="submitButton" onClick="saveIncome()" type="button">Save
                                             </button>
                                             <button class="submitButton" onclick="editIncome()" type="button">Edit
@@ -385,21 +372,21 @@ ul {
                                     <tr>
                                         <td>Actual&nbsp;HRA&nbsp;PER&nbsp;ANNUM</td>
                                         <td><b>:</b></td>
-                                        <td style="padding:5px"><input
+                                        <td style="padding:5px"><input style="border-radius:5px"
                                                 th:value="${form16GenerationForm}!=null?${form16GenerationForm.totalActualHRA}:''"
                                                 readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>40%&nbsp;of&nbsp;Salary&nbsp;(basic)</td>
                                         <td><b>:</b></td>
-                                        <td style="padding:5px"><input
+                                        <td style="padding:5px"><input style="border-radius:5px"
                                                 th:value="${form16GenerationForm}!=null?${form16GenerationForm.basic40per}:''"
                                                 readonly="true"></td>
                                     </tr>
                                     <tr>
                                         <td>Employee&nbsp;given&nbsp;-&nbsp;10%&nbsp;of&nbsp;Basic</td>
                                         <td><b>:</b></td>
-                                        <td style="padding:5px"><input
+                                        <td style="padding:5px"><input style="border-radius:5px"
                                                 th:value="${form16GenerationForm}!=null?${form16GenerationForm.hraWithBasic10per}:''"
                                                 readonly="true"></td>
 
@@ -407,7 +394,7 @@ ul {
                                     <tr>
                                         <td>HRA Exempted</td>
                                         <td><b>:</b></td>
-                                        <td style="padding:5px"><input
+                                        <td style="padding:5px"><input style="border-radius:5px"
                                                 th:value="${form16GenerationForm}!=null?${form16GenerationForm.hra}:''"
                                                 readonly="true">
                                     </tr>
@@ -424,16 +411,16 @@ ul {
                                     <div th:if="${sectionData.sectionLimit}!=0">
                                     <input type="hidden" name="form16GenerationForm.taxSectionForms.sectionName" value="${sectionData.sectionName}" />
                                     <div ><label name="showOrHideSections" style="color: #1b75bb;"><strong><a th:text="${sectionData.sectionName}"/></a></strong></label>
-                                        <input   th:name ="${sectionData.sectionLimit}" th:value ="${sectionData.sectionLimit}" readonly="true"/></div>
+                                        <input style="border-radius:5px"  th:name ="${sectionData.sectionLimit}" th:value ="${sectionData.sectionLimit}" readonly="true"/></div>
                                     <ul class="childSection" style="display:none;" >
                                         <li th:each ="declarationData :${sectionData.employeeTaxSectionDeclarations}">
 
                                             <div style="width:30%; float:left;">
-                                                <input type="hidden"  name="form16GenerationForm.taxSectionForms.taxSectionDeclarations.subSectionName" th:value="${declarationData.subSectionName}" />
+                                                <input type="hidden" style="border-radius:5px"  name="form16GenerationForm.taxSectionForms.taxSectionDeclarations.subSectionName" th:value="${declarationData.subSectionName}" />
                                                 <label th:text="${declarationData.subSectionName}"></label>
                                             </div>
                                             <div style="width:70%; float:left;">
-                                                <input name="form16GenerationForm.taxSectionForms.taxSectionDeclarations.saveAmount" th:value="${declarationData.saveAmount}" readonly="true"/>
+                                                <input style="border-radius:5px" name="form16GenerationForm.taxSectionForms.taxSectionDeclarations.saveAmount" th:value="${declarationData.saveAmount}" readonly="true"/>
                                             </div>
                                         </li>
 
@@ -450,7 +437,7 @@ ul {
                     <br>
                     <hr/>
                    <!-- onclick="calculateTax()"-->
-                    <b><button onclick="calculateTax()"  type="button">Calculate Tax</button></b>
+                    <b><button onclick="calculateTax()"  type="button" class="submitButton">Calculate Tax</button></b>
 
 
                     <div class="row" id="calculateTax">
@@ -459,42 +446,42 @@ ul {
                                 <tr>
                                     <td>GROSS&nbsp;SALARY</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>Net Taxable Income</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>Tax on Income</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>EDU cess(3%)</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>Total Tax on Income</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>Less : TDS Deducted</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding;5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>Tax to be Deducted</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true"></td>
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px"></td>
                                 </tr>
                                 <tr>
                                     <td>Per Month Tax</td>
                                     <td width="10px"><b>:</b></td>
-                                    <td style="padding:5px"><input name="" type="text" readonly="true">
+                                    <td style="padding:5px"><input name="" type="text" readonly="true" style="border-radius:5px">
                                     </td>
                                     <td style="padding:20px">
                                     </td>
