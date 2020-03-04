@@ -1,6 +1,7 @@
 package com.indianeagle.internal.service.impl;
 
 import com.indianeagle.internal.dao.repository.EmployeeRepository;
+import com.indianeagle.internal.dao.repository.DepartmentRepository;
 import com.indianeagle.internal.dao.repository.UsersRepository;
 import com.indianeagle.internal.dto.*;
 import com.indianeagle.internal.form.EmployeeForm;
@@ -27,6 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private List<Employee> bufferedEmployees;
     @Autowired
     private MailingEngine mailingEngine;
+    @Autowired
+    private DepartmentRepository departmentRepository;
     private List<Employee> employeeList;
     private List<Employee> activeEmployees;
 
@@ -49,12 +52,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.getDepartmentList();
     }
 
-
+public Department getDepartment(EmployeeForm employeeForm)
+{
+    String deptname=null;
+    for(Department d:employeeForm.getDepartments()){
+        if(d.getDepartment().equals(employeeForm.getDepartment())){
+            deptname=d.getDepartment();
+        }
+    }
+  return departmentRepository.findBydepartment(deptname);
+}
     public void createEmployee(EmployeeForm employeeForm) {
         Employee employee = this.employeeRepository.findByEmpId(employeeForm.getEmpId());
+       Department department=getDepartment(employeeForm);
         if (employee != null) {
             employeeForm.getEmployeeVO().setId(employee.getId());
             employeeForm.getEmployeeVO().setEmpId(employee.getEmpId());
+            // employee.setDepartment(employeeForm.getDepartment());
+            employee.setDepartment(department);
             BeanUtils.copyProperties(employeeForm.getEmployeeVO(), employee);
             this.employeeRepository.save(employee);
         } else {
@@ -73,6 +88,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             Leaves leaves = new Leaves();
             leaves.setEmployee(employee);
             employee.setLeaves(leaves);
+            employee.setDepartment(department);
             this.employeeRepository.save(employee);
         }
         // this.mailingEngine.mailAccountDetails(employeeForm.getEmpId(), employeeForm.getEmployeeVO().getOfficialEmail());
@@ -80,9 +96,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public void updateEmployee(EmployeeForm employeeForm) {
         Employee employee = this.employeeRepository.findByEmpId(employeeForm.getEmployeeVO().getEmpId());
-        System.out.println("###Emp: "+employee);
         User user = this.usersRepository.findByUserName(employeeForm.getEmployeeVO().getEmpId());
-        System.out.println("###User: "+user);
+        Department department=getDepartment(employeeForm);
         if(user!=null) {
             user.setFirstName(employeeForm.getEmployeeVO().getFirstName());
             user.setLastName(employeeForm.getEmployeeVO().getLastName());
@@ -96,22 +111,20 @@ public class EmployeeServiceImpl implements EmployeeService {
             this.usersRepository.save(user);
         }
         if (employee.getSalary() != null) {
-            System.out.println("==salry==="+employee.getSalary());
             employeeForm.getEmployeeVO().getSalaryVO().setId(employee.getSalary().getId());
         }
         employeeForm.getEmployeeVO().setId(employee.getId());
         if (employee.getNominee() != null) {
-            System.out.println("==nominee==="+employee.getNominee());
             employeeForm.getEmployeeVO().getNomineeVO().setId(employee.getNominee().getId());
         }
         BeanUtils.copyProperties( employeeForm.getEmployeeVO(),  employee);
-        System.out.println("==employee="+employee.getSalary());
         employee.getNominee().setEmployee(employee);
         Salary salary=new Salary();
         BeanUtils.copyProperties(employeeForm.getEmployeeVO().getSalaryVO(),salary);
         employee.setSalary(salary);
+        employee.setDepartment(department);
         this.employeeRepository.save(employee);
-        // this.mailingEngine.mailAccountDetails(employee.getEmpId(), employee.getOfficialEmail());
+        this.mailingEngine.mailAccountDetails(employee.getEmpId(), employee.getOfficialEmail());
     }
 
     public void updateEmployeeLeaves(Employee employee) {

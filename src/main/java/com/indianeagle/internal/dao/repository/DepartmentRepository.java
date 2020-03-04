@@ -23,4 +23,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
      * @return collection of Department Objects
      */
     List<Department> findByDepartmentStartingWith(String department);
+
+    Department findBydepartment(String deptNo);
+
 }

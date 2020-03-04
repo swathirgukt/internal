@@ -2,51 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Monthly Incentives Search</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script type="text/javascript">
-        function ExportToPDF() {
-            html2canvas(document.getElementById('tblCustomers'), {
-                onrendered: function (canvas) {
-                    var data = canvas.toDataURL();
-                    var docDefinition = {
-                        content: [{
-                            image: data,
-                            width: 100,
-                        }]
-                    };
-                    pdfMake.createPdf(docDefinition).download("Table.pdf");
-                }
-            });
-        }
-    </script>
-
-    <script type="text/javascript">
-
-      function exportHTMLTableToExcel(tableID, file){
-      $("#"+tableID).table2excel({
-	    exclude: ".excludeInExcel",
-	    filename: file,
-	    preserveColors: true
-	  });
-}
-
-  function exportHTMLTableToPDF(tableID, file){
-  console.log("pdf");
-      $("#"+tableID).tableHTMLExport({
-	   type:'pdf',
-        orientation:'p'
-	  });
-}
-
-    </script>
 </head>
 <body>
 <div th:fragment="basicSearchResult" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${employeesList} != null AND ${employeesList.size()}>0" id="tableScrollbar">
+        <div class="tableScrollbar">
         <table cellpadding="1" cellspacing="1" style="font-size:12px;"
                class="table table-bordered table-hover" id="tblCustomers">
             <tr style="background-color:#333333;color: #FFFFFF;padding: 50px" class="sticky">
@@ -90,9 +50,12 @@
             </tr>
         </table>
     </div>
-    <button onclick="exportHTMLTableToExcel('tblCustomers','table.xls')" class="submitButton">Excel</button>
-    <button id="btnExport" value="Export" onclick="ExportToPDF()" class="submitButton">PDF</button>
-
+    <div>
+        <b>Export&nbsp;:&nbsp;</b>
+        <button onclick="exportToExcel('tblCustomers','BasicSalaryDetails.xls')">Excel</button>
+        <button onclick="exportToPDF('tblCustomers','BasicSalaryDetailsPDF')">PDF</button>
+    </div>
+    </div>
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
          th:if="${employeesList}!=null  AND ${employeesList.size()}==0">
         Nothing found to display

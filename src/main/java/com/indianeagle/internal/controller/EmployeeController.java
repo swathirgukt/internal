@@ -1,6 +1,9 @@
 package com.indianeagle.internal.controller;
 
 import com.indianeagle.internal.dto.Employee;
+import com.indianeagle.internal.dao.repository.DepartmentRepository;
+import com.indianeagle.internal.dao.repository.EmployeeRepository;
+import com.indianeagle.internal.dto.Department;
 import com.indianeagle.internal.dto.Role;
 import com.indianeagle.internal.dto.User;
 import com.indianeagle.internal.form.EmployeeForm;
@@ -76,6 +79,8 @@ public class EmployeeController {
         EmployeeVO employeeVO = new EmployeeVO();
         BeanUtils.copyProperties(employee, employeeVO);
         employeeForm.setEmployeeVO(employeeVO);
+        employeeForm.setDepartment(employee.getDepartment().getDepartment());
+
         return "html/updateMyDetails";
     }
 
@@ -96,7 +101,7 @@ public class EmployeeController {
         employeeForm.setRolesList(userRolesService.loadAll());
         employeeService.createEmployee(employeeForm);
         //  createUser(employeeForm);
-        model.addAttribute("saveMessage", "Successfully Saved");
+        model.addAttribute("saveMessage", "Employee details saved successfully");
         return "html/updateMyDetails";
     }
 
@@ -121,10 +126,10 @@ public class EmployeeController {
      */
     @PostMapping("/updateEmployeeController")
     public String updateEmployee(ModelMap model, @ModelAttribute("employeeForm") EmployeeForm employeeForm) {
-        if (StringUtils.isEmpty(employeeForm.getUser().getPassword())) {
+       /* if (StringUtils.isEmpty(employeeForm.getUser().getPassword())) {
             model.addAttribute("passwordRequired", "Password is required");
             return "html/createEmployee";
-        }
+        }*/
         try {
             if (StringUtils.isEmpty(employeeForm.getEmpId())) {
                 if (employeeService.findEmployeeByEmpId(employeeForm.getEmployeeVO().getEmpId()) != null) {
@@ -133,7 +138,7 @@ public class EmployeeController {
                 }
                 employeeService.createEmployee(employeeForm);
                 //  createUser(employeeForm);
-                model.addAttribute("saveMessage", "SuccessFully Saved");
+                model.addAttribute("saveMessage", "Employee details saved successfully");
             } else {
                 User user = usersService.findByUserName(employeeForm.getEmpId());
             /*if(!user.getPassword().equals(employeeForm.getUser().getPassword())){
@@ -196,6 +201,7 @@ public class EmployeeController {
         EmployeeVO selectedEmployeeVO = new EmployeeVO();
         BeanUtils.copyProperties(selectedEmployee, selectedEmployeeVO);
         employeeForm.setEmployeeVO(selectedEmployeeVO);
+        employeeForm.setDepartment(selectedEmployee.getDepartment().getDepartment());
         SalaryVO salaryVO = new SalaryVO();
         BeanUtils.copyProperties(selectedEmployee.getSalary(), salaryVO);
         employeeForm.getEmployeeVO().setSalaryVO(salaryVO);

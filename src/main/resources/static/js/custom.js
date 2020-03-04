@@ -23,6 +23,13 @@ function exportToExcel(tableID, file){
 	  });
 }
 
+function exportHTMLTableToExcel(tableID, file){
+      $("#"+tableID).table2excel({
+	    exclude: ".excludeInExcel",
+	    filename: file,
+	    preserveColors: true
+	  });
+}
 function exportToPDF(tableID,file){
             html2canvas($('#'+tableID)[0], {
                 onrendered: function (canvas) {
@@ -101,7 +108,7 @@ function submitApproveLeaveForm(){
     $("#fromDateError").text("");
     $("#toDateError").text("");
     $("#leaveDaysError").text("");
-    $("#success").text("");
+    $("#result").text("");
     if($("#fromDate").val()==""){
         console.log("###Blank from Date");
         $("#fromDateError").text("Please select date");
@@ -463,6 +470,11 @@ function saveSalaryDecider(){
 }
 
 function getLeaveBalance(){
+    $("#fromDateError").text("");
+    $("#toDateError").text("");
+    $("#leaveDaysError").text("");
+    $("#result").text("");
+
     var response = makeAJAXCall("/findLeaveBalance",'approveLeaveForm');
     response.done(function(responseData){
         if(responseData){
@@ -532,6 +544,7 @@ document.chequeForm.action="/saveChequeDetails";
 
 function searchChequeDetails()
 {
+ removeMessageMonthlySalary();
  var x = document.forms["chequeForm"]["datepicker1"]
  var y = document.forms["chequeForm"]["datepicker2"]
  var z = document.forms["chequeForm"]["cheque_Amount"]
@@ -586,6 +599,8 @@ function getFormtData() {
 }
 
 function searchEmployeeStatus() {
+ removeMessageMonthlySalary();
+
      var x = document.forms["statusEmployeeForm"]["datepicker"]
      var y = document.forms["statusEmployeeForm"]["datepicker1"]
      var error = false;
@@ -617,7 +632,7 @@ function searchEmployeeStatus() {
     var y = document.forms["createEmployeeForm"]["lastName"]
     var z = document.forms["createEmployeeForm"]["department"]
     var a = document.forms["createEmployeeForm"]["temporaryAddress"]
-    var b = document.forms["createEmployeeForm"]["datepicker"]
+    var b = document.forms["createEmployeeForm"]["datepicker1"]
     var c = document.forms["createEmployeeForm"]["bank_Name"]
     var d = document.forms["createEmployeeForm"]["bank_AC"]
     var e = document.forms["createEmployeeForm"]["per_Address"]
@@ -628,7 +643,7 @@ function searchEmployeeStatus() {
     var j = document.forms["createEmployeeForm"]["mobile_No"]
     var k = document.forms["createEmployeeForm"]["emergency_Contact"]
     var l = document.forms["createEmployeeForm"]["datepicker"]
-    var m = document.forms["createEmployeeForm"]["role_Auth"]
+
 
     var error = false;
     if(x.value == "") {
@@ -706,11 +721,6 @@ function searchEmployeeStatus() {
                                                    document.getElementById("joinDate").innerHTML="join date required";
                                                    error = true;
                                                }
-    if(m.value == "select") {
-                                                   console.log("come in m");
-                                                   document.getElementById("roleAuth").innerHTML="Role required";
-                                                   error = true;
-                                               }
 
 
     if(error){return;}
@@ -719,9 +729,16 @@ function searchEmployeeStatus() {
     document.createEmployeeForm.submit();
 
  }
-
+function removeMessageMonthlySalary()
+{
+$("#salDate").text('');
+$("#fromDate").text('');
+$("#toDate").text('');
+$("#cheque-Amount").text('');
+}
  function monthlySalaryReport()
  {
+ removeMessageMonthlySalary();
      var x = document.forms["monthlySalaryForm"]["salaryDate"]
      var error = false;
         if(x.value == "") {

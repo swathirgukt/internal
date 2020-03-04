@@ -1,5 +1,6 @@
 <div th:fragment="statusSearchResult" xmlns:th="http://www.thymeleaf.org">
     <div th:if="${employeeForm} != null AND ${employeeForm.employeeList.size()}>0">
+        <div class="tableScrollbar">
 
         <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
 
@@ -16,6 +17,13 @@
                 <td th:text="${status.dob}"></td>
             </tr>
         </table>
+        </div>
+        <div>
+            <b>Export&nbsp;:&nbsp;</b>
+            <button onclick="exportToExcel('tblCustomers','employeeStatus.xls')">Excel</button>
+            <button onclick="exportToPDF('tblCustomers','employeeStatusPDF')">PDF</button>
+        </div>
+
     </div>
 
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
