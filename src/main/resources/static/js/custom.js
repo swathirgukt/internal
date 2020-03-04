@@ -18,6 +18,13 @@ function exportToExcel(tableID, file){
 	  });
 }
 
+function exportHTMLTableToExcel(tableID, file){
+      $("#"+tableID).table2excel({
+	    exclude: ".excludeInExcel",
+	    filename: file,
+	    preserveColors: true
+	  });
+}
 function exportToPDF(tableID,file){
             html2canvas($('#'+tableID)[0], {
                 onrendered: function (canvas) {
@@ -605,7 +612,7 @@ function searchEmployeeStatus() {
     var j = document.forms["createEmployeeForm"]["mobile_No"]
     var k = document.forms["createEmployeeForm"]["emergency_Contact"]
     var l = document.forms["createEmployeeForm"]["datepicker"]
-    var m = document.forms["createEmployeeForm"]["role_Auth"]
+
 
     var error = false;
     if(x.value == "") {
@@ -681,11 +688,6 @@ function searchEmployeeStatus() {
     if(l.value == "") {
                                                    console.log("come in l");
                                                    document.getElementById("joinDate").innerHTML="join date required";
-                                                   error = true;
-                                               }
-    if(m.value == "select") {
-                                                   console.log("come in m");
-                                                   document.getElementById("roleAuth").innerHTML="Role required";
                                                    error = true;
                                                }
 

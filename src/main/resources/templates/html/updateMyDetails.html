@@ -150,9 +150,9 @@
 
                                             <select th:field="${employeeForm.department}" class="selectOption">
                                                 <option value="">select </option>
-                                                <option th:each="branches : ${employeeForm.departments}"
+                                                <option th:with="name=${employeeForm.department}" th:each="branches : ${employeeForm.departments}"
                                                         th:value="${branches.department}"
-                                                        th:text="${branches.department}"/>
+                                                        th:text="${branches.department}" th:selected="${name==branches.department}"/>
                                             </select>
                                         </td>
                                     </tr>
