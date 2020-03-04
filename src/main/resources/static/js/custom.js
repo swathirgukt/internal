@@ -544,6 +544,7 @@ document.chequeForm.action="/saveChequeDetails";
 
 function searchChequeDetails()
 {
+ removeMessageMonthlySalary();
  var x = document.forms["chequeForm"]["datepicker1"]
  var y = document.forms["chequeForm"]["datepicker2"]
  var z = document.forms["chequeForm"]["cheque_Amount"]
@@ -598,6 +599,8 @@ function getFormtData() {
 }
 
 function searchEmployeeStatus() {
+ removeMessageMonthlySalary();
+
      var x = document.forms["statusEmployeeForm"]["datepicker"]
      var y = document.forms["statusEmployeeForm"]["datepicker1"]
      var error = false;
@@ -629,7 +632,7 @@ function searchEmployeeStatus() {
     var y = document.forms["createEmployeeForm"]["lastName"]
     var z = document.forms["createEmployeeForm"]["department"]
     var a = document.forms["createEmployeeForm"]["temporaryAddress"]
-    var b = document.forms["createEmployeeForm"]["datepicker"]
+    var b = document.forms["createEmployeeForm"]["datepicker1"]
     var c = document.forms["createEmployeeForm"]["bank_Name"]
     var d = document.forms["createEmployeeForm"]["bank_AC"]
     var e = document.forms["createEmployeeForm"]["per_Address"]
@@ -726,9 +729,16 @@ function searchEmployeeStatus() {
     document.createEmployeeForm.submit();
 
  }
-
+function removeMessageMonthlySalary()
+{
+$("#salDate").text('');
+$("#fromDate").text('');
+$("#toDate").text('');
+$("#cheque-Amount").text('');
+}
  function monthlySalaryReport()
  {
+ removeMessageMonthlySalary();
      var x = document.forms["monthlySalaryForm"]["salaryDate"]
      var error = false;
         if(x.value == "") {

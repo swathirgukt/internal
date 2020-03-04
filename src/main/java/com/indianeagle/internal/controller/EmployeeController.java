@@ -101,7 +101,7 @@ public class EmployeeController {
         employeeForm.setRolesList(userRolesService.loadAll());
         employeeService.createEmployee(employeeForm);
         //  createUser(employeeForm);
-        model.addAttribute("saveMessage", "Successfully Saved");
+        model.addAttribute("saveMessage", "Employee details saved successfully");
         return "html/updateMyDetails";
     }
 
@@ -138,7 +138,7 @@ public class EmployeeController {
                 }
                 employeeService.createEmployee(employeeForm);
                 //  createUser(employeeForm);
-                model.addAttribute("saveMessage", "SuccessFully Saved");
+                model.addAttribute("saveMessage", "Employee details saved successfully");
             } else {
                 User user = usersService.findByUserName(employeeForm.getEmpId());
             /*if(!user.getPassword().equals(employeeForm.getUser().getPassword())){
