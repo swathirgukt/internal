@@ -18,11 +18,12 @@ function setEmployeeId(empId){
  });
 
  function searchSaveEmployees(){
- $("#loading,#itp_overlay").show();
+
   $('#employeeDetails').html("");
 
 if(document.getElementById('employeeName').value!=""){
     console.log("====");
+    $("#loading,#itp_overlay").show();
  var response = makeAJAXCall('/searchEmployeeDetails','empdata');
  $(document).ajaxStart(function(){
           $("#loading").css("display", "block");

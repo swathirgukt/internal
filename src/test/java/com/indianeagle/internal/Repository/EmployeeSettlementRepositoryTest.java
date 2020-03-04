@@ -5,7 +5,6 @@ import com.indianeagle.internal.dto.EmployeeSettlement;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 
 import java.text.ParseException;
 import java.util.List;
@@ -28,7 +27,7 @@ public class EmployeeSettlementRepositoryTest {
 
     @Test
     public void findResignedEmployeeSettlementByEmployeeId() {
-        EmployeeSettlement e = employeeSettlementRepository.findResignedEmployeeSettlementByEmployeeId("YSPL1014" ).get(0);
+        EmployeeSettlement e = employeeSettlementRepository.findResignedEmployeeSettlementByEmployeeId("YSPL1014").get(0);
         // System.out.println(e.toString());
     }
 

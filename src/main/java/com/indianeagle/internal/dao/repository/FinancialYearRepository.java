@@ -3,6 +3,7 @@ package com.indianeagle.internal.dao.repository;
 import com.indianeagle.internal.dto.FinancialYear;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface FinancialYearRepository extends JpaRepository<FinancialYear, Lo
      * @return
      */
     @Query("select fy from FinancialYear fy left join fetch fy.incomeTaxSlabs its left join fetch fy.taxSections ts left join fetch ts.taxSectionDeclarations tsd left join fetch fy.rebates r where fy.fromMonth=:fromMonth and fy.fromYear=:fromYear and fy.toMonth=:toMonth and fy.toYear=:toYear and its.active=true and ts.active=true and tsd.active=true and r.active=true")
-    List<FinancialYear> findFinancialYearSectionsByFinancialYear(String fromMonth, String fromYear, String toMonth, String toYear);
+    List<FinancialYear> findFinancialYearSectionsByFinancialYear(@Param("fromMonth") String fromMonth, @Param("fromYear")String fromYear,@Param("toMonth") String toMonth, @Param("toYear") String toYear);
 
     /**
      * To load all financialYear data

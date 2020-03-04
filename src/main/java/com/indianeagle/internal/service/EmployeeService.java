@@ -69,4 +69,6 @@ public interface EmployeeService {
      * @param employee
      */
     void updateEmployeeLeaves(Employee employee);
+
+    List<Employee> loadActiveEmployees();
 }

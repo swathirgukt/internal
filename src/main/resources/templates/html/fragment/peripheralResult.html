@@ -21,8 +21,8 @@
                     <td th:text="${peripheral.brand}"></td>
                     <td th:text="${peripheral.model}"></td>
                     <td th:text="${peripheral.serialNumber}"></td>
-                    <td th:text="${peripheral.yearOfPurchase}"></td>
-                    <td th:text="${peripheral.warrantyDate}"></td>
+                    <td th:text="${#dates.format(peripheral.yearOfPurchase,'MM/dd/yyyy')}"></td>
+                    <td th:text="${#dates.format(peripheral.warrantyDate,'MM/dd/yyyy')}"></td>
                     <td th:text="${peripheral.users}"></td>
                     <td th:text="${peripheral.status}"></td>
                     <td class="excludeInExcel"><a th:href="@{/peripheral/edit/{id}(id=${peripheral.id})}">Edit</a></td>
@@ -32,10 +32,11 @@
         <div>
             <b>Export&nbsp;:&nbsp;</b>
             <button onclick="exportToExcel('peripheralTable','Peripherals')">Excel</button>
+            <button onclick="exportToPDF('peripheralTable','Peripherals')">PDF</button>
         </div>
     </div>
     <div style="font: 15pt 'Arial Black';color: #ff0000;"
-         th:if="${departmentList}!=null  AND ${departmentList.size()}==0">
+         th:if="${peripheralList}!=null  AND ${peripheralList.size()}==0">
         Nothing found to display
     </div>
 </div>

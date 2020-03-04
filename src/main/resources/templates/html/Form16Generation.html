@@ -19,6 +19,8 @@ ul {
 </script>
 <body onload="calculateTotalIncomeEarnedByEmployee()">
 <header th:insert="html/fragment/header :: header"></header>
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-lg-2 sidenav">
@@ -32,7 +34,7 @@ ul {
                     <div th:if="${data}!=null">
                        <b> <span style="color:red" th:text="${data}">pdf technical error</span></b>
                     </div>
-                    <b> <span style="color:red" th:if="${technicalError}!=null" th:text="${technicalError}"></span></b>
+                    <b> <span style="color:red" id="technicalError" th:if="${technicalError}!=null" th:text="${technicalError}"></span></b>
                     <div class="Heading">Income Tax Sections</div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-10">
@@ -59,10 +61,10 @@ ul {
                                                    th:value="${employee}!=null?${employee.fullName}:''" ></td>
                                         <td>
                                             <!-- <a onclick="searchEmployeeByNameInForm16Generation()"> Search Employee By Name </a>-->
-                                            <button class="submitButton"
+                                            <b><button class="submitButton"
                                                     onClick="searchEmployeeByNameInForm16Generation()" type="button">
                                                 searchEmployeeByName
-                                            </button>
+                                            </button></b>
 
                                         </td>
 
@@ -129,9 +131,9 @@ ul {
                                         </td>
                                         <td>
                                             <!-- <a  onclick="retrieveSalaryInfoForForm16()">Retrieve&nbsp;Salary&nbsp;Info</a>-->
-                                            <button class="submitButton" onClick="retrieveSalaryInfoForForm16()"
+                                            <b><button class="submitButton" onClick="retrieveSalaryInfoForForm16()"
                                                     type="button">retrieveSalaryInfo
-                                            </button>
+                                            </button></b>
                                         </td>
                                         <td style="padding:20px">
                                         </td>
@@ -142,7 +144,7 @@ ul {
 
 
                                 </table>
-                               <b> <span style="color:red" th:if="${employeeId}!=null" th:text="${employeeId}"></span></b>
+                               <b> <span style="color:red" id="employeeId1" th:if="${employeeId}!=null" th:text="${employeeId}"></span></b>
                             </div>
                         </div>
                     </div>
@@ -181,13 +183,13 @@ ul {
                             </div>
                         </div>
 
-                       <b><span style="color:red" th:if="${employeeDetails}!=null" th:text="${employeeDetails}">provide Employee details</span></b>
-                        <b><span style="color:red" th:if="${employeeerror}!=null" th:text="${employeeerror}">no employee Found</span></b>
-                        <b> <span style="color:red" th:text="${financialerror}">Financial Error</span></b>
-                        <b> <span style="color:red" th:if="${noSalary}!=null" th:text="${noSalary}">Financial Error</span></b>
+                       <b><span style="color:red" id="employeeDetails1" th:if="${employeeDetails}!=null" th:text="${employeeDetails}">provide Employee details</span></b>
+                        <b><span style="color:red" id="employeeerror"th:if="${employeeerror}!=null" th:text="${employeeerror}">no employee Found</span></b>
+                        <b> <span style="color:red" id="financialerror"  th:text="${financialerror}">Financial Error</span></b>
+                        <b> <span style="color:red" id="noSalary" th:if="${noSalary}!=null" th:text="${noSalary}">Financial Error</span></b>
                         <div th:if="${salaryHistories }!= null AND ${!salaryHistories.isEmpty()}">
                             <div class="Heading text-center bold">
-                            Total Salary for the financial year  <span th:text="${employeeFinancialYearForm.financialYear.fromYear}"> </span> - <span th:text="${employeeFinancialYearForm.financialYear.toYear}"> </span>
+                                <b> Total Salary for the financial year  <span th:text="${employeeFinancialYearForm.financialYear.fromYear}"> </span> - <span th:text="${employeeFinancialYearForm.financialYear.toYear}"> </span></b>
                             </div>
                             <div id="salaryHistoryTable" style="overflow-x:auto;">
                                 <table id="salaryHist" width="98%" align="center" cellpadding="0" cellspacing="0"
@@ -267,7 +269,7 @@ ul {
                                         <td th:text="${lastSalary.salaryInAdvance}"></td>
                                         <td th:text="${lastSalary.incomeTax}"></td>
                                         <td th:text="${lastSalary.totalDeductions}"></td>
-                                        <td th:text="${lastSalary.netSalary}">/td>
+                                        <td th:text="${lastSalary.netSalary}"></td>
                                     </tr>
 
                                     <tr th:if="${totalSalaryHistoryForm}!=null">
@@ -316,43 +318,43 @@ ul {
                                     <tr>
                                         <td>Incentives</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="incentives"
-                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.incentives}:''" >
+                                        <td style="padding:5px"><input name="incentives" id="incentives"
+                                                                       readonly="true"           th:value="${form16GenerationForm}!=null?${form16GenerationForm.incentives}:''" >
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>PLB</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="plb"
-                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.plb}:''">
+                                        <td style="padding:5px"><input name="plb" id="plb"
+                                                                       readonly="true"           th:value="${form16GenerationForm}!=null?${form16GenerationForm.plb}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Reimbursement</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="reimbursement"
-                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.reimbursement}:''">
+                                        <td style="padding:5px"><input name="reimbursement" id="reimbursement"
+                                                                       readonly="true"        th:value="${form16GenerationForm}!=null?${form16GenerationForm.reimbursement}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Bonus</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="bonus"
+                                        <td style="padding:5px"><input name="bonus" id="bonus"
                                                                        th:value="${form16GenerationForm}!=null?${form16GenerationForm.bonus}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Others</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input  name="others"
-                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.others}:''">
+                                        <td style="padding:5px"><input  name="others" id="others"
+                                                                        readonly="true"         th:value="${form16GenerationForm}!=null?${form16GenerationForm.others}:''">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Previous&nbsp;Company&nbsp;Income</td>
                                         <td width="10px"><b>:</b></td>
-                                        <td style="padding:5px"><input name="previousCompanyIncome"
-                                                                       th:value="${form16GenerationForm}!=null?${form16GenerationForm.previousCompanyIncome}:''">
+                                        <td style="padding:5px"><input name="previousCompanyIncome" id="previousCompanyIncome"
+                                                                       readonly="true"        th:value="${form16GenerationForm}!=null?${form16GenerationForm.previousCompanyIncome}:''">
                                         </td>
                                     </tr>
                                     <tr>
@@ -369,6 +371,9 @@ ul {
                                         </td>
                                     </tr>
                                 </table>
+                                <div >
+                                    <b> <span style="color:red;" id="inputsError"></span></b>
+                                </div>
                             </div>
                         </div>
 
@@ -445,7 +450,7 @@ ul {
                     <br>
                     <hr/>
                    <!-- onclick="calculateTax()"-->
-                        <button onclick="calculateTax()"  type="button">Calculate Tax</button>
+                    <b><button onclick="calculateTax()"  type="button">Calculate Tax</button></b>
 
 
                     <div class="row" id="calculateTax">
@@ -502,27 +507,28 @@ ul {
                         <div id="emailReport"></div>
                         <div class="col-md-12 col-sm-12 col-xs-10">
 
-                            <button class="retrivesalaryInfoButton" onclick="alert('Generate Form 16')">Generate Form
+                            <b> <button class="retrivesalaryInfoButton" onclick="alert('Generate Form 16')" type="button">Generate Form
                                 16
-                            </button>
+                            </button></b>
 
-                            <button class="submitButton"
+                            <b> <button class="submitButton"
                                     onClick="form16sendMail()" type="button">
                                 Email
-                            </button>
-                            <button class="submitButton" onclick="saveAsPdf()">Save as PDF</button>
-                            <button class="submitButton" onclick="saveAsExcel()">Save as Excel</button>
-                            <button class="submitButton" onclick="saveEmployeeIncomeTax()" type="button">Save</button>
+                            </button></b>
+                            <b>  <button class="submitButton" onclick="saveAsPdf()">Save as PDF</button></b>
+                                <b>  <button class="submitButton" onclick="saveAsExcel()">Save as Excel</button></b>
+                                    <b> <button class="submitButton" onclick="saveEmployeeIncomeTax()" type="button">Save</button></b>
                         </div>
                         <div id="form16SaveResult">
 
                         </div>
                     </div>
-                       <b><span style="color:red" th:if="${valuesError}" th:text="${valuesError}"></span></b>
-                    <b> <span style="color:green" th:if="${employeeSaved}" th:text="${employeeSaved}"></span></b>
+                       <!--<b><span style="color:red" th:if="${valuesError}" th:text="${valuesError}"></span></b>
+                    <b> <span style="color:green" th:if="${employeeSaved}" th:text="${employeeSaved}"></span></b>-->
                     <div id="pdfResults">
 
                     </div>
+
                 </form>
                 </div>
             </div>

@@ -18,55 +18,63 @@
                           th:action="@{/peripheral/save}" th:object="${peripheral}">
                         <div class="Heading">Workshop Details</div>
                         <div class="row ">
-
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="inputDiv">
-                                    <table  width="100%" class="table-condensed">
+                                    <input type="hidden" name="id" th:value="*{id}?:''">
+                                    <table width="100%" class="table-condensed">
                                         <tr>
                                             <td>
                                                 <span>Peripheral Name<span style="color:red">*</span></span>
                                                 <span style="float: right;margin-right:10px">:</span>
                                             </td>
-                                            <td ><input th:field="*{peripheralName}" type="text"></td>
+                                            <td><input th:field="*{peripheralName}" type="text"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="peripheralNameError" style="color:red;"></span></td>
+                                            <td><span id="peripheralNameError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                Type<span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
+                                                Type<span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span>
                                             </td>
                                             <td><input th:field="*{type}" type="text"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="peripheralTypeError" style="color:red;"></span></td>
+                                            <td><span id="peripheralTypeError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
-                                            <td> <span>Model<span style=" color:red">*</span></span><span style="float: right;margin-right:10px">:</span></td>
-                                            <td ><input th:field="*{model}" type="text"></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td ><span id="peripheralModelError" style="color:red;"></span></td>
-                                        </tr>
+                                            <td><span>Model<span style=" color:red">*</span></span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
+                                            <td><input th:field="*{model}" type="text"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="purchaseDateError" style="color:red;"></span></td>
+                                            <td><span id="peripheralModelError" style="color:red;"></span></td>
+                                        </tr>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><span id="purchaseDateError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                Year of Purchase<span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
+                                                Year of Purchase<span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span>
                                             </td>
                                             <td>
-                                                <input width="170px" th:field="*{yearOfPurchase}" style="border: 1px solid #ff9900;">
-                                                <script>$('#yearOfPurchase').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                                <input width="170px" th:field="*{yearOfPurchase}"
+                                                       style="border: 1px solid #ff9900;">
+                                                <script>$('#yearOfPurchase').datepicker({ uiLibrary: 'bootstrap' });
+
+
+                                                </script>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><span>Employee Id</span><span style="float: right;margin-right:10px">:</span></td>
+                                            <td><span>Employee Id</span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
                                             <td><input th:field="*{users}" type="text"></td>
                                         </tr>
                                     </table>
@@ -74,43 +82,51 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div>
-                                    <table  width="100%" class="table-condensed">
+                                    <table width="100%" class="table-condensed">
                                         <tr>
-                                            <td> <span>Brand<span style="color:red">*</span></span><span style="float: right;margin-right:10px">:</span></td>
+                                            <td><span>Brand<span style="color:red">*</span></span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
                                             <td><input th:field="*{brand}" type="text"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="peripheralBrandError" style="color:red;"></span></td>
+                                            <td><span id="peripheralBrandError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Serial Number <span style="color:red">*</span><span style="float: right;margin-right:10px">:</span></td>
+                                            <td>Serial Number <span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span></td>
                                             <td><input th:field="*{serialNumber}" type="text"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="serialNumberError" style="color:red;"></span></td>
+                                            <td><span id="serialNumberError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="warrantyDateError" style="color:red;"></span></td>
+                                            <td><span id="warrantyDateError" style="color:red;"></span></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                Warranty Date <span style="color:red">*</span><span style="float: right;margin-right:10px">:</span>
+                                                Warranty Date <span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px">:</span>
                                             </td>
                                             <td>
-                                                <input  width="170px" th:field="*{warrantyDate}" style="border: 1px solid #ff9900;">
-                                                <script>$('#warrantyDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                                <input width="170px" th:field="*{warrantyDate}"
+                                                       style="border: 1px solid #ff9900;">
+                                                <script>$('#warrantyDate').datepicker({ uiLibrary: 'bootstrap' });
+
+
+                                                </script>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Status <span style="color:red">*</span><span style="float: right;margin-right:10px"s>:</span></td>
+                                            <td>Status <span style="color:red">*</span><span
+                                                    style="float: right;margin-right:10px" s>:</span></td>
                                             <td><input th:field="*{status}" type="text"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td ><span id="peripheralStatusError" style="color:red;"></span></td>
+                                            <td><span id="peripheralStatusError" style="color:red;"></span></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -119,20 +135,20 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
                                 <div style="float:right">
-										<span>
-											 <button type="button" class="submitButton"
-                                                     onclick="savePeripheral()"><b>Submit</b></button>
-										</span>
+                                    <span style="color: #008000;" th:text="${success}?:''" id="success"></span>
                                     <span>
-											 <button class="submitButton" onclick="searchPeripheral()"
-                                                     type="button"><b>Search</b></button>
-										</span>
+                                        <button type="button" class="submitButton"
+                                                onclick="savePeripheral()"><b>Submit</b></button>
+                                    </span>
                                     <span>
-											 <button class="submitButton" onclick="document.peripheralForm.reset()"
-                                                     type="button"><b>Reset</b></button>
-										</span>
+                                    <button class="submitButton" onclick="searchPeripheral()"
+                                            type="button"><b>Search</b></button>
+                                    </span>
+                                    <span>
+                                        <button class="submitButton" onclick="document.peripheralForm.reset()"
+                                                type="button"><b>Reset</b></button>
+                                    </span>
                                 </div>
-
                             </div>
                         </div>
                     </form>
@@ -141,14 +157,11 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div id="peripheralResult"></div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <footer th:insert="html/fragment/footer :: footer"></footer>
 </body>

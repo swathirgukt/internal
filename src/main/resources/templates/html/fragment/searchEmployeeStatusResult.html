@@ -2,15 +2,13 @@
     <div th:if="${employeeForm} != null AND ${employeeForm.employeeList.size()}>0">
         <div class="tableScrollbar">
 
-            <table cellpadding="1" cellspacing="1" style="font-size:12px;"
-                   class="table table-bordered table-hover" id="tblCustomers">
-            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px">
-                <th>Employee Id</th>
-                <th>Employee Name</th>
-                <th>DOJ</th>
-                <th>DOB</th>
+        <table cellpadding="1" cellspacing="1" class="table table-bordered table-responsive-lg table-hover">
 
-
+            <tr style="background-color:#333333;color: #FFFFFF;padding: 50px" class="sticky">
+                <th>Employee&nbsp;Id</th>
+                <th>Employee&nbsp;Name</th>
+                <th>Date&nbsp;Of&nbsp;Joined</th>
+                <th>Date&nbsp;Of&nbsp;Birth</th>
             </tr>
             <tr style="background-color:#FFFFFF;color: #000000;padding: 50px" th:each="status :${employeeForm.employeeList}">
                 <td th:text="${status.empId}"></td>
@@ -18,7 +16,6 @@
                 <td th:text="${status.joinDate}"></td>
                 <td th:text="${status.dob}"></td>
             </tr>
-
         </table>
         </div>
         <div>

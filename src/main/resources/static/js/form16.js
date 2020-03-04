@@ -40,7 +40,7 @@
         });
 
       function searchEmployeeByNameInForm16Generation(){
-
+         removeMessages();
        var response = makeAJAXCall("/searchEmployeeByNameInForm16Generation", 'form16GenerationData');
           response.done(function (responseData) {
               if (response) {
@@ -50,17 +50,16 @@
       }
 
         function calculateTax(){
-          var taxableIncome= document.getElementById("earnedIncome").value;
-          console.log(taxableIncome);
+           removeMessages();
+           if(!validateInputs()){
+           return false;
+           }
            var response = makeAJAXCall("/calculateTax", 'form16GenerationData');
-               response.done(function (responseData) {
+           response.done(function (responseData) {
                    if (response) {
-
                        $("#calculateTax").html(responseData);
-
                        console.log("in calculateTax success");
                    }
-
                });
            }
           /* function calculateTax(){
@@ -83,52 +82,49 @@
                          }*/
 
        function saveEmployeeIncomeTax(){
+         removeMessages();
+            if(!validateInputs()){
+                  return false;
+                  }
                  var taxableIncome= document.getElementById("earnedIncome").value;
                  console.log(taxableIncome);
                   var response = makeAJAXCall("/saveEmployeeIncomeTax", 'form16GenerationData');
                       response.done(function (responseData) {
                           if (response) {
-
                               $("#form16SaveResult").html(responseData);
-
                               console.log("in calculateTax success");
                           }
                       });
                   }
 
-       /* function sendMailEmployeeIncomeTax(){
-            var overlay = new loadOverlay();
-            overlay.show("MenuWrapper");
-            $.ajax({url:"./sendMailEmployeeIncomeTax.action",
-                    type: 'POST',
-                    data: $('#form16GenerationData').serialize()
-            }).done(function(data){
-                $('#form16GenerationBody').html(data);
-                placeHolderLoad();
-                saveEmpInfo();
-                saveIncome();
-                overlay.hide();
-            });
-        }*/
+
        function form16sendMail(){
+       removeMessages();
        console.log("in send mail");
+       $("#loading,#itp_overlay").show();
        var response = makeAJAXCall("/sendMail","form16GenerationData");
+        $(document).ajaxStart(function(){
+                $("#loading").css("display", "block");
+              });
+              $(document).ajaxComplete(function(){
+                $("#loading").css("display", "none");
+              });
        response.done(function (responseData) {
                           if (response) {
-
-                              $("#emailReport").replaceWith(responseData);
-
+                             $("#loading,#itp_overlay").hide();
+                             $("#emailReport").replaceWith(responseData);
                               console.log("in calculateTax success");
                           }
                       });
        }
 
      function setEmployeeId(empId){
+     removeMessages();
          console.log(empId);
          document.getElementById('employeeId').value=empId;
      }
      function retrieveSalaryInfoForForm16(){
-         console.log("in retrieveSalaryInfo java script method");
+     removeMessages();
        var url="/retrieveEmployeeInfoInForm16";
        var form=document.getElementById("form16GenerationData");
        form.action=url;
@@ -136,25 +132,22 @@
        form.submit();
          }
      function saveAsPdf(){
-                console.log("in saveAsPdf java script method");
+     removeMessages();
               var url="/saveAsPdf";
               var form=document.getElementById("form16GenerationData");
               form.action=url;
-          //  var w = window.open('', 'form-target', 'width=600', 'height=400');
-            //form.target = 'form-target';
             form.setAttribute("target", "_blank");
            form.submit();
 
      }
-
-             function saveAsExcel(){
-                        console.log("in saveAsPdf java script method");
-                     var url="/saveAsExcel";
-                     var form=document.getElementById("form16GenerationData");
-                     form.action=url;
-                     form.setAttribute('target','_self');
-                      form.submit();;
-                       }
+     function saveAsExcel(){
+     removeMessages();
+       var url="/saveAsExcel";
+       var form=document.getElementById("form16GenerationData");
+       form.action=url;
+       form.setAttribute('target','_self');
+       form.submit();;
+     }
 
 
 
@@ -203,9 +196,69 @@ $(document).on('click', '#appliedSections li label[name="showOrHideSections"]', 
     });
 
 
+ function validateInputs(){
+ console.log("in validates");
+    var incentives=document.getElementById("incentives");
+    var plb=document.getElementById("plb");
+    var previousCompanyIncome=document.getElementById("previousCompanyIncome");
+    var others=document.getElementById("others");
+    var bonus=document.getElementById("bonus");
+    var reimbursement=document.getElementById("reimbursement");
+    var inputsError=document.getElementById("inputsError");
+    var flag=false;
+    if(incentives.value<0){
+        $('#inputsError').text('Values Must Not be Negative').css('color','red');
+        flag=true;
+    }
+     if(incentives.value<0){
+       $('#inputsError').text('Values Must Not be Negative');
+            flag=true;
+        }
+     if(plb.value<0){
+          $('#inputsError').text('Values Must Not be Negative');
+           flag=true;
+            }
+     if(previousCompanyIncome.value<0){
+         $('#inputsError').text('Values Must Not be Negative');
+          flag=true;
+                }
+     if(others.value<0){
+         $('#inputsError').text('Values Must Not be Negative');
+           flag=true;
+         }
+     if(reimbursement.value<0){
+         $('#inputsError').text('Values Must Not be Negative');
+            flag=true;
+    }
+    if(bonus.value<0){
+           $('#inputsError').text('Values Must Not be Negative');
+            flag=true;
+        }
+    if(flag){
+      return false;
+    }
+    return true;
 
 
+ }
 
+ function removeMessages(){
+     $('#inputsError').text('');
+     $('#saveError').text('');
+     $('#saveSuccess').text('');
+     $('#technicalError').text('');
+     $('#employeeId1').text('');
+     $('#employeeDetails1').text('');
+     $('#employeeerror').text('');
+     $('#financialerror').text('');
+     $('#noSalary').text('');
+     $('#retrieveNameError').text('');
+     $('#emailFail').text('');
+     $('#emailFail').text('');
+
+ }
+
+//
 
 function taxSlabEdit() {
     $("#taxSlabSaveBtn").show();

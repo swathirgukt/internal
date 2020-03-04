@@ -34,6 +34,12 @@ public class ApprovedLeaveServiceImpl implements ApprovedLeaveService {
      */
     public List<LeaveApproveForm> getApprovedLeaves(String empId, Date fromDate, Date toDate) {
         List<ApprovedLeaves> approvedLeaveses = approvedLeavesRepository.findByEmpIdAndFromDateGreaterThanEqualAndToDateLessThanEqualOrderByEmpId(empId, fromDate, toDate);
+
+        approvedLeaveses.forEach(i->{
+            i.setFromDate(DateUtils.convertDateInCstToIst(i.getFromDate()));
+            i.setToDate(DateUtils.convertDateInCstToIst(i.getToDate()));
+        });
+
         List<LeaveApproveForm> listOfLeaveApproves = new ArrayList<LeaveApproveForm>();
         Map<String, LeaveApproveForm> employeeLeaves = new LinkedHashMap<String, LeaveApproveForm>();
         for (ApprovedLeaves approvedLeaves : approvedLeaveses) {
@@ -59,6 +65,12 @@ public class ApprovedLeaveServiceImpl implements ApprovedLeaveService {
      */
     public List<LeaveApproveForm> getApprovedLeaves(Date fromDate, Date toDate) {
         List<ApprovedLeaves> approvedLeaveses = approvedLeavesRepository.findByFromDateGreaterThanEqualAndToDateLessThanEqualOrderByEmpId(fromDate, toDate);
+
+        approvedLeaveses.forEach(i->{
+            i.setFromDate(DateUtils.convertDateInCstToIst(i.getFromDate()));
+            i.setToDate(DateUtils.convertDateInCstToIst(i.getToDate()));
+        });
+
         Map<String, LeaveApproveForm> employeeLeaves = new LinkedHashMap<String, LeaveApproveForm>();
         List<LeaveApproveForm> listOfLeaveApproves = new ArrayList<LeaveApproveForm>();
         for (ApprovedLeaves approvedLeaves : approvedLeaveses) {

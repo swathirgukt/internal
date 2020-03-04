@@ -6,6 +6,8 @@
     </head>
 <body>
 <header th:insert="html/fragment/header :: header"></header>
+<div id="itp_overlay" class="black_overlay" ></div>
+<div id="loading" class="loading" ></div>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-lg-2 sidenav"></div>
@@ -15,8 +17,8 @@
                     <form action="/employeeLeaveReport" name="employeeLeaveReportForm" id="employeeLeaveReportForm" method="post" th:action="@{/employeeLeaveReport}">
                         <div class="Heading">Leave Report</div>
                         <div class="row">
-                            <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <table>
+                            <div class="col-md-12 col-sm-12 col-xs-10">
+                                <table width="100%" class="table-condensed">
                                     <tr>
                                         <td>Employee&nbsp;ID<span style="color: red">*</span></td>
                                         <td width="15px"><b>:</b></td>
@@ -25,40 +27,35 @@
                                                 <option th:each="empId : ${employeeIds}" th:value="${empId}">[[${empId}]]</option>
                                             </select>
                                         </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class=" col-lg-4  col-md-12 col-sm-12 col-xs-12">
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td>From<span style="color: red">*</span></td>
-                                            <td width="15px"><b>:</b></td>
-                                            <td>
-                                                <input id="fromDate" width="150px" name="fromDate" style="border: 1px solid #ff9900;"/>
-                                                <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
-                                            </td>
-                                            <td><span style="color:red;" id="fromDateError"></span></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class=" col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                                <table>
-                                    <tr>
+                                        <td>From<span style="color: red">*</span></td>
+                                        <td width="15px"><b>:</b></td>
+                                        <td>
+                                            <input id="fromDate" width="150px" name="fromDate" style="border: 1px solid #ff9900;"/>
+                                            <script>$('#fromDate').datepicker({ uiLibrary: 'bootstrap' });</script>
+                                        </td>
                                         <td>To<span style="color: red">*</span></td>
                                         <td width="15px"><b>:</b></td>
                                         <td>
                                             <input id="toDate" width="150px" name="toDate" style="border: 1px solid #ff9900;"/>
                                             <script>$('#toDate').datepicker({ uiLibrary: 'bootstrap' });</script>
                                         </td>
-                                        <td><span style="color:red;" id="toDateError"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span id="fromDateError"/></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><span id="toDateError"/></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="row">
-                            <div style="float:right;margin-right:100px;padding:10px">
+                            <div style="float:right;margin-right:55px">
                                 <button type="button" class="submitButton" onclick="searchEmployeeLeaveReport()"><b>Search</b></button>
                             </div>
                         </div>
