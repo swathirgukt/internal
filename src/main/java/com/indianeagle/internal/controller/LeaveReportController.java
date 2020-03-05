@@ -109,9 +109,6 @@ public class LeaveReportController {
 
     @PostMapping("/updateLeaves")
     public String updateLeaves(ModelMap modelMap, @RequestParam String employeeId, LeavesForm leavesForm) {
-        if(SimpleUtils.isEmpty(employeeId)) {
-            return "html/addEditLeave";
-        }
         Employee employee = employeeService.findEmployeeByEmpId(employeeId);
         if (employee.getLeaves()==null){
             return "html/addEditLeave";
@@ -124,7 +121,7 @@ public class LeaveReportController {
         employeeService.updateEmployeeLeaves(employee);
 
         modelMap.addAttribute("employeeIds", employeeIds);
-        modelMap.addAttribute("leavesForm", new LeavesForm());
+        modelMap.addAttribute("leavesForm",leavesForm);
         modelMap.addAttribute("success","Add or Edit leave is successfull");
         return "html/addEditLeave";
     }
