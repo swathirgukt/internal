@@ -55,7 +55,7 @@ function addSection(){
             row1.append('<td><b><input type="text" style="border:0px none;" value="'+sectionName+'" readonly="true" name="taxSectionForms['+sectionCount+'].sectionName" ></b></td><td style="padding:10px"><b><button type="button" onclick="addSectionDeclaration($(this))">Add</button></b></td>');
             row2.append('<td style="padding:10px">Section&nbsp;Limit</td>]<td><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].sectionLimit"></td>');
             row2.append('<td><button style="float: right; padding-right: 10px; margin-right: 30px;" class="submitButton" name="sectionRemoveButton" type="button">Remove&nbsp;Section</button></td>');
-            row3.append('<td style="padding:10px"><b><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].taxSectionDeclarations[0].subSectionName"></b></td>');
+            row3.append('<td style="padding:10px"><b><input class="inputfieldsection" type="text" name="taxSectionForms['+sectionCount+'].taxSectionDeclarations[0].subSectionName" style="width:176px"></b></td>');
             row3.append('<td><button class="submitButton" type="button" name="subSectionRemoveButton"><b>Remove</b></button></td>');
 
             sectionTable.append(span);

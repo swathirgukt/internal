@@ -77,7 +77,6 @@
 
 
 .retrivesalaryInfoButton {
-
                      width: 130px;
                      height: 30px;
                      border-radius: 10%;
@@ -88,15 +87,12 @@
         }
 
 .retrivesalaryInfoButton:hover {
-
             background-color: #ff9933;
             box-shadow: 0 8px 6px 0 #ff9933;
-
         }
 
 
 .claTask {
-
             width: 200px;
             height: 50px;
             border-radius: 10%;
@@ -104,30 +100,22 @@
             font-size: 20px;
             cursor: pointer;
             font-weight: bold;
-
-
         }
 
 .claTask:hover {
-
                 background-color: #ff9933;
                 box-shadow: 0 8px 6px 0 #ff9933;
-
               }
 
 .container {
                   width: 1386px;
            }
 .container .jumbotron, .container-fluid .jumbotron {
-     padding-right: 1px;
-     padding-left: 1px;
+     padding-right: 20px;
+     padding-left: 20px;
 
 }
-.container .jumbotron, .container-fluid .jumbotron {
-     padding-right: 1px;
-     padding-left: 1px;
 
-}
 hr.new1 {
   border-top: 1px solid gray;
 }
@@ -163,7 +151,6 @@ hr.new1 {
     background-image: url(../Images/DoubleRing.gif);
     background-size: cover;
     background-repeat: no-repeat;
-
-     padding:50px;
+    padding:50px;
 }
 
