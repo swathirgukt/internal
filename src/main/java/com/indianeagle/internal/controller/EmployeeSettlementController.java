@@ -9,6 +9,7 @@ import com.indianeagle.internal.service.EmployeeService;
 import com.indianeagle.internal.service.SalaryService;
 import com.indianeagle.internal.service.UserRolesService;
 import com.indianeagle.internal.service.UsersService;
+import com.indianeagle.internal.util.DateUtils;
 import com.indianeagle.internal.util.SimpleUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -91,9 +92,10 @@ public class EmployeeSettlementController {
         employeeSettlementForm.setEmployeeId(employeeId);
         employeeSettlementForm.setEmployeeName(employee.getFullName());
         employeeSettlementForm.setEmployeeDesignation(employee.getDesignation());
-        employeeSettlementForm.setRelievingDate(employee.getRelieveDate());
-        employeeSettlementForm.setResignationDate(employee.getResignDate());
-        employeeSettlementForm.setSettlementDate(employeeSettlement.getSettlementDate());
+        employee.setJoinDate(DateUtils.convertDateInCstToIst(employee.getJoinDate()));
+        employeeSettlementForm.setRelievingDate(DateUtils.convertDateInCstToIst(employee.getRelieveDate()));
+        employeeSettlementForm.setResignationDate(DateUtils.convertDateInCstToIst(employee.getResignDate()));
+        employeeSettlementForm.setSettlementDate(DateUtils.convertDateInCstToIst(employeeSettlement.getSettlementDate()));
         employeeSettlementForm.setEmpStatus(employee.getEmpStatus());
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
         modelMap.addAttribute("employeeSettlement", employeeSettlement);
@@ -116,6 +118,7 @@ public class EmployeeSettlementController {
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
         return "html/fSettlementDetails";
     }
+
 
     /**
      * Method to copy form properties
@@ -173,6 +176,17 @@ public class EmployeeSettlementController {
         modelMap.addAttribute("save", "Employee Settlement is successfully saved");
         return "html/fSettlementDetails";
     }
+
+    /*@PostMapping("/goBack")
+    public String goBack(@ModelAttribute("employeeForm") EmployeeForm employeeForm,ModelMap modelMap,@ModelAttribute("department") String department,@ModelAttribute("status") String status) {
+        employeeForm.setStatus("working");
+        //employeeForm.setStatus(status);
+        employeeForm.setDepartment(department);
+        employeeForm.setDepartment(employeeForm.getDepartment());
+        employeeForm.setEmployeeList(employeeService.searchEmployees(employeeForm));
+        modelMap.addAttribute("employeeList", employeeForm.getEmployeeList());
+        return "html/fragment/fSettlementResult";
+    }*/
 }
 
 
