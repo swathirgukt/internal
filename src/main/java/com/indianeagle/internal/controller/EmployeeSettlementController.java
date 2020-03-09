@@ -45,18 +45,6 @@ public class EmployeeSettlementController {
     private SalaryService salaryService;
 
 
-    /**
-     * Execute method
-     */
-    @ModelAttribute
-    public String execute(Model model) {
-        EmployeeForm employeeForm = new EmployeeForm();
-        userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        employeeForm.setDepartments(employeeService.getDepartmentList());
-        employeeForm.setRolesList(userRolesService.loadAll());
-        model.addAttribute("employeeForm", employeeForm);
-        return "html/fSettlement";
-    }
 
     @InitBinder
     public void initBinder(final WebDataBinder binder) {
@@ -65,7 +53,12 @@ public class EmployeeSettlementController {
     }
 
     @GetMapping("/employeeSettlement")
-    public String employee() {
+    public String employee(Model model) {
+        EmployeeForm employeeForm = new EmployeeForm();
+        userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        employeeForm.setDepartments(employeeService.getDepartmentList());
+        employeeForm.setRolesList(userRolesService.loadAll());
+        model.addAttribute("employeeForm", employeeForm);
         return "html/fSettlement";
     }
 
@@ -94,7 +87,7 @@ public class EmployeeSettlementController {
         employeeSettlementForm.setEmployeeDesignation(employee.getDesignation());
         employee.setJoinDate(DateUtils.convertDateInCstToIst(employee.getJoinDate()));
         employeeSettlementForm.setRelievingDate(DateUtils.convertDateInCstToIst(employee.getRelieveDate()));
-        employeeSettlementForm.setResignationDate(DateUtils.convertDateInCstToIst(employee.getResignDate()));
+        employeeSettlementForm.setResignationDate(employee.getResignDate());
         employeeSettlementForm.setSettlementDate(DateUtils.convertDateInCstToIst(employeeSettlement.getSettlementDate()));
         employeeSettlementForm.setEmpStatus(employee.getEmpStatus());
         modelMap.addAttribute("employeeSettlementForm", employeeSettlementForm);
